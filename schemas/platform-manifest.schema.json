@@ -1,0 +1,542 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://healthcare-platform.org/schemas/platform-manifest-v1.0.0.schema.json",
+  "title": "Platform Manifest",
+  "description": "Machine-readable declaration of a repository's identity, capabilities, and compliance with the Unified Healthcare Platform standards.",
+  "type": "object",
+  "required": ["manifest", "identity", "purpose", "ownership", "runtime", "maturity", "compatibility"],
+  "properties": {
+    "manifest": {
+      "$ref": "#/$defs/ManifestMetadata"
+    },
+    "identity": {
+      "$ref": "#/$defs/Identity"
+    },
+    "purpose": {
+      "$ref": "#/$defs/Purpose"
+    },
+    "ownership": {
+      "$ref": "#/$defs/Ownership"
+    },
+    "runtime": {
+      "$ref": "#/$defs/Runtime"
+    },
+    "maturity": {
+      "$ref": "#/$defs/Maturity"
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Service"
+      },
+      "uniqueItems": true
+    },
+    "apis": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/API"
+      },
+      "uniqueItems": true
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "uniqueItems": true
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Device"
+      },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Dependency"
+      }
+    },
+    "standards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Standard"
+      }
+    },
+    "compatibility": {
+      "$ref": "#/$defs/Compatibility"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ManifestMetadata": {
+      "type": "object",
+      "required": ["schema_version", "version", "created_at", "updated_at"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Version of the manifest schema",
+          "const": "1.0.0"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Version of this manifest instance"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 last update timestamp"
+        },
+        "signed_by": {
+          "type": "string",
+          "description": "Identity of the signer"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Cryptographic signature of the manifest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Identity": {
+      "type": "object",
+      "required": ["name", "slug", "description", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Repository name (kebab-case)"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "URL-safe identifier"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 500,
+          "description": "Human-readable purpose"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["platform-core", "module", "adapter", "sdk", "tool"],
+          "description": "Repository type"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+          },
+          "uniqueItems": true,
+          "description": "Classification tags"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Purpose": {
+      "type": "object",
+      "required": ["summary", "scope"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 200,
+          "description": "One-line purpose"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["shared", "module-specific", "infrastructure"],
+          "description": "Scope of this repository"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Healthcare domains served"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Ownership": {
+      "type": "object",
+      "required": ["team", "organization", "contact", "repository_url"],
+      "properties": {
+        "team": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owning team name"
+        },
+        "organization": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owning organization"
+        },
+        "contact": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email"
+        },
+        "repository_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source code URL"
+        },
+        "documentation_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation URL"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Runtime": {
+      "type": "object",
+      "required": ["language", "version"],
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": ["python", "typescript", "javascript", "go", "rust", "java", "csharp", "other"],
+          "description": "Primary programming language"
+        },
+        "version": {
+          "type": "string",
+          "description": "Language version requirement (e.g., >=3.11)"
+        },
+        "framework": {
+          "type": "string",
+          "description": "Framework name and version"
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Runtime environment"
+        },
+        "os": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["linux", "windows", "macos"]
+          },
+          "description": "Supported operating systems"
+        },
+        "container": {
+          "type": "object",
+          "properties": {
+            "base_image": {
+              "type": "string"
+            },
+            "ports": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\d+:\\d+$"
+              }
+            }
+          },
+          "description": "Container configuration"
+        },
+        "environment_variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "required"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]*$"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "description": {
+                "type": "string"
+              },
+              "default": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Required environment variables"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Maturity": {
+      "type": "object",
+      "required": ["level", "since"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["experimental", "alpha", "beta", "stable", "mature", "legacy"],
+          "description": "Current maturity level"
+        },
+        "since": {
+          "type": "string",
+          "format": "date",
+          "description": "Date current maturity was reached"
+        },
+        "certification": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string",
+              "enum": ["basic", "standard", "clinical", "national"]
+            },
+            "status": {
+              "type": "string",
+              "enum": ["pending", "passed", "conditional", "failed", "expired", "revoked"]
+            },
+            "assessed_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "expires_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "description": "Certification status"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Service": {
+      "type": "object",
+      "required": ["name", "type", "description", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["core", "module", "adapter", "gateway", "worker", "scheduler"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535
+        },
+        "health_endpoint": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "metrics_endpoint": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "additionalProperties": false
+    },
+    "API": {
+      "type": "object",
+      "required": ["name", "type", "description", "version", "base_path", "authentication"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["rest", "graphql", "grpc", "websocket", "webhook"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "base_path": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "authentication": {
+          "type": "string",
+          "enum": ["none", "api_key", "jwt", "oauth2", "mtls"]
+        },
+        "rate_limit": {
+          "type": "object",
+          "properties": {
+            "requests_per_minute": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "burst": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "deprecated": {
+          "type": "boolean"
+        },
+        "sunset_date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Event": {
+      "type": "object",
+      "required": ["name", "type", "description", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9.]*[a-z0-9]$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["domain", "integration", "system", "audit", "notification"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "retention_days": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Device": {
+      "type": "object",
+      "required": ["name", "type", "manufacturer", "model", "protocol", "driver"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": ["analyzer", "reader", "printer", "sensor", "imaging", "point_of_care", "infusion", "monitor"]
+        },
+        "manufacturer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol": {
+          "type": "string",
+          "enum": ["ASTM", "HL7", "FHIR", "USB", "Serial", "TCP_IP", "Bluetooth"]
+        },
+        "driver": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Dependency": {
+      "type": "object",
+      "required": ["name", "type", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": ["platform", "external_package", "external_service", "shared_sdk", "protocol", "standard"]
+        },
+        "version": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "critical": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Standard": {
+      "type": "object",
+      "required": ["name", "version", "level"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["HL7", "FHIR", "LOINC", "SNOMED_CT", "ASTM", "DICOM", "IHE"]
+        },
+        "version": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": ["full", "partial", "planned"]
+        },
+        "adapter": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Compatibility": {
+      "type": "object",
+      "required": ["platform_core", "min_platform_core"],
+      "properties": {
+        "platform_core": {
+          "type": "string",
+          "description": "Compatible Platform-Core version range"
+        },
+        "min_platform_core": {
+          "type": "string",
+          "description": "Minimum required Platform-Core version"
+        },
+        "breaking_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Known breaking changes in this version"
+        },
+        "migration_guide": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to migration documentation"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
