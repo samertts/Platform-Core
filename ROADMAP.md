@@ -37,7 +37,7 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | 13 | Knowledge Graph Engine | ✅ Complete | 225 passing | 14 components, fully tested |
 | 14 | Ecosystem Unification | ✅ Complete | — | 8 repos analyzed, 14 docs generated |
 | 15 | Architecture & Governance | ✅ Complete | — | 12 ADRs, standards, release governance |
-| 16 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
+| 16 | Unified Domain Model | ✅ Complete | — | 35 domains, 57 entities, 12 docs, 7 registries |
 | 17 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
 
 **Total Tests**: 728 passing (111 runtime + 157 package manager + 86 discovery engine + 149 governance + 225 knowledge graph)
