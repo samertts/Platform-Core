@@ -36,8 +36,9 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | 12 | Governance Engine | ✅ Complete | 149 passing | 14 components, fully tested |
 | 13 | Knowledge Graph Engine | ✅ Complete | 225 passing | 14 components, fully tested |
 | 14 | Ecosystem Unification | ✅ Complete | — | 8 repos analyzed, 14 docs generated |
-| 15 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
-| 16 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
+| 15 | Architecture & Governance | ✅ Complete | — | 12 ADRs, standards, release governance |
+| 16 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
+| 17 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
 
 **Total Tests**: 728 passing (111 runtime + 157 package manager + 86 discovery engine + 149 governance + 225 knowledge graph)
 
@@ -170,6 +171,30 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 12. Performance Benchmarks
 13. Security Assessment
 14. Certification Report
+
+### Phase 15 — Architecture & Governance (COMPLETE)
+
+**12 ADRs, 3 standards documents generated**:
+
+| Deliverable | File | Lines |
+|-------------|------|-------|
+| ADR-0001 | `adr/ADR-0001.md` | 367 |
+| ADR-0002 | `adr/ADR-0002.md` | 437 |
+| ADR-0003 | `adr/ADR-0003.md` | 410 |
+| ADR-0004 | `adr/ADR-0004.md` | 477 |
+| ADR-0005 | `adr/ADR-0005.md` | 450 |
+| ADR-0006 | `adr/ADR-0006.md` | 436 |
+| ADR-0007 | `adr/ADR-0007.md` | 479 |
+| ADR-0008 | `adr/ADR-0008.md` | 432 |
+| ADR-0009 | `adr/ADR-0009.md` | 501 |
+| ADR-0010 | `adr/ADR-0010.md` | 456 |
+| ADR-0011 | `adr/ADR-0011.md` | 437 |
+| ADR-0012 | `adr/ADR-0012.md` | 482 |
+| Reference Architecture | `REFERENCE_ARCHITECTURE.md` | 722 |
+| Platform Standards | `PLATFORM_STANDARDS.md` | 923 |
+| Release Governance | `RELEASE_GOVERNANCE.md` | 657 |
+| Final Readiness Report | `FINAL_EXECUTION_READINESS_REPORT.md` | — |
+| Architectural Certification | `ARCHITECTURAL_CERTIFICATION_REPORT.md` | — |
 
 ---
 
@@ -874,9 +899,10 @@ If migration causes issues:
 | Phase 12 — Governance Engine | All | Governance engine with 14 components (findings, reviews, decisions, risk, compliance, quality, constitution, registry, AI assistant) |
 | Phase 13 — Knowledge Graph Engine | All | Knowledge graph with 14 components (graph store, nodes, edges, temporal, queries, impact, architecture, healthcare, AI, API, visualization) |
 | Phase 14 — Ecosystem Unification | All | Ecosystem analysis of 8 repositories, 14 documentation deliverables, module classification, migration plan |
+| Phase 15 — Architecture & Governance | All | 12 ADRs, Reference Architecture, Platform Standards, Release Governance, Certification Reports |
 
 ---
 
-*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-14*
+*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-15*
 *Constitution Reference: All Articles*
 *Last Updated: 2026-06-25*
