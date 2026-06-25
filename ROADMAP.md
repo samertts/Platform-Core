@@ -32,12 +32,12 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | 8 | Implementation Plan | ✅ Complete | — | 4 milestones, 26 weeks roadmap |
 | 9 | Platform Runtime V1.0 | ✅ Complete | 111 passing | 12 components, fully tested |
 | 10 | Package Manager | ✅ Complete | 157 passing | 11 components, fully tested |
-| 11 | Discovery Engine | 🔲 Pending | — | Next: implement scanners |
+| 11 | Discovery Engine | ✅ Complete | 86 passing | Scanner, 9 analyzers, scorer, reporter |
 | 12 | Governance Engine | 🔲 Pending | — | After Phase 11 |
 | 13 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
 | 14 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
 
-**Total Tests**: 268 passing (111 runtime + 157 package manager)
+**Total Tests**: 354 passing (111 runtime + 157 package manager + 86 discovery engine)
 
 ---
 
@@ -82,6 +82,19 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | CLI | `cli/__init__.py` | Command-line interface |
 | REST API | `api/__init__.py` | FastAPI endpoints |
 | Package SDK | `packages/sdk.py` | Python SDK, publishing, runtime |
+
+### Phase 11 — Discovery Engine (COMPLETE)
+
+**6 components implemented and tested (86 tests passing)**:
+
+| Component | Module | Description |
+|-----------|--------|-------------|
+| Core Types | `discovery/types.py` | All enums, dataclasses for discovery |
+| Scanner | `discovery/scanner.py` | Filesystem-based repository scanning |
+| Analyzers | `discovery/analyzers.py` | 9 analyzers (language, framework, architecture, docs, testing, security, dependencies, CI/CD, Docker) |
+| Health Scorer | `discovery/scorer.py` | Weighted category scoring with rating thresholds |
+| Reporter | `discovery/reporter.py` | Ecosystem and repository health reports |
+| Discovery Engine | `discovery/engine.py` | Full workflow orchestrator |
 
 ---
 
@@ -586,6 +599,12 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | P10-09 | Rollback Engine | Phase 10 | — | ✅ Complete |
 | P10-10 | Package Builder | Phase 10 | — | ✅ Complete |
 | P10-11 | Package Manager Core | Phase 10 | — | ✅ Complete |
+| P11-01 | Core Types | Phase 11 | — | ✅ Complete |
+| P11-02 | Scanner | Phase 11 | — | ✅ Complete |
+| P11-03 | Analyzers (9) | Phase 11 | — | ✅ Complete |
+| P11-04 | Health Scorer | Phase 11 | — | ✅ Complete |
+| P11-05 | Reporter | Phase 11 | — | ✅ Complete |
+| P11-06 | Discovery Engine | Phase 11 | — | ✅ Complete |
 
 ---
 
