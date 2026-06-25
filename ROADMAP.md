@@ -34,10 +34,11 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | 10 | Package Manager | ✅ Complete | 157 passing | 11 components, fully tested |
 | 11 | Discovery Engine | ✅ Complete | 86 passing | Scanner, 9 analyzers, scorer, reporter |
 | 12 | Governance Engine | ✅ Complete | 149 passing | 14 components, fully tested |
-| 13 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
-| 14 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
+| 13 | Knowledge Graph Engine | ✅ Complete | 225 passing | 14 components, fully tested |
+| 14 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
+| 15 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
 
-**Total Tests**: 503 passing (111 runtime + 157 package manager + 86 discovery engine + 149 governance)
+**Total Tests**: 728 passing (111 runtime + 157 package manager + 86 discovery engine + 149 governance + 225 knowledge graph)
 
 ---
 
@@ -116,6 +117,27 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | AI Governance Assistant | `governance/ai_assistant.py` | Read-only AI assistant for architecture, dependency, manifest, API reviews |
 | Governance Engine | `governance/engine.py` | Orchestrator coordinating all sub-engines |
 | Governance API | `governance/api.py` | REST API for governance operations (reviews, findings, decisions, compliance, risk, quality, constitution) |
+
+### Phase 13 — Knowledge Graph Engine (COMPLETE)
+
+**14 components implemented and tested (225 tests passing)**:
+
+| Component | Module | Description |
+|-----------|--------|-------------|
+| Core Types | `knowledge/types.py` | 22 node types, 20 relationship types, 12 query types, 12 smell types, 8 healthcare standards |
+| Graph Store | `knowledge/graph.py` | In-memory graph with adjacency lists, thread-safe CRUD, snapshot support |
+| Node Manager | `knowledge/nodes.py` | Node CRUD, lifecycle transitions, search, filtering |
+| Edge Manager | `knowledge/edges.py` | Relationship CRUD, traversal, incoming/outgoing queries |
+| Temporal Manager | `knowledge/temporal.py` | Event history, snapshots, restore, entity timeline |
+| Query Engine | `knowledge/queries.py` | 8 query types: dependency, impact, circular, shortest path, reachability, architecture nav, risk, repository health |
+| Impact Analyzer | `knowledge/impact.py` | Change impact analysis with affected categorization across 9 entity types |
+| Architecture Intelligence | `knowledge/architecture.py` | 8 smell types: orphan, dead, unused, duplicate, circular, high coupling, god module; recommendations |
+| Healthcare Knowledge | `knowledge/healthcare.py` | HL7, FHIR, LOINC, SNOMED CT, ICD, ASTM, DICOM, IHE; entity mapping |
+| AI Knowledge Layer | `knowledge/ai_layer.py` | 8 reasoning types: architecture, dependencies, impact, migration, refactoring, governance, risk, healthcare |
+| Knowledge Engine | `knowledge/engine.py` | Orchestrator coordinating all sub-engines with temporal tracking |
+| Knowledge API | `knowledge/api.py` | REST endpoints: node, relationship, dependency, impact, search, traversal, history, analytics |
+| Visualization | `knowledge/visualization.py` | 10 graph types: architecture, repository, dependency, service, module, event, healthcare, device, governance, timeline |
+| Knowledge Engine Config | `knowledge/types.py` | Configurable limits, temporal/AI/healthcare toggles |
 
 ---
 
@@ -640,6 +662,20 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | P12-12 | AI Governance Assistant | Phase 12 | — | ✅ Complete |
 | P12-13 | Governance Engine | Phase 12 | — | ✅ Complete |
 | P12-14 | Governance API | Phase 12 | — | ✅ Complete |
+| P13-01 | Core Types | Phase 13 | — | ✅ Complete |
+| P13-02 | Graph Store | Phase 13 | — | ✅ Complete |
+| P13-03 | Node Manager | Phase 13 | — | ✅ Complete |
+| P13-04 | Edge Manager | Phase 13 | — | ✅ Complete |
+| P13-05 | Temporal Manager | Phase 13 | — | ✅ Complete |
+| P13-06 | Query Engine | Phase 13 | — | ✅ Complete |
+| P13-07 | Impact Analyzer | Phase 13 | — | ✅ Complete |
+| P13-08 | Architecture Intelligence | Phase 13 | — | ✅ Complete |
+| P13-09 | Healthcare Knowledge | Phase 13 | — | ✅ Complete |
+| P13-10 | AI Knowledge Layer | Phase 13 | — | ✅ Complete |
+| P13-11 | Knowledge Engine | Phase 13 | — | ✅ Complete |
+| P13-12 | Knowledge API | Phase 13 | — | ✅ Complete |
+| P13-13 | Visualization Engine | Phase 13 | — | ✅ Complete |
+| P13-14 | Knowledge Tests | Phase 13 | — | ✅ Complete |
 
 ---
 
@@ -656,7 +692,7 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | Governance Coverage | All Constitution articles enforced | Coverage matrix |
 | API Response Time | <200ms (p95) | Load testing |
 | System Uptime | 99.9% | Monitoring |
-| Test Coverage | >90% (currently 503 tests passing) | Coverage report |
+| Test Coverage | >90% (currently 728 tests passing) | Coverage report |
 
 ### 8.2 Milestone-Level Success Criteria
 
@@ -804,9 +840,10 @@ If migration causes issues:
 | Phase 10 — Package Manager | All | Package management (11 components) |
 | Phase 11 — Discovery Engine | All | Repository scanning and health scoring (6 components) |
 | Phase 12 — Governance Engine | All | Governance engine with 14 components (findings, reviews, decisions, risk, compliance, quality, constitution, registry, AI assistant) |
+| Phase 13 — Knowledge Graph Engine | All | Knowledge graph with 14 components (graph store, nodes, edges, temporal, queries, impact, architecture, healthcare, AI, API, visualization) |
 
 ---
 
-*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-12*
+*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-13*
 *Constitution Reference: All Articles*
 *Last Updated: 2026-06-25*
