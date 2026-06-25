@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "name": "NHDOS Reference Data Registry",
+    "version": "1.0.0",
+    "description": "Reference data standards and catalogs",
+    "created_at": "2026-06-25",
+    "certified": true
+  },
+  "standards": [
+    {
+      "id": "ref-001",
+      "name": "ICD-11",
+      "full_name": "International Classification of Diseases 11th Revision",
+      "purpose": "Disease and health condition coding",
+      "version": "2024.01",
+      "release_date": "2026-01-01",
+      "languages": ["en", "ar"],
+      "update_frequency": "annual",
+      "record_count": 55000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/icd11",
+      "validation_endpoint": "/api/v1/reference-data/icd11/validate"
+    },
+    {
+      "id": "ref-002",
+      "name": "SNOMED CT",
+      "full_name": "Systematized Nomenclature of Medicine Clinical Terms",
+      "purpose": "Clinical term coding",
+      "version": "2026.01",
+      "release_date": "2026-01-01",
+      "languages": ["en", "ar"],
+      "update_frequency": "semi-annual",
+      "record_count": 350000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/snomed",
+      "validation_endpoint": "/api/v1/reference-data/snomed/validate"
+    },
+    {
+      "id": "ref-003",
+      "name": "LOINC",
+      "full_name": "Logical Observation Identifiers Names and Codes",
+      "purpose": "Laboratory and clinical observation coding",
+      "version": "2.76",
+      "release_date": "2026-01-01",
+      "languages": ["en"],
+      "update_frequency": "tri-annual",
+      "record_count": 90000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/loinc",
+      "validation_endpoint": "/api/v1/reference-data/loinc/validate"
+    },
+    {
+      "id": "ref-004",
+      "name": "UCUM",
+      "full_name": "Unified Code for Units of Measure",
+      "purpose": "Unit of measure coding",
+      "version": "2.1",
+      "release_date": "2024-01-01",
+      "languages": ["en"],
+      "update_frequency": "as_needed",
+      "record_count": 3000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/ucum",
+      "validation_endpoint": "/api/v1/reference-data/ucum/validate"
+    },
+    {
+      "id": "ref-005",
+      "name": "ATC",
+      "full_name": "Anatomical Therapeutic Chemical Classification",
+      "purpose": "Medication classification",
+      "version": "2026",
+      "release_date": "2026-01-01",
+      "languages": ["en"],
+      "update_frequency": "annual",
+      "record_count": 5000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/atc",
+      "validation_endpoint": "/api/v1/reference-data/atc/validate"
+    },
+    {
+      "id": "ref-006",
+      "name": "ISO_3166",
+      "full_name": "ISO 3166 Country Codes",
+      "purpose": "Country and subdivision coding",
+      "version": "2024",
+      "release_date": "2024-01-01",
+      "languages": ["en"],
+      "update_frequency": "annual",
+      "record_count": 250,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/iso3166",
+      "validation_endpoint": "/api/v1/reference-data/iso3166/validate"
+    }
+  ],
+  "catalogs": [
+    {
+      "id": "cat-001",
+      "name": "governorates",
+      "display_name": "Governorates",
+      "description": "National governorate codes",
+      "parent_standard": null,
+      "record_count": 18,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/governorates"
+    },
+    {
+      "id": "cat-002",
+      "name": "districts",
+      "display_name": "Districts",
+      "description": "District codes within governorates",
+      "parent_standard": "governorates",
+      "record_count": 100,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/districts"
+    },
+    {
+      "id": "cat-003",
+      "name": "facilities",
+      "display_name": "Healthcare Facilities",
+      "description": "Healthcare facility codes",
+      "parent_standard": "districts",
+      "record_count": 1000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/facilities"
+    },
+    {
+      "id": "cat-004",
+      "name": "organizations",
+      "display_name": "Healthcare Organizations",
+      "description": "Healthcare organization codes",
+      "parent_standard": null,
+      "record_count": 100,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/organizations"
+    },
+    {
+      "id": "cat-005",
+      "name": "laboratories",
+      "display_name": "Laboratories",
+      "description": "Laboratory unit codes",
+      "parent_standard": "facilities",
+      "record_count": 200,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/laboratories"
+    },
+    {
+      "id": "cat-006",
+      "name": "devices",
+      "display_name": "Medical Devices",
+      "description": "Medical device classification codes",
+      "parent_standard": null,
+      "record_count": 500,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/devices"
+    },
+    {
+      "id": "cat-007",
+      "name": "tests",
+      "display_name": "Laboratory Tests",
+      "description": "Laboratory test definition codes",
+      "parent_standard": "LOINC",
+      "record_count": 1000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/tests"
+    },
+    {
+      "id": "cat-008",
+      "name": "medications",
+      "display_name": "Medications",
+      "description": "Medication product codes",
+      "parent_standard": "ATC",
+      "record_count": 5000,
+      "status": "active",
+      "api_endpoint": "/api/v1/reference-data/medications"
+    }
+  ],
+  "mappings": [
+    {
+      "id": "map-001",
+      "source_standard": "ICD-11",
+      "target_standard": "SNOMED CT",
+      "mapping_type": "one_to_many",
+      "coverage": 0.85,
+      "status": "active"
+    },
+    {
+      "id": "map-002",
+      "source_standard": "LOINC",
+      "target_standard": "SNOMED CT",
+      "mapping_type": "many_to_many",
+      "coverage": 0.70,
+      "status": "active"
+    },
+    {
+      "id": "map-003",
+      "source_standard": "ATC",
+      "target_standard": "SNOMED CT",
+      "mapping_type": "one_to_one",
+      "coverage": 0.90,
+      "status": "active"
+    }
+  ]
+}

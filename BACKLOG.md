@@ -16,6 +16,7 @@
 | R1-001 | Event Bus (Redis) | Platform-Core | 2 weeks | Pending |
 | R1-016 | Unified Domain Model | Platform-Core | 1 week | ✅ Complete |
 | R1-017 | Frontend Development | Platform-Core | 2 weeks | ✅ Complete |
+| R1-018 | Architecture Freeze | Platform-Core | 1 week | ✅ Complete |
 | R1-002 | LabLink-Core Integration | LabLink Module | 3 weeks | Pending |
 | R1-003 | Front-end Integration | Frontend Module | 2 weeks | Pending |
 | R1-004 | Receipt-and-delivery Integration | Lab Module | 2 weeks | Pending |
