@@ -33,11 +33,11 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | 9 | Platform Runtime V1.0 | ✅ Complete | 111 passing | 12 components, fully tested |
 | 10 | Package Manager | ✅ Complete | 157 passing | 11 components, fully tested |
 | 11 | Discovery Engine | ✅ Complete | 86 passing | Scanner, 9 analyzers, scorer, reporter |
-| 12 | Governance Engine | 🔲 Pending | — | After Phase 11 |
+| 12 | Governance Engine | ✅ Complete | 149 passing | 14 components, fully tested |
 | 13 | Event Bus (Redis) | 🔲 Pending | — | Production event bus |
 | 14 | Dashboard & Self-Evolution | 🔲 Pending | — | Final integration |
 
-**Total Tests**: 354 passing (111 runtime + 157 package manager + 86 discovery engine)
+**Total Tests**: 503 passing (111 runtime + 157 package manager + 86 discovery engine + 149 governance)
 
 ---
 
@@ -95,6 +95,27 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | Health Scorer | `discovery/scorer.py` | Weighted category scoring with rating thresholds |
 | Reporter | `discovery/reporter.py` | Ecosystem and repository health reports |
 | Discovery Engine | `discovery/engine.py` | Full workflow orchestrator |
+
+### Phase 12 — Governance Engine (COMPLETE)
+
+**14 components implemented and tested (149 tests passing)**:
+
+| Component | Module | Description |
+|-----------|--------|-------------|
+| Core Types | `governance/types.py` | 30 dataclasses, 12 enums (ReviewType, FindingSeverity, RiskLevel, ComplianceStatus, etc.) |
+| Finding Manager | `governance/findings.py` | Finding lifecycle management (CRUD, status tracking, severity filtering) |
+| Review Manager | `governance/reviews.py` | 8 review types, review lifecycle (create, start, complete, fail, cancel) |
+| Decision Engine | `governance/decisions.py` | Auto and manual decision making (approve, reject, defer) |
+| Recommendation Engine | `governance/recommendations.py` | Priority-based recommendations from findings |
+| Exception Manager | `governance/exceptions.py` | Exception and waiver management for governance rules |
+| Risk Engine | `governance/risk.py` | 7 risk categories (security, compliance, architecture, dependencies, performance, data, operational) |
+| Compliance Engine | `governance/compliance.py` | 9 compliance standards (constitution, manifest, API, package, security, coding, docs, testing, coverage) |
+| Quality Gate Engine | `governance/quality.py` | Quality gates with pass/fail criteria for releases |
+| Constitution Enforcer | `governance/constitution.py` | Automated validation against 15 Constitution articles |
+| Governance Registry | `governance/registry.py` | Audit history, repository governance records, statistics |
+| AI Governance Assistant | `governance/ai_assistant.py` | Read-only AI assistant for architecture, dependency, manifest, API reviews |
+| Governance Engine | `governance/engine.py` | Orchestrator coordinating all sub-engines |
+| Governance API | `governance/api.py` | REST API for governance operations (reviews, findings, decisions, compliance, risk, quality, constitution) |
 
 ---
 
@@ -605,6 +626,20 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | P11-04 | Health Scorer | Phase 11 | — | ✅ Complete |
 | P11-05 | Reporter | Phase 11 | — | ✅ Complete |
 | P11-06 | Discovery Engine | Phase 11 | — | ✅ Complete |
+| P12-01 | Core Types | Phase 12 | — | ✅ Complete |
+| P12-02 | Finding Manager | Phase 12 | — | ✅ Complete |
+| P12-03 | Review Manager | Phase 12 | — | ✅ Complete |
+| P12-04 | Decision Engine | Phase 12 | — | ✅ Complete |
+| P12-05 | Recommendation Engine | Phase 12 | — | ✅ Complete |
+| P12-06 | Exception Manager | Phase 12 | — | ✅ Complete |
+| P12-07 | Risk Engine | Phase 12 | — | ✅ Complete |
+| P12-08 | Compliance Engine | Phase 12 | — | ✅ Complete |
+| P12-09 | Quality Gate Engine | Phase 12 | — | ✅ Complete |
+| P12-10 | Constitution Enforcer | Phase 12 | — | ✅ Complete |
+| P12-11 | Governance Registry | Phase 12 | — | ✅ Complete |
+| P12-12 | AI Governance Assistant | Phase 12 | — | ✅ Complete |
+| P12-13 | Governance Engine | Phase 12 | — | ✅ Complete |
+| P12-14 | Governance API | Phase 12 | — | ✅ Complete |
 
 ---
 
@@ -621,7 +656,7 @@ This roadmap defines the implementation plan for Platform-Core, the authoritativ
 | Governance Coverage | All Constitution articles enforced | Coverage matrix |
 | API Response Time | <200ms (p95) | Load testing |
 | System Uptime | 99.9% | Monitoring |
-| Test Coverage | >90% (currently 268 tests passing) | Coverage report |
+| Test Coverage | >90% (currently 503 tests passing) | Coverage report |
 
 ### 8.2 Milestone-Level Success Criteria
 
@@ -767,9 +802,11 @@ If migration causes issues:
 | XVIII — Long-term Vision | All | Foundation for future growth |
 | Phase 9 — Runtime | All | Platform runtime V1.0 (12 components) |
 | Phase 10 — Package Manager | All | Package management (11 components) |
+| Phase 11 — Discovery Engine | All | Repository scanning and health scoring (6 components) |
+| Phase 12 — Governance Engine | All | Governance engine with 14 components (findings, reviews, decisions, risk, compliance, quality, constitution, registry, AI assistant) |
 
 ---
 
-*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-10*
+*Document generated as part of Platform-Core V2.0 Bootstrap Program — Phases 1-12*
 *Constitution Reference: All Articles*
 *Last Updated: 2026-06-25*
