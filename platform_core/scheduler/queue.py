@@ -4,7 +4,6 @@ from platform_core.scheduler.task import ScheduledTask
 
 
 class TaskQueue:
-
     def __init__(self) -> None:
 
         self._tasks: list[ScheduledTask] = []

@@ -20,17 +20,13 @@ class NotificationClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/recipient/{recipient_id}")
 
     def get_unread(self, recipient_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/unread", params={"recipient_id": recipient_id}
-        )
+        return self.client.get(f"{self.endpoint}/unread", params={"recipient_id": recipient_id})
 
     def mark_read(self, notification_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{notification_id}/read")
 
     def mark_all_read(self, recipient_id: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/read-all", data={"recipient_id": recipient_id}
-        )
+        return self.client.put(f"{self.endpoint}/read-all", data={"recipient_id": recipient_id})
 
     def send(self, notification_data: dict) -> dict:
         return self.client.post(f"{self.endpoint}/send", data=notification_data)

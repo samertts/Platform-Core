@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Any
-
 from platform_core.services.descriptor import ServiceDescriptor
 
 
@@ -23,9 +21,7 @@ class ServiceRegistry:
     ) -> None:
 
         if descriptor.key in self._services:
-            raise ValueError(
-                f"Service already registered: {descriptor.key}"
-            )
+            raise ValueError(f"Service already registered: {descriptor.key}")
 
         self._services[descriptor.key] = descriptor
 
@@ -56,9 +52,7 @@ class ServiceRegistry:
             return self._services[key]
 
         except KeyError as exc:
-            raise KeyError(
-                f"Unknown service: {key}"
-            ) from exc
+            raise KeyError(f"Unknown service: {key}") from exc
 
     def all(self) -> tuple[ServiceDescriptor, ...]:
 

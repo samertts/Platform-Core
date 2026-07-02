@@ -3,7 +3,6 @@ Workflow domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -13,7 +12,7 @@ class Workflow(BaseEntity):
     """Workflow definition."""
 
     name: str = ""
-    description: Optional[str] = None
+    description: str | None = None
     workflow_type: str = ""
     version: str = "1.0.0"
     status: str = "active"
@@ -28,8 +27,8 @@ class WorkflowStep(BaseEntity):
     step_name: str = ""
     step_order: int = 0
     step_type: str = ""
-    assigned_role: Optional[str] = None
-    timeout_hours: Optional[int] = None
+    assigned_role: str | None = None
+    timeout_hours: int | None = None
     status: str = "active"
 
 
@@ -38,11 +37,11 @@ class Task(BaseEntity):
     """Task record."""
 
     workflow_id: str = ""
-    step_id: Optional[str] = None
+    step_id: str | None = None
     title: str = ""
-    description: Optional[str] = None
-    assigned_to: Optional[str] = None
-    due_date: Optional[str] = None
+    description: str | None = None
+    assigned_to: str | None = None
+    due_date: str | None = None
     priority: str = "medium"
     status: str = "pending"
-    completed_at: Optional[str] = None
+    completed_at: str | None = None

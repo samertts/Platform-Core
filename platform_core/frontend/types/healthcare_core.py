@@ -3,7 +3,6 @@ Healthcare Core domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -14,9 +13,9 @@ class Patient(BaseEntity):
 
     citizen_id: str = ""
     medical_record_number: str = ""
-    facility_id: Optional[str] = None
-    primary_care_provider_id: Optional[str] = None
-    blood_type: Optional[str] = None
+    facility_id: str | None = None
+    primary_care_provider_id: str | None = None
+    blood_type: str | None = None
     allergies: list[str] = field(default_factory=list)
     chronic_conditions: list[str] = field(default_factory=list)
     status: str = "active"
@@ -29,12 +28,12 @@ class Visit(BaseEntity):
 
     patient_id: str = ""
     facility_id: str = ""
-    department_id: Optional[str] = None
+    department_id: str | None = None
     visit_type: str = ""
-    reason: Optional[str] = None
+    reason: str | None = None
     status: str = "active"
-    started_at: Optional[str] = None
-    ended_at: Optional[str] = None
+    started_at: str | None = None
+    ended_at: str | None = None
 
 
 @dataclass
@@ -44,12 +43,12 @@ class Encounter(BaseEntity):
     visit_id: str = ""
     patient_id: str = ""
     encounter_type: str = ""
-    chief_complaint: Optional[str] = None
-    assessment: Optional[str] = None
-    plan: Optional[str] = None
+    chief_complaint: str | None = None
+    assessment: str | None = None
+    plan: str | None = None
     status: str = "active"
-    started_at: Optional[str] = None
-    ended_at: Optional[str] = None
+    started_at: str | None = None
+    ended_at: str | None = None
 
 
 @dataclass
@@ -58,13 +57,13 @@ class Appointment(BaseEntity):
 
     patient_id: str = ""
     facility_id: str = ""
-    department_id: Optional[str] = None
-    provider_id: Optional[str] = None
+    department_id: str | None = None
+    provider_id: str | None = None
     appointment_type: str = ""
     scheduled_date: str = ""
     scheduled_time: str = ""
     duration_minutes: int = 30
-    reason: Optional[str] = None
+    reason: str | None = None
     status: str = "scheduled"
 
 
@@ -76,9 +75,9 @@ class Admission(BaseEntity):
     facility_id: str = ""
     admission_type: str = ""
     admission_date: str = ""
-    department_id: Optional[str] = None
-    bed_id: Optional[str] = None
-    admitting_diagnosis: Optional[str] = None
+    department_id: str | None = None
+    bed_id: str | None = None
+    admitting_diagnosis: str | None = None
     status: str = "active"
 
 
@@ -90,7 +89,7 @@ class Discharge(BaseEntity):
     patient_id: str = ""
     discharge_date: str = ""
     discharge_type: str = ""
-    discharge_diagnosis: Optional[str] = None
-    discharge_instructions: Optional[str] = None
-    follow_up_date: Optional[str] = None
+    discharge_diagnosis: str | None = None
+    discharge_instructions: str | None = None
+    follow_up_date: str | None = None
     status: str = "completed"

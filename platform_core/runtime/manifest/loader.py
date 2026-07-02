@@ -72,11 +72,7 @@ class ManifestLoader:
             indent = len(line) - len(line.lstrip())
             stripped = line.strip()
 
-            while (
-                section_stack
-                and indent <= section_stack[-1][0]
-                and len(section_stack) > 1
-            ):
+            while section_stack and indent <= section_stack[-1][0] and len(section_stack) > 1:
                 section_stack.pop()
             current_section = section_stack[-1][1]
 
@@ -191,9 +187,7 @@ class ManifestLoader:
                     elif section_key == "events" and not self.EVENT_NAME_PATTERN.match(
                         str(item["name"])
                     ):
-                        errors.append(
-                            f"{section_key}[{i}].name invalid format: {item['name']}"
-                        )
+                        errors.append(f"{section_key}[{i}].name invalid format: {item['name']}")
 
         return errors
 

@@ -1,12 +1,10 @@
 import pytest
 
 from platform_core.doctor.check import DoctorCheck
-from platform_core.doctor.check_result import CheckResult
-from platform_core.doctor.check_result import CheckStatus
+from platform_core.doctor.check_result import CheckResult, CheckStatus
 
 
 class FakeCheck(DoctorCheck):
-
     id = "fake"
 
     name = "Fake"

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from platform_core.governance.types import Exception, ExceptionType, Waiver
@@ -78,7 +78,7 @@ class ExceptionManager:
             exception_type=exception_type,
             active_only=True,
         )
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for exc in exceptions:
             if exc.expires_at is None or exc.expires_at > now:
                 return True
@@ -137,7 +137,7 @@ class ExceptionManager:
 
     def is_finding_waived(self, finding_id: str) -> bool:
         waivers = self.list_waivers(finding_id=finding_id, active_only=True)
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for waiver in waivers:
             if waiver.expires_at is None or waiver.expires_at > now:
                 return True

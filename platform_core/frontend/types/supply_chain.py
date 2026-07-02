@@ -3,7 +3,6 @@ Supply Chain domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -15,13 +14,13 @@ class InventoryItem(BaseEntity):
     facility_id: str = ""
     item_code: str = ""
     name: str = ""
-    description: Optional[str] = None
+    description: str | None = None
     category: str = ""
     unit_of_measure: str = ""
     current_quantity: int = 0
     reorder_level: int = 0
-    maximum_level: Optional[int] = None
-    location: Optional[str] = None
+    maximum_level: int | None = None
+    location: str | None = None
     status: str = "active"
 
 
@@ -31,11 +30,11 @@ class Supplier(BaseEntity):
 
     name: str = ""
     supplier_type: str = ""
-    contact_person: Optional[str] = None
-    phone: Optional[str] = None
-    email: Optional[str] = None
-    address: Optional[str] = None
-    rating: Optional[float] = None
+    contact_person: str | None = None
+    phone: str | None = None
+    email: str | None = None
+    address: str | None = None
+    rating: float | None = None
     status: str = "active"
 
 
@@ -47,7 +46,7 @@ class Purchase(BaseEntity):
     supplier_id: str = ""
     purchase_order_number: str = ""
     order_date: str = ""
-    expected_delivery_date: Optional[str] = None
+    expected_delivery_date: str | None = None
     total_amount: float = 0.0
     currency: str = "IQD"
     status: str = "pending"

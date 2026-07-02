@@ -32,20 +32,16 @@ class ServiceProvider:
         #
 
         if descriptor.lifetime is ServiceLifetime.SINGLETON:
-
             instance = self._singletons.get(
                 descriptor.key,
             )
 
             if instance is None:
-
                 instance = self._activator.create(
                     descriptor,
                 )
 
-                self._singletons[
-                    descriptor.key
-                ] = instance
+                self._singletons[descriptor.key] = instance
 
             return instance
 
@@ -54,17 +50,12 @@ class ServiceProvider:
         #
 
         if descriptor.lifetime is ServiceLifetime.SCOPED:
-
             if scope is None:
-
-                raise RuntimeError(
-                    "Scoped service requires ServiceScope."
-                )
+                raise RuntimeError("Scoped service requires ServiceScope.")
 
             if scope.exists(
                 descriptor.key,
             ):
-
                 return scope.get(
                     descriptor.key,
                 )
@@ -85,14 +76,11 @@ class ServiceProvider:
         #
 
         if descriptor.lifetime is ServiceLifetime.TRANSIENT:
-
             return self._activator.create(
                 descriptor,
             )
 
-        raise ValueError(
-            f"Unsupported lifetime: {descriptor.lifetime}"
-        )
+        raise ValueError(f"Unsupported lifetime: {descriptor.lifetime}")
 
     def clear(
         self,

@@ -6,7 +6,6 @@ from platform_core.services.collection import ServiceCollection
 
 
 class DoctorRegistrar(Registrar):
-
     def register(
         self,
         services: ServiceCollection,

@@ -7,7 +7,6 @@ Repository dependency graph.
 from __future__ import annotations
 
 from collections import defaultdict
-from pathlib import Path
 
 from .models import RepositorySnapshot
 
@@ -52,21 +51,17 @@ class RepositoryGraph:
 
     def edges(self) -> dict[str, list[str]]:
 
-        return {
-            node: sorted(targets)
-            for node, targets in self._edges.items()
-        }
+        return {node: sorted(targets) for node, targets in self._edges.items()}
 
     @classmethod
     def from_snapshot(
         cls,
         snapshot: RepositorySnapshot,
-    ) -> "RepositoryGraph":
+    ) -> RepositoryGraph:
 
         graph = cls()
 
         for module in snapshot.modules:
-
             graph.add_node(module.name)
 
         return graph

@@ -23,9 +23,7 @@ class PrescriptionClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/encounter/{encounter_id}")
 
     def cancel(self, prescription_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{prescription_id}/cancel", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{prescription_id}/cancel", data={"reason": reason})
 
     def refill(self, prescription_id: str) -> dict:
         return self.client.post(f"{self.endpoint}/{prescription_id}/refill")
@@ -51,9 +49,7 @@ class MedicationClient(BaseEntityClient):
         )
 
     def get_expiring(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/expiring", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/expiring", params={"facility_id": facility_id})
 
 
 @dataclass

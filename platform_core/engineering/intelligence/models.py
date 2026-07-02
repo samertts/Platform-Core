@@ -20,7 +20,6 @@ from .enums import (
     RepairStatus,
 )
 
-
 # ---------------------------------------------------------------------
 # Repository
 # ---------------------------------------------------------------------
@@ -61,7 +60,6 @@ class IssueLocation:
 
 @dataclass(slots=True)
 class Issue:
-
     identifier: str
 
     title: str
@@ -84,7 +82,6 @@ class Issue:
 
 @dataclass(slots=True)
 class RepairAction:
-
     name: str
 
     description: str
@@ -94,7 +91,6 @@ class RepairAction:
 
 @dataclass(slots=True)
 class RepairPlan:
-
     identifier: str
 
     title: str
@@ -104,7 +100,6 @@ class RepairPlan:
 
 @dataclass(slots=True)
 class RepairResult:
-
     status: RepairStatus
 
     repaired: int = 0
@@ -123,7 +118,6 @@ class RepairResult:
 
 @dataclass(slots=True)
 class EngineeringMetric:
-
     name: str
 
     metric_type: MetricType
@@ -140,7 +134,6 @@ class EngineeringMetric:
 
 @dataclass(slots=True)
 class Dependency:
-
     name: str
 
     version: str
@@ -155,7 +148,6 @@ class Dependency:
 
 @dataclass(slots=True)
 class Capability:
-
     identifier: str
 
     name: str
@@ -174,7 +166,6 @@ class Capability:
 
 @dataclass(slots=True)
 class KnowledgeRecord:
-
     identifier: str
 
     title: str
@@ -193,7 +184,6 @@ class KnowledgeRecord:
 
 @dataclass(slots=True)
 class LearningRecord:
-
     issue: str
 
     solution: str
@@ -210,7 +200,6 @@ class LearningRecord:
 
 @dataclass(slots=True)
 class ProjectProfile:
-
     name: str
 
     version: str

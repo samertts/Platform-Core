@@ -1,7 +1,5 @@
 """Unit tests for Recommendation Engine."""
 
-import pytest
-
 from platform_core.governance.recommendations import RecommendationEngine
 from platform_core.governance.types import Finding, FindingSeverity
 
@@ -19,9 +17,7 @@ class TestRecommendationEngine:
                 title="Critical issue",
                 category="security",
             ),
-            Finding(
-                severity=FindingSeverity.HIGH, title="High issue", category="testing"
-            ),
+            Finding(severity=FindingSeverity.HIGH, title="High issue", category="testing"),
             Finding(
                 severity=FindingSeverity.LOW,
                 title="Low issue",
@@ -36,9 +32,7 @@ class TestRecommendationEngine:
     def test_prioritize(self) -> None:
         re = RecommendationEngine()
         recs = [
-            re.generate_recommendations(
-                [Finding(severity=FindingSeverity.LOW, title="l")], "r"
-            )[0],
+            re.generate_recommendations([Finding(severity=FindingSeverity.LOW, title="l")], "r")[0],
             re.generate_recommendations(
                 [Finding(severity=FindingSeverity.CRITICAL, title="c")], "r"
             )[0],

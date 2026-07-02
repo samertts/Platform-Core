@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 from uuid import uuid4
@@ -159,7 +159,7 @@ class ScanResult:
     repository: str = ""
     scan_type: ScanType = ScanType.FULL
     status: ScanStatus = ScanStatus.PENDING
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     duration_seconds: float = 0.0
     root_path: str = ""
@@ -209,7 +209,7 @@ class DiscoveryResult:
     scan: ScanResult = field(default_factory=ScanResult)
     analysis: AnalysisResult = field(default_factory=AnalysisResult)
     health_score: HealthScore = field(default_factory=HealthScore)
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     duration_seconds: float = 0.0
     status: ScanStatus = ScanStatus.PENDING
@@ -218,7 +218,7 @@ class DiscoveryResult:
 @dataclass
 class EcosystemReport:
     id: str = field(default_factory=lambda: str(uuid4()))
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     total_repositories: int = 0
     scanned_repositories: int = 0
     health_distribution: dict[str, int] = field(default_factory=dict)
@@ -233,7 +233,7 @@ class EcosystemReport:
 class RepositoryReport:
     id: str = field(default_factory=lambda: str(uuid4()))
     repository: str = ""
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     health_score: HealthScore = field(default_factory=HealthScore)
     category_scores: dict[str, float] = field(default_factory=dict)
     findings: list[Finding] = field(default_factory=list)

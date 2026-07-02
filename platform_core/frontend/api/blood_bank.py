@@ -35,9 +35,7 @@ class BloodUnitClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/blood-type/{blood_type}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/available", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
 
     def get_expiring(self, facility_id: str, days: int = 7) -> dict:
         return self.client.get(

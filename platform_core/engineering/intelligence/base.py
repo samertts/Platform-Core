@@ -6,9 +6,7 @@ Shared base classes.
 
 from __future__ import annotations
 
-from dataclasses import asdict
-from dataclasses import dataclass
-from dataclasses import fields
+from dataclasses import asdict, dataclass, fields
 from typing import Any
 
 
@@ -34,8 +32,5 @@ class EngineeringObject:
         return cls(**self.to_dict())
 
     def __repr__(self) -> str:
-        values = ", ".join(
-            f"{name}={getattr(self, name)!r}"
-            for name in self.field_names()
-        )
+        values = ", ".join(f"{name}={getattr(self, name)!r}" for name in self.field_names())
         return f"{self.__class__.__name__}({values})"

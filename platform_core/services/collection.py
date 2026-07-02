@@ -21,16 +21,14 @@ class ServiceCollection:
         self,
         key: str,
         implementation: type[Any],
-    ) -> "ServiceCollection":
+    ) -> ServiceCollection:
 
         self._services.append(
-
             ServiceDescriptor(
                 key=key,
                 implementation=implementation,
                 lifetime=ServiceLifetime.SINGLETON,
             )
-
         )
 
         return self
@@ -39,16 +37,14 @@ class ServiceCollection:
         self,
         key: str,
         implementation: type[Any],
-    ) -> "ServiceCollection":
+    ) -> ServiceCollection:
 
         self._services.append(
-
             ServiceDescriptor(
                 key=key,
                 implementation=implementation,
                 lifetime=ServiceLifetime.SCOPED,
             )
-
         )
 
         return self
@@ -57,16 +53,14 @@ class ServiceCollection:
         self,
         key: str,
         implementation: type[Any],
-    ) -> "ServiceCollection":
+    ) -> ServiceCollection:
 
         self._services.append(
-
             ServiceDescriptor(
                 key=key,
                 implementation=implementation,
                 lifetime=ServiceLifetime.TRANSIENT,
             )
-
         )
 
         return self

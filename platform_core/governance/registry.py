@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any
 
 from platform_core.governance.types import GovernanceRecord

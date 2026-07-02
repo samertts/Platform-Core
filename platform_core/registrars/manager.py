@@ -5,7 +5,6 @@ from platform_core.services.collection import ServiceCollection
 
 
 class RegistrarManager:
-
     def __init__(self) -> None:
 
         self._registrars: list[Registrar] = []
@@ -25,7 +24,6 @@ class RegistrarManager:
     ) -> None:
 
         for registrar in self._registrars:
-
             registrar.register(
                 services,
             )

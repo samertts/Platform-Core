@@ -2,7 +2,6 @@ from collections import defaultdict
 
 
 class DependencyGraph:
-
     def __init__(self):
 
         self.nodes = {}

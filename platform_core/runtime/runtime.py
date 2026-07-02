@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from platform_core.events import Event
-from platform_core.events import EventBus
+from platform_core.events import Event, EventBus
 from platform_core.kernel.kernel import Kernel
 from platform_core.services.container import ServiceContainer
 
 
 class Runtime:
-
     def __init__(
         self,
         container: ServiceContainer,

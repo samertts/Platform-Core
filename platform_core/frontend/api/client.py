@@ -2,11 +2,9 @@
 Base API client for NHDOS Frontend
 """
 
-import json
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Generic, Optional, TypeVar
-from uuid import uuid4
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
@@ -14,9 +12,7 @@ T = TypeVar("T")
 class APIError(Exception):
     """API error exception."""
 
-    def __init__(
-        self, message: str, status_code: int = 500, details: Optional[dict] = None
-    ):
+    def __init__(self, message: str, status_code: int = 500, details: dict | None = None):
         super().__init__(message)
         self.status_code = status_code
         self.details = details or {}
@@ -30,7 +26,7 @@ class APIConfig:
     api_version: str = "v1"
     timeout: int = 30
     retry_count: int = 3
-    auth_token: Optional[str] = None
+    auth_token: str | None = None
     headers: dict[str, str] = field(default_factory=dict)
 
 
@@ -54,8 +50,8 @@ class APIClient:
         self,
         method: str,
         endpoint: str,
-        data: Optional[dict] = None,
-        params: Optional[dict] = None,
+        data: dict | None = None,
+        params: dict | None = None,
     ) -> dict:
         url = self._build_url(endpoint)
         try:
@@ -67,13 +63,13 @@ class APIClient:
         except Exception as e:
             raise APIError(f"Request failed: {str(e)}", 500)
 
-    def get(self, endpoint: str, params: Optional[dict] = None) -> dict:
+    def get(self, endpoint: str, params: dict | None = None) -> dict:
         return self._make_request("GET", endpoint, params=params)
 
-    def post(self, endpoint: str, data: Optional[dict] = None) -> dict:
+    def post(self, endpoint: str, data: dict | None = None) -> dict:
         return self._make_request("POST", endpoint, data=data)
 
-    def put(self, endpoint: str, data: Optional[dict] = None) -> dict:
+    def put(self, endpoint: str, data: dict | None = None) -> dict:
         return self._make_request("PUT", endpoint, data=data)
 
     def delete(self, endpoint: str) -> dict:

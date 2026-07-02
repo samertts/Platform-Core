@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 
 from platform_core.workflow.context import WorkflowContext
 from platform_core.workflow.result import WorkflowResult

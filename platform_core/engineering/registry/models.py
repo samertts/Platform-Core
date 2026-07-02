@@ -1,10 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Dict, List
 
 
 @dataclass(slots=True)
 class RegistryEntry:
-
     id: str
 
     kind: str
@@ -15,6 +13,6 @@ class RegistryEntry:
 
     description: str = ""
 
-    tags: List[str] = field(default_factory=list)
+    tags: list[str] = field(default_factory=list)
 
-    metadata: Dict[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = field(default_factory=dict)

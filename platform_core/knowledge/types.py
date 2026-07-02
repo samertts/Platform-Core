@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -234,8 +234,8 @@ class Node:
     lifecycle: LifecycleStage = LifecycleStage.DEVELOPMENT
     owner: str = ""
     status: NodeStatus = NodeStatus.ACTIVE
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     labels: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
     capabilities: list[str] = field(default_factory=list)
@@ -273,8 +273,8 @@ class Edge:
     source_origin: str = ""
     evidence: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -299,7 +299,7 @@ class GraphSnapshot:
     """A point-in-time snapshot of the graph."""
 
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     description: str = ""
     node_count: int = 0
     edge_count: int = 0
@@ -314,7 +314,7 @@ class TemporalEvent:
 
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     event_type: EventType = EventType.NODE_CREATED
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     entity_id: str = ""
     entity_type: NodeType | RelationshipType | None = None
     old_value: dict[str, Any] | None = None
@@ -354,7 +354,7 @@ class ImpactReport:
     total_affected: int = 0
     recommendations: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass
@@ -367,7 +367,7 @@ class ArchitectureSmell:
     affected_nodes: list[str] = field(default_factory=list)
     severity: ImpactLevel = ImpactLevel.MEDIUM
     recommendation: str = ""
-    detected_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    detected_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -412,7 +412,7 @@ class AIReasoningResult:
     supporting_edges: list[str] = field(default_factory=list)
     recommendations: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass
@@ -426,7 +426,7 @@ class GraphVisualization:
     edges: list[dict[str, Any]] = field(default_factory=list)
     layout: str = "force_directed"
     metadata: dict[str, Any] = field(default_factory=dict)
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def to_dict(self) -> dict[str, Any]:
         return {

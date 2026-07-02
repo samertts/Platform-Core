@@ -8,27 +8,40 @@ from .base import BaseEntityClient
 from .blood_bank import BloodUnitClient, DonationClient, TransfusionClient
 from .citizen import CitizenClient, DigitalCredentialClient
 from .client import APIClient, APIError
-from .clinical import (DiagnosisClient, ObservationClient, ProcedureClient,
-                       VitalSignsClient)
+from .clinical import DiagnosisClient, ObservationClient, ProcedureClient, VitalSignsClient
 from .communications import CorrespondenceClient
 from .epidemiology import DiseaseClient, OutbreakClient
-from .financial import (ClaimClient, ConsentClient, InsuranceClient,
-                        InvoiceClient, PaymentClient)
-from .healthcare_core import (AdmissionClient, AppointmentClient,
-                              DischargeClient, EncounterClient, PatientClient,
-                              VisitClient)
-from .human_resources import (AttendanceClient, BedClient, DepartmentClient,
-                              EmployeeClient, FacilityClient, LeaveClient,
-                              LicenseClient, OrganizationClient,
-                              ProfessionalClient, RoomClient)
-from .laboratory import (AnalyzerClient, LaboratoryOrderClient,
-                         LaboratoryResultClient, SpecimenClient)
-from .medical_devices import (CalibrationClient, DeviceConnectionClient,
-                              MedicalDeviceClient)
+from .financial import ClaimClient, ConsentClient, InsuranceClient, InvoiceClient, PaymentClient
+from .healthcare_core import (
+    AdmissionClient,
+    AppointmentClient,
+    DischargeClient,
+    EncounterClient,
+    PatientClient,
+    VisitClient,
+)
+from .human_resources import (
+    AttendanceClient,
+    BedClient,
+    DepartmentClient,
+    EmployeeClient,
+    FacilityClient,
+    LeaveClient,
+    LicenseClient,
+    OrganizationClient,
+    ProfessionalClient,
+    RoomClient,
+)
+from .laboratory import (
+    AnalyzerClient,
+    LaboratoryOrderClient,
+    LaboratoryResultClient,
+    SpecimenClient,
+)
+from .medical_devices import CalibrationClient, DeviceConnectionClient, MedicalDeviceClient
 from .notifications import MessageClient, NotificationClient
 from .pharmacy import DispensingClient, MedicationClient, PrescriptionClient
-from .public_health import (ImmunizationClient, ResearchStudyClient,
-                            VaccineClient)
+from .public_health import ImmunizationClient, ResearchStudyClient, VaccineClient
 from .radiology import ImageClient, RadiologyReportClient, RadiologyStudyClient
 from .supply_chain import InventoryItemClient, PurchaseClient, SupplierClient
 from .workflow import TaskClient, WorkflowClient, WorkflowStepClient

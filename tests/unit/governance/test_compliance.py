@@ -1,7 +1,5 @@
 """Unit tests for Compliance Engine."""
 
-import pytest
-
 from platform_core.governance.compliance import ComplianceEngine
 from platform_core.governance.types import ComplianceStatus
 

@@ -1,7 +1,5 @@
 """Unit tests for Constitution Enforcer."""
 
-import pytest
-
 from platform_core.governance.constitution import ConstitutionEnforcer
 
 

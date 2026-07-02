@@ -8,7 +8,6 @@ class Create(Command):
 
 
 class Handler(CommandHandler):
-
     def __init__(self):
 
         self.called = False

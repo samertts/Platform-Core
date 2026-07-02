@@ -1,8 +1,6 @@
 """Unit tests for Package Verification."""
 
-import pytest
-
-from platform_core.verifier import PackageVerifier, VerificationError
+from platform_core.verifier import PackageVerifier
 
 
 class TestPackageVerifier:

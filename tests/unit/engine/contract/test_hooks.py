@@ -3,12 +3,10 @@ from uuid import uuid4
 from platform_core.engine.base import BaseEngine
 from platform_core.engine.cancellation import CancellationToken
 from platform_core.engine.context import EngineContext
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class HookEngine(BaseEngine):
-
     def __init__(self):
 
         super().__init__()

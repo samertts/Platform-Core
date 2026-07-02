@@ -3,17 +3,25 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 from pathlib import Path
 from typing import Any
 
-from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
-                                           CIInfo, DependencyInfo, DockerInfo,
-                                           DocumentationInfo, Finding,
-                                           FindingCategory, FindingSeverity,
-                                           FrameworkInfo, LanguageInfo,
-                                           SecurityInfo, TestingInfo)
+from platform_core.discovery.types import (
+    AnalysisResult,
+    ArchitectureInfo,
+    CIInfo,
+    DependencyInfo,
+    DockerInfo,
+    DocumentationInfo,
+    Finding,
+    FindingCategory,
+    FindingSeverity,
+    FrameworkInfo,
+    LanguageInfo,
+    SecurityInfo,
+    TestingInfo,
+)
 
 
 class BaseAnalyzer:
@@ -261,9 +269,7 @@ class FrameworkAnalyzer(BaseAnalyzer):
             "count": len(detected),
         }
 
-    def _read_dependency_files(
-        self, root: Path, files: list[dict[str, Any]]
-    ) -> dict[str, str]:
+    def _read_dependency_files(self, root: Path, files: list[dict[str, Any]]) -> dict[str, str]:
         dep_files = [
             "requirements.txt",
             "setup.py",
@@ -282,9 +288,7 @@ class FrameworkAnalyzer(BaseAnalyzer):
             if f["name"] in dep_files:
                 filepath = root / f["path"]
                 try:
-                    result[f["path"]] = filepath.read_text(
-                        encoding="utf-8", errors="ignore"
-                    )
+                    result[f["path"]] = filepath.read_text(encoding="utf-8", errors="ignore")
                 except (OSError, PermissionError):
                     pass
         return result
@@ -327,17 +331,13 @@ class ArchitectureAnalyzer(BaseAnalyzer):
         features: list[str] = []
 
         for pattern in self.PATTERNS:
-            matches = sum(
-                1 for s in pattern["signals"] if any(s in n for n in all_names)
-            )
+            matches = sum(1 for s in pattern["signals"] if any(s in n for n in all_names))
             if matches >= pattern["min_matches"]:
                 confidence = min(matches / len(pattern["signals"]), 1.0)
                 if confidence > best_confidence:
                     best_pattern = pattern["name"]
                     best_confidence = confidence
-                    features = [
-                        s for s in pattern["signals"] if any(s in n for n in all_names)
-                    ]
+                    features = [s for s in pattern["signals"] if any(s in n for n in all_names)]
 
         return {
             "pattern": best_pattern,
@@ -372,9 +372,7 @@ class DocumentationAnalyzer(BaseAnalyzer):
         has_readme = any(r in file_names for r in self.REQUIRED_FILES)
         has_changelog = "CHANGELOG.md" in file_names
         has_contributing = "CONTRIBUTING.md" in file_names
-        has_license = any(
-            l in file_names for l in ["LICENSE", "LICENSE.md", "LICENSE.txt"]
-        )
+        has_license = any(l in file_names for l in ["LICENSE", "LICENSE.md", "LICENSE.txt"])
         has_api_docs = any(d in file_names for d in self.API_DOC_FILES)
         has_arch_docs = any(d.rstrip("/") in dir_names for d in self.ARCH_DOC_DIRS)
 
@@ -461,9 +459,7 @@ class TestingAnalyzer(BaseAnalyzer):
     def analyze(self, root_path: str, files: list[dict[str, Any]]) -> dict[str, Any]:
         test_files = [f for f in files if self._is_test_file(f["name"])]
         has_test_config = any(f["name"] in self.TEST_CONFIG_FILES for f in files)
-        has_coverage = any(
-            any(c in f["path"] for c in self.COVERAGE_FILES) for f in files
-        )
+        has_coverage = any(any(c in f["path"] for c in self.COVERAGE_FILES) for f in files)
 
         test_framework = self._detect_framework(files)
         test_count = len(test_files)
@@ -663,16 +659,12 @@ class DependencyAnalyzer(BaseAnalyzer):
                     [
                         line
                         for line in content.splitlines()
-                        if line.strip()
-                        and not line.startswith("#")
-                        and not line.startswith("-")
+                        if line.strip() and not line.startswith("#") and not line.startswith("-")
                     ]
                 )
             if file_info["name"] == "package.json":
                 data = json.loads(content)
-                return len(data.get("dependencies", {})) + len(
-                    data.get("devDependencies", {})
-                )
+                return len(data.get("dependencies", {})) + len(data.get("devDependencies", {}))
         except (OSError, json.JSONDecodeError):
             pass
         return 0
@@ -699,9 +691,7 @@ class CIAnalyzer(BaseAnalyzer):
 
         for system, patterns in self.CI_SYSTEMS.items():
             for pattern in patterns:
-                matches = [
-                    p for p in file_paths if p.startswith(pattern) or p == pattern
-                ]
+                matches = [p for p in file_paths if p.startswith(pattern) or p == pattern]
                 if matches:
                     detected_system = system
                     ci_files.extend(matches)
@@ -740,9 +730,7 @@ class DockerAnalyzer(BaseAnalyzer):
         docker_files = [f["path"] for f in files if f["name"] in self.DOCKER_FILES]
 
         has_dockerfile = "Dockerfile" in file_names
-        has_compose = (
-            "docker-compose.yml" in file_names or "docker-compose.yaml" in file_names
-        )
+        has_compose = "docker-compose.yml" in file_names or "docker-compose.yaml" in file_names
 
         base_image = ""
         multi_stage = False
@@ -819,11 +807,7 @@ def run_all_analyzers(root_path: str, files: list[dict[str, Any]]) -> AnalysisRe
             result.framework = FrameworkInfo(
                 name=analysis["primary"],
                 frameworks=analysis["detected"],
-                confidence=(
-                    analysis["detected"][0]["confidence"]
-                    if analysis["detected"]
-                    else 0.0
-                ),
+                confidence=(analysis["detected"][0]["confidence"] if analysis["detected"] else 0.0),
             )
         elif analyzer.name == "architecture":
             result.architecture = ArchitectureInfo(

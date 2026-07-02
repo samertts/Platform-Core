@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 class FileSystem:
-
     @staticmethod
     def exists(path: Path) -> bool:
 

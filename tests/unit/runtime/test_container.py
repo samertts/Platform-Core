@@ -6,7 +6,6 @@ class IService:
 
 
 class Service(IService):
-
     pass
 
 
@@ -52,6 +51,8 @@ def test_transient():
     second = container.resolve(IService)
 
     assert first is not second
+
+
 import pytest
 
 from platform_core.runtime.container.exceptions import (
@@ -69,10 +70,7 @@ def test_duplicate_registration():
         Service,
     )
 
-    with pytest.raises(
-        ServiceAlreadyRegisteredError
-    ):
-
+    with pytest.raises(ServiceAlreadyRegisteredError):
         container.register_singleton(
             IService,
             Service,
@@ -83,8 +81,5 @@ def test_unknown_service():
 
     container = ServiceContainer()
 
-    with pytest.raises(
-        ServiceNotRegisteredError
-    ):
-
+    with pytest.raises(ServiceNotRegisteredError):
         container.resolve(IService)

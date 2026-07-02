@@ -5,12 +5,10 @@ from abc import ABC
 
 from platform_core.engine.abc import Engine
 from platform_core.engine.context import EngineContext
-from platform_core.engine.errors import EngineError
-from platform_core.engine.errors import EngineErrorCategory
+from platform_core.engine.errors import EngineError, EngineErrorCategory
 from platform_core.engine.lifecycle import LifecycleState
 from platform_core.engine.lifecycle_machine import LifecycleMachine
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class BaseEngine(Engine, ABC):
@@ -149,7 +147,6 @@ class BaseEngine(Engine, ABC):
         started = time.perf_counter()
 
         try:
-
             self.configure()
             self.initialize()
             self.ready()
@@ -157,7 +154,6 @@ class BaseEngine(Engine, ABC):
             self._lifecycle.running()
 
             if context.cancellation_token.is_cancelled:
-
                 self._lifecycle.cancelled()
 
                 return EngineResult(
@@ -195,7 +191,6 @@ class BaseEngine(Engine, ABC):
             )
 
         except Exception as exc:
-
             self._lifecycle.failed()
 
             self.on_failure(context, exc)
@@ -213,5 +208,4 @@ class BaseEngine(Engine, ABC):
             )
 
         finally:
-
             self.dispose()

@@ -1,9 +1,7 @@
 from .generator_engine import GeneratorEngine
-
-from .generators.engine_generator import EngineGenerator
 from .generators.capability_generator import CapabilityGenerator
+from .generators.engine_generator import EngineGenerator
 from .project_generator import ProjectGenerator
-
 
 engine = GeneratorEngine()
 

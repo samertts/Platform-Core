@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
-from collections.abc import Mapping
 from uuid import UUID
 
 from platform_core.engine.cancellation import CancellationToken

@@ -6,12 +6,17 @@ Provides snapshot creation, restoration, and temporal queries.
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (Edge, EventType, GraphSnapshot,
-                                           Node, TemporalError, TemporalEvent)
+from platform_core.knowledge.types import (
+    Edge,
+    EventType,
+    GraphSnapshot,
+    Node,
+    TemporalEvent,
+)
 
 
 class TemporalManager:

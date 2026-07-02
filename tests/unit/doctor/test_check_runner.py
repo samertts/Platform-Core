@@ -1,12 +1,10 @@
 from platform_core.doctor.check import DoctorCheck
 from platform_core.doctor.check_registry import CheckRegistry
-from platform_core.doctor.check_result import CheckResult
-from platform_core.doctor.check_result import CheckStatus
+from platform_core.doctor.check_result import CheckResult, CheckStatus
 from platform_core.doctor.check_runner import CheckRunner
 
 
 class CheckA(DoctorCheck):
-
     id = "a"
 
     name = "A"
@@ -22,7 +20,6 @@ class CheckA(DoctorCheck):
 
 
 class CheckB(DoctorCheck):
-
     id = "b"
 
     name = "B"

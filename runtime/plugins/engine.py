@@ -6,7 +6,7 @@ import logging
 import sys
 import threading
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -114,9 +114,7 @@ class PluginEngine:
     def _discover_plugin_from_dir(self, path: Path) -> str | None:
         try:
             module_name = f"platform_core_plugin_{path.name}"
-            spec = importlib.util.spec_from_file_location(
-                module_name, str(path / "__init__.py")
-            )
+            spec = importlib.util.spec_from_file_location(module_name, str(path / "__init__.py"))
             if spec is None or spec.loader is None:
                 return None
 
@@ -192,9 +190,7 @@ class PluginEngine:
             if info is None:
                 raise ValueError(f"Plugin not found: {plugin_id}")
             if info.status != "loaded":
-                raise ValueError(
-                    f"Plugin {plugin_id} not loaded (status: {info.status})"
-                )
+                raise ValueError(f"Plugin {plugin_id} not loaded (status: {info.status})")
 
             instance = self._plugin_instances.get(plugin_id)
             if instance is not None and hasattr(instance, "activate"):
@@ -206,7 +202,7 @@ class PluginEngine:
                     raise
 
             info.status = "active"
-            info.activated_at = datetime.now(timezone.utc)
+            info.activated_at = datetime.now(UTC)
 
     async def deactivate(self, plugin_id: str) -> None:
         with self._lock:
@@ -250,9 +246,7 @@ class PluginEngine:
                     "path": p.path,
                     "description": p.description,
                     "error": p.error,
-                    "activated_at": (
-                        p.activated_at.isoformat() if p.activated_at else None
-                    ),
+                    "activated_at": (p.activated_at.isoformat() if p.activated_at else None),
                 }
                 for p in self._plugins.values()
             ]
@@ -265,23 +259,13 @@ class PluginEngine:
                 return [f"Plugin {plugin_id} not found"]
 
             if info.min_platform_version:
-                if (
-                    self._compare_versions(
-                        self._platform_version, info.min_platform_version
-                    )
-                    < 0
-                ):
+                if self._compare_versions(self._platform_version, info.min_platform_version) < 0:
                     errors.append(
                         f"Platform version {self._platform_version} < required {info.min_platform_version}"
                     )
 
             if info.max_platform_version:
-                if (
-                    self._compare_versions(
-                        self._platform_version, info.max_platform_version
-                    )
-                    > 0
-                ):
+                if self._compare_versions(self._platform_version, info.max_platform_version) > 0:
                     errors.append(
                         f"Platform version {self._platform_version} > maximum {info.max_platform_version}"
                     )

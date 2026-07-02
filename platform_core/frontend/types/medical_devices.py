@@ -2,8 +2,7 @@
 Medical Devices domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -13,15 +12,15 @@ class MedicalDevice(BaseEntity):
     """Medical device record."""
 
     facility_id: str = ""
-    department_id: Optional[str] = None
+    department_id: str | None = None
     device_type: str = ""
     manufacturer: str = ""
     model: str = ""
     serial_number: str = ""
-    location: Optional[str] = None
+    location: str | None = None
     status: str = "active"
-    last_maintenance_date: Optional[str] = None
-    next_maintenance_date: Optional[str] = None
+    last_maintenance_date: str | None = None
+    next_maintenance_date: str | None = None
 
 
 @dataclass
@@ -30,11 +29,11 @@ class DeviceConnection(BaseEntity):
 
     device_id: str = ""
     connection_type: str = ""
-    connection_string: Optional[str] = None
-    protocol: Optional[str] = None
+    connection_string: str | None = None
+    protocol: str | None = None
     status: str = "connected"
-    connected_at: Optional[str] = None
-    disconnected_at: Optional[str] = None
+    connected_at: str | None = None
+    disconnected_at: str | None = None
 
 
 @dataclass
@@ -44,7 +43,7 @@ class Calibration(BaseEntity):
     device_id: str = ""
     calibration_type: str = ""
     calibration_date: str = ""
-    next_calibration_date: Optional[str] = None
-    performed_by: Optional[str] = None
+    next_calibration_date: str | None = None
+    performed_by: str | None = None
     result: str = "pass"
-    notes: Optional[str] = None
+    notes: str | None = None

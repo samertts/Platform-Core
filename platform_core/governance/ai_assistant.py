@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            Recommendation, ReviewType)
+from platform_core.governance.types import Finding
 
 
 class AIGovernanceAssistant:
@@ -30,9 +28,7 @@ class AIGovernanceAssistant:
         self._reviews: dict[str, dict[str, Any]] = {}
         self._lock = threading.RLock()
 
-    def review_architecture(
-        self, repository: str, evidence: dict[str, Any]
-    ) -> dict[str, Any]:
+    def review_architecture(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
         findings: list[dict[str, Any]] = []
         recommendations: list[dict[str, Any]] = []
 
@@ -72,9 +68,7 @@ class AIGovernanceAssistant:
             "summary": f"Architecture review: {score:.0%} score",
         }
 
-    def review_dependencies(
-        self, repository: str, evidence: dict[str, Any]
-    ) -> dict[str, Any]:
+    def review_dependencies(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
         findings: list[dict[str, Any]] = []
         recommendations: list[dict[str, Any]] = []
 
@@ -122,9 +116,7 @@ class AIGovernanceAssistant:
             "summary": f"Dependency review: {total_deps} total, {vulnerable} vulnerable, {outdated} outdated",
         }
 
-    def review_manifest(
-        self, repository: str, evidence: dict[str, Any]
-    ) -> dict[str, Any]:
+    def review_manifest(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
         findings: list[dict[str, Any]] = []
         recommendations: list[dict[str, Any]] = []
 
@@ -210,9 +202,7 @@ class AIGovernanceAssistant:
             "summary": f"API review: health={has_health}, docs={has_docs}, versioned={is_versioned}",
         }
 
-    def estimate_risk(
-        self, repository: str, evidence: dict[str, Any]
-    ) -> dict[str, Any]:
+    def estimate_risk(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
         risk_factors: list[dict[str, Any]] = []
 
         if evidence.get("vulnerable_dependencies", 0) > 0:
@@ -251,9 +241,7 @@ class AIGovernanceAssistant:
             "summary": f"Risk assessment: {overall_risk} ({len(risk_factors)} factors)",
         }
 
-    def generate_remediation_plan(
-        self, repository: str, findings: list[Finding]
-    ) -> dict[str, Any]:
+    def generate_remediation_plan(self, repository: str, findings: list[Finding]) -> dict[str, Any]:
         plan_items: list[dict[str, Any]] = []
 
         sorted_findings = sorted(

@@ -4,7 +4,6 @@ from platform_core.workflow.result import WorkflowResult
 
 
 class WorkflowHistory:
-
     def __init__(self) -> None:
 
         self._items: list[WorkflowResult] = []

@@ -1,18 +1,15 @@
-from typing import Dict, Type
-
 from .base_generator import BaseGenerator
 
 
 class GeneratorRegistry:
-
     def __init__(self):
 
-        self._registry: Dict[str, Type[BaseGenerator]] = {}
+        self._registry: dict[str, type[BaseGenerator]] = {}
 
     def register(
         self,
         name: str,
-        generator: Type[BaseGenerator],
+        generator: type[BaseGenerator],
     ):
 
         self._registry[name] = generator

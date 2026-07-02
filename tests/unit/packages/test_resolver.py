@@ -2,8 +2,7 @@
 
 import pytest
 
-from platform_core.resolver import (CircularDependencyError,
-                                    DependencyResolver, VersionConflict)
+from platform_core.resolver import CircularDependencyError, DependencyResolver
 
 
 class TestDependencyResolver:

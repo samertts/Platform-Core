@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 class ProjectValidator:
-
     REQUIRED = [
         "README.md",
         "pyproject.toml",

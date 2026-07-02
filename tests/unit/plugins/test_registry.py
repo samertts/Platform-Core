@@ -3,7 +3,6 @@ from platform_core.plugins.registry import PluginRegistry
 
 
 class TestPlugin(Plugin):
-
     def initialize(self) -> None:
         pass
 

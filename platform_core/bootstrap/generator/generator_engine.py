@@ -4,7 +4,6 @@ from .generator_registry import GeneratorRegistry
 
 
 class GeneratorEngine:
-
     def __init__(self):
 
         self.registry = GeneratorRegistry()

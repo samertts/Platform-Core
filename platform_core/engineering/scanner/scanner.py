@@ -1,5 +1,5 @@
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 import yaml
 
@@ -23,7 +23,6 @@ class EngineeringScanner:
     def scan(self) -> None:
 
         for file in self._yaml_files():
-
             document = self._load(file)
 
             if document is None:
@@ -51,5 +50,4 @@ class EngineeringScanner:
             "r",
             encoding="utf8",
         ) as f:
-
             return yaml.safe_load(f)

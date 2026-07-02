@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import threading
-from typing import Any
 
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            Recommendation)
+from platform_core.governance.types import Finding, FindingSeverity, Recommendation
 
 
 class RecommendationEngine:
@@ -56,9 +54,7 @@ class RecommendationEngine:
 
         return recommendations
 
-    def _finding_to_recommendation(
-        self, finding: Finding, repository: str
-    ) -> Recommendation:
+    def _finding_to_recommendation(self, finding: Finding, repository: str) -> Recommendation:
         category = finding.category or "general"
         effort = self.EFFORT_ESTIMATES.get(category, "2-4 hours")
 
@@ -96,9 +92,7 @@ class RecommendationEngine:
             groups.setdefault(cat, []).append(rec)
         return groups
 
-    def estimate_total_effort(
-        self, recommendations: list[Recommendation]
-    ) -> dict[str, int]:
+    def estimate_total_effort(self, recommendations: list[Recommendation]) -> dict[str, int]:
         hours_map = {
             "1-2 hours": 2,
             "2-4 hours": 3,

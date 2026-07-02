@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (ComplianceStatus, Finding,
-                                            FindingSeverity, FindingStatus,
-                                            QualityGate, QualityGateResult)
+from platform_core.governance.types import (
+    Finding,
+    FindingSeverity,
+    FindingStatus,
+    QualityGate,
+    QualityGateResult,
+)
 
 
 class QualityGateEngine:
@@ -55,9 +58,7 @@ class QualityGateEngine:
         critical_findings = len(
             [f for f in open_findings if f.severity == FindingSeverity.CRITICAL]
         )
-        high_findings = len(
-            [f for f in open_findings if f.severity == FindingSeverity.HIGH]
-        )
+        high_findings = len([f for f in open_findings if f.severity == FindingSeverity.HIGH])
         coverage_met = coverage_percent >= self._min_coverage
 
         checks = [

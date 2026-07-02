@@ -41,9 +41,7 @@ class ConsentClient(BaseEntityClient):
         return self.client.post(f"{self.endpoint}/grant", data=consent_data)
 
     def revoke(self, consent_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{consent_id}/revoke", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{consent_id}/revoke", data={"reason": reason})
 
     def check(self, patient_id: str, consent_type: str, target: str) -> dict:
         return self.client.get(
@@ -70,9 +68,7 @@ class InvoiceClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/patient/{patient_id}/outstanding")
 
     def mark_paid(self, invoice_id: str, amount: float) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{invoice_id}/paid", data={"amount": amount}
-        )
+        return self.client.put(f"{self.endpoint}/{invoice_id}/paid", data={"amount": amount})
 
 
 @dataclass
@@ -117,6 +113,4 @@ class ClaimClient(BaseEntityClient):
         )
 
     def reject(self, claim_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{claim_id}/reject", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{claim_id}/reject", data={"reason": reason})

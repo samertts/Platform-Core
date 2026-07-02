@@ -41,9 +41,7 @@ class LicenseClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/verify/{license_number}")
 
     def suspend(self, license_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{license_id}/suspend", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{license_id}/suspend", data={"reason": reason})
 
     def reinstate(self, license_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{license_id}/reinstate")
@@ -115,9 +113,7 @@ class RoomClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/department/{department_id}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/available", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
 
     def get_beds(self, room_id: str) -> dict:
         return self.client.get(f"{self.endpoint}/{room_id}/beds")
@@ -135,14 +131,10 @@ class BedClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/room/{room_id}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/available", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
 
     def assign(self, bed_id: str, patient_id: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{bed_id}/assign", data={"patient_id": patient_id}
-        )
+        return self.client.put(f"{self.endpoint}/{bed_id}/assign", data={"patient_id": patient_id})
 
     def release(self, bed_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{bed_id}/release")
@@ -175,14 +167,10 @@ class AttendanceClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/employee/{employee_id}")
 
     def clock_in(self, employee_id: str) -> dict:
-        return self.client.post(
-            f"{self.endpoint}/clock-in", data={"employee_id": employee_id}
-        )
+        return self.client.post(f"{self.endpoint}/clock-in", data={"employee_id": employee_id})
 
     def clock_out(self, employee_id: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/clock-out", data={"employee_id": employee_id}
-        )
+        return self.client.put(f"{self.endpoint}/clock-out", data={"employee_id": employee_id})
 
 
 @dataclass
@@ -202,6 +190,4 @@ class LeaveClient(BaseEntityClient):
         )
 
     def reject(self, leave_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{leave_id}/reject", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{leave_id}/reject", data={"reason": reason})

@@ -1,20 +1,33 @@
 """Unit tests for Governance types."""
 
-import pytest
-
-from platform_core.governance.types import (Approval, ApprovalStatus,
-                                            ComplianceCheck, ComplianceReport,
-                                            ComplianceStatus,
-                                            ConstitutionReport, Decision,
-                                            DecisionType, Exception,
-                                            ExceptionType, Finding,
-                                            FindingSeverity, FindingStatus,
-                                            GovernanceRecord, Policy,
-                                            PolicyType, QualityGate,
-                                            QualityGateResult, Recommendation,
-                                            Review, ReviewStatus, ReviewType,
-                                            RiskAssessment, RiskCategory,
-                                            RiskLevel, Waiver)
+from platform_core.governance.types import (
+    Approval,
+    ApprovalStatus,
+    ComplianceCheck,
+    ComplianceReport,
+    ComplianceStatus,
+    ConstitutionReport,
+    Decision,
+    DecisionType,
+    Exception,
+    ExceptionType,
+    Finding,
+    FindingSeverity,
+    FindingStatus,
+    GovernanceRecord,
+    Policy,
+    PolicyType,
+    QualityGate,
+    QualityGateResult,
+    Recommendation,
+    Review,
+    ReviewStatus,
+    ReviewType,
+    RiskAssessment,
+    RiskCategory,
+    RiskLevel,
+    Waiver,
+)
 
 
 class TestGovernanceTypes:
@@ -82,9 +95,7 @@ class TestGovernanceTypes:
         assert r.title == "fix this"
 
     def test_risk_assessment(self) -> None:
-        r = RiskAssessment(
-            risk_category=RiskCategory.SECURITY, risk_level=RiskLevel.HIGH
-        )
+        r = RiskAssessment(risk_category=RiskCategory.SECURITY, risk_level=RiskLevel.HIGH)
         assert r.risk_category == RiskCategory.SECURITY
 
     def test_compliance_check(self) -> None:
@@ -116,9 +127,7 @@ class TestGovernanceTypes:
         assert r.action == "test_action"
 
     def test_compliance_report(self) -> None:
-        r = ComplianceReport(
-            repository="test", overall_status=ComplianceStatus.COMPLIANT
-        )
+        r = ComplianceReport(repository="test", overall_status=ComplianceStatus.COMPLIANT)
         assert r.repository == "test"
 
     def test_constitution_report(self) -> None:

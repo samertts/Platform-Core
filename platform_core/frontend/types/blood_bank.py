@@ -3,7 +3,6 @@ Blood Bank domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -17,8 +16,8 @@ class Donation(BaseEntity):
     facility_id: str = ""
     donation_type: str = ""
     volume_ml: int = 0
-    hemoglobin_level: Optional[float] = None
-    blood_pressure: Optional[str] = None
+    hemoglobin_level: float | None = None
+    blood_pressure: str | None = None
     status: str = "completed"
 
 
@@ -32,7 +31,7 @@ class BloodUnit(BaseEntity):
     volume_ml: int = 0
     collection_date: str = ""
     expiry_date: str = ""
-    storage_location: Optional[str] = None
+    storage_location: str | None = None
     status: str = "available"
     crossmatch_compatibility: list[str] = field(default_factory=list)
 
@@ -46,7 +45,7 @@ class Transfusion(BaseEntity):
     transfusion_date: str = ""
     performing_provider_id: str = ""
     facility_id: str = ""
-    indication: Optional[str] = None
+    indication: str | None = None
     volume_transfused: int = 0
-    reaction: Optional[str] = None
+    reaction: str | None = None
     status: str = "completed"

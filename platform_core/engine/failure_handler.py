@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 from platform_core.engine.context import EngineContext
-from platform_core.engine.errors import EngineError
-from platform_core.engine.errors import EngineErrorCategory
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.errors import EngineError, EngineErrorCategory
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class FailureHandler:

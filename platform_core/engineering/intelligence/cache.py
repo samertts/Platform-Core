@@ -6,7 +6,6 @@ from __future__ import annotations
 
 
 class RepositoryCache:
-
     def __init__(self):
 
         self._cache = {}

@@ -2,8 +2,7 @@
 
 import pytest
 
-from platform_core.packages import (RegistryEntry, RepositoryConfig,
-                                    RepositoryType)
+from platform_core.packages import RegistryEntry, RepositoryConfig, RepositoryType
 from platform_core.repository import RepositoryError, RepositoryManager
 
 
@@ -47,12 +46,8 @@ class TestRepositoryManager:
 
     def test_list_repositories_by_type(self) -> None:
         manager = RepositoryManager()
-        manager.add_repository(
-            RepositoryConfig(name="local", type=RepositoryType.LOCAL)
-        )
-        manager.add_repository(
-            RepositoryConfig(name="remote", type=RepositoryType.REMOTE)
-        )
+        manager.add_repository(RepositoryConfig(name="local", type=RepositoryType.LOCAL))
+        manager.add_repository(RepositoryConfig(name="remote", type=RepositoryType.REMOTE))
         local_repos = manager.list_repositories(type_filter=RepositoryType.LOCAL)
         assert len(local_repos) == 1
 

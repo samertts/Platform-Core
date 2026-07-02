@@ -1,15 +1,15 @@
 """Unit tests for Reporter."""
 
-import pytest
-
 from platform_core.discovery.reporter import Reporter
-from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
-                                           CIInfo, DependencyInfo,
-                                           DiscoveryResult, DocumentationInfo,
-                                           Finding, FindingCategory,
-                                           FindingSeverity, HealthRating,
-                                           HealthScore, ScanResult, ScanStatus,
-                                           SecurityInfo, TestingInfo)
+from platform_core.discovery.types import (
+    AnalysisResult,
+    DiscoveryResult,
+    DocumentationInfo,
+    HealthRating,
+    HealthScore,
+    ScanStatus,
+    TestingInfo,
+)
 
 
 class TestReporter:

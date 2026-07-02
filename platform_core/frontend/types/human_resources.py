@@ -3,7 +3,6 @@ Human Resources domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -14,10 +13,10 @@ class Professional(BaseEntity):
 
     citizen_id: str = ""
     professional_type: str = ""
-    specialty: Optional[str] = None
-    license_number: Optional[str] = None
-    facility_id: Optional[str] = None
-    department_id: Optional[str] = None
+    specialty: str | None = None
+    license_number: str | None = None
+    facility_id: str | None = None
+    department_id: str | None = None
     status: str = "active"
 
 
@@ -41,11 +40,11 @@ class Organization(BaseEntity):
 
     name: str = ""
     organization_type: str = ""
-    parent_organization_id: Optional[str] = None
-    registration_number: Optional[str] = None
-    address: Optional[str] = None
-    phone: Optional[str] = None
-    email: Optional[str] = None
+    parent_organization_id: str | None = None
+    registration_number: str | None = None
+    address: str | None = None
+    phone: str | None = None
+    email: str | None = None
     status: str = "active"
 
 
@@ -57,10 +56,10 @@ class Facility(BaseEntity):
     name: str = ""
     facility_type: str = ""
     facility_code: str = ""
-    address: Optional[str] = None
-    phone: Optional[str] = None
-    email: Optional[str] = None
-    capacity: Optional[int] = None
+    address: str | None = None
+    phone: str | None = None
+    email: str | None = None
+    capacity: int | None = None
     status: str = "active"
 
 
@@ -72,8 +71,8 @@ class Department(BaseEntity):
     name: str = ""
     department_code: str = ""
     department_type: str = ""
-    head_of_department_id: Optional[str] = None
-    phone: Optional[str] = None
+    head_of_department_id: str | None = None
+    phone: str | None = None
     status: str = "active"
 
 
@@ -96,7 +95,7 @@ class Bed(BaseEntity):
     bed_number: str = ""
     bed_type: str = ""
     status: str = "available"
-    patient_id: Optional[str] = None
+    patient_id: str | None = None
 
 
 @dataclass
@@ -107,7 +106,7 @@ class Employee(BaseEntity):
     citizen_id: str = ""
     employee_number: str = ""
     position: str = ""
-    department_id: Optional[str] = None
+    department_id: str | None = None
     hire_date: str = ""
     employment_type: str = "full_time"
     status: str = "active"
@@ -119,9 +118,9 @@ class Attendance(BaseEntity):
 
     employee_id: str = ""
     date: str = ""
-    clock_in: Optional[str] = None
-    clock_out: Optional[str] = None
-    hours_worked: Optional[float] = None
+    clock_in: str | None = None
+    clock_out: str | None = None
+    hours_worked: float | None = None
     status: str = "present"
 
 
@@ -133,6 +132,6 @@ class Leave(BaseEntity):
     leave_type: str = ""
     start_date: str = ""
     end_date: str = ""
-    reason: Optional[str] = None
+    reason: str | None = None
     status: str = "pending"
-    approved_by: Optional[str] = None
+    approved_by: str | None = None

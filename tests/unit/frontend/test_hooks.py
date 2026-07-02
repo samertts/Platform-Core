@@ -6,10 +6,14 @@ import sys
 
 sys.path.insert(0, "/tmp")
 
-from platform_core.frontend.hooks import (UseCallback, UseEffect, UseMemo,
-                                          UseMutation, UseQuery, UseState,
-                                          use_callback, use_effect, use_memo,
-                                          use_mutate, use_query, use_state)
+from platform_core.frontend.hooks import (
+    use_callback,
+    use_effect,
+    use_memo,
+    use_mutate,
+    use_query,
+    use_state,
+)
 
 
 class TestHooks:

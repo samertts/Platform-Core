@@ -44,19 +44,12 @@ class RepositoryIndex:
         self.ast = {}
 
         for module in snapshot.modules:
-
             for file in module.files:
-
                 if file.path.suffix == ".py":
-
                     try:
-
-                        self.ast[file.path] = self._ast.scan(
-                            file.path
-                        )
+                        self.ast[file.path] = self._ast.scan(file.path)
 
                     except Exception:
-
                         pass
 
         return snapshot

@@ -44,9 +44,7 @@ class WorkflowStepClient(BaseEntityClient):
         return self.client.put(f"{self.endpoint}/{step_id}/complete", data=result)
 
     def skip(self, step_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{step_id}/skip", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{step_id}/skip", data={"reason": reason})
 
 
 @dataclass
@@ -72,6 +70,4 @@ class TaskClient(BaseEntityClient):
         return self.client.put(f"{self.endpoint}/{task_id}/complete")
 
     def get_pending(self, assignee_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/pending", params={"assignee_id": assignee_id}
-        )
+        return self.client.get(f"{self.endpoint}/pending", params={"assignee_id": assignee_id})

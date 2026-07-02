@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import threading
-from collections import defaultdict
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 
 class CircularDependencyError(Exception):
@@ -56,9 +56,7 @@ class ServiceScope:
 
         if registration.lifetime == "scoped":
             if service_type not in self._scoped_instances:
-                self._scoped_instances[service_type] = self._create_instance(
-                    registration
-                )
+                self._scoped_instances[service_type] = self._create_instance(registration)
             return self._scoped_instances[service_type]
 
         return self._create_instance(registration)
@@ -75,9 +73,7 @@ class ServiceScope:
             deps = self._get_dependencies(impl)
             return impl(*deps)
 
-        raise RuntimeError(
-            f"Cannot create instance for {registration.service_type.__name__}"
-        )
+        raise RuntimeError(f"Cannot create instance for {registration.service_type.__name__}")
 
     def _get_dependencies(self, cls: type) -> list[Any]:
         deps: list[Any] = []
@@ -204,9 +200,7 @@ class ServiceContainer:
             deps = self._get_dependencies(impl)
             return impl(*deps)
 
-        raise RuntimeError(
-            f"Cannot create instance for {registration.service_type.__name__}"
-        )
+        raise RuntimeError(f"Cannot create instance for {registration.service_type.__name__}")
 
     def _get_dependencies(self, cls: type) -> list[Any]:
         deps: list[Any] = []
@@ -241,9 +235,7 @@ class ServiceContainer:
             if service_type in path:
                 cycle_start = path.index(service_type)
                 chain = path[cycle_start:] + [service_type]
-                errors.append(
-                    f"Circular dependency: {' -> '.join(t.__name__ for t in chain)}"
-                )
+                errors.append(f"Circular dependency: {' -> '.join(t.__name__ for t in chain)}")
                 return
             if service_type in visited:
                 return
@@ -281,9 +273,7 @@ class ServiceContainer:
                 return None
             return {
                 "service_type": reg.service_type.__name__,
-                "implementation": (
-                    reg.implementation.__name__ if reg.implementation else None
-                ),
+                "implementation": (reg.implementation.__name__ if reg.implementation else None),
                 "lifetime": reg.lifetime,
                 "has_instance": reg.instance is not None,
             }

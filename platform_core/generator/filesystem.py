@@ -6,7 +6,6 @@ class FileAlreadyExistsError(RuntimeError):
 
 
 class FileSystem:
-
     def mkdir(self, path: Path) -> None:
         path.mkdir(parents=True, exist_ok=True)
 
@@ -23,9 +22,7 @@ class FileSystem:
         )
 
         if path.exists() and not overwrite:
-            raise FileAlreadyExistsError(
-                f"{path} already exists."
-            )
+            raise FileAlreadyExistsError(f"{path} already exists.")
 
         path.write_text(
             content,

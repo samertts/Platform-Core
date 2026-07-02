@@ -7,11 +7,9 @@ workflows, packages, standards, and deployments.
 from __future__ import annotations
 
 import threading
-from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (ChangeType, ImpactLevel,
-                                           ImpactReport, Node, NodeType)
+from platform_core.knowledge.types import ChangeType, ImpactLevel, ImpactReport, Node, NodeType
 
 
 class ImpactAnalyzer:

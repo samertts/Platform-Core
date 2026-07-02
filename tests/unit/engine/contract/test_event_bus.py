@@ -1,6 +1,5 @@
 from platform_core.engine.event_bus import EventBus
-from platform_core.engine.events import EngineEvent
-from platform_core.engine.events import EngineEventType
+from platform_core.engine.events import EngineEvent, EngineEventType
 
 
 def test_subscribe_specific():

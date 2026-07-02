@@ -6,7 +6,6 @@ from .models import Capability
 
 
 class CapabilityLoader:
-
     def __init__(self, root: Path):
 
         self.root = root
@@ -16,9 +15,7 @@ class CapabilityLoader:
         capabilities = []
 
         for file in self.root.rglob("*.yaml"):
-
-            with open(file, "r", encoding="utf-8") as f:
-
+            with open(file, encoding="utf-8") as f:
                 data = yaml.safe_load(f)
 
             capabilities.append(

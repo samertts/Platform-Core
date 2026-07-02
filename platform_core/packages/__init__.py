@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from enum import Enum
 from typing import Any
 from uuid import UUID, uuid4
@@ -75,8 +75,8 @@ class PackageIdentity:
     description: str = ""
     publisher: str = ""
     license: str = "proprietary"
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     status: PackageStatus = PackageStatus.ACTIVE
 
 
@@ -118,7 +118,7 @@ class PackageSignature:
     algorithm: SignatureAlgorithm = SignatureAlgorithm.SHA256
     certificate: str = ""
     signature: str = ""
-    signed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    signed_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     signer: str = ""
 
 
@@ -147,8 +147,8 @@ class RegistryEntry:
     lifecycle: PackageLifecycle = field(default_factory=PackageLifecycle)
     checksum: PackageChecksum = field(default_factory=PackageChecksum)
     license: str = "proprietary"
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     status: PackageStatus = PackageStatus.ACTIVE
 
 
@@ -169,7 +169,7 @@ class InstallRecord:
     package_name: str = ""
     package_version: str = ""
     install_path: str = ""
-    installed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    installed_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     checksum: PackageChecksum = field(default_factory=PackageChecksum)
     status: InstallStatus = InstallStatus.PENDING
     repository: str = ""
@@ -179,7 +179,7 @@ class InstallRecord:
 @dataclass
 class Snapshot:
     id: UUID = field(default_factory=uuid4)
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     description: str = ""
     installed_packages: list[InstallRecord] = field(default_factory=list)
     checksum: str = ""
@@ -188,7 +188,7 @@ class Snapshot:
 @dataclass
 class Transaction:
     id: UUID = field(default_factory=uuid4)
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     operations: list[dict[str, Any]] = field(default_factory=list)
     status: str = "pending"

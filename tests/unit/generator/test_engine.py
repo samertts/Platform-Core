@@ -8,11 +8,8 @@ def test_generate_service(tmp_path: Path):
     engine = GeneratorEngine()
 
     result = engine.generate_service(
-
         tmp_path,
-
         "user",
-
     )
 
     assert result.success
@@ -21,12 +18,4 @@ def test_generate_service(tmp_path: Path):
 
     assert result.created_directories == 1
 
-    assert (
-
-        tmp_path
-        / "platform_core"
-        / "services"
-        / "user"
-        / "service.py"
-
-    ).exists()
+    assert (tmp_path / "platform_core" / "services" / "user" / "service.py").exists()

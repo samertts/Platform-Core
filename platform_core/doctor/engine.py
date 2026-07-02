@@ -4,8 +4,7 @@ from platform_core.doctor.check_registry import CheckRegistry
 from platform_core.doctor.check_runner import CheckRunner
 from platform_core.engine.base import BaseEngine
 from platform_core.engine.context import EngineContext
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class DoctorEngine(BaseEngine):

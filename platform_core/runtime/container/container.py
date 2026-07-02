@@ -12,7 +12,6 @@ from .service_descriptor import ServiceDescriptor
 
 
 class ServiceContainer(IServiceContainer):
-
     def __init__(self) -> None:
         self._services: dict[type, ServiceDescriptor] = {}
 
@@ -23,9 +22,7 @@ class ServiceContainer(IServiceContainer):
     ) -> None:
 
         if interface in self._services:
-            raise ServiceAlreadyRegisteredError(
-                f"{interface.__name__} already registered."
-            )
+            raise ServiceAlreadyRegisteredError(f"{interface.__name__} already registered.")
 
         self._services[interface] = ServiceDescriptor(
             interface=interface,
@@ -40,9 +37,7 @@ class ServiceContainer(IServiceContainer):
     ) -> None:
 
         if interface in self._services:
-            raise ServiceAlreadyRegisteredError(
-                f"{interface.__name__} already registered."
-            )
+            raise ServiceAlreadyRegisteredError(f"{interface.__name__} already registered.")
 
         self._services[interface] = ServiceDescriptor(
             interface=interface,
@@ -55,12 +50,9 @@ class ServiceContainer(IServiceContainer):
         descriptor = self._services.get(interface)
 
         if descriptor is None:
-            raise ServiceNotRegisteredError(
-                f"{interface.__name__} is not registered."
-            )
+            raise ServiceNotRegisteredError(f"{interface.__name__} is not registered.")
 
         if descriptor.lifetime == Lifetime.SINGLETON:
-
             if descriptor.instance is None:
                 descriptor.instance = descriptor.implementation()
 

@@ -4,10 +4,7 @@ import json
 import os
 import tempfile
 
-import pytest
-
-from platform_core.runtime.policy.engine import (Policy, PolicyEngine,
-                                                 PolicyResult)
+from platform_core.runtime.policy.engine import Policy, PolicyEngine, PolicyResult
 
 
 class TestPolicyEngine:

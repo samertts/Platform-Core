@@ -1,16 +1,24 @@
 """Unit tests for Package Manager core types."""
 
-import pytest
-
-from platform_core.packages import (DependencyType, InstallRecord,
-                                    InstallStatus, LifecycleMaturity,
-                                    PackageCapabilities, PackageChecksum,
-                                    PackageCompatibility, PackageDependencies,
-                                    PackageIdentity, PackageLifecycle,
-                                    PackageManifest, PackageSignature,
-                                    PackageStatus, PackageUUID, RegistryEntry,
-                                    RepositoryConfig, RepositoryType,
-                                    SignatureAlgorithm, Snapshot, Transaction)
+from platform_core.packages import (
+    DependencyType,
+    InstallRecord,
+    InstallStatus,
+    LifecycleMaturity,
+    PackageCapabilities,
+    PackageCompatibility,
+    PackageDependencies,
+    PackageIdentity,
+    PackageManifest,
+    PackageStatus,
+    PackageUUID,
+    RegistryEntry,
+    RepositoryConfig,
+    RepositoryType,
+    SignatureAlgorithm,
+    Snapshot,
+    Transaction,
+)
 
 
 class TestPackageTypes:

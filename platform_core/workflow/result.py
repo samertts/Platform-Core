@@ -8,7 +8,6 @@ from platform_core.workflow.status import WorkflowStatus
 
 @dataclass(frozen=True, slots=True)
 class WorkflowResult:
-
     status: WorkflowStatus
 
     message: str = ""
@@ -29,7 +28,7 @@ class WorkflowResult:
     def ok(
         cls,
         **data: Any,
-    ) -> "WorkflowResult":
+    ) -> WorkflowResult:
 
         return cls(
             status=WorkflowStatus.COMPLETED,
@@ -41,7 +40,7 @@ class WorkflowResult:
         cls,
         message: str,
         **data: Any,
-    ) -> "WorkflowResult":
+    ) -> WorkflowResult:
 
         return cls(
             status=WorkflowStatus.FAILED,

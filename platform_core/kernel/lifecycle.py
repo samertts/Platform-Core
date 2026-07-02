@@ -2,7 +2,6 @@ from .state import KernelState
 
 
 class Lifecycle:
-
     def __init__(self):
 
         self._state = KernelState.CREATED

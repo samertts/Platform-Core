@@ -2,8 +2,7 @@
 Clinical domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -13,14 +12,14 @@ class Diagnosis(BaseEntity):
     """Diagnosis record."""
 
     patient_id: str = ""
-    encounter_id: Optional[str] = None
+    encounter_id: str | None = None
     diagnosis_code: str = ""
     diagnosis_name: str = ""
     diagnosis_type: str = ""
-    onset_date: Optional[str] = None
-    resolution_date: Optional[str] = None
+    onset_date: str | None = None
+    resolution_date: str | None = None
     status: str = "active"
-    severity: Optional[str] = None
+    severity: str | None = None
 
 
 @dataclass
@@ -35,7 +34,7 @@ class Procedure(BaseEntity):
     facility_id: str = ""
     procedure_date: str = ""
     status: str = "completed"
-    complications: Optional[str] = None
+    complications: str | None = None
 
 
 @dataclass
@@ -43,15 +42,15 @@ class Observation(BaseEntity):
     """Clinical observation record."""
 
     patient_id: str = ""
-    encounter_id: Optional[str] = None
+    encounter_id: str | None = None
     observation_type: str = ""
-    observation_code: Optional[str] = None
+    observation_code: str | None = None
     observation_value: str = ""
-    observation_unit: Optional[str] = None
-    reference_range: Optional[str] = None
-    abnormal_flag: Optional[str] = None
-    recorded_by: Optional[str] = None
-    recorded_at: Optional[str] = None
+    observation_unit: str | None = None
+    reference_range: str | None = None
+    abnormal_flag: str | None = None
+    recorded_by: str | None = None
+    recorded_at: str | None = None
 
 
 @dataclass
@@ -59,14 +58,14 @@ class VitalSigns(BaseEntity):
     """Vital signs record."""
 
     patient_id: str = ""
-    encounter_id: Optional[str] = None
-    temperature: Optional[float] = None
-    heart_rate: Optional[int] = None
-    respiratory_rate: Optional[int] = None
-    blood_pressure_systolic: Optional[int] = None
-    blood_pressure_diastolic: Optional[int] = None
-    oxygen_saturation: Optional[float] = None
-    weight: Optional[float] = None
-    height: Optional[float] = None
-    recorded_by: Optional[str] = None
-    recorded_at: Optional[str] = None
+    encounter_id: str | None = None
+    temperature: float | None = None
+    heart_rate: int | None = None
+    respiratory_rate: int | None = None
+    blood_pressure_systolic: int | None = None
+    blood_pressure_diastolic: int | None = None
+    oxygen_saturation: float | None = None
+    weight: float | None = None
+    height: float | None = None
+    recorded_by: str | None = None
+    recorded_at: str | None = None

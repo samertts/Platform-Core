@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 import asyncio
-import signal
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
-from platform_core.runtime.types import (HealthReport, HealthStatus,
-                                         RuntimeState)
+from platform_core.runtime.types import HealthReport, HealthStatus, RuntimeState
 
 
 class RuntimeKernel:
@@ -45,7 +43,7 @@ class RuntimeKernel:
     def uptime_seconds(self) -> float | None:
         if self._started_at is None:
             return None
-        end = self._stopped_at or datetime.now(timezone.utc)
+        end = self._stopped_at or datetime.now(UTC)
         return (end - self._started_at).total_seconds()
 
     def _set_state(self, new_state: RuntimeState) -> None:
@@ -75,7 +73,7 @@ class RuntimeKernel:
             raise RuntimeError(f"Cannot start runtime in state {self._state.value}")
 
         self._set_state(RuntimeState.STARTING)
-        self._started_at = datetime.now(timezone.utc)
+        self._started_at = datetime.now(UTC)
 
         try:
             self._set_state(RuntimeState.RUNNING)
@@ -99,7 +97,7 @@ class RuntimeKernel:
             except Exception:
                 pass
 
-        self._stopped_at = datetime.now(timezone.utc)
+        self._stopped_at = datetime.now(UTC)
         self._set_state(RuntimeState.STOPPED)
 
     async def ready(self) -> None:
@@ -142,13 +140,15 @@ class RuntimeKernel:
         overall = (
             HealthStatus.HEALTHY
             if all_healthy
-            else HealthStatus.DEGRADED if components else HealthStatus.HEALTHY
+            else HealthStatus.DEGRADED
+            if components
+            else HealthStatus.HEALTHY
         )
 
         return HealthReport(
             status=overall,
             components=components,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             details={
                 "name": self._name,
                 "version": self._version,

@@ -2,8 +2,7 @@
 Laboratory domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -15,11 +14,11 @@ class Specimen(BaseEntity):
     patient_id: str = ""
     specimen_type: str = ""
     collection_date: str = ""
-    collection_method: Optional[str] = None
-    collector_id: Optional[str] = None
+    collection_method: str | None = None
+    collector_id: str | None = None
     facility_id: str = ""
     status: str = "collected"
-    rejection_reason: Optional[str] = None
+    rejection_reason: str | None = None
 
 
 @dataclass
@@ -27,13 +26,13 @@ class LaboratoryOrder(BaseEntity):
     """Laboratory test order."""
 
     patient_id: str = ""
-    encounter_id: Optional[str] = None
+    encounter_id: str | None = None
     ordering_provider_id: str = ""
     facility_id: str = ""
     test_code: str = ""
     test_name: str = ""
     priority: str = "routine"
-    clinical_indication: Optional[str] = None
+    clinical_indication: str | None = None
     status: str = "ordered"
 
 
@@ -47,13 +46,13 @@ class LaboratoryResult(BaseEntity):
     test_code: str = ""
     test_name: str = ""
     result_value: str = ""
-    result_unit: Optional[str] = None
-    reference_range: Optional[str] = None
-    abnormal_flag: Optional[str] = None
+    result_unit: str | None = None
+    reference_range: str | None = None
+    abnormal_flag: str | None = None
     result_status: str = "final"
-    performing_lab_id: Optional[str] = None
-    validated_by: Optional[str] = None
-    validated_at: Optional[str] = None
+    performing_lab_id: str | None = None
+    validated_by: str | None = None
+    validated_at: str | None = None
 
 
 @dataclass
@@ -61,11 +60,11 @@ class Analyzer(BaseEntity):
     """Laboratory analyzer device."""
 
     facility_id: str = ""
-    department_id: Optional[str] = None
+    department_id: str | None = None
     analyzer_type: str = ""
     manufacturer: str = ""
     model: str = ""
     serial_number: str = ""
-    location: Optional[str] = None
+    location: str | None = None
     status: str = "active"
-    last_calibration_date: Optional[str] = None
+    last_calibration_date: str | None = None

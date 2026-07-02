@@ -6,12 +6,11 @@ Handles node CRUD, lifecycle transitions, and node queries.
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (LifecycleStage, Node, NodeStatus,
-                                           NodeType)
+from platform_core.knowledge.types import LifecycleStage, Node, NodeStatus, NodeType
 
 
 class NodeManager:
@@ -81,7 +80,7 @@ class NodeManager:
             node.tags = tags
         if capabilities is not None:
             node.capabilities = capabilities
-        node.updated_at = datetime.now(timezone.utc)
+        node.updated_at = datetime.now(UTC)
         return self._store.update_node(node)
 
     def delete_node(self, node_id: str) -> bool:
@@ -126,7 +125,7 @@ class NodeManager:
     def transition_lifecycle(self, node_id: str, new_stage: LifecycleStage) -> Node:
         node = self._store.get_node(node_id)
         node.lifecycle = new_stage
-        node.updated_at = datetime.now(timezone.utc)
+        node.updated_at = datetime.now(UTC)
         return self._store.update_node(node)
 
     def count(self) -> int:

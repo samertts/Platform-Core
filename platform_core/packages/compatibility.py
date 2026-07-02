@@ -135,9 +135,7 @@ class CompatibilityEngine:
         runtime = manifest.get("runtime", {})
         if "language" in runtime and "version" in runtime:
             runtime_str = f"{runtime['language']}{runtime['version']}"
-            result = self.check_runtime_compatibility(
-                runtime_str, runtime.get("version", "3.11")
-            )
+            result = self.check_runtime_compatibility(runtime_str, runtime.get("version", "3.11"))
             if not result["compatible"]:
                 issues.append(f"Runtime incompatible: {result.get('error', 'unknown')}")
 
@@ -217,9 +215,7 @@ class CompatibilityEngine:
 
         compatibility = manifest.get("compatibility", {})
         if "platform_core" in compatibility:
-            results["platform"] = self.check_platform_compatibility(
-                compatibility["platform_core"]
-            )
+            results["platform"] = self.check_platform_compatibility(compatibility["platform_core"])
 
         runtime = manifest.get("runtime", {})
         if "language" in runtime:
@@ -229,9 +225,7 @@ class CompatibilityEngine:
             )
 
         if "sdk_version" in compatibility:
-            results["sdk"] = self.check_sdk_compatibility(
-                compatibility["sdk_version"], "1.0.0"
-            )
+            results["sdk"] = self.check_sdk_compatibility(compatibility["sdk_version"], "1.0.0")
 
         results["overall_compatible"] = all(
             r.get("compatible", True) for r in results.values() if isinstance(r, dict)

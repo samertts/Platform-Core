@@ -6,10 +6,14 @@ import sys
 
 sys.path.insert(0, "/tmp")
 
-from platform_core.frontend.types.base import (ApiResponse, BaseEntity,
-                                               BaseEvent, BaseRelationship,
-                                               PaginatedResponse,
-                                               PaginationParams)
+from platform_core.frontend.types.base import (
+    ApiResponse,
+    BaseEntity,
+    BaseEvent,
+    BaseRelationship,
+    PaginatedResponse,
+    PaginationParams,
+)
 
 
 class TestBaseTypes:

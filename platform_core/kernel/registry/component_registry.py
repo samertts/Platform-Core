@@ -2,7 +2,6 @@ from __future__ import annotations
 
 
 class ComponentRegistry:
-
     def __init__(self):
 
         self._components: dict[str, object] = {}
@@ -43,6 +42,4 @@ class ComponentRegistry:
 
     def all(self):
 
-        return dict(
-            self._components
-        )
+        return dict(self._components)

@@ -1,5 +1,4 @@
 class TemplateRenderer:
-
     def render(
         self,
         template: str,
@@ -9,13 +8,9 @@ class TemplateRenderer:
         rendered = template
 
         for key, value in variables.items():
-
             rendered = rendered.replace(
-
                 "{{" + key + "}}",
-
                 value,
-
             )
 
         return rendered

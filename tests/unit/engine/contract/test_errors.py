@@ -1,5 +1,4 @@
-from platform_core.engine.errors import EngineError
-from platform_core.engine.errors import EngineErrorCategory
+from platform_core.engine.errors import EngineError, EngineErrorCategory
 
 
 def test_error_category():
@@ -34,9 +33,6 @@ def test_all_categories_exist():
         "internal",
     }
 
-    actual = {
-        category.value
-        for category in EngineErrorCategory
-    }
+    actual = {category.value for category in EngineErrorCategory}
 
     assert actual == expected

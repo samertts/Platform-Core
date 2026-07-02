@@ -4,7 +4,6 @@ from platform_core.workflow.step import WorkflowStep
 
 
 class Step(WorkflowStep):
-
     def execute(
         self,
         context: WorkflowContext,

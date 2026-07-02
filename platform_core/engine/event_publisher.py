@@ -4,7 +4,6 @@ from collections.abc import Callable
 
 from platform_core.engine.events import EngineEvent
 
-
 EventHandler = Callable[[EngineEvent], None]
 
 

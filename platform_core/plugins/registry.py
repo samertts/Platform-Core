@@ -4,7 +4,6 @@ from platform_core.plugins.plugin import Plugin
 
 
 class PluginRegistry:
-
     def __init__(self) -> None:
 
         self._plugins: dict[str, Plugin] = {}

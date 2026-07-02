@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import json
 import threading
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 
 @dataclass
@@ -18,7 +19,7 @@ class Policy:
     status: str = "active"
     priority: int = 0
     scope: str = "platform"
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass
@@ -26,7 +27,7 @@ class PolicyResult:
     allowed: bool
     policy_id: str = ""
     reason: str = ""
-    evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    evaluated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     details: dict[str, Any] = field(default_factory=dict)
 
 
@@ -34,7 +35,7 @@ class PolicyResult:
 class EvaluationResult:
     allowed: bool
     results: list[PolicyResult] = field(default_factory=list)
-    evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    evaluated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     @property
     def denied_results(self) -> list[PolicyResult]:
@@ -123,11 +124,7 @@ class PolicyEngine:
             indent = len(line) - len(line.lstrip())
             stripped = line.strip()
 
-            while (
-                section_stack
-                and indent <= section_stack[-1][0]
-                and len(section_stack) > 1
-            ):
+            while section_stack and indent <= section_stack[-1][0] and len(section_stack) > 1:
                 section_stack.pop()
             current_section = section_stack[-1][1]
 
@@ -204,9 +201,7 @@ class PolicyEngine:
                     return PolicyResult(
                         allowed=False,
                         policy_id=policy.id,
-                        reason=rule.get(
-                            "reason", f"Policy {policy.name} denied access"
-                        ),
+                        reason=rule.get("reason", f"Policy {policy.name} denied access"),
                     )
 
         return PolicyResult(
@@ -248,15 +243,11 @@ class PolicyEngine:
 
         return False
 
-    def register_authorization_hook(
-        self, hook: Callable[[dict[str, Any]], PolicyResult]
-    ) -> None:
+    def register_authorization_hook(self, hook: Callable[[dict[str, Any]], PolicyResult]) -> None:
         with self._lock:
             self._authorization_hooks.append(hook)
 
-    def register_governance_hook(
-        self, hook: Callable[[dict[str, Any]], PolicyResult]
-    ) -> None:
+    def register_governance_hook(self, hook: Callable[[dict[str, Any]], PolicyResult]) -> None:
         with self._lock:
             self._governance_hooks.append(hook)
 

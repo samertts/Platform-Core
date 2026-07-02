@@ -1,7 +1,5 @@
 """Unit tests for AI Governance Assistant."""
 
-import pytest
-
 from platform_core.governance.ai_assistant import AIGovernanceAssistant
 from platform_core.governance.types import Finding, FindingSeverity
 
@@ -13,9 +11,7 @@ class TestAIGovernanceAssistant:
 
     def test_review_architecture(self) -> None:
         ai = AIGovernanceAssistant()
-        result = ai.review_architecture(
-            "repo", {"architecture_pattern": "microservices"}
-        )
+        result = ai.review_architecture("repo", {"architecture_pattern": "microservices"})
         assert result["score"] > 0
         assert result["review_type"] == "architecture"
 
@@ -34,9 +30,7 @@ class TestAIGovernanceAssistant:
 
     def test_review_manifest_present(self) -> None:
         ai = AIGovernanceAssistant()
-        result = ai.review_manifest(
-            "repo", {"has_manifest": True, "manifest_valid": True}
-        )
+        result = ai.review_manifest("repo", {"has_manifest": True, "manifest_valid": True})
         assert result["score"] == 1.0
 
     def test_review_manifest_missing(self) -> None:
@@ -59,9 +53,7 @@ class TestAIGovernanceAssistant:
 
     def test_estimate_risk(self) -> None:
         ai = AIGovernanceAssistant()
-        result = ai.estimate_risk(
-            "repo", {"vulnerable_dependencies": 1, "has_ci": False}
-        )
+        result = ai.estimate_risk("repo", {"vulnerable_dependencies": 1, "has_ci": False})
         assert result["overall_risk"] in ("high", "medium", "low")
 
     def test_generate_remediation_plan(self) -> None:
@@ -72,9 +64,7 @@ class TestAIGovernanceAssistant:
                 title="Critical",
                 recommendation="Fix now",
             ),
-            Finding(
-                severity=FindingSeverity.LOW, title="Low", recommendation="Fix later"
-            ),
+            Finding(severity=FindingSeverity.LOW, title="Low", recommendation="Fix later"),
         ]
         plan = ai.generate_remediation_plan("repo", findings)
         assert plan["total_items"] == 2

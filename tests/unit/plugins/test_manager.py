@@ -3,7 +3,6 @@ from platform_core.plugins.plugin import Plugin
 
 
 class TestPlugin(Plugin):
-
     def __init__(self):
 
         self.initialized = False

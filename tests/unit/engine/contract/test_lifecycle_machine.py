@@ -1,7 +1,7 @@
+import pytest
+
 from platform_core.engine.lifecycle import LifecycleState
 from platform_core.engine.lifecycle_machine import LifecycleMachine
-
-import pytest
 
 
 def test_initial_state():
@@ -58,7 +58,6 @@ def test_invalid_transition():
     machine = LifecycleMachine()
 
     with pytest.raises(RuntimeError):
-
         machine.completed()
 
 

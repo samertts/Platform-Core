@@ -1,5 +1,5 @@
-from pathlib import Path
 import platform
+from pathlib import Path
 
 
 def doctor():
@@ -17,23 +17,16 @@ def doctor():
     print()
 
     required = [
-
         "README.md",
-
         "pyproject.toml",
-
         "platform_core",
-
     ]
 
     for item in required:
-
         if Path(item).exists():
-
             print(f"[ OK ] {item}")
 
         else:
-
             print(f"[FAIL] {item}")
 
     print()

@@ -9,7 +9,6 @@ class Logger:
 
 
 class Repository:
-
     def __init__(
         self,
         logger: Logger,
@@ -45,7 +44,6 @@ def test_constructor_not_supported():
     with pytest.raises(
         NotImplementedError,
     ):
-
         ObjectActivator().create(
             descriptor,
         )

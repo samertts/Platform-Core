@@ -1,19 +1,16 @@
 from __future__ import annotations
 
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from typing import Any
 
 
 class IServiceFactory(ABC):
-
     @abstractmethod
     def create(self) -> Any:
         raise NotImplementedError
 
 
 class IServiceProvider(ABC):
-
     @abstractmethod
     def create(
         self,
@@ -24,7 +21,6 @@ class IServiceProvider(ABC):
 
 
 class IServiceRegistry(ABC):
-
     @abstractmethod
     def register(
         self,

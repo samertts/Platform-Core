@@ -4,7 +4,6 @@ from .types import MetadataKind
 
 
 class MetadataRegistry:
-
     ROOT = Path(".engineering")
 
     MAP = {

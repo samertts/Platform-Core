@@ -20,9 +20,7 @@ class RadiologyStudyClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/patient/{patient_id}")
 
     def schedule(self, study_id: str, schedule_data: dict) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{study_id}/schedule", data=schedule_data
-        )
+        return self.client.put(f"{self.endpoint}/{study_id}/schedule", data=schedule_data)
 
     def complete(self, study_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{study_id}/complete")
@@ -60,6 +58,4 @@ class RadiologyReportClient(BaseEntityClient):
         )
 
     def add_findings(self, report_id: str, findings: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{report_id}/findings", data={"findings": findings}
-        )
+        return self.client.put(f"{self.endpoint}/{report_id}/findings", data={"findings": findings})

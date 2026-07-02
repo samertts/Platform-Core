@@ -4,9 +4,10 @@ NHDOS Frontend Hooks
 Reusable hooks for frontend state management
 """
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Callable, Optional
+from typing import Any, Optional
 
 from ..types.base import ApiResponse, PaginatedResponse
 
@@ -16,7 +17,7 @@ class UseState:
     """State management hook."""
 
     value: Any = None
-    setter: Optional[Callable] = None
+    setter: Callable | None = None
 
     def update(self, new_value: Any):
         self.value = new_value
@@ -29,15 +30,15 @@ class UseEffect:
     """Side effect hook."""
 
     dependencies: list[Any] = field(default_factory=list)
-    cleanup: Optional[Callable] = None
-    effect: Optional[Callable] = None
+    cleanup: Callable | None = None
+    effect: Callable | None = None
 
 
 @dataclass
 class UseCallback:
     """Memoized callback hook."""
 
-    callback: Optional[Callable] = None
+    callback: Callable | None = None
     dependencies: list[Any] = field(default_factory=list)
 
 
@@ -54,9 +55,9 @@ class UseQuery:
     """Data fetching hook."""
 
     data: Any = None
-    error: Optional[str] = None
+    error: str | None = None
     loading: bool = False
-    refetch: Optional[Callable] = None
+    refetch: Callable | None = None
 
 
 @dataclass
@@ -64,9 +65,9 @@ class UseMutation:
     """Data mutation hook."""
 
     data: Any = None
-    error: Optional[str] = None
+    error: str | None = None
     loading: bool = False
-    mutate: Optional[Callable] = None
+    mutate: Callable | None = None
 
 
 def use_state(initial_value: Any = None) -> UseState:

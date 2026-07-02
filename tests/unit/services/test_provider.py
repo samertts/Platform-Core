@@ -77,6 +77,7 @@ def test_clear():
 
     assert first is not second
 
+
 def test_scoped():
 
     provider = ServiceProvider()

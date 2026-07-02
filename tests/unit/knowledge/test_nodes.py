@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.nodes import NodeManager
 from platform_core.knowledge.types import LifecycleStage, NodeStatus, NodeType

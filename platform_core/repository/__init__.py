@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import json
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import (RegistryEntry, RepositoryConfig,
-                                    RepositoryType)
+from platform_core.packages import RegistryEntry, RepositoryConfig, RepositoryType
 
 
 class RepositoryError(Exception):
@@ -158,7 +157,7 @@ class RepositoryManager:
         if repo is None:
             raise RepositoryError(f"Repository not found: {name}")
 
-        repo.last_synced = datetime.now(timezone.utc)
+        repo.last_synced = datetime.now(UTC)
         self._save_config()
 
         return {
@@ -177,9 +176,7 @@ class RepositoryManager:
 
         with self._lock:
             stats["total_repositories"] = len(self._repositories)
-            stats["enabled_repositories"] = sum(
-                1 for r in self._repositories.values() if r.enabled
-            )
+            stats["enabled_repositories"] = sum(1 for r in self._repositories.values() if r.enabled)
 
             for repo in self._repositories.values():
                 repo_type = repo.type.value

@@ -2,8 +2,8 @@
 
 import pytest
 
-from platform_core.packages import InstallRecord, InstallStatus
-from platform_core.rollback import RollbackEngine, RollbackError, SnapshotError
+from platform_core.packages import InstallRecord
+from platform_core.rollback import RollbackEngine, RollbackError
 
 
 def _make_record(tmp_path, name="pkg", version="1.0.0"):

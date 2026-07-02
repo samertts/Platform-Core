@@ -1,14 +1,19 @@
 """Unit tests for Health Scorer."""
 
-import pytest
-
 from platform_core.discovery.scorer import HealthScorer
-from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
-                                           CIInfo, DependencyInfo,
-                                           DocumentationInfo, FrameworkInfo,
-                                           HealthRating, HealthScore,
-                                           LanguageInfo, SecurityInfo,
-                                           TestingInfo)
+from platform_core.discovery.types import (
+    AnalysisResult,
+    ArchitectureInfo,
+    CIInfo,
+    DependencyInfo,
+    DocumentationInfo,
+    FrameworkInfo,
+    HealthRating,
+    HealthScore,
+    LanguageInfo,
+    SecurityInfo,
+    TestingInfo,
+)
 
 
 class TestHealthScorer:

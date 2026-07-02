@@ -2,7 +2,6 @@ from platform_core.cli.core.command import Command
 
 
 class BootstrapCommand(Command):
-
     name = "bootstrap"
 
     help = "Bootstrap Platform-Core"
@@ -12,8 +11,6 @@ class BootstrapCommand(Command):
 
     def execute(self, args) -> int:
 
-        print(
-            "Bootstrap is not implemented yet."
-        )
+        print("Bootstrap is not implemented yet.")
 
         return 0

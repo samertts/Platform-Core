@@ -1,13 +1,12 @@
-from typing import Dict, Iterable, Optional
+from collections.abc import Iterable
 
 from .models import RegistryEntry
 
 
 class EngineeringRegistry:
-
     def __init__(self):
 
-        self._entries: Dict[str, RegistryEntry] = {}
+        self._entries: dict[str, RegistryEntry] = {}
 
     def register(self, entry: RegistryEntry):
 
@@ -17,7 +16,7 @@ class EngineeringRegistry:
 
         self._entries.pop(identifier, None)
 
-    def get(self, identifier: str) -> Optional[RegistryEntry]:
+    def get(self, identifier: str) -> RegistryEntry | None:
 
         return self._entries.get(identifier)
 

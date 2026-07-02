@@ -6,11 +6,7 @@ def run(ctx):
     pyproject = ctx.root / "pyproject.toml"
 
     return CheckResult(
-
         name="Project",
-
         passed=pyproject.exists(),
-
         message="pyproject.toml",
-
     )

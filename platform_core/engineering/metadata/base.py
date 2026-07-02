@@ -4,7 +4,6 @@ import yaml
 
 
 class BaseMetadataLoader:
-
     def load_yaml(self, path: Path) -> dict:
 
         return yaml.safe_load(path.read_text(encoding="utf-8"))

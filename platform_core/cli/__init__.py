@@ -59,9 +59,7 @@ class PlatformCLI:
         rollback.add_argument("package", help="Package name")
 
         registry = subparsers.add_parser("registry", help="Registry operations")
-        registry.add_argument(
-            "action", choices=["list", "count", "stats"], help="Registry action"
-        )
+        registry.add_argument("action", choices=["list", "count", "stats"], help="Registry action")
 
         return parser
 

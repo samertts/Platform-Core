@@ -10,10 +10,9 @@ implement these interfaces.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Protocol
-from typing import Iterable
-from typing import runtime_checkable
+from typing import Protocol, runtime_checkable
 
 from .models import (
     Capability,
@@ -27,7 +26,6 @@ from .models import (
     RepositorySnapshot,
 )
 
-
 # ============================================================
 # Repository
 # ============================================================
@@ -35,12 +33,9 @@ from .models import (
 
 @runtime_checkable
 class RepositoryProviderProtocol(Protocol):
+    def load(self, root: Path) -> RepositorySnapshot: ...
 
-    def load(self, root: Path) -> RepositorySnapshot:
-        ...
-
-    def refresh(self) -> RepositorySnapshot:
-        ...
+    def refresh(self) -> RepositorySnapshot: ...
 
 
 # ============================================================
@@ -50,9 +45,7 @@ class RepositoryProviderProtocol(Protocol):
 
 @runtime_checkable
 class ScannerProtocol(Protocol):
-
-    def scan(self, root: Path) -> RepositorySnapshot:
-        ...
+    def scan(self, root: Path) -> RepositorySnapshot: ...
 
 
 # ============================================================
@@ -62,12 +55,10 @@ class ScannerProtocol(Protocol):
 
 @runtime_checkable
 class AnalyzerProtocol(Protocol):
-
     def analyze(
         self,
         repository: RepositorySnapshot,
-    ) -> list[Issue]:
-        ...
+    ) -> list[Issue]: ...
 
 
 # ============================================================
@@ -77,12 +68,10 @@ class AnalyzerProtocol(Protocol):
 
 @runtime_checkable
 class PlannerProtocol(Protocol):
-
     def build_plan(
         self,
         issues: list[Issue],
-    ) -> RepairPlan:
-        ...
+    ) -> RepairPlan: ...
 
 
 # ============================================================
@@ -92,12 +81,10 @@ class PlannerProtocol(Protocol):
 
 @runtime_checkable
 class RepairEngineProtocol(Protocol):
-
     def repair(
         self,
         plan: RepairPlan,
-    ) -> RepairResult:
-        ...
+    ) -> RepairResult: ...
 
 
 # ============================================================
@@ -107,18 +94,15 @@ class RepairEngineProtocol(Protocol):
 
 @runtime_checkable
 class KnowledgeProviderProtocol(Protocol):
-
     def search(
         self,
         query: str,
-    ) -> Iterable[KnowledgeRecord]:
-        ...
+    ) -> Iterable[KnowledgeRecord]: ...
 
     def learn(
         self,
         record: KnowledgeRecord,
-    ) -> None:
-        ...
+    ) -> None: ...
 
 
 # ============================================================
@@ -128,9 +112,7 @@ class KnowledgeProviderProtocol(Protocol):
 
 @runtime_checkable
 class MetricsProviderProtocol(Protocol):
-
-    def collect(self) -> list[EngineeringMetric]:
-        ...
+    def collect(self) -> list[EngineeringMetric]: ...
 
 
 # ============================================================
@@ -140,15 +122,12 @@ class MetricsProviderProtocol(Protocol):
 
 @runtime_checkable
 class CapabilityRegistryProtocol(Protocol):
-
-    def list(self) -> list[Capability]:
-        ...
+    def list(self) -> list[Capability]: ...
 
     def get(
         self,
         identifier: str,
-    ) -> Capability:
-        ...
+    ) -> Capability: ...
 
 
 # ============================================================
@@ -158,9 +137,7 @@ class CapabilityRegistryProtocol(Protocol):
 
 @runtime_checkable
 class DependencyProviderProtocol(Protocol):
-
-    def dependencies(self) -> list[Dependency]:
-        ...
+    def dependencies(self) -> list[Dependency]: ...
 
 
 # ============================================================
@@ -170,6 +147,4 @@ class DependencyProviderProtocol(Protocol):
 
 @runtime_checkable
 class ProjectProviderProtocol(Protocol):
-
-    def profile(self) -> ProjectProfile:
-        ...
+    def profile(self) -> ProjectProfile: ...

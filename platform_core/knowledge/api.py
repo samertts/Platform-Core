@@ -9,13 +9,13 @@ from __future__ import annotations
 from typing import Any
 
 from platform_core.knowledge.engine import KnowledgeEngine
-from platform_core.knowledge.types import (ChangeType, EdgeNotFoundError,
-                                           HealthcareEntity,
-                                           HealthcareStandard, ImpactLevel,
-                                           KnowledgeError, LifecycleStage,
-                                           NodeNotFoundError, NodeStatus,
-                                           NodeType, QueryType,
-                                           RelationshipType)
+from platform_core.knowledge.types import (
+    ChangeType,
+    NodeStatus,
+    NodeType,
+    QueryType,
+    RelationshipType,
+)
 
 
 class KnowledgeAPI:
@@ -125,9 +125,7 @@ class KnowledgeAPI:
             "execution_time_ms": result.execution_time_ms,
         }
 
-    def impact_analysis(
-        self, node_id: str, change_type: str = "modify"
-    ) -> dict[str, Any]:
+    def impact_analysis(self, node_id: str, change_type: str = "modify") -> dict[str, Any]:
         ct = ChangeType(change_type)
         report = self._engine.analyze_impact(node_id, ct)
         return {

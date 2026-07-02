@@ -17,9 +17,7 @@ class PatientClient(BaseEntityClient):
     endpoint: str = "patients"
 
     def get_by_medical_record(self, medical_record_number: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/medical-record/{medical_record_number}"
-        )
+        return self.client.get(f"{self.endpoint}/medical-record/{medical_record_number}")
 
     def get_by_citizen(self, citizen_id: str) -> dict:
         return self.client.get(f"{self.endpoint}/citizen/{citizen_id}")
@@ -93,9 +91,7 @@ class AppointmentClient(BaseEntityClient):
         return self.client.put(f"{self.endpoint}/{appointment_id}/confirm")
 
     def cancel(self, appointment_id: str, reason: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{appointment_id}/cancel", data={"reason": reason}
-        )
+        return self.client.put(f"{self.endpoint}/{appointment_id}/cancel", data={"reason": reason})
 
     def reschedule(self, appointment_id: str, new_date: str, new_time: str) -> dict:
         return self.client.put(

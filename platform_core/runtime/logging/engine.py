@@ -4,9 +4,9 @@ import json
 import logging
 import sys
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-from uuid import UUID, uuid4
+from uuid import UUID
 
 
 class CorrelationFilter(logging.Filter):
@@ -34,7 +34,7 @@ class StructuredFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         log_entry: dict[str, Any] = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": record.levelname,
             "logger": record.name,
             "message": record.getMessage(),
@@ -70,7 +70,7 @@ class AuditHandler(logging.Handler):
 
     def emit(self, record: logging.LogRecord) -> None:
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "action": getattr(record, "audit_action", ""),
             "subject": getattr(record, "audit_subject", ""),
             "actor": getattr(record, "audit_actor", ""),
@@ -110,9 +110,7 @@ class LoggingEngine:
         if json_format:
             formatter: logging.Formatter = StructuredFormatter()
         else:
-            formatter = logging.Formatter(
-                "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-            )
+            formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
         if output == "stdout":
             handler: logging.Handler = logging.StreamHandler(sys.stdout)
@@ -151,7 +149,7 @@ class LoggingEngine:
         self._logger.log(level, message, extra=extra)
 
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": logging.getLevelName(level),
             "message": message,
             "context": kwargs,

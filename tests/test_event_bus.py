@@ -1,5 +1,4 @@
-from platform_core.events import Event
-from platform_core.events import EventBus
+from platform_core.events import Event, EventBus
 
 
 def test_publish():

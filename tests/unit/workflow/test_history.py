@@ -6,9 +6,7 @@ def test_history():
 
     history = WorkflowHistory()
 
-    history.add(
-        WorkflowResult.ok()
-    )
+    history.add(WorkflowResult.ok())
 
     assert len(history) == 1
 

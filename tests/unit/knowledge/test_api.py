@@ -6,7 +6,7 @@ import pytest
 
 from platform_core.knowledge.api import KnowledgeAPI
 from platform_core.knowledge.engine import KnowledgeEngine
-from platform_core.knowledge.types import NodeNotFoundError, NodeType
+from platform_core.knowledge.types import NodeNotFoundError
 
 
 class TestKnowledgeAPI:
@@ -63,18 +63,14 @@ class TestKnowledgeAPI:
         api = self._make_api()
         n1 = api.create_node("module", "a")
         n2 = api.create_node("module", "b")
-        result = api.create_relationship(
-            n1["node"]["id"], n2["node"]["id"], "depends_on"
-        )
+        result = api.create_relationship(n1["node"]["id"], n2["node"]["id"], "depends_on")
         assert result["status"] == "created"
 
     def test_get_relationship(self) -> None:
         api = self._make_api()
         n1 = api.create_node("module", "a")
         n2 = api.create_node("module", "b")
-        created = api.create_relationship(
-            n1["node"]["id"], n2["node"]["id"], "depends_on"
-        )
+        created = api.create_relationship(n1["node"]["id"], n2["node"]["id"], "depends_on")
         edge_id = created["edge"]["id"]
         result = api.get_relationship(edge_id)
         assert result["edge"]["source_id"] == n1["node"]["id"]
@@ -83,9 +79,7 @@ class TestKnowledgeAPI:
         api = self._make_api()
         n1 = api.create_node("module", "a")
         n2 = api.create_node("module", "b")
-        created = api.create_relationship(
-            n1["node"]["id"], n2["node"]["id"], "depends_on"
-        )
+        created = api.create_relationship(n1["node"]["id"], n2["node"]["id"], "depends_on")
         result = api.delete_relationship(created["edge"]["id"])
         assert result["status"] == "deleted"
 

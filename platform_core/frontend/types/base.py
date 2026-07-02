@@ -4,7 +4,7 @@ Base types for NHDOS Frontend Domain Model
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from uuid import uuid4
 
 
@@ -16,8 +16,8 @@ class BaseEntity:
     version: str = "1.0.0"
     created_at: datetime = field(default_factory=datetime.utcnow)
     updated_at: datetime = field(default_factory=datetime.utcnow)
-    created_by: Optional[str] = None
-    updated_by: Optional[str] = None
+    created_by: str | None = None
+    updated_by: str | None = None
     is_active: bool = True
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -74,6 +74,6 @@ class ApiResponse:
 
     success: bool = True
     data: Any = None
-    error: Optional[str] = None
-    message: Optional[str] = None
+    error: str | None = None
+    message: str | None = None
     timestamp: datetime = field(default_factory=datetime.utcnow)

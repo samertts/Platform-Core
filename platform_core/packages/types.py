@@ -1,14 +1,27 @@
 """Platform Package Manager - Core types."""
 
-from platform_core.packages import (DependencyType, InstallRecord,
-                                    InstallStatus, LifecycleMaturity,
-                                    PackageCapabilities, PackageChecksum,
-                                    PackageCompatibility, PackageDependencies,
-                                    PackageIdentity, PackageLifecycle,
-                                    PackageManifest, PackageSignature,
-                                    PackageStatus, PackageUUID, RegistryEntry,
-                                    RepositoryConfig, RepositoryType,
-                                    SignatureAlgorithm, Snapshot, Transaction)
+from platform_core.packages import (
+    DependencyType,
+    InstallRecord,
+    InstallStatus,
+    LifecycleMaturity,
+    PackageCapabilities,
+    PackageChecksum,
+    PackageCompatibility,
+    PackageDependencies,
+    PackageIdentity,
+    PackageLifecycle,
+    PackageManifest,
+    PackageSignature,
+    PackageStatus,
+    PackageUUID,
+    RegistryEntry,
+    RepositoryConfig,
+    RepositoryType,
+    SignatureAlgorithm,
+    Snapshot,
+    Transaction,
+)
 
 __all__ = [
     "PackageStatus",

@@ -2,8 +2,7 @@
 Citizen domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -14,14 +13,14 @@ class Citizen(BaseEntity):
 
     national_id: str = ""
     full_name: str = ""
-    date_of_birth: Optional[str] = None
-    gender: Optional[str] = None
-    blood_type: Optional[str] = None
-    phone: Optional[str] = None
-    email: Optional[str] = None
-    address: Optional[str] = None
-    governorate: Optional[str] = None
-    district: Optional[str] = None
+    date_of_birth: str | None = None
+    gender: str | None = None
+    blood_type: str | None = None
+    phone: str | None = None
+    email: str | None = None
+    address: str | None = None
+    governorate: str | None = None
+    district: str | None = None
     status: str = "active"
     confidentiality_level: int = 5
 
@@ -33,8 +32,8 @@ class DigitalCredential(BaseEntity):
     citizen_id: str = ""
     credential_type: str = ""
     credential_number: str = ""
-    issue_date: Optional[str] = None
-    expiry_date: Optional[str] = None
+    issue_date: str | None = None
+    expiry_date: str | None = None
     issuing_authority: str = ""
     status: str = "active"
-    biometric_hash: Optional[str] = None
+    biometric_hash: str | None = None

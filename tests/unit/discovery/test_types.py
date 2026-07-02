@@ -1,17 +1,28 @@
 """Unit tests for Discovery Engine types."""
 
-import pytest
-
-from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
-                                           CIInfo, DependencyInfo,
-                                           DiscoveryResult, DockerInfo,
-                                           DocumentationInfo, EcosystemReport,
-                                           Finding, FindingCategory,
-                                           FindingSeverity, FrameworkInfo,
-                                           HealthRating, HealthScore,
-                                           LanguageInfo, RepositoryReport,
-                                           ScanResult, ScanStatus, ScanType,
-                                           SecurityInfo, TestingInfo)
+from platform_core.discovery.types import (
+    AnalysisResult,
+    ArchitectureInfo,
+    CIInfo,
+    DependencyInfo,
+    DiscoveryResult,
+    DockerInfo,
+    DocumentationInfo,
+    EcosystemReport,
+    Finding,
+    FindingCategory,
+    FindingSeverity,
+    FrameworkInfo,
+    HealthRating,
+    HealthScore,
+    LanguageInfo,
+    RepositoryReport,
+    ScanResult,
+    ScanStatus,
+    ScanType,
+    SecurityInfo,
+    TestingInfo,
+)
 
 
 class TestDiscoveryTypes:

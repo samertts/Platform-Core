@@ -7,14 +7,18 @@ import json
 import shutil
 import tarfile
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from io import BytesIO
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from platform_core.packages import (PackageChecksum, PackageManifest,
-                                    PackageSignature, SignatureAlgorithm)
+from platform_core.packages import (
+    PackageChecksum,
+    PackageManifest,
+    PackageSignature,
+    SignatureAlgorithm,
+)
 
 
 class BuildError(Exception):
@@ -31,7 +35,7 @@ class PackageBuilder:
 
     def _log(self, message: str, level: str = "info", **kwargs: Any) -> None:
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": level,
             "message": message,
             **kwargs,
@@ -49,11 +53,14 @@ class PackageBuilder:
         capabilities: dict[str, list[str]] | None = None,
         compatibility: dict[str, str] | None = None,
     ) -> PackageManifest:
-        from platform_core.packages import (PackageCapabilities,
-                                            PackageCompatibility,
-                                            PackageDependencies,
-                                            PackageIdentity, PackageLifecycle,
-                                            PackageUUID)
+        from platform_core.packages import (
+            PackageCapabilities,
+            PackageCompatibility,
+            PackageDependencies,
+            PackageIdentity,
+            PackageLifecycle,
+            PackageUUID,
+        )
 
         manifest = PackageManifest(
             package=PackageIdentity(
@@ -73,9 +80,7 @@ class PackageBuilder:
             ),
             compatibility=PackageCompatibility(
                 platform_core=(
-                    compatibility.get("platform_core", ">=1.0.0")
-                    if compatibility
-                    else ">=1.0.0"
+                    compatibility.get("platform_core", ">=1.0.0") if compatibility else ">=1.0.0"
                 ),
                 runtime=(
                     compatibility.get("runtime", "python>=3.11")
@@ -83,20 +88,16 @@ class PackageBuilder:
                     else "python>=3.11"
                 ),
                 sdk_version=(
-                    compatibility.get("sdk_version", ">=1.0.0")
-                    if compatibility
-                    else ">=1.0.0"
+                    compatibility.get("sdk_version", ">=1.0.0") if compatibility else ">=1.0.0"
                 ),
             ),
         )
         return manifest
 
-    def generate_sbom(
-        self, manifest: PackageManifest, files: list[str]
-    ) -> dict[str, Any]:
+    def generate_sbom(self, manifest: PackageManifest, files: list[str]) -> dict[str, Any]:
         return {
             "sbom_version": "1.0.0",
-            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "generated_at": datetime.now(UTC).isoformat(),
             "package": {
                 "name": manifest.package.name,
                 "version": manifest.package.version,
@@ -123,15 +124,13 @@ class PackageBuilder:
 
     def sign_package(self, data: bytes, private_key: str = "") -> PackageSignature:
         data_hash = hashlib.sha256(data).hexdigest()
-        signature_value = hashlib.sha256(
-            f"{data_hash}:{private_key}".encode()
-        ).hexdigest()
+        signature_value = hashlib.sha256(f"{data_hash}:{private_key}".encode()).hexdigest()
 
         return PackageSignature(
             algorithm=SignatureAlgorithm.SHA256,
             signature=signature_value,
             signer=private_key or "platform-core",
-            signed_at=datetime.now(timezone.utc),
+            signed_at=datetime.now(UTC),
         )
 
     def build_package(

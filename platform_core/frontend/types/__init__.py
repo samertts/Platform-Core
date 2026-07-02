@@ -12,10 +12,19 @@ from .clinical import Diagnosis, Observation, Procedure, VitalSigns
 from .communications import Correspondence
 from .epidemiology import Disease, Outbreak
 from .financial import Claim, Consent, Insurance, Invoice, Payment
-from .healthcare_core import (Admission, Appointment, Discharge, Encounter,
-                              Patient, Visit)
-from .human_resources import (Attendance, Bed, Department, Employee, Facility,
-                              Leave, License, Organization, Professional, Room)
+from .healthcare_core import Admission, Appointment, Discharge, Encounter, Patient, Visit
+from .human_resources import (
+    Attendance,
+    Bed,
+    Department,
+    Employee,
+    Facility,
+    Leave,
+    License,
+    Organization,
+    Professional,
+    Room,
+)
 from .laboratory import Analyzer, LaboratoryOrder, LaboratoryResult, Specimen
 from .medical_devices import Calibration, DeviceConnection, MedicalDevice
 from .notifications import Message, Notification

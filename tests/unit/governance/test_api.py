@@ -1,7 +1,5 @@
 """Unit tests for Governance API."""
 
-import pytest
-
 from platform_core.governance.api import GovernanceAPI
 
 

@@ -3,7 +3,6 @@ from platform_core.doctor.engine import DoctorEngine
 
 
 class DoctorCommand(Command):
-
     name = "doctor"
 
     help = "Analyze project"
@@ -18,11 +17,8 @@ class DoctorCommand(Command):
         results = engine.run()
 
         for result in results:
-
             icon = "✔" if result.passed else "✘"
 
-            print(
-                f"{icon} {result.name}: {result.message}"
-            )
+            print(f"{icon} {result.name}: {result.message}")
 
         return 0

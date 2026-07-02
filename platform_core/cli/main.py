@@ -4,10 +4,9 @@ Platform-Core Command Line Interface
 Genesis Version 0.1.0
 """
 
-from pathlib import Path
 import argparse
 import platform
-import sys
+from pathlib import Path
 
 VERSION = "0.1.0"
 
@@ -58,16 +57,9 @@ def build():
 
 def main():
 
-    parser = argparse.ArgumentParser(
-        prog="platform",
-        description="Platform-Core CLI"
-    )
+    parser = argparse.ArgumentParser(prog="platform", description="Platform-Core CLI")
 
-    parser.add_argument(
-        "command",
-        nargs="?",
-        default="doctor"
-    )
+    parser.add_argument("command", nargs="?", default="doctor")
 
     args = parser.parse_args()
 

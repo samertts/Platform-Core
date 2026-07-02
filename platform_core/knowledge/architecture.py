@@ -11,11 +11,15 @@ from collections import Counter
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (ArchitectureRecommendation,
-                                           ArchitectureSmell, ImpactLevel,
-                                           Node, NodeType,
-                                           RecommendationPriority,
-                                           RelationshipType)
+from platform_core.knowledge.types import (
+    ArchitectureRecommendation,
+    ArchitectureSmell,
+    ImpactLevel,
+    Node,
+    NodeType,
+    RecommendationPriority,
+    RelationshipType,
+)
 
 
 class ArchitectureIntelligence:

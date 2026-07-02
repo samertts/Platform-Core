@@ -1,12 +1,9 @@
-from pathlib import Path
-
 from .base_generator import BaseGenerator
 from .directory_generator import DirectoryGenerator
 from .file_generator import FileGenerator
 
 
 class ProjectGenerator(BaseGenerator):
-
     def generate(self):
 
         root = self.workspace
@@ -20,7 +17,6 @@ class ProjectGenerator(BaseGenerator):
         ]
 
         for directory in directories:
-
             DirectoryGenerator.create(root / directory)
 
         FileGenerator.create(

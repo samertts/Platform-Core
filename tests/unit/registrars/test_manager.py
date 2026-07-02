@@ -41,6 +41,9 @@ def test_multiple_registrars():
         services,
     )
 
-    assert len(
-        manager._registrars,
-    ) == 2
+    assert (
+        len(
+            manager._registrars,
+        )
+        == 2
+    )

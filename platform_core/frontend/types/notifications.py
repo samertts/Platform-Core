@@ -3,7 +3,6 @@ Notifications domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -19,7 +18,7 @@ class Notification(BaseEntity):
     message: str = ""
     priority: str = "normal"
     status: str = "unread"
-    read_at: Optional[str] = None
+    read_at: str | None = None
     channel: str = "in_app"
 
 
@@ -31,9 +30,9 @@ class Message(BaseEntity):
     sender_type: str = ""
     recipient_id: str = ""
     recipient_type: str = ""
-    subject: Optional[str] = None
+    subject: str | None = None
     body: str = ""
     message_type: str = ""
     status: str = "sent"
-    read_at: Optional[str] = None
+    read_at: str | None = None
     attachments: list[str] = field(default_factory=list)

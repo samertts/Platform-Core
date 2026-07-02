@@ -2,7 +2,6 @@ from .models import Capability
 
 
 class CapabilityRegistry:
-
     def __init__(self):
 
         self.capabilities = {}

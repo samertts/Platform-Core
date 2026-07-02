@@ -25,7 +25,6 @@ class ObjectActivator:
         parameters = []
 
         for parameter in list(signature.parameters.values())[1:]:
-
             #
             # Ignore object.__init__(*args, **kwargs)
             #
@@ -39,9 +38,6 @@ class ObjectActivator:
             parameters.append(parameter)
 
         if parameters:
-
-            raise NotImplementedError(
-                "Constructor Injection is not implemented yet."
-            )
+            raise NotImplementedError("Constructor Injection is not implemented yet.")
 
         return implementation()

@@ -5,7 +5,6 @@ from platform_core.services.collection import ServiceCollection
 
 
 class CoreRegistrar(Registrar):
-
     def register(
         self,
         services: ServiceCollection,

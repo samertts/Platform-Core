@@ -8,11 +8,9 @@ device graphs, governance graphs, and knowledge timelines.
 from __future__ import annotations
 
 import threading
-from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (GraphVisualization, Node, NodeType,
-                                           RelationshipType)
+from platform_core.knowledge.types import GraphVisualization, Node, NodeType, RelationshipType
 
 
 class VisualizationEngine:
@@ -114,10 +112,7 @@ class VisualizationEngine:
             edges = self._store.get_all_edges()
             node_ids = {n.id for n in result_nodes}
 
-        vis_nodes = [
-            {"id": n.id, "label": n.name, "type": n.node_type.value}
-            for n in result_nodes
-        ]
+        vis_nodes = [{"id": n.id, "label": n.name, "type": n.node_type.value} for n in result_nodes]
         vis_edges = [
             {
                 "id": e.id,
@@ -258,8 +253,7 @@ class VisualizationEngine:
             if e.source_id in node_ids or e.target_id in node_ids
         ]
         vis_nodes = [
-            {"id": n.id, "label": n.name, "type": "device", "status": n.status.value}
-            for n in nodes
+            {"id": n.id, "label": n.name, "type": "device", "status": n.status.value} for n in nodes
         ]
         return GraphVisualization(
             title="Device Graph",
@@ -287,12 +281,9 @@ class VisualizationEngine:
         for e in gov_edges:
             node_ids.add(e.source_id)
             node_ids.add(e.target_id)
-        all_relevant_nodes = [
-            n for n in self._store.get_all_nodes() if n.id in node_ids
-        ]
+        all_relevant_nodes = [n for n in self._store.get_all_nodes() if n.id in node_ids]
         vis_nodes = [
-            {"id": n.id, "label": n.name, "type": n.node_type.value}
-            for n in all_relevant_nodes
+            {"id": n.id, "label": n.name, "type": n.node_type.value} for n in all_relevant_nodes
         ]
         vis_edges = [
             {
@@ -332,9 +323,7 @@ class VisualizationEngine:
             layout="timeline",
         )
 
-    def generate_visualization(
-        self, graph_type: str, node_id: str = ""
-    ) -> GraphVisualization:
+    def generate_visualization(self, graph_type: str, node_id: str = "") -> GraphVisualization:
         dispatch = {
             "architecture": lambda: self.generate_architecture_graph(),
             "repository": lambda: self.generate_repository_graph(),

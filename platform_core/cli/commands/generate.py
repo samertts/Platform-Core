@@ -5,7 +5,6 @@ from platform_core.generator.engine import GeneratorEngine
 
 
 class GenerateCommand(Command):
-
     name = "generate"
 
     help = "Generate platform artifacts"
@@ -30,7 +29,6 @@ class GenerateCommand(Command):
         engine = GeneratorEngine()
 
         if args.kind == "service":
-
             result = engine.generate_service(
                 Path.cwd(),
                 args.name,

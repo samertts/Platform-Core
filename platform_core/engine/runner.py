@@ -9,8 +9,7 @@ from platform_core.engine.context import EngineContext
 from platform_core.engine.failure_handler import FailureHandler
 from platform_core.engine.hook_dispatcher import HookDispatcher
 from platform_core.engine.pipeline_executor import PipelineExecutor
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class EngineRunner:
@@ -32,10 +31,7 @@ class EngineRunner:
 
         self._failure = failure_handler or FailureHandler()
 
-        self._cancellation = (
-            cancellation
-            or CancellationCoordinator()
-        )
+        self._cancellation = cancellation or CancellationCoordinator()
 
         self._pipeline = PipelineExecutor(
             self._hooks,
@@ -50,7 +46,6 @@ class EngineRunner:
         started = time.perf_counter()
 
         try:
-
             engine.configure()
 
             engine.initialize()
@@ -72,8 +67,7 @@ class EngineRunner:
 
             return EngineResult(
                 status=EngineStatus.COMPLETED,
-                duration=time.perf_counter()
-                - started,
+                duration=time.perf_counter() - started,
                 artifacts=result.artifacts,
                 metrics=result.metrics,
                 warnings=result.warnings,
@@ -81,7 +75,6 @@ class EngineRunner:
             )
 
         except Exception as exc:
-
             engine.failed()
 
             self._hooks.on_failure(
@@ -93,10 +86,8 @@ class EngineRunner:
             return self._failure.handle(
                 context=context,
                 exc=exc,
-                duration=time.perf_counter()
-                - started,
+                duration=time.perf_counter() - started,
             )
 
         finally:
-
             engine.dispose()

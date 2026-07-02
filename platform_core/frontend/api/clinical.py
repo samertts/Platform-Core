@@ -47,9 +47,7 @@ class ProcedureClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/encounter/{encounter_id}")
 
     def complete(self, procedure_id: str, notes: str) -> dict:
-        return self.client.put(
-            f"{self.endpoint}/{procedure_id}/complete", data={"notes": notes}
-        )
+        return self.client.put(f"{self.endpoint}/{procedure_id}/complete", data={"notes": notes})
 
 
 @dataclass

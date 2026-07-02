@@ -3,7 +3,6 @@ from __future__ import annotations
 from platform_core.engine.lifecycle import LifecycleState
 from platform_core.engine.state_history import StateHistory
 
-
 _ALLOWED_TRANSITIONS: dict[LifecycleState, set[LifecycleState]] = {
     LifecycleState.CREATED: {
         LifecycleState.CONFIGURED,
@@ -63,10 +62,8 @@ class LifecycleMachine:
         allowed = _ALLOWED_TRANSITIONS[self._state]
 
         if target not in allowed:
-
             raise RuntimeError(
-                f"Illegal lifecycle transition "
-                f"{self._state.value} -> {target.value}"
+                f"Illegal lifecycle transition {self._state.value} -> {target.value}"
             )
 
         self._state = target

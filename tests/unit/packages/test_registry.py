@@ -1,7 +1,5 @@
 """Unit tests for Module Registry."""
 
-import pytest
-
 from platform_core.packages import PackageStatus, RegistryEntry
 from platform_core.registry import ModuleRegistry
 
@@ -84,12 +82,8 @@ class TestModuleRegistry:
 
     def test_list_packages_with_status_filter(self) -> None:
         registry = ModuleRegistry()
-        registry.register(
-            RegistryEntry(name="a", version="1.0.0", status=PackageStatus.ACTIVE)
-        )
-        registry.register(
-            RegistryEntry(name="b", version="1.0.0", status=PackageStatus.DEPRECATED)
-        )
+        registry.register(RegistryEntry(name="a", version="1.0.0", status=PackageStatus.ACTIVE))
+        registry.register(RegistryEntry(name="b", version="1.0.0", status=PackageStatus.DEPRECATED))
         active = registry.list_packages(status=PackageStatus.ACTIVE)
         assert len(active) == 1
         deprecated = registry.list_packages(status=PackageStatus.DEPRECATED)

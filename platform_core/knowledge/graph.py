@@ -8,9 +8,13 @@ from __future__ import annotations
 import threading
 from typing import Any
 
-from platform_core.knowledge.types import (Edge, EdgeNotFoundError,
-                                           GraphConstraintError, Node,
-                                           NodeNotFoundError)
+from platform_core.knowledge.types import (
+    Edge,
+    EdgeNotFoundError,
+    GraphConstraintError,
+    Node,
+    NodeNotFoundError,
+)
 
 
 class GraphStore:
@@ -23,12 +27,8 @@ class GraphStore:
     def __init__(self, max_nodes: int = 100000, max_edges: int = 500000) -> None:
         self._nodes: dict[str, Node] = {}
         self._edges: dict[str, Edge] = {}
-        self._outgoing: dict[str, dict[str, str]] = (
-            {}
-        )  # node_id -> {edge_id: target_id}
-        self._incoming: dict[str, dict[str, str]] = (
-            {}
-        )  # node_id -> {edge_id: source_id}
+        self._outgoing: dict[str, dict[str, str]] = {}  # node_id -> {edge_id: target_id}
+        self._incoming: dict[str, dict[str, str]] = {}  # node_id -> {edge_id: source_id}
         self._max_nodes = max_nodes
         self._max_edges = max_edges
         self._lock = threading.RLock()
@@ -36,9 +36,7 @@ class GraphStore:
     def add_node(self, node: Node) -> Node:
         with self._lock:
             if len(self._nodes) >= self._max_nodes:
-                raise GraphConstraintError(
-                    f"Maximum node limit ({self._max_nodes}) reached"
-                )
+                raise GraphConstraintError(f"Maximum node limit ({self._max_nodes}) reached")
             self._nodes[node.id] = node
             self._outgoing.setdefault(node.id, {})
             self._incoming.setdefault(node.id, {})
@@ -82,9 +80,7 @@ class GraphStore:
     def add_edge(self, edge: Edge) -> Edge:
         with self._lock:
             if len(self._edges) >= self._max_edges:
-                raise GraphConstraintError(
-                    f"Maximum edge limit ({self._max_edges}) reached"
-                )
+                raise GraphConstraintError(f"Maximum edge limit ({self._max_edges}) reached")
             if edge.source_id not in self._nodes:
                 raise NodeNotFoundError(f"Source node {edge.source_id} not found")
             if edge.target_id not in self._nodes:

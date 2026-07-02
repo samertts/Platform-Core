@@ -41,9 +41,7 @@ class ImmunizationClient(BaseEntityClient):
         return self.client.post(f"{self.endpoint}/record", data=immunization_data)
 
     def get_schedule(self, patient_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/schedule", params={"patient_id": patient_id}
-        )
+        return self.client.get(f"{self.endpoint}/schedule", params={"patient_id": patient_id})
 
 
 @dataclass

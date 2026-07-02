@@ -13,7 +13,6 @@ from pathlib import Path
 
 @dataclass(slots=True)
 class ImportRecord:
-
     module: str
 
     name: str | None
@@ -21,7 +20,6 @@ class ImportRecord:
 
 @dataclass(slots=True)
 class FunctionRecord:
-
     name: str
 
     lineno: int
@@ -29,7 +27,6 @@ class FunctionRecord:
 
 @dataclass(slots=True)
 class ClassRecord:
-
     name: str
 
     lineno: int
@@ -37,7 +34,6 @@ class ClassRecord:
 
 @dataclass(slots=True)
 class PythonFileAnalysis:
-
     path: Path
 
     imports: list[ImportRecord]
@@ -48,7 +44,6 @@ class PythonFileAnalysis:
 
 
 class PythonAstScanner:
-
     def scan(
         self,
         file: Path,
@@ -67,11 +62,8 @@ class PythonAstScanner:
         classes = []
 
         for node in ast.walk(tree):
-
             if isinstance(node, ast.Import):
-
                 for alias in node.names:
-
                     imports.append(
                         ImportRecord(
                             module=alias.name,
@@ -80,9 +72,7 @@ class PythonAstScanner:
                     )
 
             elif isinstance(node, ast.ImportFrom):
-
                 for alias in node.names:
-
                     imports.append(
                         ImportRecord(
                             module=node.module or "",
@@ -94,7 +84,6 @@ class PythonAstScanner:
                 node,
                 ast.FunctionDef,
             ):
-
                 functions.append(
                     FunctionRecord(
                         name=node.name,
@@ -106,7 +95,6 @@ class PythonAstScanner:
                 node,
                 ast.ClassDef,
             ):
-
                 classes.append(
                     ClassRecord(
                         name=node.name,

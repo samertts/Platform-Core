@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            FindingStatus)
+from platform_core.governance.types import Finding, FindingSeverity, FindingStatus
 
 
 class FindingManager:
@@ -59,9 +58,9 @@ class FindingManager:
             if finding is None:
                 return None
             finding.status = status
-            finding.updated_at = datetime.now(timezone.utc)
+            finding.updated_at = datetime.now(UTC)
             if status == FindingStatus.RESOLVED:
-                finding.resolved_at = datetime.now(timezone.utc)
+                finding.resolved_at = datetime.now(UTC)
             return finding
 
     def update_finding(self, finding_id: str, **kwargs: Any) -> Finding | None:
@@ -72,7 +71,7 @@ class FindingManager:
             for key, value in kwargs.items():
                 if hasattr(finding, key):
                     setattr(finding, key, value)
-            finding.updated_at = datetime.now(timezone.utc)
+            finding.updated_at = datetime.now(UTC)
             return finding
 
     def delete_finding(self, finding_id: str) -> bool:

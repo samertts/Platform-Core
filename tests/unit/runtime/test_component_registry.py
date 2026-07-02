@@ -12,22 +12,10 @@ def test_registry():
         service,
     )
 
-    assert registry.exists(
-        "runtime"
-    )
+    assert registry.exists("runtime")
 
-    assert (
-        registry.get("runtime")
-        is service
-    )
+    assert registry.get("runtime") is service
 
-    registry.unregister(
-        "runtime"
-    )
+    registry.unregister("runtime")
 
-    assert (
-        registry.exists(
-            "runtime"
-        )
-        is False
-    )
+    assert registry.exists("runtime") is False

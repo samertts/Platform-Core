@@ -3,7 +3,6 @@ from platform_core.version import VERSION
 
 
 class VersionCommand(Command):
-
     name = "version"
 
     help = "Show Platform version"
@@ -13,8 +12,6 @@ class VersionCommand(Command):
 
     def execute(self, args) -> int:
 
-        print(
-            f"Platform-Core {VERSION.string}"
-        )
+        print(f"Platform-Core {VERSION.string}")
 
         return 0

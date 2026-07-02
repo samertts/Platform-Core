@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import time
 
-from platform_core.doctor.check import DoctorCheck
 from platform_core.doctor.check_registry import CheckRegistry
 from platform_core.doctor.report import DoctorReport
 
@@ -28,7 +27,6 @@ class CheckRunner:
         score = 0
 
         for check in self._registry:
-
             result = check.run()
 
             checks.append(result)

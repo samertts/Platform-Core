@@ -1,7 +1,5 @@
 """Unit tests for Exception Manager."""
 
-import pytest
-
 from platform_core.governance.exceptions import ExceptionManager
 from platform_core.governance.types import ExceptionType
 

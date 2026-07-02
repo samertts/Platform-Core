@@ -4,7 +4,7 @@ import asyncio
 import logging
 import threading
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, Protocol, runtime_checkable
 from uuid import uuid4
 
@@ -32,7 +32,7 @@ class Subscription:
         self.event_type = event_type
         self.handler = handler
         self.priority = priority
-        self.created_at = datetime.now(timezone.utc)
+        self.created_at = datetime.now(UTC)
 
 
 class EventBus:
@@ -96,9 +96,7 @@ class EventBus:
                         self._dead_letters.append(event)
                         self._stats["dead_lettered"] += 1
                         if len(self._dead_letters) > self._max_queue_size:
-                            self._dead_letters = self._dead_letters[
-                                -self._max_queue_size :
-                            ]
+                            self._dead_letters = self._dead_letters[-self._max_queue_size :]
             except Exception as e:
                 logger.error("Event handler error: %s", e)
                 with self._lock:
@@ -116,9 +114,7 @@ class EventBus:
     def unsubscribe(self, subscription_id: str) -> None:
         with self._lock:
             for event_type, subs in self._subscriptions.items():
-                self._subscriptions[event_type] = [
-                    s for s in subs if s.id != subscription_id
-                ]
+                self._subscriptions[event_type] = [s for s in subs if s.id != subscription_id]
 
     async def replay(self, event_type: str, since: datetime | None = None) -> None:
         with self._lock:

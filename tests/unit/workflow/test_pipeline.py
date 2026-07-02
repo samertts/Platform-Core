@@ -1,11 +1,10 @@
-from platform_core.workflow.pipeline import WorkflowPipeline
-from platform_core.workflow.step import WorkflowStep
-from platform_core.workflow.result import WorkflowResult
 from platform_core.workflow.context import WorkflowContext
+from platform_core.workflow.pipeline import WorkflowPipeline
+from platform_core.workflow.result import WorkflowResult
+from platform_core.workflow.step import WorkflowStep
 
 
 class Step(WorkflowStep):
-
     def execute(
         self,
         context: WorkflowContext,

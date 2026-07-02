@@ -2,8 +2,7 @@
 Public Health domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -17,8 +16,8 @@ class Vaccine(BaseEntity):
     manufacturer: str = ""
     dose_number: int = 1
     required_doses: int = 1
-    interval_days: Optional[int] = None
-    storage_temperature: Optional[str] = None
+    interval_days: int | None = None
+    storage_temperature: str | None = None
     status: str = "active"
 
 
@@ -30,11 +29,11 @@ class Immunization(BaseEntity):
     vaccine_id: str = ""
     administration_date: str = ""
     dose_number: int = 1
-    lot_number: Optional[str] = None
-    expiry_date: Optional[str] = None
-    site: Optional[str] = None
-    route: Optional[str] = None
-    administered_by: Optional[str] = None
+    lot_number: str | None = None
+    expiry_date: str | None = None
+    site: str | None = None
+    route: str | None = None
+    administered_by: str | None = None
     facility_id: str = ""
     status: str = "completed"
 
@@ -44,12 +43,12 @@ class ResearchStudy(BaseEntity):
     """Research study record."""
 
     title: str = ""
-    description: Optional[str] = None
+    description: str | None = None
     study_type: str = ""
-    principal_investigator_id: Optional[str] = None
-    facility_id: Optional[str] = None
-    start_date: Optional[str] = None
-    end_date: Optional[str] = None
+    principal_investigator_id: str | None = None
+    facility_id: str | None = None
+    start_date: str | None = None
+    end_date: str | None = None
     status: str = "planning"
     participants_count: int = 0
     ethical_approval_status: str = "pending"

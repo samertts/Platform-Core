@@ -5,8 +5,7 @@ from __future__ import annotations
 from platform_core.knowledge.edges import EdgeManager
 from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.nodes import NodeManager
-from platform_core.knowledge.types import (Node, NodeType, RelationshipStatus,
-                                           RelationshipType)
+from platform_core.knowledge.types import NodeType, RelationshipStatus, RelationshipType
 
 
 class TestEdgeManager:

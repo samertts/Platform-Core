@@ -1,6 +1,5 @@
 from platform_core.engine.event_publisher import EventPublisher
-from platform_core.engine.events import EngineEvent
-from platform_core.engine.events import EngineEventType
+from platform_core.engine.events import EngineEvent, EngineEventType
 
 
 def test_publish():
@@ -50,11 +49,9 @@ def test_event_is_immutable():
     )
 
     try:
-
         event.payload = {}
 
         assert False
 
     except Exception:
-
         pass

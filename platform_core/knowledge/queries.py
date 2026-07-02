@@ -12,8 +12,13 @@ from collections import deque
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (Edge, Node, NodeType, QueryResult,
-                                           QueryType, RelationshipType)
+from platform_core.knowledge.types import (
+    Edge,
+    Node,
+    NodeType,
+    QueryResult,
+    QueryType,
+)
 
 
 class QueryEngine:
@@ -98,9 +103,7 @@ class QueryEngine:
         cycle_node_ids = set()
         for cycle in cycles:
             cycle_node_ids.update(cycle)
-        result_nodes = [
-            n for n in self._store.get_all_nodes() if n.id in cycle_node_ids
-        ]
+        result_nodes = [n for n in self._store.get_all_nodes() if n.id in cycle_node_ids]
         return QueryResult(
             query_type=QueryType.CIRCULAR_DEPENDENCY,
             nodes=result_nodes,
@@ -238,9 +241,7 @@ class QueryEngine:
         elif query_type == QueryType.REPOSITORY_HEALTH:
             result = self.repository_health()
         else:
-            result = QueryResult(
-                query_type=query_type, metadata={"error": "unsupported"}
-            )
+            result = QueryResult(query_type=query_type, metadata={"error": "unsupported"})
         elapsed = (time.monotonic() - start) * 1000
         result.execution_time_ms = round(elapsed, 3)
         return result

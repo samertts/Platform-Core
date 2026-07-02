@@ -5,7 +5,6 @@ from platform_core.execution.handler import CommandHandler
 
 
 class CommandDispatcher:
-
     def dispatch(
         self,
         handler: CommandHandler,

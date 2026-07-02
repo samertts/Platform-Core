@@ -1,16 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
 
 
 @dataclass(slots=True)
 class Manifest:
-
     capabilities: list = field(default_factory=list)
 
 
 @dataclass(slots=True)
 class ProjectManifest:
-
     name: str
 
     owner: str
@@ -20,7 +17,6 @@ class ProjectManifest:
 
 @dataclass(slots=True)
 class EngineeringManifest:
-
     language: str
 
     mode: str
@@ -35,21 +31,19 @@ class EngineeringManifest:
 
     documentation: bool
 
+
 @dataclass(slots=True)
 class RepositoryManifest:
-
     default_branch: str
 
 
 @dataclass(slots=True)
 class LearningManifest:
-
     enabled: bool
 
 
 @dataclass(slots=True)
 class Manifest:
-
     version: int
 
     project: ProjectManifest
@@ -60,4 +54,4 @@ class Manifest:
 
     learning: LearningManifest
 
-    metadata: Dict[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = field(default_factory=dict)

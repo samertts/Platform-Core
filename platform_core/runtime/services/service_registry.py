@@ -4,7 +4,6 @@ from typing import Any
 
 
 class ServiceRegistry:
-
     def __init__(self) -> None:
         self._services: dict[str, Any] = {}
 

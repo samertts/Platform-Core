@@ -46,9 +46,7 @@ class TestTelemetryEngine:
     @pytest.mark.asyncio
     async def test_health_check_unhealthy(self) -> None:
         engine = TelemetryEngine()
-        engine.register_health_check(
-            "failing", lambda: (_ for _ in ()).throw(RuntimeError("fail"))
-        )
+        engine.register_health_check("failing", lambda: (_ for _ in ()).throw(RuntimeError("fail")))
         result = await engine.health_check()
         assert result["status"] == "degraded"
 

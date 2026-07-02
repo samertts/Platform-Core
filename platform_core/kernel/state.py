@@ -2,7 +2,6 @@ from enum import Enum
 
 
 class KernelState(str, Enum):
-
     CREATED = "created"
 
     INITIALIZED = "initialized"

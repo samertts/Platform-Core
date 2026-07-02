@@ -2,8 +2,7 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from platform_core.doctor.check_result import CheckResult
-from platform_core.doctor.check_result import CheckStatus
+from platform_core.doctor.check_result import CheckResult, CheckStatus
 
 
 def test_result_is_immutable():

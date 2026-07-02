@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 from uuid import uuid4
@@ -114,7 +114,7 @@ class Review:
     repository: str = ""
     status: ReviewStatus = ReviewStatus.PENDING
     reviewer: str = ""
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     findings: list[Finding] = field(default_factory=list)
     score: float = 0.0
@@ -138,8 +138,8 @@ class Finding:
     owner: str = ""
     priority: int = 0
     target_version: str = ""
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     resolved_at: datetime | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -152,7 +152,7 @@ class Decision:
     decision_type: DecisionType = DecisionType.DEFER
     rationale: str = ""
     decided_by: str = ""
-    decided_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    decided_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     conditions: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -169,7 +169,7 @@ class Recommendation:
     estimated_effort: str = ""
     estimated_impact: str = ""
     target_version: str = ""
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -184,7 +184,7 @@ class RiskAssessment:
     impact: str = ""
     likelihood: str = ""
     mitigation: str = ""
-    assessed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    assessed_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     assessed_by: str = ""
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -200,7 +200,7 @@ class ComplianceCheck:
     checks_failed: int = 0
     checks_total: int = 0
     details: list[dict[str, Any]] = field(default_factory=list)
-    checked_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    checked_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -220,7 +220,7 @@ class QualityGate:
     manifest_valid: bool = False
     signature_valid: bool = False
     sbom_valid: bool = False
-    evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    evaluated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -231,7 +231,7 @@ class Exception:
     exception_type: ExceptionType = ExceptionType.COMPLIANCE
     reason: str = ""
     approved_by: str = ""
-    approved_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    approved_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     expires_at: datetime | None = None
     finding_ids: list[str] = field(default_factory=list)
     conditions: list[str] = field(default_factory=list)
@@ -246,7 +246,7 @@ class Approval:
     version: str = ""
     status: ApprovalStatus = ApprovalStatus.PENDING
     approved_by: str = ""
-    approved_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    approved_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     expires_at: datetime | None = None
     conditions: list[str] = field(default_factory=list)
     review_ids: list[str] = field(default_factory=list)
@@ -262,8 +262,8 @@ class Policy:
     category: str = ""
     rules: list[dict[str, Any]] = field(default_factory=list)
     enabled: bool = True
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -274,7 +274,7 @@ class Waiver:
     repository: str = ""
     reason: str = ""
     waived_by: str = ""
-    waived_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    waived_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     expires_at: datetime | None = None
     conditions: list[str] = field(default_factory=list)
     active: bool = True
@@ -288,7 +288,7 @@ class GovernanceRecord:
     repository: str = ""
     action: str = ""
     actor: str = ""
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     details: dict[str, Any] = field(default_factory=dict)
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -297,7 +297,7 @@ class GovernanceRecord:
 class ComplianceReport:
     id: str = field(default_factory=lambda: str(uuid4()))
     repository: str = ""
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     overall_status: ComplianceStatus = ComplianceStatus.UNKNOWN
     overall_score: float = 0.0
     checks: list[ComplianceCheck] = field(default_factory=list)
@@ -309,7 +309,7 @@ class ComplianceReport:
 class ConstitutionReport:
     id: str = field(default_factory=lambda: str(uuid4()))
     repository: str = ""
-    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     compliant: bool = False
     score: float = 0.0
     articles_checked: int = 0

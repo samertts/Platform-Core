@@ -1,8 +1,6 @@
 from inspect import isabstract
 
-from platform_core.services.contracts import IServiceFactory
-from platform_core.services.contracts import IServiceProvider
-from platform_core.services.contracts import IServiceRegistry
+from platform_core.services.contracts import IServiceFactory, IServiceProvider, IServiceRegistry
 
 
 def test_factory_is_abstract():

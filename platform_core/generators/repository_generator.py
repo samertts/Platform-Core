@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 class RepositoryGenerator:
-
     def __init__(self, root: Path):
         self.root = root
 

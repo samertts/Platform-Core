@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
-from typing import Any
 
-from platform_core.governance.types import (Decision, DecisionType, Finding,
-                                            FindingSeverity, FindingStatus)
+from platform_core.governance.types import (
+    Decision,
+    DecisionType,
+    Finding,
+    FindingSeverity,
+    FindingStatus,
+)
 
 
 class DecisionEngine:
@@ -68,16 +71,13 @@ class DecisionEngine:
             return DecisionType.DEFER
         return DecisionType.APPROVE
 
-    def _generate_rationale(
-        self, decision_type: DecisionType, findings: list[Finding]
-    ) -> str:
+    def _generate_rationale(self, decision_type: DecisionType, findings: list[Finding]) -> str:
         open_count = len([f for f in findings if f.status == FindingStatus.OPEN])
         critical_count = len(
             [
                 f
                 for f in findings
-                if f.severity == FindingSeverity.CRITICAL
-                and f.status == FindingStatus.OPEN
+                if f.severity == FindingSeverity.CRITICAL and f.status == FindingStatus.OPEN
             ]
         )
         high_count = len(

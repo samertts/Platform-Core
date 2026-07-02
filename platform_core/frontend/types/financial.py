@@ -3,7 +3,6 @@ Financial domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -15,10 +14,10 @@ class Insurance(BaseEntity):
     patient_id: str = ""
     insurance_provider: str = ""
     policy_number: str = ""
-    group_number: Optional[str] = None
+    group_number: str | None = None
     coverage_type: str = ""
     start_date: str = ""
-    end_date: Optional[str] = None
+    end_date: str | None = None
     status: str = "active"
 
 
@@ -29,11 +28,11 @@ class Consent(BaseEntity):
     patient_id: str = ""
     consent_type: str = ""
     consent_date: str = ""
-    expiry_date: Optional[str] = None
+    expiry_date: str | None = None
     scope: str = ""
     granted_to: list[str] = field(default_factory=list)
     status: str = "active"
-    withdrawal_date: Optional[str] = None
+    withdrawal_date: str | None = None
 
 
 @dataclass
@@ -44,7 +43,7 @@ class Invoice(BaseEntity):
     facility_id: str = ""
     invoice_number: str = ""
     invoice_date: str = ""
-    due_date: Optional[str] = None
+    due_date: str | None = None
     total_amount: float = 0.0
     paid_amount: float = 0.0
     currency: str = "IQD"
@@ -61,7 +60,7 @@ class Payment(BaseEntity):
     amount: float = 0.0
     currency: str = "IQD"
     payment_method: str = ""
-    reference_number: Optional[str] = None
+    reference_number: str | None = None
     status: str = "completed"
 
 
@@ -75,6 +74,6 @@ class Claim(BaseEntity):
     claim_number: str = ""
     claim_date: str = ""
     claim_amount: float = 0.0
-    approved_amount: Optional[float] = None
+    approved_amount: float | None = None
     status: str = "submitted"
-    denial_reason: Optional[str] = None
+    denial_reason: str | None = None

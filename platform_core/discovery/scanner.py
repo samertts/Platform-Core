@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -64,7 +64,7 @@ class Scanner:
             repository=repository or root.name,
             scan_type=scan_type,
             status=ScanStatus.RUNNING,
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
             root_path=str(root.resolve()),
         )
 
@@ -77,10 +77,8 @@ class Scanner:
             result.status = ScanStatus.FAILED
             result.errors.append(str(e))
 
-        result.completed_at = datetime.now(timezone.utc)
-        result.duration_seconds = (
-            result.completed_at - result.started_at
-        ).total_seconds()
+        result.completed_at = datetime.now(UTC)
+        result.duration_seconds = (result.completed_at - result.started_at).total_seconds()
 
         return result
 
@@ -112,7 +110,7 @@ class Scanner:
                             "extension": filepath.suffix.lower(),
                             "size": stat.st_size,
                             "modified_at": datetime.fromtimestamp(
-                                stat.st_mtime, tz=timezone.utc
+                                stat.st_mtime, tz=UTC
                             ).isoformat(),
                         }
                     )
@@ -138,9 +136,7 @@ class Scanner:
 
         return self._build_tree(root, root, max_depth, 0)
 
-    def _build_tree(
-        self, root: Path, current: Path, max_depth: int, depth: int
-    ) -> dict[str, Any]:
+    def _build_tree(self, root: Path, current: Path, max_depth: int, depth: int) -> dict[str, Any]:
         node: dict[str, Any] = {
             "name": current.name,
             "type": "dir" if current.is_dir() else "file",

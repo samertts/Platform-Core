@@ -17,7 +17,6 @@ class ContainerBuilder:
         container = ServiceContainer()
 
         for descriptor in services.descriptors:
-
             container.register(
                 descriptor,
             )

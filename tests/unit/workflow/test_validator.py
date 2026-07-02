@@ -9,7 +9,6 @@ def test_empty_pipeline():
     validator = WorkflowValidator()
 
     with pytest.raises(ValueError):
-
         validator.validate(
             WorkflowPipeline(),
         )

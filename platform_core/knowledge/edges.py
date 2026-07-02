@@ -6,12 +6,11 @@ Handles edge CRUD, relationship queries, and traversal.
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (Edge, RelationshipStatus,
-                                           RelationshipType)
+from platform_core.knowledge.types import Edge, RelationshipStatus, RelationshipType
 
 
 class EdgeManager:
@@ -61,7 +60,7 @@ class EdgeManager:
             edge.confidence = confidence
         if metadata is not None:
             edge.metadata.update(metadata)
-        edge.updated_at = datetime.now(timezone.utc)
+        edge.updated_at = datetime.now(UTC)
         return self._store.update_edge(edge)
 
     def delete_edge(self, edge_id: str) -> bool:
@@ -102,11 +101,7 @@ class EdgeManager:
         return list(neighbors)
 
     def get_edges_between(self, source_id: str, target_id: str) -> list[Edge]:
-        return [
-            e
-            for e in self._store.get_outgoing_edges(source_id)
-            if e.target_id == target_id
-        ]
+        return [e for e in self._store.get_outgoing_edges(source_id) if e.target_id == target_id]
 
     def count(self) -> int:
         return self._store.edge_count()

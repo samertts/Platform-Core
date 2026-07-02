@@ -1,7 +1,5 @@
 """Unit tests for Finding Manager."""
 
-import pytest
-
 from platform_core.governance.findings import FindingManager
 from platform_core.governance.types import FindingSeverity, FindingStatus
 

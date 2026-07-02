@@ -5,13 +5,17 @@ from __future__ import annotations
 import pytest
 
 from platform_core.knowledge.engine import KnowledgeEngine
-from platform_core.knowledge.types import (ChangeType, EventType,
-                                           HealthcareEntity,
-                                           HealthcareStandard,
-                                           KnowledgeEngineConfig,
-                                           LifecycleStage, NodeNotFoundError,
-                                           NodeStatus, NodeType, QueryType,
-                                           RelationshipType)
+from platform_core.knowledge.types import (
+    ChangeType,
+    EventType,
+    HealthcareEntity,
+    HealthcareStandard,
+    KnowledgeEngineConfig,
+    NodeNotFoundError,
+    NodeType,
+    QueryType,
+    RelationshipType,
+)
 
 
 class TestKnowledgeEngine:

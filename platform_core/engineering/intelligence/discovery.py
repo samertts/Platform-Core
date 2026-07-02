@@ -9,7 +9,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 PYTHON_FILES = {
     "pyproject.toml",
     "requirements.txt",
@@ -55,7 +54,6 @@ DOC_FILES = {
 
 @dataclass(slots=True)
 class DiscoveryResult:
-
     python: bool = False
 
     node: bool = False
@@ -84,7 +82,6 @@ class DiscoveryResult:
 
 
 class DiscoveryEngine:
-
     def discover(
         self,
         root: Path,
@@ -95,7 +92,6 @@ class DiscoveryEngine:
         result = DiscoveryResult()
 
         for path in root.rglob("*"):
-
             result.files.append(path)
 
             name = path.name

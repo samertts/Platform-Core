@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import json
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import (InstallRecord, InstallStatus,
-                                    PackageManifest, PackageStatus)
+from platform_core.packages import InstallRecord, InstallStatus, PackageManifest, PackageStatus
 
 
 class UpdateError(Exception):
@@ -29,7 +28,7 @@ class UpdateManager:
 
     def _log(self, message: str, level: str = "info", **kwargs: Any) -> None:
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": level,
             "message": message,
             **kwargs,
@@ -56,9 +55,7 @@ class UpdateManager:
                                 "package": name,
                                 "current_version": installed.package_version,
                                 "available_version": version,
-                                "type": self._get_update_type(
-                                    installed.package_version, version
-                                ),
+                                "type": self._get_update_type(installed.package_version, version),
                             }
                         )
 
@@ -102,7 +99,7 @@ class UpdateManager:
             "version": target_version,
             "status": "downloaded",
             "source": source_url,
-            "downloaded_at": datetime.now(timezone.utc).isoformat(),
+            "downloaded_at": datetime.now(UTC).isoformat(),
         }
 
     def validate_update(
@@ -142,7 +139,7 @@ class UpdateManager:
             self._staged_updates[package_name] = {
                 "package": package_name,
                 "target_version": target_version,
-                "staged_at": datetime.now(timezone.utc).isoformat(),
+                "staged_at": datetime.now(UTC).isoformat(),
                 "status": "staged",
             }
 
@@ -177,7 +174,7 @@ class UpdateManager:
             "package": package_name,
             "version": target_version,
             "status": "applied",
-            "applied_at": datetime.now(timezone.utc).isoformat(),
+            "applied_at": datetime.now(UTC).isoformat(),
         }
 
     def rollback_update(self, package_name: str) -> dict[str, Any]:

@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -54,9 +54,7 @@ class PackageVerifier:
                 h.update(chunk)
         return h.hexdigest()
 
-    def compute_directory_checksum(
-        self, dir_path: str, algorithm: str = "sha256"
-    ) -> str:
+    def compute_directory_checksum(self, dir_path: str, algorithm: str = "sha256") -> str:
         path = Path(dir_path)
         if not path.exists():
             raise FileNotFoundError(f"Directory not found: {dir_path}")
@@ -70,9 +68,7 @@ class PackageVerifier:
                         h.update(chunk)
         return h.hexdigest()
 
-    def verify_checksum(
-        self, data: bytes, expected: str, algorithm: str = "sha256"
-    ) -> bool:
+    def verify_checksum(self, data: bytes, expected: str, algorithm: str = "sha256") -> bool:
         actual = self.compute_checksum(data, algorithm)
         return actual == expected
 
@@ -108,7 +104,7 @@ class PackageVerifier:
             "algorithm": "sha256",
             "data_hash": data_hash,
             "signature": signature,
-            "signed_at": datetime.now(timezone.utc).isoformat(),
+            "signed_at": datetime.now(UTC).isoformat(),
         }
 
     def verify_signature(self, data: bytes, signature_data: dict[str, Any]) -> bool:
@@ -142,7 +138,7 @@ class PackageVerifier:
         with self._lock:
             self._trust_store[name] = {
                 "certificate": certificate,
-                "added_at": datetime.now(timezone.utc).isoformat(),
+                "added_at": datetime.now(UTC).isoformat(),
                 "revoked": False,
             }
 
@@ -173,7 +169,7 @@ class PackageVerifier:
         if expiry:
             try:
                 expiry_dt = datetime.fromisoformat(expiry)
-                if expiry_dt < datetime.now(timezone.utc):
+                if expiry_dt < datetime.now(UTC):
                     return False
             except (ValueError, TypeError):
                 pass
@@ -195,7 +191,7 @@ class PackageVerifier:
     ) -> dict[str, Any]:
         results: dict[str, Any] = {
             "file": file_path,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "checksum": {"valid": False},
             "signature": {"valid": False},
             "certificate": {"valid": False},

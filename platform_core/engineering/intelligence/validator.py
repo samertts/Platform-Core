@@ -8,7 +8,6 @@ from .index import RepositoryIndex
 
 
 class ArchitectureValidator:
-
     def validate(
         self,
         index: RepositoryIndex,

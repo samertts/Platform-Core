@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
-from platform_core.governance.types import (Finding, FindingSeverity, Review,
-                                            ReviewStatus, ReviewType)
+from platform_core.governance.types import (
+    Finding,
+    Review,
+    ReviewStatus,
+    ReviewType,
+)
 
 
 class ReviewManager:
@@ -45,7 +49,7 @@ class ReviewManager:
             if review is None:
                 return None
             review.status = ReviewStatus.IN_PROGRESS
-            review.started_at = datetime.now(timezone.utc)
+            review.started_at = datetime.now(UTC)
             return review
 
     def complete_review(
@@ -60,7 +64,7 @@ class ReviewManager:
             if review is None:
                 return None
             review.status = ReviewStatus.COMPLETED
-            review.completed_at = datetime.now(timezone.utc)
+            review.completed_at = datetime.now(UTC)
             if findings is not None:
                 review.findings = findings
             review.score = score
@@ -73,7 +77,7 @@ class ReviewManager:
             if review is None:
                 return None
             review.status = ReviewStatus.FAILED
-            review.completed_at = datetime.now(timezone.utc)
+            review.completed_at = datetime.now(UTC)
             review.summary = reason
             return review
 
@@ -83,7 +87,7 @@ class ReviewManager:
             if review is None:
                 return None
             review.status = ReviewStatus.CANCELLED
-            review.completed_at = datetime.now(timezone.utc)
+            review.completed_at = datetime.now(UTC)
             return review
 
     def list_reviews(
@@ -104,16 +108,14 @@ class ReviewManager:
 
         return results
 
-    def get_latest_review(
-        self, repository: str, review_type: ReviewType
-    ) -> Review | None:
+    def get_latest_review(self, repository: str, review_type: ReviewType) -> Review | None:
         reviews = self.list_reviews(repository=repository, review_type=review_type)
         completed = [r for r in reviews if r.status == ReviewStatus.COMPLETED]
         if not completed:
             return None
         return max(
             completed,
-            key=lambda r: r.completed_at or datetime.min.replace(tzinfo=timezone.utc),
+            key=lambda r: r.completed_at or datetime.min.replace(tzinfo=UTC),
         )
 
     def get_review_summary(self, repository: str | None = None) -> dict[str, Any]:
@@ -132,8 +134,7 @@ class ReviewManager:
             "by_type": by_type,
             "by_status": by_status,
             "completed_count": by_status.get("completed", 0),
-            "pending_count": by_status.get("pending", 0)
-            + by_status.get("in_progress", 0),
+            "pending_count": by_status.get("pending", 0) + by_status.get("in_progress", 0),
         }
 
     def run_all_reviews(self, repository: str) -> list[Review]:
@@ -142,7 +143,7 @@ class ReviewManager:
             review = self.create_review(repository=repository, review_type=review_type)
             self.start_review(review.id)
             review.status = ReviewStatus.COMPLETED
-            review.completed_at = datetime.now(timezone.utc)
+            review.completed_at = datetime.now(UTC)
             reviews.append(review)
         return reviews
 

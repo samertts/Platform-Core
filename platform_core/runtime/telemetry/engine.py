@@ -3,15 +3,15 @@ from __future__ import annotations
 import threading
 import time
 from collections import defaultdict
-from contextlib import contextmanager
-from datetime import datetime, timezone
-from typing import Any, Callable, Generator
+from collections.abc import Callable
+from datetime import UTC, datetime
+from typing import Any
 
 
 class TimerContext:
     """Context manager for timing operations."""
 
-    def __init__(self, name: str, collector: "MetricsCollector") -> None:
+    def __init__(self, name: str, collector: MetricsCollector) -> None:
         self._name = name
         self._collector = collector
         self._start: float = 0.0
@@ -124,8 +124,7 @@ class MetricsCollector:
                 "counters": dict(self._counters),
                 "gauges": dict(self._gauges),
                 "histograms": {
-                    k: self._compute_histogram_stats(v)
-                    for k, v in self._histograms.items()
+                    k: self._compute_histogram_stats(v) for k, v in self._histograms.items()
                 },
             }
 
@@ -169,9 +168,7 @@ class TelemetryEngine:
     def timer(self, name: str) -> TimerContext:
         return TimerContext(name, self._metrics)
 
-    def register_health_check(
-        self, name: str, check: Callable[[], dict[str, Any]]
-    ) -> None:
+    def register_health_check(self, name: str, check: Callable[[], dict[str, Any]]) -> None:
         self._health_checks[name] = check
 
     async def health_check(self) -> dict[str, Any]:
@@ -191,7 +188,7 @@ class TelemetryEngine:
         return {
             "status": "healthy" if all_healthy else "degraded",
             "components": results,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
         }
 
     def start_trace(self, name: str) -> TraceSpan:
@@ -209,9 +206,7 @@ class TelemetryEngine:
             if self._trace_stack:
                 span = self._trace_stack.pop()
                 span.end()
-                self._current_trace = (
-                    self._trace_stack[-1] if self._trace_stack else None
-                )
+                self._current_trace = self._trace_stack[-1] if self._trace_stack else None
                 if not span.parent:
                     self._completed_traces.append(span)
                 return span

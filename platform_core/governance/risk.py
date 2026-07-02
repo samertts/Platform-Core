@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            RiskAssessment, RiskCategory,
-                                            RiskLevel)
+from platform_core.governance.types import (
+    Finding,
+    FindingSeverity,
+    RiskAssessment,
+    RiskCategory,
+    RiskLevel,
+)
 
 
 class RiskEngine:
@@ -98,9 +101,7 @@ class RiskEngine:
         assessments: list[RiskAssessment] = []
         for category in RiskCategory:
             relevant_findings = self._filter_findings_for_category(findings, category)
-            assessment = self.assess_risk(
-                repository, category, relevant_findings, assessed_by
-            )
+            assessment = self.assess_risk(repository, category, relevant_findings, assessed_by)
             assessments.append(assessment)
         return assessments
 
@@ -190,18 +191,14 @@ class RiskEngine:
             by_level[lvl] = by_level.get(lvl, 0) + 1
             by_category[a.risk_category.value] = a.score
 
-        avg_score = (
-            sum(a.score for a in assessments) / len(assessments) if assessments else 0.0
-        )
+        avg_score = sum(a.score for a in assessments) / len(assessments) if assessments else 0.0
 
         return {
             "total_assessments": len(assessments),
             "by_level": by_level,
             "by_category": by_category,
             "average_score": round(avg_score, 3),
-            "highest_risk": max(
-                (a.risk_level.value for a in assessments), default="none"
-            ),
+            "highest_risk": max((a.risk_level.value for a in assessments), default="none"),
         }
 
     def count(self) -> int:

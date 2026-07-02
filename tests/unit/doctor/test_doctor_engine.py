@@ -2,8 +2,7 @@ from uuid import uuid4
 
 from platform_core.doctor.check import DoctorCheck
 from platform_core.doctor.check_registry import CheckRegistry
-from platform_core.doctor.check_result import CheckResult
-from platform_core.doctor.check_result import CheckStatus
+from platform_core.doctor.check_result import CheckResult, CheckStatus
 from platform_core.doctor.engine import DoctorEngine
 from platform_core.engine.cancellation import CancellationToken
 from platform_core.engine.context import EngineContext
@@ -11,7 +10,6 @@ from platform_core.engine.result import EngineStatus
 
 
 class FakeCheck(DoctorCheck):
-
     id = "python"
 
     name = "Python"

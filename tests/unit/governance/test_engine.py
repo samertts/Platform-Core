@@ -1,10 +1,6 @@
 """Unit tests for Governance Engine."""
 
-import pytest
-
-from platform_core.governance.engine import GovernanceEngine, GovernanceError
-from platform_core.governance.types import (FindingSeverity, FindingStatus,
-                                            QualityGateResult)
+from platform_core.governance.engine import GovernanceEngine
 
 
 class TestGovernanceEngine:

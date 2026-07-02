@@ -2,7 +2,6 @@ from enum import Enum
 
 
 class MetadataKind(str, Enum):
-
     MANIFEST = "manifest"
 
     CAPABILITY = "capability"

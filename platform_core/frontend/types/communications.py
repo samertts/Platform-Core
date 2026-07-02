@@ -3,7 +3,6 @@ Communications domain types for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .base import BaseEntity
 
@@ -21,6 +20,6 @@ class Correspondence(BaseEntity):
     correspondence_type: str = ""
     priority: str = "normal"
     status: str = "sent"
-    read_at: Optional[str] = None
+    read_at: str | None = None
     attachments: list[str] = field(default_factory=list)
-    reference_number: Optional[str] = None
+    reference_number: str | None = None

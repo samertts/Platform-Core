@@ -2,7 +2,6 @@ from pathlib import Path
 
 from platform_core.engineering.dependency.graph import DependencyGraph
 from platform_core.engineering.dependency.models import DependencyNode
-from platform_core.engineering.registry.models import RegistryEntry
 from platform_core.engineering.registry.registry import EngineeringRegistry
 from platform_core.engineering.scanner.scanner import EngineeringScanner
 
@@ -44,7 +43,6 @@ class ManifestLoader:
         manifest = Manifest()
 
         for capability in registry.list():
-
             graph.add_node(
                 DependencyNode(
                     id=capability.id,
@@ -61,7 +59,6 @@ class ManifestLoader:
                 "depends_on",
                 [],
             ):
-
                 graph.add_dependency(
                     capability.id,
                     dependency,
@@ -77,11 +74,13 @@ class ManifestLoader:
 
 from pathlib import Path
 
-from platform_core.engineering.manifest.models import (EngineeringManifest,
-                                                       LearningManifest,
-                                                       Manifest,
-                                                       ProjectManifest,
-                                                       RepositoryManifest)
+from platform_core.engineering.manifest.models import (
+    EngineeringManifest,
+    LearningManifest,
+    Manifest,
+    ProjectManifest,
+    RepositoryManifest,
+)
 from platform_core.engineering.metadata.base import BaseMetadataLoader
 
 

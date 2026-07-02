@@ -2,15 +2,13 @@ from __future__ import annotations
 
 from uuid import uuid4
 
-from tests.unit.engine.fakes import FakeEngine
-
 from platform_core.engine.cancellation import CancellationToken
 from platform_core.engine.context import EngineContext
 from platform_core.engine.result import EngineStatus
+from tests.unit.engine.fakes import FakeEngine
 
 
 class BrokenEngine(FakeEngine):
-
     def execute(
         self,
         context,

@@ -148,9 +148,7 @@ class DependencyResolver:
                 return "0.1.0"
             return constraint.lstrip(">=<!^~")
 
-        for ver in sorted(
-            available, key=lambda v: self._parse_version(v), reverse=True
-        ):
+        for ver in sorted(available, key=lambda v: self._parse_version(v), reverse=True):
             if self._satisfies(ver, constraint):
                 return ver
 

@@ -5,12 +5,11 @@ from __future__ import annotations
 import json
 import shutil
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import (InstallRecord, InstallStatus,
-                                    PackageManifest)
+from platform_core.packages import InstallRecord, InstallStatus, PackageManifest
 
 
 class InstallError(Exception):
@@ -40,16 +39,14 @@ class ModuleInstaller:
 
     def _log(self, message: str, level: str = "info", **kwargs: Any) -> None:
         entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": level,
             "message": message,
             **kwargs,
         }
         self._install_log.append(entry)
 
-    def pre_install_validate(
-        self, package_path: str, manifest: PackageManifest
-    ) -> list[str]:
+    def pre_install_validate(self, package_path: str, manifest: PackageManifest) -> list[str]:
         errors: list[str] = []
         path = Path(package_path)
 
@@ -67,9 +64,7 @@ class ModuleInstaller:
             if "name" not in dep:
                 errors.append("Required dependency must have a name")
             if "version" not in dep:
-                errors.append(
-                    f"Required dependency {dep.get('name', '?')} must have a version"
-                )
+                errors.append(f"Required dependency {dep.get('name', '?')} must have a version")
 
         install_path = self._install_root / manifest.package.name
         if install_path.exists():
@@ -111,18 +106,14 @@ class ModuleInstaller:
         manifest: PackageManifest,
         dry_run: bool = False,
     ) -> InstallRecord:
-        self._log(
-            f"Starting install of {manifest.package.name}@{manifest.package.version}"
-        )
+        self._log(f"Starting install of {manifest.package.name}@{manifest.package.version}")
 
         errors = self.pre_install_validate(package_path, manifest)
         if errors:
             raise ValidationError(f"Pre-install validation failed: {errors}")
 
         if dry_run:
-            self._log(
-                f"Dry run: would install {manifest.package.name}@{manifest.package.version}"
-            )
+            self._log(f"Dry run: would install {manifest.package.name}@{manifest.package.version}")
             return InstallRecord(
                 package_name=manifest.package.name,
                 package_version=manifest.package.version,
@@ -147,7 +138,7 @@ class ModuleInstaller:
             package_name=manifest.package.name,
             package_version=manifest.package.version,
             install_path=str(install_path),
-            installed_at=datetime.now(timezone.utc),
+            installed_at=datetime.now(UTC),
             status=InstallStatus.COMPLETED,
             checksum=manifest.checksum,
         )
@@ -155,9 +146,7 @@ class ModuleInstaller:
         with self._lock:
             self._installed[manifest.package.name] = record
 
-        self._log(
-            f"Installed {manifest.package.name}@{manifest.package.version} to {install_path}"
-        )
+        self._log(f"Installed {manifest.package.name}@{manifest.package.version} to {install_path}")
 
         return record
 

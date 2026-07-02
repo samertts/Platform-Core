@@ -4,7 +4,6 @@ from platform_core.scheduler.queue import TaskQueue
 
 
 class SchedulerEngine:
-
     def __init__(self) -> None:
 
         self._queue = TaskQueue()
@@ -21,7 +20,6 @@ class SchedulerEngine:
     ) -> None:
 
         while not self._queue.empty():
-
             task = self._queue.dequeue()
 
             task.action()

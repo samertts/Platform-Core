@@ -16,7 +16,6 @@ from .models import (
 )
 from .protocols import ScannerProtocol
 
-
 SUPPORTED_SUFFIXES = {
     ".py",
     ".toml",
@@ -46,7 +45,6 @@ class RepositoryScanner(ScannerProtocol):
         modules: list[RepositoryModule] = []
 
         for directory in sorted(root.iterdir()):
-
             if not directory.is_dir():
                 continue
 
@@ -59,7 +57,6 @@ class RepositoryScanner(ScannerProtocol):
             )
 
             for file in directory.rglob("*"):
-
                 if not file.is_file():
                     continue
 
@@ -67,9 +64,7 @@ class RepositoryScanner(ScannerProtocol):
                     continue
 
                 try:
-                    checksum = sha256(
-                        file.read_bytes()
-                    ).hexdigest()
+                    checksum = sha256(file.read_bytes()).hexdigest()
                 except Exception:
                     checksum = ""
 

@@ -7,13 +7,8 @@ from platform_core.cli.commands.version import VersionCommand
 def load_commands():
 
     return [
-
         VersionCommand(),
-
         DoctorCommand(),
-
         BootstrapCommand(),
-
         GenerateCommand(),
-
     ]

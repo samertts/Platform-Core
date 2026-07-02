@@ -11,9 +11,14 @@ from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.nodes import NodeManager
-from platform_core.knowledge.types import (HealthcareEntity, HealthcareMapping,
-                                           HealthcareStandard, LifecycleStage,
-                                           Node, NodeType, RelationshipType)
+from platform_core.knowledge.types import (
+    HealthcareEntity,
+    HealthcareMapping,
+    HealthcareStandard,
+    LifecycleStage,
+    Node,
+    NodeType,
+)
 
 
 class HealthcareKnowledge:

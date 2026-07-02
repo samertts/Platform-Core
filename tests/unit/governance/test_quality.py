@@ -1,10 +1,12 @@
 """Unit tests for Quality Gate Engine."""
 
-import pytest
-
 from platform_core.governance.quality import QualityGateEngine
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            FindingStatus, QualityGateResult)
+from platform_core.governance.types import (
+    Finding,
+    FindingSeverity,
+    FindingStatus,
+    QualityGateResult,
+)
 
 
 class TestQualityGateEngine:

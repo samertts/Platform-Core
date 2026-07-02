@@ -4,8 +4,6 @@ import json
 import os
 import tempfile
 
-import pytest
-
 from platform_core.runtime.manifest.loader import ManifestLoader
 
 VALID_MANIFEST = {
@@ -59,7 +57,9 @@ class TestManifestLoader:
 
     def test_parse_yaml(self) -> None:
         loader = ManifestLoader()
-        content = "identity:\n  name: test\n  slug: test\n  description: test module\n  type: module\n"
+        content = (
+            "identity:\n  name: test\n  slug: test\n  description: test module\n  type: module\n"
+        )
         result = loader.parse(content, "yaml")
         assert result["identity"]["name"] == "test"
 

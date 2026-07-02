@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (ConstitutionReport, Finding,
-                                            FindingSeverity, FindingStatus,
-                                            Recommendation, ReviewType)
+from platform_core.governance.types import (
+    ConstitutionReport,
+    Finding,
+    FindingSeverity,
+    FindingStatus,
+    Recommendation,
+)
 
 
 class ConstitutionEnforcer:

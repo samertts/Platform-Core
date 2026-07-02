@@ -19,9 +19,7 @@ class CheckRegistry:
     ) -> None:
 
         if check.id in self._checks:
-            raise ValueError(
-                f"Duplicate check id: {check.id}"
-            )
+            raise ValueError(f"Duplicate check id: {check.id}")
 
         self._checks[check.id] = check
 

@@ -7,20 +7,27 @@ import sys
 sys.path.insert(0, "/tmp")
 
 from platform_core.frontend.types.citizen import Citizen, DigitalCredential
-from platform_core.frontend.types.clinical import (Diagnosis, Observation,
-                                                   Procedure, VitalSigns)
-from platform_core.frontend.types.healthcare_core import (Admission,
-                                                          Appointment,
-                                                          Discharge, Encounter,
-                                                          Patient, Visit)
-from platform_core.frontend.types.laboratory import (Analyzer, LaboratoryOrder,
-                                                     LaboratoryResult,
-                                                     Specimen)
-from platform_core.frontend.types.medical_devices import (Calibration,
-                                                          DeviceConnection,
-                                                          MedicalDevice)
-from platform_core.frontend.types.pharmacy import (Dispensing, Medication,
-                                                   Prescription)
+from platform_core.frontend.types.clinical import Diagnosis, Observation, Procedure, VitalSigns
+from platform_core.frontend.types.healthcare_core import (
+    Admission,
+    Appointment,
+    Discharge,
+    Encounter,
+    Patient,
+    Visit,
+)
+from platform_core.frontend.types.laboratory import (
+    Analyzer,
+    LaboratoryOrder,
+    LaboratoryResult,
+    Specimen,
+)
+from platform_core.frontend.types.medical_devices import (
+    Calibration,
+    DeviceConnection,
+    MedicalDevice,
+)
+from platform_core.frontend.types.pharmacy import Dispensing, Medication, Prescription
 
 
 class TestCitizenTypes:
@@ -49,30 +56,22 @@ class TestHealthcareCoreTypes:
         assert visit.facility_id == "f1"
 
     def test_encounter_creation(self):
-        encounter = Encounter(
-            visit_id="v1", patient_id="p1", encounter_type="consultation"
-        )
+        encounter = Encounter(visit_id="v1", patient_id="p1", encounter_type="consultation")
         assert encounter.visit_id == "v1"
         assert encounter.patient_id == "p1"
 
     def test_appointment_creation(self):
-        appointment = Appointment(
-            patient_id="p1", facility_id="f1", scheduled_date="2026-01-01"
-        )
+        appointment = Appointment(patient_id="p1", facility_id="f1", scheduled_date="2026-01-01")
         assert appointment.patient_id == "p1"
         assert appointment.scheduled_date == "2026-01-01"
 
     def test_admission_creation(self):
-        admission = Admission(
-            patient_id="p1", facility_id="f1", admission_type="emergency"
-        )
+        admission = Admission(patient_id="p1", facility_id="f1", admission_type="emergency")
         assert admission.patient_id == "p1"
         assert admission.admission_type == "emergency"
 
     def test_discharge_creation(self):
-        discharge = Discharge(
-            admission_id="a1", patient_id="p1", discharge_type="regular"
-        )
+        discharge = Discharge(admission_id="a1", patient_id="p1", discharge_type="regular")
         assert discharge.admission_id == "a1"
         assert discharge.patient_id == "p1"
 
@@ -84,9 +83,7 @@ class TestLaboratoryTypes:
         assert specimen.specimen_type == "blood"
 
     def test_lab_order_creation(self):
-        order = LaboratoryOrder(
-            patient_id="p1", ordering_provider_id="doc1", test_code="CBC"
-        )
+        order = LaboratoryOrder(patient_id="p1", ordering_provider_id="doc1", test_code="CBC")
         assert order.patient_id == "p1"
         assert order.test_code == "CBC"
 
@@ -96,18 +93,14 @@ class TestLaboratoryTypes:
         assert result.result_value == "12.5"
 
     def test_analyzer_creation(self):
-        analyzer = Analyzer(
-            facility_id="f1", analyzer_type="hematology", manufacturer="Sysmex"
-        )
+        analyzer = Analyzer(facility_id="f1", analyzer_type="hematology", manufacturer="Sysmex")
         assert analyzer.analyzer_type == "hematology"
         assert analyzer.manufacturer == "Sysmex"
 
 
 class TestMedicalDeviceTypes:
     def test_medical_device_creation(self):
-        device = MedicalDevice(
-            facility_id="f1", device_type="monitor", manufacturer="Philips"
-        )
+        device = MedicalDevice(facility_id="f1", device_type="monitor", manufacturer="Philips")
         assert device.device_type == "monitor"
         assert device.manufacturer == "Philips"
 
@@ -117,9 +110,7 @@ class TestMedicalDeviceTypes:
         assert connection.connection_type == "usb"
 
     def test_calibration_creation(self):
-        calibration = Calibration(
-            device_id="d1", calibration_type="daily", result="pass"
-        )
+        calibration = Calibration(device_id="d1", calibration_type="daily", result="pass")
         assert calibration.device_id == "d1"
         assert calibration.result == "pass"
 
@@ -136,18 +127,14 @@ class TestPharmacyTypes:
         assert medication.manufacturer == "PharmaCo"
 
     def test_dispensing_creation(self):
-        dispensing = Dispensing(
-            prescription_id="pr1", medication_id="m1", quantity_dispensed=10
-        )
+        dispensing = Dispensing(prescription_id="pr1", medication_id="m1", quantity_dispensed=10)
         assert dispensing.prescription_id == "pr1"
         assert dispensing.quantity_dispensed == 10
 
 
 class TestClinicalTypes:
     def test_diagnosis_creation(self):
-        diagnosis = Diagnosis(
-            patient_id="p1", diagnosis_code="J06.9", diagnosis_name="Common cold"
-        )
+        diagnosis = Diagnosis(patient_id="p1", diagnosis_code="J06.9", diagnosis_name="Common cold")
         assert diagnosis.diagnosis_code == "J06.9"
         assert diagnosis.diagnosis_name == "Common cold"
 

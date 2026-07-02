@@ -1,12 +1,10 @@
 """Unit tests for Package Builder."""
 
-import json
 import os
 
 import pytest
 
 from platform_core.builder import BuildError, PackageBuilder
-from platform_core.packages import PackageIdentity, PackageManifest
 
 
 class TestPackageBuilder:
@@ -88,9 +86,7 @@ class TestPackageBuilder:
         output_dir = tmp_path / "output"
         builder = PackageBuilder(output_dir=str(output_dir))
         manifest = builder.generate_manifest(name="test", version="1.0.0")
-        result = builder.build_package(
-            str(source_dir), manifest, sign=True, private_key="test-key"
-        )
+        result = builder.build_package(str(source_dir), manifest, sign=True, private_key="test-key")
         assert os.path.exists(result)
         assert os.path.exists(result + ".sig")
 

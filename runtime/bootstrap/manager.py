@@ -4,7 +4,7 @@ import asyncio
 import logging
 import signal
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from platform_core.runtime.config.engine import ConfigurationEngine
@@ -111,9 +111,7 @@ class BootstrapManager:
         await self._step("Register Signal Handlers", self._register_signals)
 
         total_time = (time.monotonic() - start_time) * 1000
-        self._log_step(
-            "Bootstrap Complete", f"All steps completed in {total_time:.1f}ms"
-        )
+        self._log_step("Bootstrap Complete", f"All steps completed in {total_time:.1f}ms")
 
     async def _step(self, name: str, func: Any) -> None:
         step_start = time.monotonic()
@@ -134,7 +132,7 @@ class BootstrapManager:
             "step": step,
             "message": message,
             "status": status,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
         }
         self._startup_log.append(entry)
         if status == "error":

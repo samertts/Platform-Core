@@ -8,13 +8,24 @@ sys.path.insert(0, "/tmp")
 
 from datetime import datetime
 
-from platform_core.frontend.utils import (camel_to_snake, capitalize_words,
-                                          chunk_list, deep_merge, flatten_dict,
-                                          format_date, format_datetime,
-                                          generate_id, hash_data, parse_date,
-                                          sanitize_filename, snake_to_camel,
-                                          truncate, unflatten_dict,
-                                          unique_by_key, validate_uuid)
+from platform_core.frontend.utils import (
+    camel_to_snake,
+    capitalize_words,
+    chunk_list,
+    deep_merge,
+    flatten_dict,
+    format_date,
+    format_datetime,
+    generate_id,
+    hash_data,
+    parse_date,
+    sanitize_filename,
+    snake_to_camel,
+    truncate,
+    unflatten_dict,
+    unique_by_key,
+    validate_uuid,
+)
 
 
 class TestUtilities:

@@ -23,9 +23,7 @@ class MedicalDeviceClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/{device_id}/status")
 
     def connect(self, device_id: str, connection_data: dict) -> dict:
-        return self.client.post(
-            f"{self.endpoint}/{device_id}/connect", data=connection_data
-        )
+        return self.client.post(f"{self.endpoint}/{device_id}/connect", data=connection_data)
 
     def disconnect(self, device_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{device_id}/disconnect")
@@ -43,9 +41,7 @@ class DeviceConnectionClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/device/{device_id}")
 
     def get_active_connections(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/active", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/active", params={"facility_id": facility_id})
 
 
 @dataclass
@@ -60,6 +56,4 @@ class CalibrationClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/device/{device_id}")
 
     def get_due_calibrations(self, facility_id: str) -> dict:
-        return self.client.get(
-            f"{self.endpoint}/due", params={"facility_id": facility_id}
-        )
+        return self.client.get(f"{self.endpoint}/due", params={"facility_id": facility_id})

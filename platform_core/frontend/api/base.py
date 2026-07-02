@@ -2,8 +2,8 @@
 Base entity client for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Generic, Optional, TypeVar
+from dataclasses import dataclass
+from typing import Generic, TypeVar
 
 from .client import APIClient
 
@@ -18,9 +18,7 @@ class BaseEntityClient(Generic[T]):
     entity_name: str = ""
     endpoint: str = ""
 
-    def list(
-        self, page: int = 1, page_size: int = 20, filters: Optional[dict] = None
-    ) -> dict:
+    def list(self, page: int = 1, page_size: int = 20, filters: dict | None = None) -> dict:
         params = {"page": page, "page_size": page_size}
         if filters:
             params.update(filters)
@@ -38,7 +36,7 @@ class BaseEntityClient(Generic[T]):
     def delete(self, entity_id: str) -> dict:
         return self.client.delete(f"{self.endpoint}/{entity_id}")
 
-    def search(self, query: str, filters: Optional[dict] = None) -> dict:
+    def search(self, query: str, filters: dict | None = None) -> dict:
         params = {"q": query}
         if filters:
             params.update(filters)

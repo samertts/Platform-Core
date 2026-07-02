@@ -2,8 +2,7 @@
 Radiology domain types for NHDOS Frontend
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 from .base import BaseEntity
 
@@ -16,11 +15,11 @@ class RadiologyStudy(BaseEntity):
     facility_id: str = ""
     study_type: str = ""
     modality: str = ""
-    body_part: Optional[str] = None
-    clinical_indication: Optional[str] = None
+    body_part: str | None = None
+    clinical_indication: str | None = None
     ordering_provider_id: str = ""
     status: str = "scheduled"
-    study_date: Optional[str] = None
+    study_date: str | None = None
 
 
 @dataclass
@@ -30,7 +29,7 @@ class Image(BaseEntity):
     study_id: str = ""
     image_type: str = ""
     file_path: str = ""
-    file_size: Optional[int] = None
+    file_size: int | None = None
     format: str = "DICOM"
     status: str = "available"
 
@@ -43,8 +42,8 @@ class RadiologyReport(BaseEntity):
     patient_id: str = ""
     radiologist_id: str = ""
     report_type: str = ""
-    findings: Optional[str] = None
-    impression: Optional[str] = None
-    recommendation: Optional[str] = None
+    findings: str | None = None
+    impression: str | None = None
+    recommendation: str | None = None
     status: str = "draft"
-    signed_at: Optional[str] = None
+    signed_at: str | None = None

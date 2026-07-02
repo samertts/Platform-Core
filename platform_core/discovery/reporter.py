@@ -2,32 +2,30 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
-from platform_core.discovery.types import (DiscoveryResult, EcosystemReport,
-                                           Finding, FindingSeverity,
-                                           HealthRating, HealthScore,
-                                           RepositoryReport, ScanStatus)
+from platform_core.discovery.types import (
+    DiscoveryResult,
+    EcosystemReport,
+    HealthRating,
+    HealthScore,
+    RepositoryReport,
+    ScanStatus,
+)
 
 
 class Reporter:
     """Generates ecosystem and repository health reports."""
 
-    def generate_ecosystem_report(
-        self, results: list[DiscoveryResult]
-    ) -> EcosystemReport:
+    def generate_ecosystem_report(self, results: list[DiscoveryResult]) -> EcosystemReport:
         report = EcosystemReport(
-            generated_at=datetime.now(timezone.utc),
+            generated_at=datetime.now(UTC),
             total_repositories=len(results),
-            scanned_repositories=sum(
-                1 for r in results if r.status == ScanStatus.SUCCESS
-            ),
+            scanned_repositories=sum(1 for r in results if r.status == ScanStatus.SUCCESS),
         )
 
-        scores = [
-            r.health_score.overall for r in results if r.status == ScanStatus.SUCCESS
-        ]
+        scores = [r.health_score.overall for r in results if r.status == ScanStatus.SUCCESS]
         if scores:
             report.average_health_score = round(sum(scores) / len(scores), 3)
 
@@ -93,7 +91,7 @@ class Reporter:
     def generate_repository_report(self, result: DiscoveryResult) -> RepositoryReport:
         report = RepositoryReport(
             repository=result.repository,
-            generated_at=datetime.now(timezone.utc),
+            generated_at=datetime.now(UTC),
             health_score=result.health_score,
             category_scores={
                 "documentation": result.health_score.documentation,
@@ -111,9 +109,7 @@ class Reporter:
 
         return report
 
-    def _generate_recommendations(
-        self, result: DiscoveryResult
-    ) -> list[dict[str, Any]]:
+    def _generate_recommendations(self, result: DiscoveryResult) -> list[dict[str, Any]]:
         recommendations: list[dict[str, Any]] = []
         score = result.health_score
         analysis = result.analysis

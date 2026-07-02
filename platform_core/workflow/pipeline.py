@@ -20,7 +20,7 @@ class WorkflowPipeline:
     def add(
         self,
         step: WorkflowStep,
-    ) -> "WorkflowPipeline":
+    ) -> WorkflowPipeline:
 
         self._steps.append(step)
 

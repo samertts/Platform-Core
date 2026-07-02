@@ -1,10 +1,7 @@
 """Unit tests for Risk Engine."""
 
-import pytest
-
 from platform_core.governance.risk import RiskEngine
-from platform_core.governance.types import (Finding, FindingSeverity,
-                                            RiskCategory, RiskLevel)
+from platform_core.governance.types import Finding, FindingSeverity, RiskCategory, RiskLevel
 
 
 class TestRiskEngine:

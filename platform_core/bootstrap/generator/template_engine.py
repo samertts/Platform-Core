@@ -2,7 +2,6 @@ from string import Template
 
 
 class TemplateEngine:
-
     @staticmethod
     def render(template: str, values: dict):
 

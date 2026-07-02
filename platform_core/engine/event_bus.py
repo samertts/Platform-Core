@@ -4,8 +4,7 @@ from collections import defaultdict
 from collections.abc import Callable
 from typing import Any
 
-from platform_core.engine.events import EngineEvent
-from platform_core.engine.events import EngineEventType
+from platform_core.engine.events import EngineEvent, EngineEventType
 
 
 class EventBus:
@@ -23,9 +22,7 @@ class EventBus:
             list[Callable[[EngineEvent], Any] | Any],
         ] = defaultdict(list)
 
-        self._global: list[
-            Callable[[EngineEvent], Any] | Any
-        ] = []
+        self._global: list[Callable[[EngineEvent], Any] | Any] = []
 
     def subscribe(
         self,

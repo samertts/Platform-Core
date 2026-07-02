@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -11,10 +11,13 @@ from platform_core.discovery.analyzers import run_all_analyzers
 from platform_core.discovery.reporter import Reporter
 from platform_core.discovery.scanner import Scanner
 from platform_core.discovery.scorer import HealthScorer
-from platform_core.discovery.types import (AnalysisResult, DiscoveryResult,
-                                           EcosystemReport, HealthScore,
-                                           RepositoryReport, ScanResult,
-                                           ScanStatus, ScanType)
+from platform_core.discovery.types import (
+    DiscoveryResult,
+    EcosystemReport,
+    RepositoryReport,
+    ScanStatus,
+    ScanType,
+)
 
 
 class DiscoveryError(Exception):
@@ -53,14 +56,12 @@ class DiscoveryEngine:
         result = DiscoveryResult(
             repository=name,
             scan_type=scan_type,
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
             status=ScanStatus.RUNNING,
         )
 
         try:
-            scan_result = self._scanner.scan(
-                repository_path, scan_type=scan_type, repository=name
-            )
+            scan_result = self._scanner.scan(repository_path, scan_type=scan_type, repository=name)
             result.scan = scan_result
 
             files = self._scanner._collect_files(root)
@@ -77,10 +78,8 @@ class DiscoveryEngine:
             result.status = ScanStatus.FAILED
             result.scan.errors.append(str(e))
 
-        result.completed_at = datetime.now(timezone.utc)
-        result.duration_seconds = (
-            result.completed_at - result.started_at
-        ).total_seconds()
+        result.completed_at = datetime.now(UTC)
+        result.duration_seconds = (result.completed_at - result.started_at).total_seconds()
 
         with self._lock:
             self._results[name] = result

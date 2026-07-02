@@ -9,7 +9,6 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-
     workspace: Path = Path.cwd()
 
     config_file: Path = Path("platform.yaml")
@@ -21,8 +20,7 @@ class Settings(BaseSettings):
 
 def load_yaml(path: Path):
 
-    with open(path, "r", encoding="utf-8") as file:
-
+    with open(path, encoding="utf-8") as file:
         return yaml.safe_load(file)
 
 

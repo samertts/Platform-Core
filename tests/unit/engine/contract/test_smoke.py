@@ -8,8 +8,7 @@ import pytest
 from platform_core.engine.cancellation import CancellationToken
 from platform_core.engine.context import EngineContext
 from platform_core.engine.lifecycle import LifecycleState
-from platform_core.engine.result import EngineResult
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 
 
 def test_lifecycle_contains_all_states():
@@ -26,10 +25,7 @@ def test_lifecycle_contains_all_states():
         "disposed",
     }
 
-    actual = {
-        state.value
-        for state in LifecycleState
-    }
+    actual = {state.value for state in LifecycleState}
 
     assert actual == expected
 

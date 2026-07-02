@@ -23,7 +23,7 @@ def format_datetime(date: datetime, format: str = "%Y-%m-%d %H:%M:%S") -> str:
     return date.strftime(format)
 
 
-def parse_date(date_string: str, format: str = "%Y-%m-%d") -> Optional[datetime]:
+def parse_date(date_string: str, format: str = "%Y-%m-%d") -> datetime | None:
     try:
         return datetime.strptime(date_string, format)
     except (ValueError, TypeError):

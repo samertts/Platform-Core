@@ -9,14 +9,12 @@ from dataclasses import dataclass
 
 @dataclass(slots=True)
 class Metric:
-
     name: str
 
     value: float
 
 
 class MetricsEngine:
-
     def health_score(
         self,
         total: int,

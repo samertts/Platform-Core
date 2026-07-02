@@ -5,7 +5,6 @@ from platform_core.plugins.registry import PluginRegistry
 
 
 class PluginManager:
-
     def __init__(self) -> None:
 
         self._registry = PluginRegistry()

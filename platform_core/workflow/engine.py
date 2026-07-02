@@ -9,7 +9,6 @@ from platform_core.workflow.validator import WorkflowValidator
 
 
 class WorkflowEngine:
-
     def __init__(self) -> None:
 
         self._pipeline = WorkflowPipeline()
@@ -26,7 +25,7 @@ class WorkflowEngine:
     def add_step(
         self,
         step: WorkflowStep,
-    ) -> "WorkflowEngine":
+    ) -> WorkflowEngine:
 
         self._pipeline.add(step)
 

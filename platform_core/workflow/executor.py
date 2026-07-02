@@ -20,7 +20,6 @@ class WorkflowExecutor:
             context = WorkflowContext()
 
         for step in pipeline:
-
             result = step.execute(
                 context,
             )
