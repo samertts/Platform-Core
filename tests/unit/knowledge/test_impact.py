@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.nodes import NodeManager
 from platform_core.knowledge.edges import EdgeManager
+from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.impact import ImpactAnalyzer
-from platform_core.knowledge.types import (
-    ChangeType,
-    ImpactLevel,
-    NodeType,
-    RelationshipType,
-)
+from platform_core.knowledge.nodes import NodeManager
+from platform_core.knowledge.types import (ChangeType, ImpactLevel, NodeType,
+                                           RelationshipType)
 
 
 class TestImpactAnalyzer:

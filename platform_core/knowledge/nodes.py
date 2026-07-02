@@ -10,12 +10,8 @@ from datetime import datetime, timezone
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    LifecycleStage,
-    Node,
-    NodeStatus,
-    NodeType,
-)
+from platform_core.knowledge.types import (LifecycleStage, Node, NodeStatus,
+                                           NodeType)
 
 
 class NodeManager:
@@ -118,7 +114,8 @@ class NodeManager:
     def search_nodes(self, query: str) -> list[Node]:
         query_lower = query.lower()
         return [
-            n for n in self._store.get_all_nodes()
+            n
+            for n in self._store.get_all_nodes()
             if query_lower in n.name.lower()
             or query_lower in n.id.lower()
             or any(query_lower in t.lower() for t in n.tags)

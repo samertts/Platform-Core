@@ -1,0 +1,25 @@
+name: Module
+
+version: 1.0
+
+required:
+
+* Manifest
+
+* Contract
+
+* Documentation
+
+* Tests
+
+* Metrics
+
+* Security
+
+* Examples
+
+optional:
+
+* Benchmarks
+
+* Templates

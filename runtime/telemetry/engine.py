@@ -209,7 +209,9 @@ class TelemetryEngine:
             if self._trace_stack:
                 span = self._trace_stack.pop()
                 span.end()
-                self._current_trace = self._trace_stack[-1] if self._trace_stack else None
+                self._current_trace = (
+                    self._trace_stack[-1] if self._trace_stack else None
+                )
                 if not span.parent:
                     self._completed_traces.append(span)
                 return span

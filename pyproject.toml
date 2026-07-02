@@ -1,7 +1,9 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
-
+requires = [
+    "setuptools>=80",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
 [project]
 name = "platform-core"
 version = "1.0.0"
@@ -12,6 +14,16 @@ requires-python = ">=3.11"
 authors = [
     {name = "Platform Engineering", email = "platform@healthcare.org"},
 ]
+
+keywords = [
+    "platform",
+    "runtime",
+    "kernel",
+    "governance",
+    "plugins",
+    "dependency-injection",
+]
+
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -19,25 +31,43 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries",
 ]
-
 dependencies = [
     "pydantic>=2.0.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-cov>=4.0.0",
-    "ruff>=0.1.0",
-    "mypy>=1.0.0",
+    "pytest>=8.0",
+    "pytest-asyncio>=1.0",
+    "pytest-cov>=7.0",
+    "coverage[toml]>=7.0",
+    "ruff>=0.12",
+    "mypy>=1.16",
+    "build>=1.2",
+    "twine>=6.0",
+    "types-PyYAML",
 ]
 yaml = [
     "pyyaml>=6.0",
 ]
 
+[project.urls]
+Repository = "https://github.com/samertts/Platform-Core"
+
 [tool.setuptools.packages.find]
 include = ["platform_core*"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.coverage.run]
+source = ["platform_core"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+precision = 2
 
 [tool.ruff]
 target-version = "py311"

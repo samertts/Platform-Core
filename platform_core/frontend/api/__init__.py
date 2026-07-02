@@ -4,57 +4,34 @@ NHDOS Frontend API Client
 Type-safe API client for all 57 entity contracts
 """
 
-from .client import APIClient, APIError
 from .base import BaseEntityClient
+from .blood_bank import BloodUnitClient, DonationClient, TransfusionClient
 from .citizen import CitizenClient, DigitalCredentialClient
-from .healthcare_core import (
-    PatientClient, VisitClient, EncounterClient,
-    AppointmentClient, AdmissionClient, DischargeClient
-)
-from .laboratory import (
-    SpecimenClient, LaboratoryOrderClient, LaboratoryResultClient, AnalyzerClient
-)
-from .medical_devices import (
-    MedicalDeviceClient, DeviceConnectionClient, CalibrationClient
-)
-from .radiology import (
-    RadiologyStudyClient, ImageClient, RadiologyReportClient
-)
-from .pharmacy import (
-    PrescriptionClient, MedicationClient, DispensingClient
-)
-from .clinical import (
-    DiagnosisClient, ProcedureClient, ObservationClient, VitalSignsClient
-)
-from .blood_bank import (
-    DonationClient, BloodUnitClient, TransfusionClient
-)
-from .epidemiology import (
-    DiseaseClient, OutbreakClient
-)
-from .human_resources import (
-    ProfessionalClient, LicenseClient, OrganizationClient,
-    FacilityClient, DepartmentClient, RoomClient, BedClient,
-    EmployeeClient, AttendanceClient, LeaveClient
-)
-from .financial import (
-    InsuranceClient, ConsentClient, InvoiceClient, PaymentClient, ClaimClient
-)
-from .supply_chain import (
-    InventoryItemClient, SupplierClient, PurchaseClient
-)
-from .workflow import (
-    WorkflowClient, WorkflowStepClient, TaskClient
-)
-from .notifications import (
-    NotificationClient, MessageClient
-)
-from .public_health import (
-    VaccineClient, ImmunizationClient, ResearchStudyClient
-)
-from .communications import (
-    CorrespondenceClient
-)
+from .client import APIClient, APIError
+from .clinical import (DiagnosisClient, ObservationClient, ProcedureClient,
+                       VitalSignsClient)
+from .communications import CorrespondenceClient
+from .epidemiology import DiseaseClient, OutbreakClient
+from .financial import (ClaimClient, ConsentClient, InsuranceClient,
+                        InvoiceClient, PaymentClient)
+from .healthcare_core import (AdmissionClient, AppointmentClient,
+                              DischargeClient, EncounterClient, PatientClient,
+                              VisitClient)
+from .human_resources import (AttendanceClient, BedClient, DepartmentClient,
+                              EmployeeClient, FacilityClient, LeaveClient,
+                              LicenseClient, OrganizationClient,
+                              ProfessionalClient, RoomClient)
+from .laboratory import (AnalyzerClient, LaboratoryOrderClient,
+                         LaboratoryResultClient, SpecimenClient)
+from .medical_devices import (CalibrationClient, DeviceConnectionClient,
+                              MedicalDeviceClient)
+from .notifications import MessageClient, NotificationClient
+from .pharmacy import DispensingClient, MedicationClient, PrescriptionClient
+from .public_health import (ImmunizationClient, ResearchStudyClient,
+                            VaccineClient)
+from .radiology import ImageClient, RadiologyReportClient, RadiologyStudyClient
+from .supply_chain import InventoryItemClient, PurchaseClient, SupplierClient
+from .workflow import TaskClient, WorkflowClient, WorkflowStepClient
 
 __all__ = [
     "APIClient",

@@ -6,14 +6,9 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    ComplianceStatus,
-    Finding,
-    FindingSeverity,
-    FindingStatus,
-    QualityGate,
-    QualityGateResult,
-)
+from platform_core.governance.types import (ComplianceStatus, Finding,
+                                            FindingSeverity, FindingStatus,
+                                            QualityGate, QualityGateResult)
 
 
 class QualityGateEngine:
@@ -57,25 +52,65 @@ class QualityGateEngine:
         sbom_valid: bool = True,
     ) -> QualityGate:
         open_findings = [f for f in findings if f.status == FindingStatus.OPEN]
-        critical_findings = len([f for f in open_findings if f.severity == FindingSeverity.CRITICAL])
-        high_findings = len([f for f in open_findings if f.severity == FindingSeverity.HIGH])
+        critical_findings = len(
+            [f for f in open_findings if f.severity == FindingSeverity.CRITICAL]
+        )
+        high_findings = len(
+            [f for f in open_findings if f.severity == FindingSeverity.HIGH]
+        )
         coverage_met = coverage_percent >= self._min_coverage
 
         checks = [
-            {"name": "critical_findings", "passed": critical_findings == 0, "required": self._require_zero_critical},
-            {"name": "high_findings", "passed": high_findings == 0, "required": self._require_zero_high},
-            {"name": "coverage", "passed": coverage_met, "required": True, "value": coverage_percent, "threshold": self._min_coverage},
-            {"name": "security", "passed": security_passed, "required": self._require_security_pass},
-            {"name": "compatibility", "passed": compatibility_passed, "required": self._require_compatibility_pass},
-            {"name": "certification", "passed": certification_passed, "required": self._require_certification_pass},
-            {"name": "manifest_valid", "passed": manifest_valid, "required": self._require_manifest_valid},
-            {"name": "signature_valid", "passed": signature_valid, "required": self._require_signature_valid},
-            {"name": "sbom_valid", "passed": sbom_valid, "required": self._require_sbom_valid},
+            {
+                "name": "critical_findings",
+                "passed": critical_findings == 0,
+                "required": self._require_zero_critical,
+            },
+            {
+                "name": "high_findings",
+                "passed": high_findings == 0,
+                "required": self._require_zero_high,
+            },
+            {
+                "name": "coverage",
+                "passed": coverage_met,
+                "required": True,
+                "value": coverage_percent,
+                "threshold": self._min_coverage,
+            },
+            {
+                "name": "security",
+                "passed": security_passed,
+                "required": self._require_security_pass,
+            },
+            {
+                "name": "compatibility",
+                "passed": compatibility_passed,
+                "required": self._require_compatibility_pass,
+            },
+            {
+                "name": "certification",
+                "passed": certification_passed,
+                "required": self._require_certification_pass,
+            },
+            {
+                "name": "manifest_valid",
+                "passed": manifest_valid,
+                "required": self._require_manifest_valid,
+            },
+            {
+                "name": "signature_valid",
+                "passed": signature_valid,
+                "required": self._require_signature_valid,
+            },
+            {
+                "name": "sbom_valid",
+                "passed": sbom_valid,
+                "required": self._require_sbom_valid,
+            },
         ]
 
-        required_failed = any(
-            not c["passed"] for c in checks if c["required"]
-        )
+        required_failed = any(not c["passed"] for c in checks if c["required"])
 
         has_waived = False  # Would check exception manager in production
 

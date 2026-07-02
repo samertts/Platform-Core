@@ -1,9 +1,13 @@
 """Unit tests for Module Installer."""
 
-import pytest
 import os
-from platform_core.installer import ModuleInstaller, InstallError, ValidationError
-from platform_core.packages import PackageManifest, PackageIdentity, PackageDependencies
+
+import pytest
+
+from platform_core.installer import (InstallError, ModuleInstaller,
+                                     ValidationError)
+from platform_core.packages import (PackageDependencies, PackageIdentity,
+                                    PackageManifest)
 
 
 class TestModuleInstaller:
@@ -21,9 +25,7 @@ class TestModuleInstaller:
 
     def test_pre_install_validate_empty_name(self) -> None:
         installer = ModuleInstaller()
-        manifest = PackageManifest(
-            package=PackageIdentity(name="", version="1.0.0")
-        )
+        manifest = PackageManifest(package=PackageIdentity(name="", version="1.0.0"))
         errors = installer.pre_install_validate("/tmp", manifest)
         assert len(errors) > 0
 
@@ -59,9 +61,7 @@ class TestModuleInstaller:
 
     def test_install_validation_error(self) -> None:
         installer = ModuleInstaller()
-        manifest = PackageManifest(
-            package=PackageIdentity(name="", version="1.0.0")
-        )
+        manifest = PackageManifest(package=PackageIdentity(name="", version="1.0.0"))
         with pytest.raises(ValidationError):
             installer.install("/nonexistent", manifest)
 

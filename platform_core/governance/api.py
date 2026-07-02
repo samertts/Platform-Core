@@ -5,14 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 from platform_core.governance.engine import GovernanceEngine
-from platform_core.governance.types import (
-    DecisionType,
-    ExceptionType,
-    FindingSeverity,
-    FindingStatus,
-    QualityGateResult,
-    ReviewType,
-)
+from platform_core.governance.types import (DecisionType, ExceptionType,
+                                            FindingSeverity, FindingStatus,
+                                            QualityGateResult, ReviewType)
 
 
 class GovernanceAPI:
@@ -97,7 +92,11 @@ class GovernanceAPI:
             description=description,
             **kwargs,
         )
-        return {"id": finding.id, "severity": finding.severity.value, "status": finding.status.value}
+        return {
+            "id": finding.id,
+            "severity": finding.severity.value,
+            "status": finding.status.value,
+        }
 
     def get_compliance(self, repository: str) -> dict[str, Any]:
         checks = self._engine.compliance.validate_all_standards(repository)
@@ -155,9 +154,13 @@ class GovernanceAPI:
     def get_ai_review(
         self, repository: str, evidence: dict[str, Any]
     ) -> dict[str, Any]:
-        arch_review = self._engine.ai_assistant.review_architecture(repository, evidence)
+        arch_review = self._engine.ai_assistant.review_architecture(
+            repository, evidence
+        )
         dep_review = self._engine.ai_assistant.review_dependencies(repository, evidence)
-        manifest_review = self._engine.ai_assistant.review_manifest(repository, evidence)
+        manifest_review = self._engine.ai_assistant.review_manifest(
+            repository, evidence
+        )
         api_review = self._engine.ai_assistant.review_api(repository, evidence)
         risk = self._engine.ai_assistant.estimate_risk(repository, evidence)
 
@@ -172,7 +175,9 @@ class GovernanceAPI:
 
     def get_recommendations(self, repository: str) -> list[dict[str, Any]]:
         findings = self._engine.findings.list_findings(repository=repository)
-        recs = self._engine.recommendations.generate_recommendations(findings, repository)
+        recs = self._engine.recommendations.generate_recommendations(
+            findings, repository
+        )
         return [
             {
                 "id": r.id,

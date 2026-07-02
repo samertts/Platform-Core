@@ -1,0 +1,93 @@
+project:
+
+  name: Platform-Core
+
+  version: 0.1.0
+
+  stage: Genesis
+
+  philosophy:
+
+    - Knowledge First
+
+    - Architecture First
+
+    - Contract First
+
+    - Automation First
+
+    - Security By Design
+
+core:
+
+  kernel:
+
+    enabled: true
+
+  runtime:
+
+    enabled: true
+
+  registry:
+
+    enabled: true
+
+  manifest:
+
+    enabled: true
+
+  contracts:
+
+    enabled: true
+
+builders:
+
+  enabled: false
+
+forge:
+
+  enabled: false
+
+knowledge:
+
+  enabled: false
+
+observatory:
+
+  enabled: false
+
+security:
+
+  enabled: true
+
+documentation:
+
+  enabled: true
+
+testing:
+
+  enabled: true
+
+platforms:
+
+  - Linux
+
+  - Windows
+
+  - macOS
+
+languages:
+
+  - Python
+
+future_languages:
+
+  - Rust
+
+  - Go
+
+  - Kotlin
+
+  - Java
+
+  - TypeScript

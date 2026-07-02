@@ -172,9 +172,7 @@ class ServiceContainer:
                 if registration.instance is None:
                     with self._singleton_lock:
                         if registration.instance is None:
-                            registration.instance = self._create_instance(
-                                registration
-                            )
+                            registration.instance = self._create_instance(registration)
                 return registration.instance
 
             if registration.lifetime == "scoped":
@@ -189,8 +187,7 @@ class ServiceContainer:
         with self._lock:
             for reg_type, reg in self._registrations.items():
                 if reg_type == service_type or (
-                    reg.implementation
-                    and issubclass(reg.implementation, service_type)
+                    reg.implementation and issubclass(reg.implementation, service_type)
                 ):
                     results.append(self.resolve(reg_type))
         return results
@@ -296,7 +293,9 @@ class ServiceContainer:
                 return None
             return {
                 "service_type": reg.service_type.__name__,
-                "implementation": reg.implementation.__name__ if reg.implementation else None,
+                "implementation": (
+                    reg.implementation.__name__ if reg.implementation else None
+                ),
                 "lifetime": reg.lifetime,
                 "has_instance": reg.instance is not None,
             }

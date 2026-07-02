@@ -3,15 +3,18 @@ Tests for NHDOS Frontend Utilities
 """
 
 import sys
-sys.path.insert(0, '/tmp')
 
-from platform_core.frontend.utils import (
-    generate_id, format_date, format_datetime, parse_date,
-    hash_data, validate_uuid, deep_merge, flatten_dict, unflatten_dict,
-    truncate, capitalize_words, snake_to_camel, camel_to_snake,
-    sanitize_filename, chunk_list, unique_by_key
-)
+sys.path.insert(0, "/tmp")
+
 from datetime import datetime
+
+from platform_core.frontend.utils import (camel_to_snake, capitalize_words,
+                                          chunk_list, deep_merge, flatten_dict,
+                                          format_date, format_datetime,
+                                          generate_id, hash_data, parse_date,
+                                          sanitize_filename, snake_to_camel,
+                                          truncate, unflatten_dict,
+                                          unique_by_key, validate_uuid)
 
 
 class TestUtilities:

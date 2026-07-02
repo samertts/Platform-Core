@@ -8,7 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import InstallRecord, InstallStatus, PackageManifest, PackageStatus
+from platform_core.packages import (InstallRecord, InstallStatus,
+                                    PackageManifest, PackageStatus)
 
 
 class UpdateError(Exception):
@@ -50,14 +51,16 @@ class UpdateManager:
                 available = available_versions.get(name, [])
                 for version in available:
                     if self._is_newer(version, installed.package_version):
-                        updates.append({
-                            "package": name,
-                            "current_version": installed.package_version,
-                            "available_version": version,
-                            "type": self._get_update_type(
-                                installed.package_version, version
-                            ),
-                        })
+                        updates.append(
+                            {
+                                "package": name,
+                                "current_version": installed.package_version,
+                                "available_version": version,
+                                "type": self._get_update_type(
+                                    installed.package_version, version
+                                ),
+                            }
+                        )
 
         return updates
 

@@ -6,12 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    Finding,
-    FindingSeverity,
-    Recommendation,
-    ReviewType,
-)
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            Recommendation, ReviewType)
 
 
 class AIGovernanceAssistant:
@@ -42,23 +38,29 @@ class AIGovernanceAssistant:
 
         pattern = evidence.get("architecture_pattern", "unknown")
         if pattern == "unknown":
-            findings.append({
-                "severity": "medium",
-                "title": "Undetected architecture pattern",
-                "description": "Unable to determine architecture pattern",
-            })
-            recommendations.append({
-                "priority": 2,
-                "title": "Document architecture pattern",
-                "description": "Add architecture documentation to clarify the design pattern",
-            })
+            findings.append(
+                {
+                    "severity": "medium",
+                    "title": "Undetected architecture pattern",
+                    "description": "Unable to determine architecture pattern",
+                }
+            )
+            recommendations.append(
+                {
+                    "priority": 2,
+                    "title": "Document architecture pattern",
+                    "description": "Add architecture documentation to clarify the design pattern",
+                }
+            )
 
         if not evidence.get("has_documentation"):
-            recommendations.append({
-                "priority": 2,
-                "title": "Add architecture documentation",
-                "description": "Create architecture documentation to explain design decisions",
-            })
+            recommendations.append(
+                {
+                    "priority": 2,
+                    "title": "Add architecture documentation",
+                    "description": "Create architecture documentation to explain design decisions",
+                }
+            )
 
         score = 0.8 if pattern != "unknown" else 0.5
         return {
@@ -81,23 +83,29 @@ class AIGovernanceAssistant:
         vulnerable = evidence.get("vulnerable_dependencies", 0)
 
         if vulnerable > 0:
-            findings.append({
-                "severity": "critical",
-                "title": f"{vulnerable} vulnerable dependencies",
-                "description": "Vulnerable dependencies detected",
-            })
-            recommendations.append({
-                "priority": 1,
-                "title": "Update vulnerable dependencies",
-                "description": f"Update {vulnerable} vulnerable dependencies immediately",
-            })
+            findings.append(
+                {
+                    "severity": "critical",
+                    "title": f"{vulnerable} vulnerable dependencies",
+                    "description": "Vulnerable dependencies detected",
+                }
+            )
+            recommendations.append(
+                {
+                    "priority": 1,
+                    "title": "Update vulnerable dependencies",
+                    "description": f"Update {vulnerable} vulnerable dependencies immediately",
+                }
+            )
 
         if outdated > 0:
-            findings.append({
-                "severity": "low",
-                "title": f"{outdated} outdated dependencies",
-                "description": "Dependencies are outdated",
-            })
+            findings.append(
+                {
+                    "severity": "low",
+                    "title": f"{outdated} outdated dependencies",
+                    "description": "Dependencies are outdated",
+                }
+            )
 
         score = 1.0
         if vulnerable > 0:
@@ -124,23 +132,29 @@ class AIGovernanceAssistant:
         manifest_valid = evidence.get("manifest_valid", False)
 
         if not has_manifest:
-            findings.append({
-                "severity": "high",
-                "title": "Missing platform manifest",
-                "description": "Repository does not have a platform manifest",
-            })
-            recommendations.append({
-                "priority": 1,
-                "title": "Create platform manifest",
-                "description": "Create platform-manifest.yaml to register with the platform",
-            })
+            findings.append(
+                {
+                    "severity": "high",
+                    "title": "Missing platform manifest",
+                    "description": "Repository does not have a platform manifest",
+                }
+            )
+            recommendations.append(
+                {
+                    "priority": 1,
+                    "title": "Create platform manifest",
+                    "description": "Create platform-manifest.yaml to register with the platform",
+                }
+            )
             score = 0.0
         elif not manifest_valid:
-            findings.append({
-                "severity": "medium",
-                "title": "Invalid platform manifest",
-                "description": "Platform manifest fails validation",
-            })
+            findings.append(
+                {
+                    "severity": "medium",
+                    "title": "Invalid platform manifest",
+                    "description": "Platform manifest fails validation",
+                }
+            )
             score = 0.5
         else:
             score = 1.0
@@ -154,9 +168,7 @@ class AIGovernanceAssistant:
             "summary": f"Manifest review: {'valid' if manifest_valid else 'invalid or missing'}",
         }
 
-    def review_api(
-        self, repository: str, evidence: dict[str, Any]
-    ) -> dict[str, Any]:
+    def review_api(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
         findings: list[dict[str, Any]] = []
         recommendations: list[dict[str, Any]] = []
 
@@ -165,17 +177,21 @@ class AIGovernanceAssistant:
         is_versioned = evidence.get("api_versioned", False)
 
         if not has_health:
-            findings.append({
-                "severity": "medium",
-                "title": "Missing health endpoint",
-                "description": "API does not have a health check endpoint",
-            })
+            findings.append(
+                {
+                    "severity": "medium",
+                    "title": "Missing health endpoint",
+                    "description": "API does not have a health check endpoint",
+                }
+            )
         if not has_docs:
-            recommendations.append({
-                "priority": 2,
-                "title": "Add API documentation",
-                "description": "Add OpenAPI/Swagger documentation",
-            })
+            recommendations.append(
+                {
+                    "priority": 2,
+                    "title": "Add API documentation",
+                    "description": "Add OpenAPI/Swagger documentation",
+                }
+            )
 
         score = 0.0
         if has_health:
@@ -200,13 +216,27 @@ class AIGovernanceAssistant:
         risk_factors: list[dict[str, Any]] = []
 
         if evidence.get("vulnerable_dependencies", 0) > 0:
-            risk_factors.append({"category": "security", "level": "high", "reason": "Vulnerable dependencies"})
+            risk_factors.append(
+                {
+                    "category": "security",
+                    "level": "high",
+                    "reason": "Vulnerable dependencies",
+                }
+            )
 
         if not evidence.get("has_ci"):
-            risk_factors.append({"category": "operational", "level": "medium", "reason": "No CI/CD pipeline"})
+            risk_factors.append(
+                {
+                    "category": "operational",
+                    "level": "medium",
+                    "reason": "No CI/CD pipeline",
+                }
+            )
 
         if not evidence.get("has_tests"):
-            risk_factors.append({"category": "quality", "level": "high", "reason": "No tests found"})
+            risk_factors.append(
+                {"category": "quality", "level": "high", "reason": "No tests found"}
+            )
 
         overall_risk = "low"
         if any(r["level"] == "high" for r in risk_factors):
@@ -228,18 +258,26 @@ class AIGovernanceAssistant:
 
         sorted_findings = sorted(
             findings,
-            key=lambda f: {"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4}.get(f.severity.value, 5),
+            key=lambda f: {
+                "critical": 0,
+                "high": 1,
+                "medium": 2,
+                "low": 3,
+                "info": 4,
+            }.get(f.severity.value, 5),
         )
 
         for i, finding in enumerate(sorted_findings):
-            plan_items.append({
-                "step": i + 1,
-                "finding_id": finding.id,
-                "severity": finding.severity.value,
-                "title": finding.title,
-                "action": finding.recommendation or "Investigate and resolve",
-                "estimated_effort": "2-4 hours",
-            })
+            plan_items.append(
+                {
+                    "step": i + 1,
+                    "finding_id": finding.id,
+                    "severity": finding.severity.value,
+                    "title": finding.title,
+                    "action": finding.recommendation or "Investigate and resolve",
+                    "estimated_effort": "2-4 hours",
+                }
+            )
 
         return {
             "repository": repository,

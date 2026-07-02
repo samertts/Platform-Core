@@ -11,15 +11,9 @@ from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.nodes import NodeManager
-from platform_core.knowledge.types import (
-    HealthcareEntity,
-    HealthcareMapping,
-    HealthcareStandard,
-    LifecycleStage,
-    Node,
-    NodeType,
-    RelationshipType,
-)
+from platform_core.knowledge.types import (HealthcareEntity, HealthcareMapping,
+                                           HealthcareStandard, LifecycleStage,
+                                           Node, NodeType, RelationshipType)
 
 
 class HealthcareKnowledge:
@@ -54,12 +48,20 @@ class HealthcareKnowledge:
         metadata: dict[str, Any] | None = None,
     ) -> Node:
         return self._node_manager.create_node(
-            node_type=NodeType.DEVICE if entity_type in (
-                HealthcareEntity.LABORATORY_EQUIPMENT,
-                HealthcareEntity.ANALYZER,
-                HealthcareEntity.MEDICAL_DEVICE,
-            ) else NodeType.WORKFLOW if entity_type == HealthcareEntity.HEALTHCARE_WORKFLOW
-            else NodeType.MODULE,
+            node_type=(
+                NodeType.DEVICE
+                if entity_type
+                in (
+                    HealthcareEntity.LABORATORY_EQUIPMENT,
+                    HealthcareEntity.ANALYZER,
+                    HealthcareEntity.MEDICAL_DEVICE,
+                )
+                else (
+                    NodeType.WORKFLOW
+                    if entity_type == HealthcareEntity.HEALTHCARE_WORKFLOW
+                    else NodeType.MODULE
+                )
+            ),
             name=name,
             metadata={"healthcare_entity": entity_type.value, **(metadata or {})},
             labels=["healthcare", entity_type.value],

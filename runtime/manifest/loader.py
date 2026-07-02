@@ -12,7 +12,15 @@ class ManifestLoader:
 
     SCHEMA_VERSION = "1.0.0"
 
-    REQUIRED_SECTIONS = ["manifest", "identity", "purpose", "ownership", "runtime", "maturity", "compatibility"]
+    REQUIRED_SECTIONS = [
+        "manifest",
+        "identity",
+        "purpose",
+        "ownership",
+        "runtime",
+        "maturity",
+        "compatibility",
+    ]
 
     NAME_PATTERN = re.compile(r"^[a-z][a-z0-9-]*[a-z0-9]$")
     SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
@@ -64,7 +72,11 @@ class ManifestLoader:
             indent = len(line) - len(line.lstrip())
             stripped = line.strip()
 
-            while section_stack and indent <= section_stack[-1][0] and len(section_stack) > 1:
+            while (
+                section_stack
+                and indent <= section_stack[-1][0]
+                and len(section_stack) > 1
+            ):
                 section_stack.pop()
             current_section = section_stack[-1][1]
 
@@ -150,7 +162,14 @@ class ManifestLoader:
 
         if "maturity" in manifest:
             maturity = manifest["maturity"]
-            valid_levels = ["experimental", "alpha", "beta", "stable", "mature", "legacy"]
+            valid_levels = [
+                "experimental",
+                "alpha",
+                "beta",
+                "stable",
+                "mature",
+                "legacy",
+            ]
             if "level" not in maturity:
                 errors.append("Missing maturity.level")
             elif maturity["level"] not in valid_levels:

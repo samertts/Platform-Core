@@ -1,0 +1,23 @@
+Module User
+
+Description "User Management Module"
+
+Version 1.0
+
+Capability Authentication
+
+Capability Authorization
+
+Capability Logging
+
+Capability Audit
+
+API REST
+
+Database SQLite
+
+Tests Required
+
+Documentation Required
+
+Security Required

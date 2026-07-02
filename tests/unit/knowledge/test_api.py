@@ -3,12 +3,10 @@
 from __future__ import annotations
 
 import pytest
+
 from platform_core.knowledge.api import KnowledgeAPI
 from platform_core.knowledge.engine import KnowledgeEngine
-from platform_core.knowledge.types import (
-    NodeNotFoundError,
-    NodeType,
-)
+from platform_core.knowledge.types import NodeNotFoundError, NodeType
 
 
 class TestKnowledgeAPI:

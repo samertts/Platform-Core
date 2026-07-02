@@ -73,7 +73,9 @@ class RollbackEngine:
                     shutil.copy2(source_path, pkg_backup)
 
         manifest_path = snapshot_dir / "manifest.json"
-        manifest_path.write_text(json.dumps(manifest, indent=2, default=str), encoding="utf-8")
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, default=str), encoding="utf-8"
+        )
 
         with self._lock:
             self._snapshots[str(snapshot.id)] = snapshot
@@ -151,12 +153,14 @@ class RollbackEngine:
             if transaction is None:
                 raise RollbackError(f"Transaction not found: {transaction_id}")
 
-            transaction.operations.append({
-                "type": operation_type,
-                "package": package_name,
-                "details": details or {},
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            transaction.operations.append(
+                {
+                    "type": operation_type,
+                    "package": package_name,
+                    "details": details or {},
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            )
 
     def commit_transaction(self, transaction_id: str) -> dict[str, Any]:
         with self._lock:
@@ -181,11 +185,13 @@ class RollbackEngine:
 
             rolled_back: list[dict[str, Any]] = []
             for op in reversed(transaction.operations):
-                rolled_back.append({
-                    "type": f"reverse_{op['type']}",
-                    "package": op["package"],
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
-                })
+                rolled_back.append(
+                    {
+                        "type": f"reverse_{op['type']}",
+                        "package": op["package"],
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    }
+                )
 
             transaction.status = "rolled_back"
             transaction.completed_at = datetime.now(timezone.utc)
@@ -199,13 +205,17 @@ class RollbackEngine:
     def auto_rollback(self, transaction_id: str) -> dict[str, Any]:
         return self.rollback_transaction(transaction_id)
 
-    def verify_consistency(self, installed_packages: dict[str, InstallRecord]) -> dict[str, Any]:
+    def verify_consistency(
+        self, installed_packages: dict[str, InstallRecord]
+    ) -> dict[str, Any]:
         issues: list[str] = []
 
         for name, record in installed_packages.items():
             install_path = Path(record.install_path)
             if not install_path.exists():
-                issues.append(f"Package {name} install path missing: {record.install_path}")
+                issues.append(
+                    f"Package {name} install path missing: {record.install_path}"
+                )
 
         return {
             "consistent": len(issues) == 0,

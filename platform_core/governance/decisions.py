@@ -6,13 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    Decision,
-    DecisionType,
-    Finding,
-    FindingSeverity,
-    FindingStatus,
-)
+from platform_core.governance.types import (Decision, DecisionType, Finding,
+                                            FindingSeverity, FindingStatus)
 
 
 class DecisionEngine:
@@ -77,8 +72,21 @@ class DecisionEngine:
         self, decision_type: DecisionType, findings: list[Finding]
     ) -> str:
         open_count = len([f for f in findings if f.status == FindingStatus.OPEN])
-        critical_count = len([f for f in findings if f.severity == FindingSeverity.CRITICAL and f.status == FindingStatus.OPEN])
-        high_count = len([f for f in findings if f.severity == FindingSeverity.HIGH and f.status == FindingStatus.OPEN])
+        critical_count = len(
+            [
+                f
+                for f in findings
+                if f.severity == FindingSeverity.CRITICAL
+                and f.status == FindingStatus.OPEN
+            ]
+        )
+        high_count = len(
+            [
+                f
+                for f in findings
+                if f.severity == FindingSeverity.HIGH and f.status == FindingStatus.OPEN
+            ]
+        )
 
         if decision_type == DecisionType.APPROVE:
             return f"Approved: {open_count} open findings, none critical or high"
@@ -113,7 +121,9 @@ class DecisionEngine:
             return None
         return max(decisions, key=lambda d: d.decided_at)
 
-    def approve(self, repository: str, review_id: str, decided_by: str, rationale: str = "") -> Decision:
+    def approve(
+        self, repository: str, review_id: str, decided_by: str, rationale: str = ""
+    ) -> Decision:
         decision = Decision(
             review_id=review_id,
             repository=repository,
@@ -125,7 +135,9 @@ class DecisionEngine:
             self._decisions[decision.id] = decision
         return decision
 
-    def reject(self, repository: str, review_id: str, decided_by: str, rationale: str = "") -> Decision:
+    def reject(
+        self, repository: str, review_id: str, decided_by: str, rationale: str = ""
+    ) -> Decision:
         decision = Decision(
             review_id=review_id,
             repository=repository,

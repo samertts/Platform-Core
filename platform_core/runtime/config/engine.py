@@ -27,7 +27,9 @@ class ConfigurationEngine:
         self._config: dict[str, Any] = {}
         self._schema = schema or ConfigSchema()
         self._sources: list[str] = []
-        self._callbacks: dict[str, list[Callable[[str, Any, Any], None]]] = defaultdict(list)
+        self._callbacks: dict[str, list[Callable[[str, Any, Any], None]]] = defaultdict(
+            list
+        )
         self._global_callbacks: list[Callable[[str, Any, Any], None]] = []
         self._lock = threading.RLock()
         self._file_mtimes: dict[str, float] = {}
@@ -128,7 +130,11 @@ class ConfigurationEngine:
             indent = len(line) - len(line.lstrip())
             stripped = line.strip()
 
-            while section_stack and indent <= section_stack[-1][0] and len(section_stack) > 1:
+            while (
+                section_stack
+                and indent <= section_stack[-1][0]
+                and len(section_stack) > 1
+            ):
                 section_stack.pop()
             current_section = section_stack[-1][1]
 
@@ -184,10 +190,16 @@ class ConfigurationEngine:
             pass
         return value
 
-    def _deep_merge(self, base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    def _deep_merge(
+        self, base: dict[str, Any], override: dict[str, Any]
+    ) -> dict[str, Any]:
         result = dict(base)
         for key, value in override.items():
-            if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+            if (
+                key in result
+                and isinstance(result[key], dict)
+                and isinstance(value, dict)
+            ):
                 result[key] = self._deep_merge(result[key], value)
             else:
                 result[key] = value

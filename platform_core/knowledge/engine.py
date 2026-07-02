@@ -8,39 +8,26 @@ from __future__ import annotations
 import threading
 from typing import Any
 
-from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.nodes import NodeManager
-from platform_core.knowledge.edges import EdgeManager
-from platform_core.knowledge.temporal import TemporalManager
-from platform_core.knowledge.queries import QueryEngine
-from platform_core.knowledge.impact import ImpactAnalyzer
-from platform_core.knowledge.architecture import ArchitectureIntelligence
-from platform_core.knowledge.healthcare import HealthcareKnowledge
 from platform_core.knowledge.ai_layer import AIKnowledgeLayer
-from platform_core.knowledge.types import (
-    AIReasoningResult,
-    ArchitectureRecommendation,
-    ArchitectureSmell,
-    ChangeType,
-    Edge,
-    EventType,
-    GraphSnapshot,
-    HealthcareEntity,
-    HealthcareMapping,
-    HealthcareStandard,
-    ImpactReport,
-    ImpactLevel,
-    KnowledgeEngineConfig,
-    LifecycleStage,
-    Node,
-    NodeStatus,
-    NodeType,
-    QueryResult,
-    QueryType,
-    RelationshipStatus,
-    RelationshipType,
-    TemporalEvent,
-)
+from platform_core.knowledge.architecture import ArchitectureIntelligence
+from platform_core.knowledge.edges import EdgeManager
+from platform_core.knowledge.graph import GraphStore
+from platform_core.knowledge.healthcare import HealthcareKnowledge
+from platform_core.knowledge.impact import ImpactAnalyzer
+from platform_core.knowledge.nodes import NodeManager
+from platform_core.knowledge.queries import QueryEngine
+from platform_core.knowledge.temporal import TemporalManager
+from platform_core.knowledge.types import (AIReasoningResult,
+                                           ArchitectureRecommendation,
+                                           ArchitectureSmell, ChangeType, Edge,
+                                           EventType, GraphSnapshot,
+                                           HealthcareEntity, HealthcareMapping,
+                                           HealthcareStandard, ImpactLevel,
+                                           ImpactReport, KnowledgeEngineConfig,
+                                           LifecycleStage, Node, NodeStatus,
+                                           NodeType, QueryResult, QueryType,
+                                           RelationshipStatus,
+                                           RelationshipType, TemporalEvent)
 
 
 class KnowledgeEngine:
@@ -149,7 +136,9 @@ class KnowledgeEngine:
         relationship_type: RelationshipType,
         **kwargs: Any,
     ) -> Edge:
-        edge = self._edges.create_edge(source_id, target_id, relationship_type, **kwargs)
+        edge = self._edges.create_edge(
+            source_id, target_id, relationship_type, **kwargs
+        )
         if self._config.enable_temporal:
             self._temporal.record_event(
                 EventType.RELATIONSHIP_CREATED,
@@ -169,7 +158,9 @@ class KnowledgeEngine:
             )
         return result
 
-    def query(self, query_type: QueryType, node_id: str = "", **kwargs: Any) -> QueryResult:
+    def query(
+        self, query_type: QueryType, node_id: str = "", **kwargs: Any
+    ) -> QueryResult:
         return self._queries.execute_query(query_type, node_id, **kwargs)
 
     def analyze_impact(
@@ -218,7 +209,9 @@ class KnowledgeEngine:
         code: str,
         **kwargs: Any,
     ) -> HealthcareMapping:
-        return self._healthcare.create_mapping(node_id, standard, entity_type, code, **kwargs)
+        return self._healthcare.create_mapping(
+            node_id, standard, entity_type, code, **kwargs
+        )
 
     def get_healthcare_summary(self) -> dict[str, Any]:
         return self._healthcare.get_healthcare_summary()
@@ -228,8 +221,7 @@ class KnowledgeEngine:
             "node_count": self._store.node_count(),
             "edge_count": self._store.edge_count(),
             "nodes_by_type": {
-                nt.value: len(self._store.get_nodes_by_type(nt))
-                for nt in NodeType
+                nt.value: len(self._store.get_nodes_by_type(nt)) for nt in NodeType
             },
             "edges_by_type": {
                 rt.value: len(self._store.get_edges_by_type(rt))

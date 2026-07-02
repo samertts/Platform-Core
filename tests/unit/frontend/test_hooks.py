@@ -3,12 +3,13 @@ Tests for NHDOS Frontend Hooks
 """
 
 import sys
-sys.path.insert(0, '/tmp')
 
-from platform_core.frontend.hooks import (
-    UseState, UseEffect, UseCallback, UseMemo, UseQuery, UseMutation,
-    use_state, use_effect, use_callback, use_memo, use_query, use_mutate
-)
+sys.path.insert(0, "/tmp")
+
+from platform_core.frontend.hooks import (UseCallback, UseEffect, UseMemo,
+                                          UseMutation, UseQuery, UseState,
+                                          use_callback, use_effect, use_memo,
+                                          use_mutate, use_query, use_state)
 
 
 class TestHooks:

@@ -1,8 +1,10 @@
 """Unit tests for Repository Manager."""
 
 import pytest
-from platform_core.repository import RepositoryManager, RepositoryError
-from platform_core.packages import RepositoryConfig, RepositoryType, RegistryEntry
+
+from platform_core.packages import (RegistryEntry, RepositoryConfig,
+                                    RepositoryType)
+from platform_core.repository import RepositoryError, RepositoryManager
 
 
 class TestRepositoryManager:
@@ -45,8 +47,12 @@ class TestRepositoryManager:
 
     def test_list_repositories_by_type(self) -> None:
         manager = RepositoryManager()
-        manager.add_repository(RepositoryConfig(name="local", type=RepositoryType.LOCAL))
-        manager.add_repository(RepositoryConfig(name="remote", type=RepositoryType.REMOTE))
+        manager.add_repository(
+            RepositoryConfig(name="local", type=RepositoryType.LOCAL)
+        )
+        manager.add_repository(
+            RepositoryConfig(name="remote", type=RepositoryType.REMOTE)
+        )
         local_repos = manager.list_repositories(type_filter=RepositoryType.LOCAL)
         assert len(local_repos) == 1
 
@@ -86,7 +92,9 @@ class TestRepositoryManager:
 
     def test_get_package_from_priority(self) -> None:
         manager = RepositoryManager()
-        manager.add_repository(RepositoryConfig(name="test", type=RepositoryType.LOCAL, priority=10))
+        manager.add_repository(
+            RepositoryConfig(name="test", type=RepositoryType.LOCAL, priority=10)
+        )
         entry = RegistryEntry(name="pkg", version="1.0.0")
         manager.register_package("test", entry)
         result = manager.get_package_from_priority("pkg", "1.0.0")

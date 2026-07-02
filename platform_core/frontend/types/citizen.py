@@ -4,12 +4,14 @@ Citizen domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Citizen(BaseEntity):
     """National citizen record."""
+
     national_id: str = ""
     full_name: str = ""
     date_of_birth: Optional[str] = None
@@ -27,6 +29,7 @@ class Citizen(BaseEntity):
 @dataclass
 class DigitalCredential(BaseEntity):
     """Digital identity credential."""
+
     citizen_id: str = ""
     credential_type: str = ""
     credential_number: str = ""

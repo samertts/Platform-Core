@@ -3,39 +3,24 @@
 from __future__ import annotations
 
 import pytest
-from platform_core.knowledge.types import (
-    NodeType,
-    NodeStatus,
-    LifecycleStage,
-    RelationshipType,
-    RelationshipStatus,
-    QueryType,
-    ImpactLevel,
-    ChangeType,
-    SmellType,
-    RecommendationPriority,
-    HealthcareStandard,
-    HealthcareEntity,
-    EventType,
-    Node,
-    Edge,
-    GraphSnapshot,
-    TemporalEvent,
-    QueryResult,
-    ImpactReport,
-    ArchitectureSmell,
-    ArchitectureRecommendation,
-    HealthcareMapping,
-    AIReasoningResult,
-    GraphVisualization,
-    KnowledgeEngineConfig,
-    KnowledgeError,
-    NodeNotFoundError,
-    EdgeNotFoundError,
-    CircularDependencyError,
-    GraphConstraintError,
-    TemporalError,
-)
+
+from platform_core.knowledge.types import (AIReasoningResult,
+                                           ArchitectureRecommendation,
+                                           ArchitectureSmell, ChangeType,
+                                           CircularDependencyError, Edge,
+                                           EdgeNotFoundError, EventType,
+                                           GraphConstraintError, GraphSnapshot,
+                                           GraphVisualization,
+                                           HealthcareEntity, HealthcareMapping,
+                                           HealthcareStandard, ImpactLevel,
+                                           ImpactReport, KnowledgeEngineConfig,
+                                           KnowledgeError, LifecycleStage,
+                                           Node, NodeNotFoundError, NodeStatus,
+                                           NodeType, QueryResult, QueryType,
+                                           RecommendationPriority,
+                                           RelationshipStatus,
+                                           RelationshipType, SmellType,
+                                           TemporalError, TemporalEvent)
 
 
 class TestEnums:

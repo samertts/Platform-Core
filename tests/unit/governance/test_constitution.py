@@ -1,6 +1,7 @@
 """Unit tests for Constitution Enforcer."""
 
 import pytest
+
 from platform_core.governance.constitution import ConstitutionEnforcer
 
 
@@ -12,19 +13,33 @@ class TestConstitutionEnforcer:
     def test_validate_all_pass(self) -> None:
         ce = ConstitutionEnforcer()
         evidence = {
-            "has_readme": True, "manifest_present": True, "manifest_valid": True,
-            "api_documented": True, "no_shared_databases": True,
-            "dependencies_declared": True, "version_declared": True,
-            "discovery_compatible": True, "metadata_complete": True,
-            "uses_platform_services": True, "service_registration": True,
-            "event_driven": True, "event_documented": True,
-            "api_versioned": True, "health_endpoint": True,
-            "device_compatible": True, "ai_documented": True,
-            "ai_audit_trail": True, "metrics_collected": True,
-            "health_score_tracked": True, "logging_configured": True,
-            "telemetry_configured": True, "certification_process": True,
-            "quality_gates": True, "decision_logged": True,
-            "audit_trail": True, "production_business_logic_in_platform_core": False,
+            "has_readme": True,
+            "manifest_present": True,
+            "manifest_valid": True,
+            "api_documented": True,
+            "no_shared_databases": True,
+            "dependencies_declared": True,
+            "version_declared": True,
+            "discovery_compatible": True,
+            "metadata_complete": True,
+            "uses_platform_services": True,
+            "service_registration": True,
+            "event_driven": True,
+            "event_documented": True,
+            "api_versioned": True,
+            "health_endpoint": True,
+            "device_compatible": True,
+            "ai_documented": True,
+            "ai_audit_trail": True,
+            "metrics_collected": True,
+            "health_score_tracked": True,
+            "logging_configured": True,
+            "telemetry_configured": True,
+            "certification_process": True,
+            "quality_gates": True,
+            "decision_logged": True,
+            "audit_trail": True,
+            "production_business_logic_in_platform_core": False,
             "repository_independence": True,
         }
         report = ce.validate("repo", evidence)

@@ -12,7 +12,9 @@ class VersionConflict(Exception):
         self.package = package
         self.required = required
         self.installed = installed
-        super().__init__(f"Version conflict for {package}: required {required}, installed {installed}")
+        super().__init__(
+            f"Version conflict for {package}: required {required}, installed {installed}"
+        )
 
 
 class CircularDependencyError(Exception):
@@ -28,14 +30,20 @@ class DependencyResolver:
     OPERATOR_PATTERN = re.compile(r"^(>=|<=|!=|==|\^|~|>|<)(.+)$")
 
     def __init__(self) -> None:
-        self._graph: dict[str, dict[str, list[dict[str, Any]]]] = defaultdict(lambda: defaultdict(list))
+        self._graph: dict[str, dict[str, list[dict[str, Any]]]] = defaultdict(
+            lambda: defaultdict(list)
+        )
         self._resolved: dict[str, str] = {}
 
     def _parse_version(self, version: str) -> tuple[int, int, int, str | None]:
         match = self.VERSION_PATTERN.match(version)
         if not match:
             return (0, 0, 0, version)
-        major, minor, patch = int(match.group(1)), int(match.group(2)), int(match.group(3))
+        major, minor, patch = (
+            int(match.group(1)),
+            int(match.group(2)),
+            int(match.group(3)),
+        )
         pre = match.group(4)
         return (major, minor, patch, pre)
 
@@ -117,11 +125,13 @@ class DependencyResolver:
             visited.add(name)
             self._resolved[name] = resolved_version
 
-            resolution_order.append({
-                "name": name,
-                "version": resolved_version,
-                "type": dep_type,
-            })
+            resolution_order.append(
+                {
+                    "name": name,
+                    "version": resolved_version,
+                    "type": dep_type,
+                }
+            )
 
             for dep in self._graph.get(name, {}).get(resolved_version, []):
                 dfs(dep["name"], dep["version"], dep["type"])
@@ -138,7 +148,9 @@ class DependencyResolver:
                 return "0.1.0"
             return constraint.lstrip(">=<!^~")
 
-        for ver in sorted(available, key=lambda v: self._parse_version(v), reverse=True):
+        for ver in sorted(
+            available, key=lambda v: self._parse_version(v), reverse=True
+        ):
             if self._satisfies(ver, constraint):
                 return ver
 
@@ -220,11 +232,13 @@ class DependencyResolver:
         for dep_name, constraints in version_map.items():
             unique = list(set(constraints))
             if len(unique) > 1:
-                conflicts.append({
-                    "package": dep_name,
-                    "constraints": unique,
-                    "message": f"Multiple version constraints for {dep_name}: {unique}",
-                })
+                conflicts.append(
+                    {
+                        "package": dep_name,
+                        "constraints": unique,
+                        "message": f"Multiple version constraints for {dep_name}: {unique}",
+                    }
+                )
 
         return conflicts
 

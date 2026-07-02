@@ -17,21 +17,13 @@ from platform_core.governance.recommendations import RecommendationEngine
 from platform_core.governance.registry import GovernanceRegistry
 from platform_core.governance.reviews import ReviewManager
 from platform_core.governance.risk import RiskEngine
-from platform_core.governance.types import (
-    ComplianceStatus,
-    Decision,
-    DecisionType,
-    Finding,
-    FindingSeverity,
-    FindingStatus,
-    QualityGate,
-    QualityGateResult,
-    Recommendation,
-    Review,
-    ReviewStatus,
-    ReviewType,
-    RiskAssessment,
-)
+from platform_core.governance.types import (ComplianceStatus, Decision,
+                                            DecisionType, Finding,
+                                            FindingSeverity, FindingStatus,
+                                            QualityGate, QualityGateResult,
+                                            Recommendation, Review,
+                                            ReviewStatus, ReviewType,
+                                            RiskAssessment)
 
 
 class GovernanceError(Exception):
@@ -70,7 +62,9 @@ class GovernanceEngine:
         review_results: dict[str, Any] = {}
 
         for review_type in ReviewType:
-            review = self.reviews.create_review(repository=repository, review_type=review_type)
+            review = self.reviews.create_review(
+                repository=repository, review_type=review_type
+            )
             self.reviews.start_review(review.id)
             self.reviews.complete_review(review.id, score=0.8)
             review_results[review_type.value] = {"status": "completed", "score": 0.8}
@@ -82,7 +76,9 @@ class GovernanceEngine:
         }
 
         compliance_checks = self.compliance.validate_all_standards(repository)
-        compliance_report = self.compliance.generate_report(repository, compliance_checks)
+        compliance_report = self.compliance.generate_report(
+            repository, compliance_checks
+        )
         review_results["compliance"] = {
             "status": compliance_report.overall_status.value,
             "score": compliance_report.overall_score,
@@ -152,7 +148,9 @@ class GovernanceEngine:
             rationale="Quality gate passed, all checks satisfied",
         )
 
-        self.registry.record("approval", repository, "release_approved", actor=approved_by)
+        self.registry.record(
+            "approval", repository, "release_approved", actor=approved_by
+        )
 
         return {
             "approved": True,
@@ -178,7 +176,9 @@ class GovernanceEngine:
             rationale=rationale or "Release rejected by governance",
         )
 
-        self.registry.record("rejection", repository, "release_rejected", actor=rejected_by)
+        self.registry.record(
+            "rejection", repository, "release_rejected", actor=rejected_by
+        )
 
         return {
             "rejected": True,

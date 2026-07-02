@@ -1,96 +1,90 @@
-from __future__ import annotations
-
-import pytest
-
-from platform_core.runtime.container.engine import (
-    CircularDependencyError,
-    ServiceContainer,
-    ServiceScope,
-)
+from platform_core.runtime.container import ServiceContainer
 
 
-class DummyService:
+class IService:
     pass
 
 
-class AnotherService:
-    def __init__(self, dummy: DummyService) -> None:
-        self.dummy = dummy
+class Service(IService):
+
+    pass
 
 
-class TestServiceContainer:
-    def test_register_and_resolve(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        instance = container.resolve(DummyService)
-        assert isinstance(instance, DummyService)
+def test_register():
 
-    def test_register_instance(self) -> None:
-        container = ServiceContainer()
-        dummy = DummyService()
-        container.register_instance(DummyService, dummy)
-        resolved = container.resolve(DummyService)
-        assert resolved is dummy
+    container = ServiceContainer()
 
-    def test_singleton(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService, lifetime="singleton")
-        i1 = container.resolve(DummyService)
-        i2 = container.resolve(DummyService)
-        assert i1 is i2
+    container.register_singleton(
+        IService,
+        Service,
+    )
 
-    def test_transient(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService, lifetime="transient")
-        i1 = container.resolve(DummyService)
-        i2 = container.resolve(DummyService)
-        assert i1 is not i2
+    assert container.contains(IService)
 
-    def test_register_factory(self) -> None:
-        container = ServiceContainer()
-        container.register_factory(DummyService, lambda: DummyService())
-        instance = container.resolve(DummyService)
-        assert isinstance(instance, DummyService)
 
-    def test_resolve_unregistered(self) -> None:
-        container = ServiceContainer()
-        with pytest.raises(KeyError):
-            container.resolve(DummyService)
+def test_singleton():
 
-    def test_dependency_injection(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        container.register(AnotherService)
-        instance = container.resolve(AnotherService)
-        assert isinstance(instance, AnotherService)
-        assert isinstance(instance.dummy, DummyService)
+    container = ServiceContainer()
 
-    def test_validate_clean(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        errors = container.validate()
-        assert errors == []
+    container.register_singleton(
+        IService,
+        Service,
+    )
 
-    def test_create_scope(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService, lifetime="scoped")
-        scope = container.create_scope()
-        instance = scope.resolve(DummyService)
-        assert isinstance(instance, DummyService)
+    first = container.resolve(IService)
 
-    def test_get_registration(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        reg = container.get_registration(DummyService)
-        assert reg is not None
-        assert reg["service_type"] == "DummyService"
+    second = container.resolve(IService)
 
-    def test_registered_types(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        assert "DummyService" in container.registered_types
+    assert first is second
 
-    def test_dispose(self) -> None:
-        container = ServiceContainer()
-        container.register(DummyService)
-        container.dispose()
+
+def test_transient():
+
+    container = ServiceContainer()
+
+    container.register_transient(
+        IService,
+        Service,
+    )
+
+    first = container.resolve(IService)
+
+    second = container.resolve(IService)
+
+    assert first is not second
+import pytest
+
+from platform_core.runtime.container.exceptions import (
+    ServiceAlreadyRegisteredError,
+    ServiceNotRegisteredError,
+)
+
+
+def test_duplicate_registration():
+
+    container = ServiceContainer()
+
+    container.register_singleton(
+        IService,
+        Service,
+    )
+
+    with pytest.raises(
+        ServiceAlreadyRegisteredError
+    ):
+
+        container.register_singleton(
+            IService,
+            Service,
+        )
+
+
+def test_unknown_service():
+
+    container = ServiceContainer()
+
+    with pytest.raises(
+        ServiceNotRegisteredError
+    ):
+
+        container.resolve(IService)

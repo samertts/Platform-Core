@@ -4,12 +4,14 @@ Epidemiology domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Disease(BaseEntity):
     """Disease record."""
+
     name: str = ""
     icd_code: Optional[str] = None
     snomed_code: Optional[str] = None
@@ -23,6 +25,7 @@ class Disease(BaseEntity):
 @dataclass
 class Outbreak(BaseEntity):
     """Disease outbreak record."""
+
     disease_id: str = ""
     outbreak_name: str = ""
     start_date: str = ""

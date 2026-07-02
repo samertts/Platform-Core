@@ -4,12 +4,14 @@ Clinical domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Diagnosis(BaseEntity):
     """Diagnosis record."""
+
     patient_id: str = ""
     encounter_id: Optional[str] = None
     diagnosis_code: str = ""
@@ -24,6 +26,7 @@ class Diagnosis(BaseEntity):
 @dataclass
 class Procedure(BaseEntity):
     """Procedure record."""
+
     patient_id: str = ""
     encounter_id: str = ""
     procedure_code: str = ""
@@ -38,6 +41,7 @@ class Procedure(BaseEntity):
 @dataclass
 class Observation(BaseEntity):
     """Clinical observation record."""
+
     patient_id: str = ""
     encounter_id: Optional[str] = None
     observation_type: str = ""
@@ -53,6 +57,7 @@ class Observation(BaseEntity):
 @dataclass
 class VitalSigns(BaseEntity):
     """Vital signs record."""
+
     patient_id: str = ""
     encounter_id: Optional[str] = None
     temperature: Optional[float] = None

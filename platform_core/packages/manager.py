@@ -8,22 +8,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import (
-    InstallRecord,
-    InstallStatus,
-    PackageManifest,
-    PackageStatus,
-    RegistryEntry,
-)
 from platform_core.builder import PackageBuilder
 from platform_core.installer import ModuleInstaller
-from platform_core.resolver import DependencyResolver, CircularDependencyError, VersionConflict
+from platform_core.packages import (InstallRecord, InstallStatus,
+                                    PackageManifest, PackageStatus,
+                                    RegistryEntry)
+from platform_core.packages.compatibility import CompatibilityEngine
+from platform_core.registry import ModuleRegistry
+from platform_core.repository import RepositoryManager
+from platform_core.resolver import (CircularDependencyError,
+                                    DependencyResolver, VersionConflict)
 from platform_core.rollback import RollbackEngine
 from platform_core.updater import UpdateManager
 from platform_core.verifier import PackageVerifier
-from platform_core.registry import ModuleRegistry
-from platform_core.repository import RepositoryManager
-from platform_core.packages.compatibility import CompatibilityEngine
 
 
 class PackageError(Exception):

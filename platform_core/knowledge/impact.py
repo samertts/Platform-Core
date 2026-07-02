@@ -10,13 +10,8 @@ import threading
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    ChangeType,
-    ImpactLevel,
-    ImpactReport,
-    Node,
-    NodeType,
-)
+from platform_core.knowledge.types import (ChangeType, ImpactLevel,
+                                           ImpactReport, Node, NodeType)
 
 
 class ImpactAnalyzer:
@@ -130,9 +125,7 @@ class ImpactAnalyzer:
                 f"Plan deployment updates for {len(report.affected_deployments)} deployment(s)"
             )
         if report.affected_packages:
-            recs.append(
-                f"Rebuild {len(report.affected_packages)} affected package(s)"
-            )
+            recs.append(f"Rebuild {len(report.affected_packages)} affected package(s)")
         if not recs:
             recs.append("No specific recommendations - low impact change")
         return recs

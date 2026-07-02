@@ -1,8 +1,9 @@
 """Unit tests for Scanner."""
 
 import pytest
-from platform_core.discovery.scanner import Scanner, ScanError
-from platform_core.discovery.types import ScanType, ScanStatus
+
+from platform_core.discovery.scanner import ScanError, Scanner
+from platform_core.discovery.types import ScanStatus, ScanType
 
 
 class TestScanner:

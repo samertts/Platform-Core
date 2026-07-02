@@ -1,0 +1,85 @@
+version: 1
+
+project:
+
+  name: Platform-Core
+
+  owner: samertts
+
+  description: >
+    Enterprise software platform for building modular,
+    governed,
+    offline-first,
+    AI-assisted systems.
+
+engineering:
+
+  mode: enterprise
+
+  architecture: modular
+
+  language:
+
+    primary: python
+
+  governance: required
+
+  tests: mandatory
+
+  typing: mandatory
+
+  documentation: mandatory
+
+repository:
+
+  default_branch: main
+
+knowledge:
+
+  enabled: true
+
+capabilities:
+
+  enabled: true
+
+plugins:
+
+  enabled: true
+
+runtime:
+
+  enabled: true
+
+registry:
+
+  enabled: true
+
+learning:
+
+  enabled: true
+
+github:
+
+  analyze_repositories: true
+
+  import_patterns: true
+
+  import_architecture: true
+
+  import_tests: true
+
+  import_docs: true
+
+security:
+
+  never_execute_untrusted_code: true
+
+  require_review_before_import: true
+
+quality:
+
+  minimum_test_coverage: 90
+
+  fail_on_test_failure: true
+
+  fail_on_linter_failure: true

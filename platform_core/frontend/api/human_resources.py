@@ -3,6 +3,7 @@ Human Resources API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class ProfessionalClient(BaseEntityClient):
     """Client for Professional entity API."""
+
     client: APIClient
     entity_name: str = "professional"
     endpoint: str = "professionals"
@@ -27,6 +29,7 @@ class ProfessionalClient(BaseEntityClient):
 @dataclass
 class LicenseClient(BaseEntityClient):
     """Client for License entity API."""
+
     client: APIClient
     entity_name: str = "license"
     endpoint: str = "licenses"
@@ -38,7 +41,9 @@ class LicenseClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/verify/{license_number}")
 
     def suspend(self, license_id: str, reason: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{license_id}/suspend", data={"reason": reason})
+        return self.client.put(
+            f"{self.endpoint}/{license_id}/suspend", data={"reason": reason}
+        )
 
     def reinstate(self, license_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{license_id}/reinstate")
@@ -47,6 +52,7 @@ class LicenseClient(BaseEntityClient):
 @dataclass
 class OrganizationClient(BaseEntityClient):
     """Client for Organization entity API."""
+
     client: APIClient
     entity_name: str = "organization"
     endpoint: str = "organizations"
@@ -61,6 +67,7 @@ class OrganizationClient(BaseEntityClient):
 @dataclass
 class FacilityClient(BaseEntityClient):
     """Client for Facility entity API."""
+
     client: APIClient
     entity_name: str = "facility"
     endpoint: str = "facilities"
@@ -84,6 +91,7 @@ class FacilityClient(BaseEntityClient):
 @dataclass
 class DepartmentClient(BaseEntityClient):
     """Client for Department entity API."""
+
     client: APIClient
     entity_name: str = "department"
     endpoint: str = "departments"
@@ -98,6 +106,7 @@ class DepartmentClient(BaseEntityClient):
 @dataclass
 class RoomClient(BaseEntityClient):
     """Client for Room entity API."""
+
     client: APIClient
     entity_name: str = "room"
     endpoint: str = "rooms"
@@ -106,7 +115,9 @@ class RoomClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/department/{department_id}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
+        return self.client.get(
+            f"{self.endpoint}/available", params={"facility_id": facility_id}
+        )
 
     def get_beds(self, room_id: str) -> dict:
         return self.client.get(f"{self.endpoint}/{room_id}/beds")
@@ -115,6 +126,7 @@ class RoomClient(BaseEntityClient):
 @dataclass
 class BedClient(BaseEntityClient):
     """Client for Bed entity API."""
+
     client: APIClient
     entity_name: str = "bed"
     endpoint: str = "beds"
@@ -123,10 +135,14 @@ class BedClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/room/{room_id}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
+        return self.client.get(
+            f"{self.endpoint}/available", params={"facility_id": facility_id}
+        )
 
     def assign(self, bed_id: str, patient_id: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{bed_id}/assign", data={"patient_id": patient_id})
+        return self.client.put(
+            f"{self.endpoint}/{bed_id}/assign", data={"patient_id": patient_id}
+        )
 
     def release(self, bed_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{bed_id}/release")
@@ -135,6 +151,7 @@ class BedClient(BaseEntityClient):
 @dataclass
 class EmployeeClient(BaseEntityClient):
     """Client for Employee entity API."""
+
     client: APIClient
     entity_name: str = "employee"
     endpoint: str = "employees"
@@ -149,6 +166,7 @@ class EmployeeClient(BaseEntityClient):
 @dataclass
 class AttendanceClient(BaseEntityClient):
     """Client for Attendance entity API."""
+
     client: APIClient
     entity_name: str = "attendance"
     endpoint: str = "attendance"
@@ -157,15 +175,20 @@ class AttendanceClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/employee/{employee_id}")
 
     def clock_in(self, employee_id: str) -> dict:
-        return self.client.post(f"{self.endpoint}/clock-in", data={"employee_id": employee_id})
+        return self.client.post(
+            f"{self.endpoint}/clock-in", data={"employee_id": employee_id}
+        )
 
     def clock_out(self, employee_id: str) -> dict:
-        return self.client.put(f"{self.endpoint}/clock-out", data={"employee_id": employee_id})
+        return self.client.put(
+            f"{self.endpoint}/clock-out", data={"employee_id": employee_id}
+        )
 
 
 @dataclass
 class LeaveClient(BaseEntityClient):
     """Client for Leave entity API."""
+
     client: APIClient
     entity_name: str = "leave"
     endpoint: str = "leaves"
@@ -174,7 +197,11 @@ class LeaveClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/employee/{employee_id}")
 
     def approve(self, leave_id: str, approver_id: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{leave_id}/approve", data={"approver_id": approver_id})
+        return self.client.put(
+            f"{self.endpoint}/{leave_id}/approve", data={"approver_id": approver_id}
+        )
 
     def reject(self, leave_id: str, reason: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{leave_id}/reject", data={"reason": reason})
+        return self.client.put(
+            f"{self.endpoint}/{leave_id}/reject", data={"reason": reason}
+        )

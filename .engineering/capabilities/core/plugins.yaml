@@ -1,0 +1,45 @@
+id: plugins
+
+name: Plugin Framework
+
+owner: platform_core.plugins
+
+status: active
+
+description: >
+  Responsible for discovering, validating, loading,
+  and managing plugins within Platform-Core.
+
+provides:
+  - plugin_loading
+  - plugin_discovery
+  - plugin_validation
+  - plugin_lifecycle
+
+depends_on:
+  - runtime
+  - registry
+
+required_by:
+  - automation
+  - packages
+
+quality:
+  tests: required
+  documentation: required
+  typing: strict
+  coverage: ">=95"
+
+governance:
+  api_stable: true
+  breaking_changes: prohibited
+  review_required: true
+
+metrics:
+  priority: high
+  availability: high
+
+tags:
+  - plugins
+  - extension
+  - framework

@@ -38,9 +38,7 @@ class TestTelemetryEngine:
     @pytest.mark.asyncio
     async def test_health_check(self) -> None:
         engine = TelemetryEngine()
-        engine.register_health_check(
-            "test", lambda: {"status": "healthy"}
-        )
+        engine.register_health_check("test", lambda: {"status": "healthy"})
         result = await engine.health_check()
         assert result["status"] == "healthy"
         assert "test" in result["components"]

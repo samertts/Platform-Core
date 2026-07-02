@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import json
-import tempfile
 import os
+import tempfile
 
 import pytest
 
-from platform_core.runtime.policy.engine import Policy, PolicyEngine, PolicyResult
+from platform_core.runtime.policy.engine import (Policy, PolicyEngine,
+                                                 PolicyResult)
 
 
 class TestPolicyEngine:
@@ -80,9 +81,7 @@ class TestPolicyEngine:
 
     def test_load_json_policies(self) -> None:
         engine = PolicyEngine()
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".json", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
             json.dump(
                 {
                     "policies": [

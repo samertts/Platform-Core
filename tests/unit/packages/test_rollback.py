@@ -1,8 +1,9 @@
 """Unit tests for Rollback Engine."""
 
 import pytest
-from platform_core.rollback import RollbackEngine, RollbackError, SnapshotError
+
 from platform_core.packages import InstallRecord, InstallStatus
+from platform_core.rollback import RollbackEngine, RollbackError, SnapshotError
 
 
 def _make_record(tmp_path, name="pkg", version="1.0.0"):

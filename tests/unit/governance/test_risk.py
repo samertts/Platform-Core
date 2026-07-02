@@ -1,8 +1,10 @@
 """Unit tests for Risk Engine."""
 
 import pytest
+
 from platform_core.governance.risk import RiskEngine
-from platform_core.governance.types import Finding, FindingSeverity, RiskCategory, RiskLevel
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            RiskCategory, RiskLevel)
 
 
 class TestRiskEngine:
@@ -46,8 +48,12 @@ class TestRiskEngine:
 
     def test_risk_summary(self) -> None:
         re = RiskEngine()
-        re.assess_risk("repo", RiskCategory.SECURITY, [
-            Finding(severity=FindingSeverity.HIGH, category="security"),
-        ])
+        re.assess_risk(
+            "repo",
+            RiskCategory.SECURITY,
+            [
+                Finding(severity=FindingSeverity.HIGH, category="security"),
+            ],
+        )
         summary = re.get_risk_summary("repo")
         assert summary["total_assessments"] == 1

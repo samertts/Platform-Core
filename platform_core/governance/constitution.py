@@ -6,14 +6,9 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    ConstitutionReport,
-    Finding,
-    FindingSeverity,
-    FindingStatus,
-    Recommendation,
-    ReviewType,
-)
+from platform_core.governance.types import (ConstitutionReport, Finding,
+                                            FindingSeverity, FindingStatus,
+                                            Recommendation, ReviewType)
 
 
 class ConstitutionEnforcer:
@@ -83,8 +78,16 @@ class ConstitutionEnforcer:
     }
 
     PROHIBITED_PATTERNS = [
-        {"pattern": "shared_database", "severity": FindingSeverity.CRITICAL, "message": "Shared database detected (Prohibition XVII)"},
-        {"pattern": "production_business_logic", "severity": FindingSeverity.HIGH, "message": "Production business logic in platform core (Prohibition XVII)"},
+        {
+            "pattern": "shared_database",
+            "severity": FindingSeverity.CRITICAL,
+            "message": "Shared database detected (Prohibition XVII)",
+        },
+        {
+            "pattern": "production_business_logic",
+            "severity": FindingSeverity.HIGH,
+            "message": "Production business logic in platform core (Prohibition XVII)",
+        },
     ]
 
     def __init__(self) -> None:
@@ -121,15 +124,17 @@ class ConstitutionEnforcer:
                         recommendation=f"Implement {check} to comply with Article {article_id}",
                     )
                     violations.append(finding)
-                    recommendations.append(Recommendation(
-                        finding_id=finding.id,
-                        repository=repository,
-                        category="constitution",
-                        priority=3,
-                        title=f"Comply with Article {article_id}: {article['title']}",
-                        description=f"Implement {check}",
-                        estimated_effort="2-4 hours",
-                    ))
+                    recommendations.append(
+                        Recommendation(
+                            finding_id=finding.id,
+                            repository=repository,
+                            category="constitution",
+                            priority=3,
+                            title=f"Comply with Article {article_id}: {article['title']}",
+                            description=f"Implement {check}",
+                            estimated_effort="2-4 hours",
+                        )
+                    )
 
             if article_passed:
                 articles_passed += 1
@@ -164,9 +169,7 @@ class ConstitutionEnforcer:
             results = [r for r in results if r.repository == repository]
         return results
 
-    def get_article_status(
-        self, repository: str, article_id: str
-    ) -> dict[str, Any]:
+    def get_article_status(self, repository: str, article_id: str) -> dict[str, Any]:
         article = self.ARTICLES.get(article_id)
         if article is None:
             return {"error": f"Article {article_id} not found"}

@@ -1,6 +1,7 @@
 """Unit tests for Compliance Engine."""
 
 import pytest
+
 from platform_core.governance.compliance import ComplianceEngine
 from platform_core.governance.types import ComplianceStatus
 
@@ -13,8 +14,11 @@ class TestComplianceEngine:
     def test_validate_standard_pass(self) -> None:
         ce = ComplianceEngine()
         evidence = {
-            "has_manifest": True, "manifest_valid": True,
-            "no_shared_databases": True, "api_documented": True, "event_driven": True,
+            "has_manifest": True,
+            "manifest_valid": True,
+            "no_shared_databases": True,
+            "api_documented": True,
+            "event_driven": True,
         }
         check = ce.validate_standard("repo", "constitution", evidence)
         assert check.status == ComplianceStatus.COMPLIANT
@@ -23,8 +27,10 @@ class TestComplianceEngine:
     def test_validate_standard_partial(self) -> None:
         ce = ComplianceEngine()
         evidence = {
-            "manifest_present": True, "manifest_valid_schema": True,
-            "dependencies_declared": True, "capabilities_declared": False,
+            "manifest_present": True,
+            "manifest_valid_schema": True,
+            "dependencies_declared": True,
+            "capabilities_declared": False,
             "compatibility_declared": False,
         }
         check = ce.validate_standard("repo", "manifest_spec", evidence)
@@ -50,7 +56,11 @@ class TestComplianceEngine:
         checks = ce.validate_all_standards("repo")
         report = ce.generate_report("repo", checks)
         assert report.repository == "repo"
-        assert report.overall_status in (ComplianceStatus.COMPLIANT, ComplianceStatus.NON_COMPLIANT, ComplianceStatus.PARTIAL)
+        assert report.overall_status in (
+            ComplianceStatus.COMPLIANT,
+            ComplianceStatus.NON_COMPLIANT,
+            ComplianceStatus.PARTIAL,
+        )
 
     def test_list_checks(self) -> None:
         ce = ComplianceEngine()

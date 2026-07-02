@@ -4,12 +4,14 @@ Blood Bank domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Donation(BaseEntity):
     """Blood donation record."""
+
     donor_id: str = ""
     donation_date: str = ""
     facility_id: str = ""
@@ -23,6 +25,7 @@ class Donation(BaseEntity):
 @dataclass
 class BloodUnit(BaseEntity):
     """Blood unit record."""
+
     donation_id: str = ""
     blood_type: str = ""
     component_type: str = ""
@@ -37,6 +40,7 @@ class BloodUnit(BaseEntity):
 @dataclass
 class Transfusion(BaseEntity):
     """Blood transfusion record."""
+
     patient_id: str = ""
     blood_unit_id: str = ""
     transfusion_date: str = ""

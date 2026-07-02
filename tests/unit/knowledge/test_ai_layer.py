@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
+from platform_core.knowledge.ai_layer import AIKnowledgeLayer
+from platform_core.knowledge.edges import EdgeManager
 from platform_core.knowledge.graph import GraphStore
 from platform_core.knowledge.nodes import NodeManager
-from platform_core.knowledge.edges import EdgeManager
-from platform_core.knowledge.ai_layer import AIKnowledgeLayer
-from platform_core.knowledge.types import (
-    NodeType,
-    RelationshipType,
-)
+from platform_core.knowledge.types import NodeType, RelationshipType
 
 
 class TestAIKnowledgeLayer:
@@ -121,7 +118,8 @@ class TestAIKnowledgeLayer:
     def test_reason_healthcare(self) -> None:
         nodes, _, ai = self._setup()
         node = nodes.create_node(
-            NodeType.HEALTHCARE_STANDARD, "FHIR",
+            NodeType.HEALTHCARE_STANDARD,
+            "FHIR",
             labels=["fhir", "hl7"],
         )
         result = ai.reason_healthcare("healthcare analysis", node.id)

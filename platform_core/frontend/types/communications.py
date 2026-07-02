@@ -4,12 +4,14 @@ Communications domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Correspondence(BaseEntity):
     """Official correspondence record."""
+
     sender_id: str = ""
     sender_type: str = ""
     recipient_id: str = ""

@@ -8,7 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import RegistryEntry, RepositoryConfig, RepositoryType
+from platform_core.packages import (RegistryEntry, RepositoryConfig,
+                                    RepositoryType)
 
 
 class RepositoryError(Exception):

@@ -1,0 +1,33 @@
+id: engineering_health
+
+name: Engineering Health
+
+kind: capability
+
+version: "1.0.0"
+
+status: stable
+
+owner: platform_core.quality
+
+description: >
+  Analyzes project quality, duplication,
+  architecture violations,
+  dead code,
+  and engineering health.
+
+depends_on:
+  - registry
+  - governance
+
+provides:
+  - duplicate_detection
+  - dead_code_detection
+  - architecture_validation
+  - unused_imports
+  - orphan_modules
+
+tags:
+  - quality
+  - engineering
+  - analysis

@@ -3,6 +3,7 @@ Epidemiology API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class DiseaseClient(BaseEntityClient):
     """Client for Disease entity API."""
+
     client: APIClient
     entity_name: str = "disease"
     endpoint: str = "diseases"
@@ -27,6 +29,7 @@ class DiseaseClient(BaseEntityClient):
 @dataclass
 class OutbreakClient(BaseEntityClient):
     """Client for Outbreak entity API."""
+
     client: APIClient
     entity_name: str = "outbreak"
     endpoint: str = "outbreaks"
@@ -43,5 +46,10 @@ class OutbreakClient(BaseEntityClient):
     def resolve(self, outbreak_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{outbreak_id}/resolve")
 
-    def update_cases(self, outbreak_id: str, cases_count: int, deaths_count: int) -> dict:
-        return self.client.put(f"{self.endpoint}/{outbreak_id}/update-cases", data={"cases_count": cases_count, "deaths_count": deaths_count})
+    def update_cases(
+        self, outbreak_id: str, cases_count: int, deaths_count: int
+    ) -> dict:
+        return self.client.put(
+            f"{self.endpoint}/{outbreak_id}/update-cases",
+            data={"cases_count": cases_count, "deaths_count": deaths_count},
+        )

@@ -9,20 +9,13 @@ from __future__ import annotations
 from typing import Any
 
 from platform_core.knowledge.engine import KnowledgeEngine
-from platform_core.knowledge.types import (
-    ChangeType,
-    HealthcareStandard,
-    HealthcareEntity,
-    ImpactLevel,
-    LifecycleStage,
-    NodeStatus,
-    NodeType,
-    QueryType,
-    RelationshipType,
-    KnowledgeError,
-    NodeNotFoundError,
-    EdgeNotFoundError,
-)
+from platform_core.knowledge.types import (ChangeType, EdgeNotFoundError,
+                                           HealthcareEntity,
+                                           HealthcareStandard, ImpactLevel,
+                                           KnowledgeError, LifecycleStage,
+                                           NodeNotFoundError, NodeStatus,
+                                           NodeType, QueryType,
+                                           RelationshipType)
 
 
 class KnowledgeAPI:
@@ -43,8 +36,13 @@ class KnowledgeAPI:
     ) -> dict[str, Any]:
         nt = NodeType(node_type)
         node = self._engine.create_node(
-            nt, name, version=version, owner=owner,
-            metadata=metadata, labels=labels, tags=tags,
+            nt,
+            name,
+            version=version,
+            owner=owner,
+            metadata=metadata,
+            labels=labels,
+            tags=tags,
         )
         return {"status": "created", "node": node.to_dict()}
 
@@ -85,7 +83,11 @@ class KnowledgeAPI:
     ) -> dict[str, Any]:
         rt = RelationshipType(relationship_type)
         edge = self._engine.create_relationship(
-            source_id, target_id, rt, confidence=confidence, metadata=metadata,
+            source_id,
+            target_id,
+            rt,
+            confidence=confidence,
+            metadata=metadata,
         )
         return {"status": "created", "edge": edge.to_dict()}
 
@@ -105,13 +107,17 @@ class KnowledgeAPI:
     ) -> dict[str, Any]:
         rt = RelationshipType(relationship_type) if relationship_type else None
         edges = self._engine.edges.list_edges(
-            source_id=source_id, target_id=target_id, relationship_type=rt,
+            source_id=source_id,
+            target_id=target_id,
+            relationship_type=rt,
         )
         return {"edges": [e.to_dict() for e in edges], "count": len(edges)}
 
     def dependency_analysis(self, node_id: str, max_depth: int = 10) -> dict[str, Any]:
         result = self._engine.query(
-            QueryType.DEPENDENCY_ANALYSIS, node_id, max_depth=max_depth,
+            QueryType.DEPENDENCY_ANALYSIS,
+            node_id,
+            max_depth=max_depth,
         )
         return {
             "nodes": [n.to_dict() for n in result.nodes],
@@ -119,7 +125,9 @@ class KnowledgeAPI:
             "execution_time_ms": result.execution_time_ms,
         }
 
-    def impact_analysis(self, node_id: str, change_type: str = "modify") -> dict[str, Any]:
+    def impact_analysis(
+        self, node_id: str, change_type: str = "modify"
+    ) -> dict[str, Any]:
         ct = ChangeType(change_type)
         report = self._engine.analyze_impact(node_id, ct)
         return {
@@ -139,7 +147,9 @@ class KnowledgeAPI:
 
     def shortest_path(self, source_id: str, target_id: str) -> dict[str, Any]:
         result = self._engine.query(
-            QueryType.SHORTEST_PATH, source_id, target_id=target_id,
+            QueryType.SHORTEST_PATH,
+            source_id,
+            target_id=target_id,
         )
         return {
             "paths": result.paths,
@@ -156,7 +166,9 @@ class KnowledgeAPI:
 
     def architecture_navigation(self, node_id: str, depth: int = 3) -> dict[str, Any]:
         result = self._engine.query(
-            QueryType.ARCHITECTURE_NAVIGATION, node_id, depth=depth,
+            QueryType.ARCHITECTURE_NAVIGATION,
+            node_id,
+            depth=depth,
         )
         return {
             "nodes": [n.to_dict() for n in result.nodes],

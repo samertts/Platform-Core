@@ -1,8 +1,10 @@
 """Unit tests for Quality Gate Engine."""
 
 import pytest
+
 from platform_core.governance.quality import QualityGateEngine
-from platform_core.governance.types import Finding, FindingSeverity, FindingStatus, QualityGateResult
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            FindingStatus, QualityGateResult)
 
 
 class TestQualityGateEngine:
@@ -13,8 +15,11 @@ class TestQualityGateEngine:
     def test_evaluate_pass(self) -> None:
         qge = QualityGateEngine()
         gate = qge.evaluate(
-            repository="repo", version="1.0.0", findings=[],
-            coverage_percent=0.90, security_passed=True,
+            repository="repo",
+            version="1.0.0",
+            findings=[],
+            coverage_percent=0.90,
+            security_passed=True,
         )
         assert gate.result == QualityGateResult.PASSED
         assert gate.coverage_met is True

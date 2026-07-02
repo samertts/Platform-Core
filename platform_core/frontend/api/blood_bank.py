@@ -3,6 +3,7 @@ Blood Bank API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class DonationClient(BaseEntityClient):
     """Client for Donation entity API."""
+
     client: APIClient
     entity_name: str = "donation"
     endpoint: str = "donations"
@@ -24,6 +26,7 @@ class DonationClient(BaseEntityClient):
 @dataclass
 class BloodUnitClient(BaseEntityClient):
     """Client for BloodUnit entity API."""
+
     client: APIClient
     entity_name: str = "blood_unit"
     endpoint: str = "blood-units"
@@ -32,18 +35,27 @@ class BloodUnitClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/blood-type/{blood_type}")
 
     def get_available(self, facility_id: str) -> dict:
-        return self.client.get(f"{self.endpoint}/available", params={"facility_id": facility_id})
+        return self.client.get(
+            f"{self.endpoint}/available", params={"facility_id": facility_id}
+        )
 
     def get_expiring(self, facility_id: str, days: int = 7) -> dict:
-        return self.client.get(f"{self.endpoint}/expiring", params={"facility_id": facility_id, "days": days})
+        return self.client.get(
+            f"{self.endpoint}/expiring",
+            params={"facility_id": facility_id, "days": days},
+        )
 
     def crossmatch(self, blood_unit_id: str, patient_id: str) -> dict:
-        return self.client.post(f"{self.endpoint}/{blood_unit_id}/crossmatch", data={"patient_id": patient_id})
+        return self.client.post(
+            f"{self.endpoint}/{blood_unit_id}/crossmatch",
+            data={"patient_id": patient_id},
+        )
 
 
 @dataclass
 class TransfusionClient(BaseEntityClient):
     """Client for Transfusion entity API."""
+
     client: APIClient
     entity_name: str = "transfusion"
     endpoint: str = "transfusions"
@@ -55,4 +67,6 @@ class TransfusionClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/blood-unit/{blood_unit_id}")
 
     def record_reaction(self, transfusion_id: str, reaction: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{transfusion_id}/reaction", data={"reaction": reaction})
+        return self.client.put(
+            f"{self.endpoint}/{transfusion_id}/reaction", data={"reaction": reaction}
+        )

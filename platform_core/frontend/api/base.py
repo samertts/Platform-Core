@@ -3,7 +3,8 @@ Base entity client for NHDOS Frontend
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Optional, TypeVar, Generic
+from typing import Any, Generic, Optional, TypeVar
+
 from .client import APIClient
 
 T = TypeVar("T")
@@ -12,11 +13,14 @@ T = TypeVar("T")
 @dataclass
 class BaseEntityClient(Generic[T]):
     """Base client for entity CRUD operations."""
+
     client: APIClient
     entity_name: str = ""
     endpoint: str = ""
 
-    def list(self, page: int = 1, page_size: int = 20, filters: Optional[dict] = None) -> dict:
+    def list(
+        self, page: int = 1, page_size: int = 20, filters: Optional[dict] = None
+    ) -> dict:
         params = {"page": page, "page_size": page_size}
         if filters:
             params.update(filters)

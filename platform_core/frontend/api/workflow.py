@@ -3,6 +3,7 @@ Workflow API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class WorkflowClient(BaseEntityClient):
     """Client for Workflow entity API."""
+
     client: APIClient
     entity_name: str = "workflow"
     endpoint: str = "workflows"
@@ -30,6 +32,7 @@ class WorkflowClient(BaseEntityClient):
 @dataclass
 class WorkflowStepClient(BaseEntityClient):
     """Client for WorkflowStep entity API."""
+
     client: APIClient
     entity_name: str = "workflow_step"
     endpoint: str = "workflow-steps"
@@ -41,12 +44,15 @@ class WorkflowStepClient(BaseEntityClient):
         return self.client.put(f"{self.endpoint}/{step_id}/complete", data=result)
 
     def skip(self, step_id: str, reason: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{step_id}/skip", data={"reason": reason})
+        return self.client.put(
+            f"{self.endpoint}/{step_id}/skip", data={"reason": reason}
+        )
 
 
 @dataclass
 class TaskClient(BaseEntityClient):
     """Client for Task entity API."""
+
     client: APIClient
     entity_name: str = "task"
     endpoint: str = "tasks"
@@ -58,10 +64,14 @@ class TaskClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/assignee/{assignee_id}")
 
     def assign(self, task_id: str, assignee_id: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{task_id}/assign", data={"assignee_id": assignee_id})
+        return self.client.put(
+            f"{self.endpoint}/{task_id}/assign", data={"assignee_id": assignee_id}
+        )
 
     def complete(self, task_id: str) -> dict:
         return self.client.put(f"{self.endpoint}/{task_id}/complete")
 
     def get_pending(self, assignee_id: str) -> dict:
-        return self.client.get(f"{self.endpoint}/pending", params={"assignee_id": assignee_id})
+        return self.client.get(
+            f"{self.endpoint}/pending", params={"assignee_id": assignee_id}
+        )

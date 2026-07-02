@@ -7,7 +7,7 @@ import json
 import sys
 from typing import Any
 
-from platform_core.packages.manager import PackageManager, PackageError
+from platform_core.packages.manager import PackageError, PackageManager
 
 
 class PlatformCLI:
@@ -59,7 +59,9 @@ class PlatformCLI:
         rollback.add_argument("package", help="Package name")
 
         registry = subparsers.add_parser("registry", help="Registry operations")
-        registry.add_argument("action", choices=["list", "count", "stats"], help="Registry action")
+        registry.add_argument(
+            "action", choices=["list", "count", "stats"], help="Registry action"
+        )
 
         return parser
 

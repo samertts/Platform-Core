@@ -1,6 +1,7 @@
 """Unit tests for Finding Manager."""
 
 import pytest
+
 from platform_core.governance.findings import FindingManager
 from platform_core.governance.types import FindingSeverity, FindingStatus
 
@@ -13,8 +14,11 @@ class TestFindingManager:
     def test_create_finding(self) -> None:
         fm = FindingManager()
         f = fm.create_finding(
-            repository="repo", severity=FindingSeverity.CRITICAL,
-            category="security", title="test", description="desc",
+            repository="repo",
+            severity=FindingSeverity.CRITICAL,
+            category="security",
+            title="test",
+            description="desc",
         )
         assert f.repository == "repo"
         assert f.severity == FindingSeverity.CRITICAL

@@ -6,13 +6,15 @@ Reusable hooks for frontend state management
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Optional, Callable
+from typing import Any, Callable, Optional
+
 from ..types.base import ApiResponse, PaginatedResponse
 
 
 @dataclass
 class UseState:
     """State management hook."""
+
     value: Any = None
     setter: Optional[Callable] = None
 
@@ -25,6 +27,7 @@ class UseState:
 @dataclass
 class UseEffect:
     """Side effect hook."""
+
     dependencies: list[Any] = field(default_factory=list)
     cleanup: Optional[Callable] = None
     effect: Optional[Callable] = None
@@ -33,6 +36,7 @@ class UseEffect:
 @dataclass
 class UseCallback:
     """Memoized callback hook."""
+
     callback: Optional[Callable] = None
     dependencies: list[Any] = field(default_factory=list)
 
@@ -40,6 +44,7 @@ class UseCallback:
 @dataclass
 class UseMemo:
     """Memoized value hook."""
+
     value: Any = None
     dependencies: list[Any] = field(default_factory=list)
 
@@ -47,6 +52,7 @@ class UseMemo:
 @dataclass
 class UseQuery:
     """Data fetching hook."""
+
     data: Any = None
     error: Optional[str] = None
     loading: bool = False
@@ -56,6 +62,7 @@ class UseQuery:
 @dataclass
 class UseMutation:
     """Data mutation hook."""
+
     data: Any = None
     error: Optional[str] = None
     loading: bool = False

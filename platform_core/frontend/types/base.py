@@ -11,6 +11,7 @@ from uuid import uuid4
 @dataclass
 class BaseEntity:
     """Base entity for all NHDOS domain entities."""
+
     id: str = field(default_factory=lambda: str(uuid4()))
     version: str = "1.0.0"
     created_at: datetime = field(default_factory=datetime.utcnow)
@@ -24,6 +25,7 @@ class BaseEntity:
 @dataclass
 class BaseRelationship:
     """Base relationship between entities."""
+
     id: str = field(default_factory=lambda: str(uuid4()))
     source_id: str = ""
     target_id: str = ""
@@ -35,6 +37,7 @@ class BaseRelationship:
 @dataclass
 class BaseEvent:
     """Base domain event."""
+
     id: str = field(default_factory=lambda: str(uuid4()))
     event_type: str = ""
     entity_type: str = ""
@@ -47,6 +50,7 @@ class BaseEvent:
 @dataclass
 class PaginationParams:
     """Pagination parameters for list queries."""
+
     page: int = 1
     page_size: int = 20
     sort_by: str = "created_at"
@@ -56,6 +60,7 @@ class PaginationParams:
 @dataclass
 class PaginatedResponse:
     """Paginated response wrapper."""
+
     items: list[Any] = field(default_factory=list)
     total: int = 0
     page: int = 1
@@ -66,6 +71,7 @@ class PaginatedResponse:
 @dataclass
 class ApiResponse:
     """Standard API response wrapper."""
+
     success: bool = True
     data: Any = None
     error: Optional[str] = None

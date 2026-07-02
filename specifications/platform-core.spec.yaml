@@ -1,0 +1,46 @@
+name: Platform-Core
+
+version: 0.1.0
+
+status: Genesis
+
+architecture: Knowledge Driven
+
+kernel:
+enabled: true
+
+runtime:
+enabled: true
+
+forge:
+enabled: false
+
+builders:
+enabled: false
+
+knowledge:
+enabled: false
+
+security:
+enabled: true
+
+observability:
+enabled: true
+
+contracts:
+enabled: true
+
+manifest:
+enabled: true
+
+target_languages:
+
+* Python
+
+target_platforms:
+
+* Linux
+* Windows
+* macOS
+
+license: Apache-2.0

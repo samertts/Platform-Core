@@ -1,6 +1,7 @@
 """Unit tests for Governance API."""
 
 import pytest
+
 from platform_core.governance.api import GovernanceAPI
 
 
@@ -17,8 +18,14 @@ class TestGovernanceAPI:
     def test_approve_release(self) -> None:
         api = GovernanceAPI()
         result = api.approve_release(
-            "repo", "1.0.0", "alice",
-            evidence={"coverage_percent": 0.90, "security_passed": True, "manifest_valid": True},
+            "repo",
+            "1.0.0",
+            "alice",
+            evidence={
+                "coverage_percent": 0.90,
+                "security_passed": True,
+                "manifest_valid": True,
+            },
         )
         assert result["approved"] is True
 
@@ -45,7 +52,11 @@ class TestGovernanceAPI:
     def test_create_finding(self) -> None:
         api = GovernanceAPI()
         result = api.create_finding(
-            "repo", "high", "security", "Test finding", "Description",
+            "repo",
+            "high",
+            "security",
+            "Test finding",
+            "Description",
         )
         assert "id" in result
         assert result["severity"] == "high"

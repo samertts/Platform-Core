@@ -11,10 +11,10 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
-
 # ---------------------------------------------------------------------------
 # Node Types
 # ---------------------------------------------------------------------------
+
 
 class NodeType(str, Enum):
     REPOSITORY = "repository"
@@ -66,6 +66,7 @@ class LifecycleStage(str, Enum):
 # Relationship Types
 # ---------------------------------------------------------------------------
 
+
 class RelationshipType(str, Enum):
     DEPENDS_ON = "depends_on"
     USES = "uses"
@@ -102,6 +103,7 @@ class RelationshipStatus(str, Enum):
 # Query Types
 # ---------------------------------------------------------------------------
 
+
 class QueryType(str, Enum):
     DEPENDENCY_ANALYSIS = "dependency_analysis"
     IMPACT_ANALYSIS = "impact_analysis"
@@ -120,6 +122,7 @@ class QueryType(str, Enum):
 # ---------------------------------------------------------------------------
 # Impact Types
 # ---------------------------------------------------------------------------
+
 
 class ImpactLevel(str, Enum):
     NONE = "none"
@@ -141,6 +144,7 @@ class ChangeType(str, Enum):
 # ---------------------------------------------------------------------------
 # Architecture Intelligence Types
 # ---------------------------------------------------------------------------
+
 
 class SmellType(str, Enum):
     ORPHAN_SERVICE = "orphan_service"
@@ -168,6 +172,7 @@ class RecommendationPriority(str, Enum):
 # ---------------------------------------------------------------------------
 # Healthcare Types
 # ---------------------------------------------------------------------------
+
 
 class HealthcareStandard(str, Enum):
     HL7 = "hl7"
@@ -199,6 +204,7 @@ class HealthcareEntity(str, Enum):
 # Temporal Types
 # ---------------------------------------------------------------------------
 
+
 class EventType(str, Enum):
     NODE_CREATED = "node_created"
     NODE_UPDATED = "node_updated"
@@ -215,9 +221,11 @@ class EventType(str, Enum):
 # Data Classes
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class Node:
     """A node in the knowledge graph."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     node_type: NodeType = NodeType.MODULE
     name: str = ""
@@ -253,6 +261,7 @@ class Node:
 @dataclass
 class Edge:
     """A relationship edge in the knowledge graph."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     source_id: str = ""
     target_id: str = ""
@@ -288,6 +297,7 @@ class Edge:
 @dataclass
 class GraphSnapshot:
     """A point-in-time snapshot of the graph."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     description: str = ""
@@ -301,6 +311,7 @@ class GraphSnapshot:
 @dataclass
 class TemporalEvent:
     """An event in the temporal history."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     event_type: EventType = EventType.NODE_CREATED
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
@@ -314,6 +325,7 @@ class TemporalEvent:
 @dataclass
 class QueryResult:
     """Result from a graph query."""
+
     query_type: QueryType = QueryType.DEPENDENCY_ANALYSIS
     nodes: list[Node] = field(default_factory=list)
     edges: list[Edge] = field(default_factory=list)
@@ -325,6 +337,7 @@ class QueryResult:
 @dataclass
 class ImpactReport:
     """Impact analysis report."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     change_type: ChangeType = ChangeType.MODIFY
     source_node_id: str = ""
@@ -347,6 +360,7 @@ class ImpactReport:
 @dataclass
 class ArchitectureSmell:
     """An architectural smell detected by the intelligence engine."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     smell_type: SmellType = SmellType.ORPHAN_SERVICE
     description: str = ""
@@ -360,6 +374,7 @@ class ArchitectureSmell:
 @dataclass
 class ArchitectureRecommendation:
     """A recommendation from architecture intelligence."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     priority: RecommendationPriority = RecommendationPriority.MEDIUM
     title: str = ""
@@ -373,6 +388,7 @@ class ArchitectureRecommendation:
 @dataclass
 class HealthcareMapping:
     """Mapping between a graph node and a healthcare standard."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     node_id: str = ""
     standard: HealthcareStandard = HealthcareStandard.FHIR
@@ -386,6 +402,7 @@ class HealthcareMapping:
 @dataclass
 class AIReasoningResult:
     """Result from AI reasoning layer."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     reasoning_type: str = ""
     question: str = ""
@@ -401,6 +418,7 @@ class AIReasoningResult:
 @dataclass
 class GraphVisualization:
     """A graph visualization output."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     title: str = ""
     graph_type: str = ""
@@ -426,6 +444,7 @@ class GraphVisualization:
 @dataclass
 class KnowledgeEngineConfig:
     """Configuration for the Knowledge Engine."""
+
     max_nodes: int = 100000
     max_edges: int = 500000
     enable_temporal: bool = True
@@ -440,6 +459,7 @@ class KnowledgeEngineConfig:
 # ---------------------------------------------------------------------------
 # Exceptions
 # ---------------------------------------------------------------------------
+
 
 class KnowledgeError(Exception):
     """Base exception for knowledge graph operations."""

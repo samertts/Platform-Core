@@ -45,9 +45,7 @@ class TestConfigurationEngine:
 
     @pytest.mark.asyncio
     async def test_load_json_file(self, engine: ConfigurationEngine) -> None:
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".json", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
             f.write('{"database": {"url": "sqlite:///test.db"}}')
             f.flush()
             try:
@@ -58,9 +56,7 @@ class TestConfigurationEngine:
 
     @pytest.mark.asyncio
     async def test_load_yaml_file(self, engine: ConfigurationEngine) -> None:
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".yaml", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
             f.write("database:\n  url: sqlite:///test.yaml.db\n")
             f.flush()
             try:

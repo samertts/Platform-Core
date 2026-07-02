@@ -6,7 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import Finding, FindingSeverity, FindingStatus
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            FindingStatus)
 
 
 class FindingManager:
@@ -63,9 +64,7 @@ class FindingManager:
                 finding.resolved_at = datetime.now(timezone.utc)
             return finding
 
-    def update_finding(
-        self, finding_id: str, **kwargs: Any
-    ) -> Finding | None:
+    def update_finding(self, finding_id: str, **kwargs: Any) -> Finding | None:
         with self._lock:
             finding = self._findings.get(finding_id)
             if finding is None:

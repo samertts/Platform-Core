@@ -1,0 +1,21 @@
+bootstrap:
+
+create_readme: true
+
+create_tests: true
+
+create_manifest: true
+
+create_contracts: true
+
+create_examples: true
+
+create_docs: true
+
+create_ci: true
+
+create_license: true
+
+create_gitignore: true
+
+create_init: true

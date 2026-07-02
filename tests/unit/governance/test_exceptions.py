@@ -1,6 +1,7 @@
 """Unit tests for Exception Manager."""
 
 import pytest
+
 from platform_core.governance.exceptions import ExceptionManager
 from platform_core.governance.types import ExceptionType
 
@@ -13,8 +14,10 @@ class TestExceptionManager:
     def test_create_exception(self) -> None:
         em = ExceptionManager()
         exc = em.create_exception(
-            repository="repo", exception_type=ExceptionType.SECURITY,
-            reason="Legacy code", approved_by="alice",
+            repository="repo",
+            exception_type=ExceptionType.SECURITY,
+            reason="Legacy code",
+            approved_by="alice",
         )
         assert exc.repository == "repo"
         assert exc.active is True
@@ -50,7 +53,10 @@ class TestExceptionManager:
     def test_create_waiver(self) -> None:
         em = ExceptionManager()
         waiver = em.create_waiver(
-            finding_id="f1", repository="repo", reason="Accepted risk", waived_by="bob",
+            finding_id="f1",
+            repository="repo",
+            reason="Accepted risk",
+            waived_by="bob",
         )
         assert waiver.finding_id == "f1"
         assert waiver.active is True

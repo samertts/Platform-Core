@@ -3,6 +3,7 @@ Financial API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class InsuranceClient(BaseEntityClient):
     """Client for Insurance entity API."""
+
     client: APIClient
     entity_name: str = "insurance"
     endpoint: str = "insurance"
@@ -27,6 +29,7 @@ class InsuranceClient(BaseEntityClient):
 @dataclass
 class ConsentClient(BaseEntityClient):
     """Client for Consent entity API."""
+
     client: APIClient
     entity_name: str = "consent"
     endpoint: str = "consents"
@@ -38,15 +41,21 @@ class ConsentClient(BaseEntityClient):
         return self.client.post(f"{self.endpoint}/grant", data=consent_data)
 
     def revoke(self, consent_id: str, reason: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{consent_id}/revoke", data={"reason": reason})
+        return self.client.put(
+            f"{self.endpoint}/{consent_id}/revoke", data={"reason": reason}
+        )
 
     def check(self, patient_id: str, consent_type: str, target: str) -> dict:
-        return self.client.get(f"{self.endpoint}/check", params={"patient_id": patient_id, "type": consent_type, "target": target})
+        return self.client.get(
+            f"{self.endpoint}/check",
+            params={"patient_id": patient_id, "type": consent_type, "target": target},
+        )
 
 
 @dataclass
 class InvoiceClient(BaseEntityClient):
     """Client for Invoice entity API."""
+
     client: APIClient
     entity_name: str = "invoice"
     endpoint: str = "invoices"
@@ -61,12 +70,15 @@ class InvoiceClient(BaseEntityClient):
         return self.client.get(f"{self.endpoint}/patient/{patient_id}/outstanding")
 
     def mark_paid(self, invoice_id: str, amount: float) -> dict:
-        return self.client.put(f"{self.endpoint}/{invoice_id}/paid", data={"amount": amount})
+        return self.client.put(
+            f"{self.endpoint}/{invoice_id}/paid", data={"amount": amount}
+        )
 
 
 @dataclass
 class PaymentClient(BaseEntityClient):
     """Client for Payment entity API."""
+
     client: APIClient
     entity_name: str = "payment"
     endpoint: str = "payments"
@@ -84,6 +96,7 @@ class PaymentClient(BaseEntityClient):
 @dataclass
 class ClaimClient(BaseEntityClient):
     """Client for Claim entity API."""
+
     client: APIClient
     entity_name: str = "claim"
     endpoint: str = "claims"
@@ -98,7 +111,12 @@ class ClaimClient(BaseEntityClient):
         return self.client.post(f"{self.endpoint}/submit", data=claim_data)
 
     def approve(self, claim_id: str, approved_amount: float) -> dict:
-        return self.client.put(f"{self.endpoint}/{claim_id}/approve", data={"approved_amount": approved_amount})
+        return self.client.put(
+            f"{self.endpoint}/{claim_id}/approve",
+            data={"approved_amount": approved_amount},
+        )
 
     def reject(self, claim_id: str, reason: str) -> dict:
-        return self.client.put(f"{self.endpoint}/{claim_id}/reject", data={"reason": reason})
+        return self.client.put(
+            f"{self.endpoint}/{claim_id}/reject", data={"reason": reason}
+        )

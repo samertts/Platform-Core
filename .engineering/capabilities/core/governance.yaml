@@ -1,0 +1,67 @@
+id: governance
+
+name: Engineering Governance
+
+kind: capability
+
+version: "1.0.0"
+
+status: stable
+
+owner: platform_core.governance
+
+description: >
+  Central governance engine responsible for validating
+  architecture, enforcing engineering rules,
+  protecting project integrity,
+  and coordinating engineering policies.
+
+depends_on:
+  - registry
+
+provides:
+  - architecture_validation
+  - policy_validation
+  - dependency_validation
+  - engineering_rules
+  - compliance
+
+consumes:
+  - registry
+
+exports:
+  - GovernanceEngine
+  - PolicyValidator
+  - RuleEngine
+
+entrypoint: platform_core.governance
+
+health:
+  startup: required
+  shutdown: graceful
+
+configuration:
+
+  strict_mode: true
+
+  validate_dependencies: true
+
+  validate_architecture: true
+
+  validate_naming: true
+
+  block_invalid_changes: true
+
+metadata:
+
+  layer: core
+
+  criticality: critical
+
+  maturity: production
+
+tags:
+  - governance
+  - architecture
+  - validation
+  - policy

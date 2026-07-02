@@ -8,13 +8,9 @@ from __future__ import annotations
 import threading
 from typing import Any
 
-from platform_core.knowledge.types import (
-    Edge,
-    Node,
-    NodeNotFoundError,
-    EdgeNotFoundError,
-    GraphConstraintError,
-)
+from platform_core.knowledge.types import (Edge, EdgeNotFoundError,
+                                           GraphConstraintError, Node,
+                                           NodeNotFoundError)
 
 
 class GraphStore:
@@ -27,8 +23,12 @@ class GraphStore:
     def __init__(self, max_nodes: int = 100000, max_edges: int = 500000) -> None:
         self._nodes: dict[str, Node] = {}
         self._edges: dict[str, Edge] = {}
-        self._outgoing: dict[str, dict[str, str]] = {}  # node_id -> {edge_id: target_id}
-        self._incoming: dict[str, dict[str, str]] = {}  # node_id -> {edge_id: source_id}
+        self._outgoing: dict[str, dict[str, str]] = (
+            {}
+        )  # node_id -> {edge_id: target_id}
+        self._incoming: dict[str, dict[str, str]] = (
+            {}
+        )  # node_id -> {edge_id: source_id}
         self._max_nodes = max_nodes
         self._max_edges = max_edges
         self._lock = threading.RLock()

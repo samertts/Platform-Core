@@ -1,8 +1,10 @@
 """Unit tests for Update Manager."""
 
 import pytest
-from platform_core.updater import UpdateManager, UpdateError
-from platform_core.packages import InstallRecord, InstallStatus, PackageManifest
+
+from platform_core.packages import (InstallRecord, InstallStatus,
+                                    PackageManifest)
+from platform_core.updater import UpdateError, UpdateManager
 
 
 class TestUpdateManager:

@@ -4,12 +4,14 @@ Healthcare Core domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Patient(BaseEntity):
     """Patient record linking citizen to healthcare."""
+
     citizen_id: str = ""
     medical_record_number: str = ""
     facility_id: Optional[str] = None
@@ -24,6 +26,7 @@ class Patient(BaseEntity):
 @dataclass
 class Visit(BaseEntity):
     """Patient visit to facility."""
+
     patient_id: str = ""
     facility_id: str = ""
     department_id: Optional[str] = None
@@ -37,6 +40,7 @@ class Visit(BaseEntity):
 @dataclass
 class Encounter(BaseEntity):
     """Clinical encounter within a visit."""
+
     visit_id: str = ""
     patient_id: str = ""
     encounter_type: str = ""
@@ -51,6 +55,7 @@ class Encounter(BaseEntity):
 @dataclass
 class Appointment(BaseEntity):
     """Scheduled appointment."""
+
     patient_id: str = ""
     facility_id: str = ""
     department_id: Optional[str] = None
@@ -66,6 +71,7 @@ class Appointment(BaseEntity):
 @dataclass
 class Admission(BaseEntity):
     """Hospital admission record."""
+
     patient_id: str = ""
     facility_id: str = ""
     admission_type: str = ""
@@ -79,6 +85,7 @@ class Admission(BaseEntity):
 @dataclass
 class Discharge(BaseEntity):
     """Hospital discharge record."""
+
     admission_id: str = ""
     patient_id: str = ""
     discharge_date: str = ""

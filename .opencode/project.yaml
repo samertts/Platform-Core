@@ -1,0 +1,129 @@
+name: Platform-Core
+
+language:
+  primary: python
+  version: ">=3.10"
+
+project:
+
+  type: enterprise-platform
+
+  description: |
+    Platform-Core is an enterprise platform framework for building
+    modular, offline-first, highly governed software ecosystems.
+
+repository:
+
+  root: .
+
+source:
+
+  - platform_core
+  - platform
+  - runtime
+  - shared
+  - automation
+
+tests:
+
+  root: tests
+
+documentation:
+
+  - README.md
+  - ARCHITECTURE.md
+  - PLATFORM_VISION.md
+  - REFERENCE_ARCHITECTURE.md
+  - CONSTITUTION.md
+
+quality:
+
+  formatter: black
+
+  linter: ruff
+
+  tests: pytest
+
+  type_checker: mypy
+
+  security: bandit
+
+tools:
+
+  git: true
+
+  docker: true
+
+  python: true
+
+  pytest: true
+
+  black: true
+
+  ruff: true
+
+  bandit: true
+
+  ast_grep: true
+
+  ripgrep: true
+
+  fd: true
+
+directories:
+
+  runtime:
+
+    - runtime
+
+    - platform_core/runtime
+
+  governance:
+
+    - platform_core/governance
+
+  discovery:
+
+    - platform_core/discovery
+
+  knowledge:
+
+    - platform_core/knowledge
+
+  packages:
+
+    - platform_core/packages
+
+  registry:
+
+    - registry
+
+  manifests:
+
+    - manifests
+
+ignore:
+
+  - .git
+
+  - .pytest_cache
+
+  - __pycache__
+
+  - .mypy_cache
+
+  - .ruff_cache
+
+goals:
+
+  - Preserve architecture
+
+  - Maintain backward compatibility
+
+  - Prefer extension over modification
+
+  - Never duplicate logic
+
+  - Always keep tests passing
+
+  - Always follow governance

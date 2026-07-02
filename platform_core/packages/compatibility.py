@@ -135,7 +135,9 @@ class CompatibilityEngine:
         runtime = manifest.get("runtime", {})
         if "language" in runtime and "version" in runtime:
             runtime_str = f"{runtime['language']}{runtime['version']}"
-            result = self.check_runtime_compatibility(runtime_str, runtime.get("version", "3.11"))
+            result = self.check_runtime_compatibility(
+                runtime_str, runtime.get("version", "3.11")
+            )
             if not result["compatible"]:
                 issues.append(f"Runtime incompatible: {result.get('error', 'unknown')}")
 
@@ -193,7 +195,9 @@ class CompatibilityEngine:
                 if i > 0:
                     prev = migration_path[i - 1]
                     if self._compare_versions(prev, step) >= 0:
-                        issues.append(f"Migration path must be monotonically increasing: {prev} -> {step}")
+                        issues.append(
+                            f"Migration path must be monotonically increasing: {prev} -> {step}"
+                        )
 
         return {
             "compatible": len(issues) == 0,

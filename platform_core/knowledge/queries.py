@@ -12,14 +12,8 @@ from collections import deque
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    Edge,
-    Node,
-    NodeType,
-    QueryResult,
-    QueryType,
-    RelationshipType,
-)
+from platform_core.knowledge.types import (Edge, Node, NodeType, QueryResult,
+                                           QueryType, RelationshipType)
 
 
 class QueryEngine:
@@ -244,7 +238,9 @@ class QueryEngine:
         elif query_type == QueryType.REPOSITORY_HEALTH:
             result = self.repository_health()
         else:
-            result = QueryResult(query_type=query_type, metadata={"error": "unsupported"})
+            result = QueryResult(
+                query_type=query_type, metadata={"error": "unsupported"}
+            )
         elapsed = (time.monotonic() - start) * 1000
         result.execution_time_ms = round(elapsed, 3)
         return result

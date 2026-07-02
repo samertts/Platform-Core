@@ -3,12 +3,13 @@ Tests for NHDOS Frontend Types
 """
 
 import sys
-sys.path.insert(0, '/tmp')
 
-from platform_core.frontend.types.base import (
-    BaseEntity, BaseRelationship, BaseEvent,
-    PaginationParams, PaginatedResponse, ApiResponse
-)
+sys.path.insert(0, "/tmp")
+
+from platform_core.frontend.types.base import (ApiResponse, BaseEntity,
+                                               BaseEvent, BaseRelationship,
+                                               PaginatedResponse,
+                                               PaginationParams)
 
 
 class TestBaseTypes:

@@ -10,11 +10,8 @@ from datetime import datetime, timezone
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    Edge,
-    RelationshipStatus,
-    RelationshipType,
-)
+from platform_core.knowledge.types import (Edge, RelationshipStatus,
+                                           RelationshipType)
 
 
 class EdgeManager:
@@ -106,7 +103,8 @@ class EdgeManager:
 
     def get_edges_between(self, source_id: str, target_id: str) -> list[Edge]:
         return [
-            e for e in self._store.get_outgoing_edges(source_id)
+            e
+            for e in self._store.get_outgoing_edges(source_id)
             if e.target_id == target_id
         ]
 

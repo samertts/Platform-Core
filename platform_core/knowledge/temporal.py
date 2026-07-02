@@ -10,14 +10,8 @@ from datetime import datetime, timezone
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    EventType,
-    GraphSnapshot,
-    Node,
-    Edge,
-    TemporalEvent,
-    TemporalError,
-)
+from platform_core.knowledge.types import (Edge, EventType, GraphSnapshot,
+                                           Node, TemporalError, TemporalEvent)
 
 
 class TemporalManager:
@@ -50,7 +44,7 @@ class TemporalManager:
         with self._lock:
             self._events.append(event)
             if len(self._events) > self._max_history:
-                self._events = self._events[-self._max_history:]
+                self._events = self._events[-self._max_history :]
         return event
 
     def create_snapshot(self, description: str = "") -> GraphSnapshot:

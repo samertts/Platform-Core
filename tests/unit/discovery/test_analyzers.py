@@ -1,18 +1,16 @@
 """Unit tests for Analyzers."""
 
 import pytest
-from platform_core.discovery.analyzers import (
-    LanguageAnalyzer,
-    FrameworkAnalyzer,
-    ArchitectureAnalyzer,
-    DocumentationAnalyzer,
-    TestingAnalyzer,
-    SecurityAnalyzer,
-    DependencyAnalyzer,
-    CIAnalyzer,
-    DockerAnalyzer,
-    run_all_analyzers,
-)
+
+from platform_core.discovery.analyzers import (ArchitectureAnalyzer,
+                                               CIAnalyzer, DependencyAnalyzer,
+                                               DockerAnalyzer,
+                                               DocumentationAnalyzer,
+                                               FrameworkAnalyzer,
+                                               LanguageAnalyzer,
+                                               SecurityAnalyzer,
+                                               TestingAnalyzer,
+                                               run_all_analyzers)
 
 
 class TestLanguageAnalyzer:
@@ -56,7 +54,13 @@ class TestFrameworkAnalyzer:
     def test_detect_fastapi(self, tmp_path) -> None:
         (tmp_path / "requirements.txt").write_text("fastapi==0.100.0\nuvicorn==0.23.0")
         analyzer = FrameworkAnalyzer()
-        files = [{"name": "requirements.txt", "path": "requirements.txt", "extension": ".txt"}]
+        files = [
+            {
+                "name": "requirements.txt",
+                "path": "requirements.txt",
+                "extension": ".txt",
+            }
+        ]
         result = analyzer.analyze(str(tmp_path), files)
         assert any(f["name"] == "FastAPI" for f in result["detected"])
 
@@ -140,13 +144,17 @@ class TestSecurityAnalyzer:
 
     def test_missing_gitignore(self) -> None:
         analyzer = SecurityAnalyzer()
-        result = analyzer.analyze("/tmp", [{"name": "main.py", "path": "main.py", "size": 10}])
+        result = analyzer.analyze(
+            "/tmp", [{"name": "main.py", "path": "main.py", "size": 10}]
+        )
         assert result["has_gitignore"] is False
 
 
 class TestDependencyAnalyzer:
     def test_count_requirements(self, tmp_path) -> None:
-        (tmp_path / "requirements.txt").write_text("fastapi==0.100.0\nuvicorn==0.23.0\n")
+        (tmp_path / "requirements.txt").write_text(
+            "fastapi==0.100.0\nuvicorn==0.23.0\n"
+        )
         analyzer = DependencyAnalyzer()
         files = [{"name": "requirements.txt", "path": "requirements.txt"}]
         result = analyzer.analyze(str(tmp_path), files)
@@ -177,7 +185,9 @@ class TestCIAnalyzer:
 
 class TestDockerAnalyzer:
     def test_detect_dockerfile(self, tmp_path) -> None:
-        (tmp_path / "Dockerfile").write_text("FROM python:3.11\nCOPY . .\nEXPOSE 8000\n")
+        (tmp_path / "Dockerfile").write_text(
+            "FROM python:3.11\nCOPY . .\nEXPOSE 8000\n"
+        )
         analyzer = DockerAnalyzer()
         files = [{"name": "Dockerfile", "path": "Dockerfile"}]
         result = analyzer.analyze(str(tmp_path), files)
@@ -186,7 +196,9 @@ class TestDockerAnalyzer:
         assert 8000 in result["ports"]
 
     def test_multi_stage(self, tmp_path) -> None:
-        (tmp_path / "Dockerfile").write_text("FROM python:3.11 AS builder\nFROM python:3.11\n")
+        (tmp_path / "Dockerfile").write_text(
+            "FROM python:3.11 AS builder\nFROM python:3.11\n"
+        )
         analyzer = DockerAnalyzer()
         files = [{"name": "Dockerfile", "path": "Dockerfile"}]
         result = analyzer.analyze(str(tmp_path), files)
@@ -201,7 +213,12 @@ class TestRunAllAnalyzers:
         files = [
             {"name": "main.py", "path": "main.py", "extension": ".py", "size": 10},
             {"name": "README.md", "path": "README.md", "extension": ".md", "size": 100},
-            {"name": "test_main.py", "path": "test_main.py", "extension": ".py", "size": 30},
+            {
+                "name": "test_main.py",
+                "path": "test_main.py",
+                "extension": ".py",
+                "size": 30,
+            },
         ]
         result = run_all_analyzers(str(tmp_path), files)
         assert result.language.primary == "Python"

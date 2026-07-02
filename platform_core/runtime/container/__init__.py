@@ -1,3 +1,11 @@
-from platform_core.runtime.container.engine import ServiceContainer, ServiceScope
+"""
+Platform-Core Service Container
+"""
 
-__all__ = ["ServiceContainer", "ServiceScope"]
+from .container import ServiceContainer
+from .lifetime import Lifetime
+
+__all__ = [
+    "ServiceContainer",
+    "Lifetime",
+]

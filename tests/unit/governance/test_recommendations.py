@@ -1,6 +1,7 @@
 """Unit tests for Recommendation Engine."""
 
 import pytest
+
 from platform_core.governance.recommendations import RecommendationEngine
 from platform_core.governance.types import Finding, FindingSeverity
 
@@ -13,9 +14,19 @@ class TestRecommendationEngine:
     def test_generate_recommendations(self) -> None:
         re = RecommendationEngine()
         findings = [
-            Finding(severity=FindingSeverity.CRITICAL, title="Critical issue", category="security"),
-            Finding(severity=FindingSeverity.HIGH, title="High issue", category="testing"),
-            Finding(severity=FindingSeverity.LOW, title="Low issue", category="documentation"),
+            Finding(
+                severity=FindingSeverity.CRITICAL,
+                title="Critical issue",
+                category="security",
+            ),
+            Finding(
+                severity=FindingSeverity.HIGH, title="High issue", category="testing"
+            ),
+            Finding(
+                severity=FindingSeverity.LOW,
+                title="Low issue",
+                category="documentation",
+            ),
         ]
         recs = re.generate_recommendations(findings, "repo")
         assert len(recs) == 3
@@ -25,8 +36,12 @@ class TestRecommendationEngine:
     def test_prioritize(self) -> None:
         re = RecommendationEngine()
         recs = [
-            re.generate_recommendations([Finding(severity=FindingSeverity.LOW, title="l")], "r")[0],
-            re.generate_recommendations([Finding(severity=FindingSeverity.CRITICAL, title="c")], "r")[0],
+            re.generate_recommendations(
+                [Finding(severity=FindingSeverity.LOW, title="l")], "r"
+            )[0],
+            re.generate_recommendations(
+                [Finding(severity=FindingSeverity.CRITICAL, title="c")], "r"
+            )[0],
         ]
         prioritized = re.prioritize(recs)
         assert prioritized[0].priority == 1

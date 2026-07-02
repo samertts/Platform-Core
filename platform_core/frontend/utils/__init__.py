@@ -4,11 +4,11 @@ NHDOS Frontend Utilities
 Helper functions for frontend development
 """
 
+import hashlib
+import json
 from datetime import datetime
 from typing import Any, Optional
 from uuid import uuid4
-import hashlib
-import json
 
 
 def generate_id() -> str:
@@ -80,7 +80,7 @@ def unflatten_dict(d: dict, sep: str = ".") -> dict:
 def truncate(text: str, max_length: int, suffix: str = "...") -> str:
     if len(text) <= max_length:
         return text
-    return text[:max_length - len(suffix)] + suffix
+    return text[: max_length - len(suffix)] + suffix
 
 
 def capitalize_words(text: str) -> str:
@@ -94,17 +94,19 @@ def snake_to_camel(name: str) -> str:
 
 def camel_to_snake(name: str) -> str:
     import re
-    s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
-    return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+    s1 = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
+    return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
 
 
 def sanitize_filename(filename: str) -> str:
     import re
-    return re.sub(r'[<>:"/\\|?*]', '_', filename)
+
+    return re.sub(r'[<>:"/\\|?*]', "_", filename)
 
 
 def chunk_list(lst: list, chunk_size: int) -> list[list]:
-    return [lst[i:i + chunk_size] for i in range(0, len(lst), chunk_size)]
+    return [lst[i : i + chunk_size] for i in range(0, len(lst), chunk_size)]
 
 
 def unique_by_key(lst: list[dict], key: str) -> list[dict]:

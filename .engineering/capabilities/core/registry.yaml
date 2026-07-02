@@ -1,0 +1,62 @@
+id: registry
+
+name: Engineering Registry
+
+kind: capability
+
+version: "1.0.0"
+
+status: stable
+
+owner: platform_core.registry
+
+description: >
+  Central registry responsible for discovering,
+  registering, indexing, validating,
+  and exposing engineering capabilities.
+
+depends_on: []
+
+provides:
+  - registration
+  - lookup
+  - indexing
+  - capability_catalog
+  - metadata_storage
+
+consumes: []
+
+exports:
+  - EngineeringRegistry
+  - RegistryEntry
+  - RegistryLoader
+
+entrypoint: platform_core.registry
+
+health:
+  startup: required
+  shutdown: graceful
+
+configuration:
+
+  persistent: false
+
+  validate_duplicates: true
+
+  validate_dependencies: true
+
+  auto_index: true
+
+metadata:
+
+  layer: core
+
+  criticality: critical
+
+  maturity: production
+
+tags:
+  - registry
+  - catalog
+  - discovery
+  - core

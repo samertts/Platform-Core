@@ -1,28 +1,15 @@
 """Discovery Engine - Repository scanning, analysis, health scoring, and reporting."""
 
-from platform_core.discovery.types import (
-    ScanType,
-    ScanStatus,
-    FindingSeverity,
-    FindingCategory,
-    HealthRating,
-    LanguageInfo,
-    FrameworkInfo,
-    ArchitectureInfo,
-    DocumentationInfo,
-    TestingInfo,
-    SecurityInfo,
-    DependencyInfo,
-    CIInfo,
-    DockerInfo,
-    ScanResult,
-    AnalysisResult,
-    HealthScore,
-    Finding,
-    DiscoveryResult,
-    EcosystemReport,
-    RepositoryReport,
-)
+from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
+                                           CIInfo, DependencyInfo,
+                                           DiscoveryResult, DockerInfo,
+                                           DocumentationInfo, EcosystemReport,
+                                           Finding, FindingCategory,
+                                           FindingSeverity, FrameworkInfo,
+                                           HealthRating, HealthScore,
+                                           LanguageInfo, RepositoryReport,
+                                           ScanResult, ScanStatus, ScanType,
+                                           SecurityInfo, TestingInfo)
 
 __all__ = [
     "ScanType",

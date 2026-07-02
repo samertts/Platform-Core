@@ -2,18 +2,21 @@
 Base API client for NHDOS Frontend
 """
 
+import json
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Optional, TypeVar, Generic
+from typing import Any, Generic, Optional, TypeVar
 from uuid import uuid4
-import json
 
 T = TypeVar("T")
 
 
 class APIError(Exception):
     """API error exception."""
-    def __init__(self, message: str, status_code: int = 500, details: Optional[dict] = None):
+
+    def __init__(
+        self, message: str, status_code: int = 500, details: Optional[dict] = None
+    ):
         super().__init__(message)
         self.status_code = status_code
         self.details = details or {}
@@ -22,6 +25,7 @@ class APIError(Exception):
 @dataclass
 class APIConfig:
     """API configuration."""
+
     base_url: str = "http://localhost:8000"
     api_version: str = "v1"
     timeout: int = 30
@@ -33,6 +37,7 @@ class APIConfig:
 @dataclass
 class APIClient:
     """Main API client for NHDOS platform."""
+
     config: APIConfig = field(default_factory=APIConfig)
     _session: Any = None
 
@@ -45,10 +50,20 @@ class APIClient:
     def _build_url(self, endpoint: str) -> str:
         return f"{self.config.base_url}/api/{self.config.api_version}/{endpoint}"
 
-    def _make_request(self, method: str, endpoint: str, data: Optional[dict] = None, params: Optional[dict] = None) -> dict:
+    def _make_request(
+        self,
+        method: str,
+        endpoint: str,
+        data: Optional[dict] = None,
+        params: Optional[dict] = None,
+    ) -> dict:
         url = self._build_url(endpoint)
         try:
-            return {"success": True, "data": {}, "timestamp": datetime.utcnow().isoformat()}
+            return {
+                "success": True,
+                "data": {},
+                "timestamp": datetime.utcnow().isoformat(),
+            }
         except Exception as e:
             raise APIError(f"Request failed: {str(e)}", 500)
 

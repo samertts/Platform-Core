@@ -18,9 +18,21 @@ class Scanner:
     """Scans repository filesystem structure and collects metadata."""
 
     DEFAULT_EXCLUDES = {
-        ".git", "node_modules", "__pycache__", ".venv", "venv",
-        "dist", "build", ".next", ".nuxt", ".tox", ".mypy_cache",
-        ".pytest_cache", ".ruff_cache", "eggs", "*.egg-info",
+        ".git",
+        "node_modules",
+        "__pycache__",
+        ".venv",
+        "venv",
+        "dist",
+        "build",
+        ".next",
+        ".nuxt",
+        ".tox",
+        ".mypy_cache",
+        ".pytest_cache",
+        ".ruff_cache",
+        "eggs",
+        "*.egg-info",
     }
 
     DEFAULT_MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
@@ -77,10 +89,7 @@ class Scanner:
         count = 0
 
         for dirpath, dirnames, filenames in os.walk(root):
-            dirnames[:] = [
-                d for d in dirnames
-                if not self._should_exclude(d)
-            ]
+            dirnames[:] = [d for d in dirnames if not self._should_exclude(d)]
 
             for filename in filenames:
                 if count >= self._max_files:
@@ -96,15 +105,17 @@ class Scanner:
                         continue
 
                     rel_path = str(filepath.relative_to(root))
-                    files.append({
-                        "path": rel_path,
-                        "name": filename,
-                        "extension": filepath.suffix.lower(),
-                        "size": stat.st_size,
-                        "modified_at": datetime.fromtimestamp(
-                            stat.st_mtime, tz=timezone.utc
-                        ).isoformat(),
-                    })
+                    files.append(
+                        {
+                            "path": rel_path,
+                            "name": filename,
+                            "extension": filepath.suffix.lower(),
+                            "size": stat.st_size,
+                            "modified_at": datetime.fromtimestamp(
+                                stat.st_mtime, tz=timezone.utc
+                            ).isoformat(),
+                        }
+                    )
                     count += 1
                 except (PermissionError, OSError):
                     continue
@@ -174,9 +185,19 @@ class Scanner:
                 metadata["has_license"] = True
             elif item.name.lower() == ".gitignore":
                 metadata["has_gitignore"] = True
-            elif item.name.lower() in ("platform-manifest.yaml", "platform-manifest.json"):
+            elif item.name.lower() in (
+                "platform-manifest.yaml",
+                "platform-manifest.json",
+            ):
                 metadata["has_manifest"] = True
-            elif item.name in ("main.py", "app.py", "index.ts", "index.js", "main.go", "cmd"):
+            elif item.name in (
+                "main.py",
+                "app.py",
+                "index.ts",
+                "index.js",
+                "main.go",
+                "cmd",
+            ):
                 metadata["entry_points"].append(item.name)
 
         return metadata

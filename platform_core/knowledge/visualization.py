@@ -11,12 +11,8 @@ import threading
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    GraphVisualization,
-    Node,
-    NodeType,
-    RelationshipType,
-)
+from platform_core.knowledge.types import (GraphVisualization, Node, NodeType,
+                                           RelationshipType)
 
 
 class VisualizationEngine:
@@ -71,7 +67,12 @@ class VisualizationEngine:
             if e.source_id in node_ids or e.target_id in node_ids
         ]
         vis_nodes = [
-            {"id": n.id, "label": n.name, "type": "repository", "status": n.status.value}
+            {
+                "id": n.id,
+                "label": n.name,
+                "type": "repository",
+                "status": n.status.value,
+            }
             for n in nodes
         ]
         return GraphVisualization(
@@ -104,7 +105,8 @@ class VisualizationEngine:
                     break
             node_ids = {n.id for n in result_nodes}
             edges = [
-                e for e in self._store.get_all_edges()
+                e
+                for e in self._store.get_all_edges()
                 if e.source_id in node_ids and e.target_id in node_ids
             ]
         else:
@@ -117,7 +119,12 @@ class VisualizationEngine:
             for n in result_nodes
         ]
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
         ]
         return GraphVisualization(
@@ -133,7 +140,12 @@ class VisualizationEngine:
         edges = self._store.get_all_edges()
         node_ids = {n.id for n in nodes}
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
             if e.source_id in node_ids or e.target_id in node_ids
         ]
@@ -154,12 +166,22 @@ class VisualizationEngine:
         edges = self._store.get_all_edges()
         node_ids = {n.id for n in nodes}
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
             if e.source_id in node_ids and e.target_id in node_ids
         ]
         vis_nodes = [
-            {"id": n.id, "label": n.name, "type": "module", "lifecycle": n.lifecycle.value}
+            {
+                "id": n.id,
+                "label": n.name,
+                "type": "module",
+                "lifecycle": n.lifecycle.value,
+            }
             for n in nodes
         ]
         return GraphVisualization(
@@ -175,14 +197,16 @@ class VisualizationEngine:
         edges = self._store.get_all_edges()
         node_ids = {n.id for n in nodes}
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
             if e.source_id in node_ids or e.target_id in node_ids
         ]
-        vis_nodes = [
-            {"id": n.id, "label": n.name, "type": "event"}
-            for n in nodes
-        ]
+        vis_nodes = [{"id": n.id, "label": n.name, "type": "event"} for n in nodes]
         return GraphVisualization(
             title="Event Graph",
             graph_type="event",
@@ -198,7 +222,12 @@ class VisualizationEngine:
         edges = self._store.get_all_edges()
         node_ids = {n.id for n in all_nodes}
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
             if e.source_id in node_ids or e.target_id in node_ids
         ]
@@ -219,7 +248,12 @@ class VisualizationEngine:
         edges = self._store.get_all_edges()
         node_ids = {n.id for n in nodes}
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in edges
             if e.source_id in node_ids or e.target_id in node_ids
         ]
@@ -241,8 +275,10 @@ class VisualizationEngine:
         all_nodes = policies + certs
         edges = self._store.get_all_edges()
         gov_edges = [
-            e for e in edges
-            if e.relationship_type in (
+            e
+            for e in edges
+            if e.relationship_type
+            in (
                 RelationshipType.GOVERNED_BY,
                 RelationshipType.CERTIFIED_BY,
             )
@@ -259,7 +295,12 @@ class VisualizationEngine:
             for n in all_relevant_nodes
         ]
         vis_edges = [
-            {"id": e.id, "source": e.source_id, "target": e.target_id, "type": e.relationship_type.value}
+            {
+                "id": e.id,
+                "source": e.source_id,
+                "target": e.target_id,
+                "type": e.relationship_type.value,
+            }
             for e in gov_edges
         ]
         return GraphVisualization(
@@ -291,7 +332,9 @@ class VisualizationEngine:
             layout="timeline",
         )
 
-    def generate_visualization(self, graph_type: str, node_id: str = "") -> GraphVisualization:
+    def generate_visualization(
+        self, graph_type: str, node_id: str = ""
+    ) -> GraphVisualization:
         dispatch = {
             "architecture": lambda: self.generate_architecture_graph(),
             "repository": lambda: self.generate_repository_graph(),

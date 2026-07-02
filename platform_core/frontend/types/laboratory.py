@@ -4,12 +4,14 @@ Laboratory domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Specimen(BaseEntity):
     """Laboratory specimen."""
+
     patient_id: str = ""
     specimen_type: str = ""
     collection_date: str = ""
@@ -23,6 +25,7 @@ class Specimen(BaseEntity):
 @dataclass
 class LaboratoryOrder(BaseEntity):
     """Laboratory test order."""
+
     patient_id: str = ""
     encounter_id: Optional[str] = None
     ordering_provider_id: str = ""
@@ -37,6 +40,7 @@ class LaboratoryOrder(BaseEntity):
 @dataclass
 class LaboratoryResult(BaseEntity):
     """Laboratory test result."""
+
     order_id: str = ""
     specimen_id: str = ""
     patient_id: str = ""
@@ -55,6 +59,7 @@ class LaboratoryResult(BaseEntity):
 @dataclass
 class Analyzer(BaseEntity):
     """Laboratory analyzer device."""
+
     facility_id: str = ""
     department_id: Optional[str] = None
     analyzer_type: str = ""

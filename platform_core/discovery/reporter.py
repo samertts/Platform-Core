@@ -5,16 +5,10 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.discovery.types import (
-    DiscoveryResult,
-    EcosystemReport,
-    Finding,
-    FindingSeverity,
-    HealthRating,
-    HealthScore,
-    RepositoryReport,
-    ScanStatus,
-)
+from platform_core.discovery.types import (DiscoveryResult, EcosystemReport,
+                                           Finding, FindingSeverity,
+                                           HealthRating, HealthScore,
+                                           RepositoryReport, ScanStatus)
 
 
 class Reporter:
@@ -31,12 +25,18 @@ class Reporter:
             ),
         )
 
-        scores = [r.health_score.overall for r in results if r.status == ScanStatus.SUCCESS]
+        scores = [
+            r.health_score.overall for r in results if r.status == ScanStatus.SUCCESS
+        ]
         if scores:
             report.average_health_score = round(sum(scores) / len(scores), 3)
 
         distribution: dict[str, int] = {
-            "excellent": 0, "good": 0, "fair": 0, "poor": 0, "critical": 0,
+            "excellent": 0,
+            "good": 0,
+            "fair": 0,
+            "poor": 0,
+            "critical": 0,
         }
         for r in results:
             if r.status == ScanStatus.SUCCESS:
@@ -48,19 +48,39 @@ class Reporter:
         successful.sort(key=lambda r: r.health_score.overall, reverse=True)
 
         report.top_repositories = [
-            {"name": r.repository, "score": r.health_score.overall, "rating": r.health_score.rating.value}
+            {
+                "name": r.repository,
+                "score": r.health_score.overall,
+                "rating": r.health_score.rating.value,
+            }
             for r in successful[:5]
         ]
-        report.bottom_repositories = [
-            {"name": r.repository, "score": r.health_score.overall, "rating": r.health_score.rating.value}
-            for r in successful[-5:]
-        ] if len(successful) > 5 else [
-            {"name": r.repository, "score": r.health_score.overall, "rating": r.health_score.rating.value}
-            for r in successful
-        ]
+        report.bottom_repositories = (
+            [
+                {
+                    "name": r.repository,
+                    "score": r.health_score.overall,
+                    "rating": r.health_score.rating.value,
+                }
+                for r in successful[-5:]
+            ]
+            if len(successful) > 5
+            else [
+                {
+                    "name": r.repository,
+                    "score": r.health_score.overall,
+                    "rating": r.health_score.rating.value,
+                }
+                for r in successful
+            ]
+        )
 
         findings_summary: dict[str, int] = {
-            "critical": 0, "high": 0, "medium": 0, "low": 0, "info": 0,
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0,
         }
         for r in results:
             for f in r.analysis.findings:
@@ -91,58 +111,72 @@ class Reporter:
 
         return report
 
-    def _generate_recommendations(self, result: DiscoveryResult) -> list[dict[str, Any]]:
+    def _generate_recommendations(
+        self, result: DiscoveryResult
+    ) -> list[dict[str, Any]]:
         recommendations: list[dict[str, Any]] = []
         score = result.health_score
         analysis = result.analysis
 
         if not analysis.documentation.has_readme:
-            recommendations.append({
-                "priority": 1,
-                "category": "documentation",
-                "message": "Add a README.md with project overview, installation, and usage instructions",
-                "estimated_effort": "1-2 hours",
-            })
+            recommendations.append(
+                {
+                    "priority": 1,
+                    "category": "documentation",
+                    "message": "Add a README.md with project overview, installation, and usage instructions",
+                    "estimated_effort": "1-2 hours",
+                }
+            )
 
         if analysis.testing.test_files == 0:
-            recommendations.append({
-                "priority": 1,
-                "category": "testing",
-                "message": "Add test files and configure a test framework",
-                "estimated_effort": "4-8 hours",
-            })
+            recommendations.append(
+                {
+                    "priority": 1,
+                    "category": "testing",
+                    "message": "Add test files and configure a test framework",
+                    "estimated_effort": "4-8 hours",
+                }
+            )
 
         if analysis.security.secret_patterns_found > 0:
-            recommendations.append({
-                "priority": 1,
-                "category": "security",
-                "message": "Remove hardcoded secrets and use environment variables",
-                "estimated_effort": "1-2 hours",
-            })
+            recommendations.append(
+                {
+                    "priority": 1,
+                    "category": "security",
+                    "message": "Remove hardcoded secrets and use environment variables",
+                    "estimated_effort": "1-2 hours",
+                }
+            )
 
         if not analysis.ci_cd.has_ci:
-            recommendations.append({
-                "priority": 2,
-                "category": "ci_cd",
-                "message": "Set up CI/CD pipeline for automated testing and deployment",
-                "estimated_effort": "2-4 hours",
-            })
+            recommendations.append(
+                {
+                    "priority": 2,
+                    "category": "ci_cd",
+                    "message": "Set up CI/CD pipeline for automated testing and deployment",
+                    "estimated_effort": "2-4 hours",
+                }
+            )
 
         if not analysis.documentation.has_changelog:
-            recommendations.append({
-                "priority": 3,
-                "category": "documentation",
-                "message": "Add CHANGELOG.md to track version changes",
-                "estimated_effort": "30 minutes",
-            })
+            recommendations.append(
+                {
+                    "priority": 3,
+                    "category": "documentation",
+                    "message": "Add CHANGELOG.md to track version changes",
+                    "estimated_effort": "30 minutes",
+                }
+            )
 
         if not analysis.documentation.has_license:
-            recommendations.append({
-                "priority": 2,
-                "category": "documentation",
-                "message": "Add a LICENSE file",
-                "estimated_effort": "10 minutes",
-            })
+            recommendations.append(
+                {
+                    "priority": 2,
+                    "category": "documentation",
+                    "message": "Add a LICENSE file",
+                    "estimated_effort": "10 minutes",
+                }
+            )
 
         recommendations.sort(key=lambda r: r["priority"])
         return recommendations

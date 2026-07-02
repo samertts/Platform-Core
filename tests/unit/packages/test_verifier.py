@@ -1,6 +1,7 @@
 """Unit tests for Package Verification."""
 
 import pytest
+
 from platform_core.verifier import PackageVerifier, VerificationError
 
 
@@ -59,8 +60,8 @@ class TestPackageVerifier:
 
     def test_tamper_detection(self) -> None:
         verifier = PackageVerifier()
-        import tempfile
         import os
+        import tempfile
 
         with tempfile.NamedTemporaryFile(delete=False) as f:
             f.write(b"test content")
@@ -74,8 +75,8 @@ class TestPackageVerifier:
 
     def test_full_verification(self) -> None:
         verifier = PackageVerifier()
-        import tempfile
         import os
+        import tempfile
 
         with tempfile.NamedTemporaryFile(delete=False) as f:
             f.write(b"test content")
@@ -89,8 +90,8 @@ class TestPackageVerifier:
 
     def test_verification_log(self) -> None:
         verifier = PackageVerifier()
-        import tempfile
         import os
+        import tempfile
 
         with tempfile.NamedTemporaryFile(delete=False) as f:
             f.write(b"test")

@@ -1,8 +1,10 @@
 """Unit tests for Decision Engine."""
 
 import pytest
+
 from platform_core.governance.decisions import DecisionEngine
-from platform_core.governance.types import DecisionType, Finding, FindingSeverity, FindingStatus
+from platform_core.governance.types import (DecisionType, Finding,
+                                            FindingSeverity, FindingStatus)
 
 
 class TestDecisionEngine:
@@ -38,7 +40,8 @@ class TestDecisionEngine:
     def test_make_decision_defer(self) -> None:
         de = DecisionEngine()
         findings = [
-            Finding(severity=FindingSeverity.MEDIUM, status=FindingStatus.OPEN) for _ in range(6)
+            Finding(severity=FindingSeverity.MEDIUM, status=FindingStatus.OPEN)
+            for _ in range(6)
         ]
         decision = de.make_decision("repo", "review-1", findings)
         assert decision.decision_type == DecisionType.DEFER

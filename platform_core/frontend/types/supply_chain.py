@@ -4,12 +4,14 @@ Supply Chain domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class InventoryItem(BaseEntity):
     """Inventory item record."""
+
     facility_id: str = ""
     item_code: str = ""
     name: str = ""
@@ -26,6 +28,7 @@ class InventoryItem(BaseEntity):
 @dataclass
 class Supplier(BaseEntity):
     """Supplier record."""
+
     name: str = ""
     supplier_type: str = ""
     contact_person: Optional[str] = None
@@ -39,6 +42,7 @@ class Supplier(BaseEntity):
 @dataclass
 class Purchase(BaseEntity):
     """Purchase order record."""
+
     facility_id: str = ""
     supplier_id: str = ""
     purchase_order_number: str = ""

@@ -4,12 +4,14 @@ Radiology domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class RadiologyStudy(BaseEntity):
     """Radiology study record."""
+
     patient_id: str = ""
     facility_id: str = ""
     study_type: str = ""
@@ -24,6 +26,7 @@ class RadiologyStudy(BaseEntity):
 @dataclass
 class Image(BaseEntity):
     """Radiology image record."""
+
     study_id: str = ""
     image_type: str = ""
     file_path: str = ""
@@ -35,6 +38,7 @@ class Image(BaseEntity):
 @dataclass
 class RadiologyReport(BaseEntity):
     """Radiology report."""
+
     study_id: str = ""
     patient_id: str = ""
     radiologist_id: str = ""

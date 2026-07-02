@@ -6,11 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    ComplianceCheck,
-    ComplianceReport,
-    ComplianceStatus,
-)
+from platform_core.governance.types import (ComplianceCheck, ComplianceReport,
+                                            ComplianceStatus)
 
 
 class ComplianceEngine:
@@ -143,10 +140,12 @@ class ComplianceEngine:
             passed = evidence.get(check_name, False)
             if passed:
                 checks_passed += 1
-            details.append({
-                "check": check_name,
-                "passed": passed,
-            })
+            details.append(
+                {
+                    "check": check_name,
+                    "passed": passed,
+                }
+            )
 
         status = ComplianceStatus.COMPLIANT
         if checks_passed == checks_total:
@@ -198,7 +197,9 @@ class ComplianceEngine:
             total_score = sum(c.score for c in checks)
             overall_score = round(total_score / len(checks), 3)
 
-            non_compliant = any(c.status == ComplianceStatus.NON_COMPLIANT for c in checks)
+            non_compliant = any(
+                c.status == ComplianceStatus.NON_COMPLIANT for c in checks
+            )
             partial = any(c.status == ComplianceStatus.PARTIAL for c in checks)
 
             if non_compliant:
@@ -260,11 +261,15 @@ class ComplianceEngine:
         for c in checks:
             by_standard[c.standard] = c.status.value
 
-        compliant_count = sum(1 for c in checks if c.status == ComplianceStatus.COMPLIANT)
+        compliant_count = sum(
+            1 for c in checks if c.status == ComplianceStatus.COMPLIANT
+        )
         return {
             "total_checks": len(checks),
             "compliant": compliant_count,
-            "non_compliant": sum(1 for c in checks if c.status == ComplianceStatus.NON_COMPLIANT),
+            "non_compliant": sum(
+                1 for c in checks if c.status == ComplianceStatus.NON_COMPLIANT
+            ),
             "partial": sum(1 for c in checks if c.status == ComplianceStatus.PARTIAL),
             "by_standard": by_standard,
         }

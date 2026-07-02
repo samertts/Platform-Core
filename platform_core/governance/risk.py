@@ -6,13 +6,9 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    Finding,
-    FindingSeverity,
-    RiskAssessment,
-    RiskCategory,
-    RiskLevel,
-)
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            RiskAssessment, RiskCategory,
+                                            RiskLevel)
 
 
 class RiskEngine:
@@ -157,9 +153,9 @@ class RiskEngine:
         }
         keywords = category_map.get(category, [])
         return [
-            f for f in findings
-            if any(kw in f.category.lower() for kw in keywords)
-            or not f.category
+            f
+            for f in findings
+            if any(kw in f.category.lower() for kw in keywords) or not f.category
         ]
 
     def get_assessment(self, assessment_id: str) -> RiskAssessment | None:
@@ -195,9 +191,7 @@ class RiskEngine:
             by_category[a.risk_category.value] = a.score
 
         avg_score = (
-            sum(a.score for a in assessments) / len(assessments)
-            if assessments
-            else 0.0
+            sum(a.score for a in assessments) / len(assessments) if assessments else 0.0
         )
 
         return {
@@ -205,7 +199,9 @@ class RiskEngine:
             "by_level": by_level,
             "by_category": by_category,
             "average_score": round(avg_score, 3),
-            "highest_risk": max((a.risk_level.value for a in assessments), default="none"),
+            "highest_risk": max(
+                (a.risk_level.value for a in assessments), default="none"
+            ),
         }
 
     def count(self) -> int:

@@ -1,20 +1,14 @@
 """Unit tests for Health Scorer."""
 
 import pytest
+
 from platform_core.discovery.scorer import HealthScorer
-from platform_core.discovery.types import (
-    AnalysisResult,
-    HealthRating,
-    HealthScore,
-    LanguageInfo,
-    FrameworkInfo,
-    ArchitectureInfo,
-    DocumentationInfo,
-    TestingInfo,
-    SecurityInfo,
-    DependencyInfo,
-    CIInfo,
-)
+from platform_core.discovery.types import (AnalysisResult, ArchitectureInfo,
+                                           CIInfo, DependencyInfo,
+                                           DocumentationInfo, FrameworkInfo,
+                                           HealthRating, HealthScore,
+                                           LanguageInfo, SecurityInfo,
+                                           TestingInfo)
 
 
 class TestHealthScorer:
@@ -25,7 +19,9 @@ class TestHealthScorer:
     def test_perfect_score(self) -> None:
         scorer = HealthScorer()
         analysis = AnalysisResult(
-            documentation=DocumentationInfo(score=1.0, has_readme=True, has_changelog=True, has_license=True),
+            documentation=DocumentationInfo(
+                score=1.0, has_readme=True, has_changelog=True, has_license=True
+            ),
             testing=TestingInfo(score=1.0, test_files=10),
             security=SecurityInfo(score=1.0, has_gitignore=True, has_security_md=True),
             architecture=ArchitectureInfo(pattern="microservices", confidence=1.0),

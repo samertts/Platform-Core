@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Any
 
+from platform_core.packages import (PackageManifest, RegistryEntry,
+                                    RepositoryConfig)
 from platform_core.packages.manager import PackageManager
-from platform_core.packages import PackageManifest, RegistryEntry, RepositoryConfig
 
 
 class PlatformSDK:

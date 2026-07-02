@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import json
-import tempfile
 import os
+import tempfile
 
 import pytest
 
 from platform_core.runtime.manifest.loader import ManifestLoader
-
 
 VALID_MANIFEST = {
     "manifest": {
@@ -92,9 +91,7 @@ class TestManifestLoader:
 
     def test_load_json_file(self) -> None:
         loader = ManifestLoader()
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".json", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
             json.dump(VALID_MANIFEST, f)
             f.flush()
             try:

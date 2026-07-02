@@ -5,31 +5,18 @@ modules, services, APIs, events, devices, workflows, policies, packages,
 healthcare standards and future ecosystem components.
 """
 
-from platform_core.knowledge.types import (
-    AIReasoningResult,
-    ArchitectureRecommendation,
-    ArchitectureSmell,
-    ChangeType,
-    Edge,
-    EventType,
-    GraphSnapshot,
-    GraphVisualization,
-    HealthcareEntity,
-    HealthcareMapping,
-    HealthcareStandard,
-    ImpactLevel,
-    ImpactReport,
-    KnowledgeEngineConfig,
-    LifecycleStage,
-    Node,
-    NodeStatus,
-    NodeType,
-    QueryResult,
-    QueryType,
-    RelationshipStatus,
-    RelationshipType,
-    TemporalEvent,
-)
+from platform_core.knowledge.types import (AIReasoningResult,
+                                           ArchitectureRecommendation,
+                                           ArchitectureSmell, ChangeType, Edge,
+                                           EventType, GraphSnapshot,
+                                           GraphVisualization,
+                                           HealthcareEntity, HealthcareMapping,
+                                           HealthcareStandard, ImpactLevel,
+                                           ImpactReport, KnowledgeEngineConfig,
+                                           LifecycleStage, Node, NodeStatus,
+                                           NodeType, QueryResult, QueryType,
+                                           RelationshipStatus,
+                                           RelationshipType, TemporalEvent)
 
 __all__ = [
     "AIReasoningResult",

@@ -3,16 +3,12 @@
 from __future__ import annotations
 
 import pytest
+
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    Edge,
-    GraphConstraintError,
-    Node,
-    NodeNotFoundError,
-    NodeType,
-    RelationshipType,
-    EdgeNotFoundError,
-)
+from platform_core.knowledge.types import (Edge, EdgeNotFoundError,
+                                           GraphConstraintError, Node,
+                                           NodeNotFoundError, NodeType,
+                                           RelationshipType)
 
 
 class TestGraphStore:
@@ -156,8 +152,14 @@ class TestGraphStore:
         n2 = Node(name="b")
         store.add_node(n1)
         store.add_node(n2)
-        e1 = Edge(source_id=n1.id, target_id=n2.id, relationship_type=RelationshipType.DEPENDS_ON)
-        e2 = Edge(source_id=n1.id, target_id=n2.id, relationship_type=RelationshipType.USES)
+        e1 = Edge(
+            source_id=n1.id,
+            target_id=n2.id,
+            relationship_type=RelationshipType.DEPENDS_ON,
+        )
+        e2 = Edge(
+            source_id=n1.id, target_id=n2.id, relationship_type=RelationshipType.USES
+        )
         store.add_edge(e1)
         store.add_edge(e2)
         deps = store.get_edges_by_type(RelationshipType.DEPENDS_ON)

@@ -4,12 +4,14 @@ Pharmacy domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Prescription(BaseEntity):
     """Prescription record."""
+
     patient_id: str = ""
     encounter_id: Optional[str] = None
     prescribing_provider_id: str = ""
@@ -27,6 +29,7 @@ class Prescription(BaseEntity):
 @dataclass
 class Medication(BaseEntity):
     """Medication record."""
+
     name: str = ""
     generic_name: Optional[str] = None
     manufacturer: str = ""
@@ -42,6 +45,7 @@ class Medication(BaseEntity):
 @dataclass
 class Dispensing(BaseEntity):
     """Medication dispensing record."""
+
     prescription_id: str = ""
     patient_id: str = ""
     medication_id: str = ""

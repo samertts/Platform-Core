@@ -192,7 +192,9 @@ class PluginEngine:
             if info is None:
                 raise ValueError(f"Plugin not found: {plugin_id}")
             if info.status != "loaded":
-                raise ValueError(f"Plugin {plugin_id} not loaded (status: {info.status})")
+                raise ValueError(
+                    f"Plugin {plugin_id} not loaded (status: {info.status})"
+                )
 
             instance = self._plugin_instances.get(plugin_id)
             if instance is not None and hasattr(instance, "activate"):
@@ -263,17 +265,23 @@ class PluginEngine:
                 return [f"Plugin {plugin_id} not found"]
 
             if info.min_platform_version:
-                if self._compare_versions(
-                    self._platform_version, info.min_platform_version
-                ) < 0:
+                if (
+                    self._compare_versions(
+                        self._platform_version, info.min_platform_version
+                    )
+                    < 0
+                ):
                     errors.append(
                         f"Platform version {self._platform_version} < required {info.min_platform_version}"
                     )
 
             if info.max_platform_version:
-                if self._compare_versions(
-                    self._platform_version, info.max_platform_version
-                ) > 0:
+                if (
+                    self._compare_versions(
+                        self._platform_version, info.max_platform_version
+                    )
+                    > 0
+                ):
                     errors.append(
                         f"Platform version {self._platform_version} > maximum {info.max_platform_version}"
                     )

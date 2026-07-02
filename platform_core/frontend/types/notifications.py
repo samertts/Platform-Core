@@ -4,12 +4,14 @@ Notifications domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Notification(BaseEntity):
     """Notification record."""
+
     recipient_id: str = ""
     recipient_type: str = ""
     notification_type: str = ""
@@ -24,6 +26,7 @@ class Notification(BaseEntity):
 @dataclass
 class Message(BaseEntity):
     """Communication message record."""
+
     sender_id: str = ""
     sender_type: str = ""
     recipient_id: str = ""

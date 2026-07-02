@@ -1,0 +1,51 @@
+name: Platform-Core
+
+version: 0.1.0
+
+stage: Genesis
+
+status: Development
+
+license: Apache-2.0
+
+language: Python
+
+minimum_python: "3.11"
+
+architecture: Knowledge-Driven
+
+kernel:
+enabled: true
+
+runtime:
+enabled: true
+
+registry:
+enabled: true
+
+contracts:
+enabled: true
+
+manifest:
+enabled: true
+
+forge:
+enabled: false
+
+builders:
+enabled: false
+
+knowledge:
+enabled: false
+
+observatory:
+enabled: false
+
+ai:
+enabled: false
+
+security:
+enabled: true
+
+testing:
+enabled: true

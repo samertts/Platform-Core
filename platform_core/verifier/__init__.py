@@ -54,7 +54,9 @@ class PackageVerifier:
                 h.update(chunk)
         return h.hexdigest()
 
-    def compute_directory_checksum(self, dir_path: str, algorithm: str = "sha256") -> str:
+    def compute_directory_checksum(
+        self, dir_path: str, algorithm: str = "sha256"
+    ) -> str:
         path = Path(dir_path)
         if not path.exists():
             raise FileNotFoundError(f"Directory not found: {dir_path}")
@@ -68,11 +70,15 @@ class PackageVerifier:
                         h.update(chunk)
         return h.hexdigest()
 
-    def verify_checksum(self, data: bytes, expected: str, algorithm: str = "sha256") -> bool:
+    def verify_checksum(
+        self, data: bytes, expected: str, algorithm: str = "sha256"
+    ) -> bool:
         actual = self.compute_checksum(data, algorithm)
         return actual == expected
 
-    def verify_file_checksum(self, file_path: str, expected: str, algorithm: str = "sha256") -> bool:
+    def verify_file_checksum(
+        self, file_path: str, expected: str, algorithm: str = "sha256"
+    ) -> bool:
         actual = self.compute_file_checksum(file_path, algorithm)
         return actual == expected
 
@@ -85,7 +91,9 @@ class PackageVerifier:
         expected = content.split()[0] if content else ""
         return self.verify_file_checksum(file_path, expected)
 
-    def generate_checksum_file(self, file_path: str, output_path: str, algorithm: str = "sha256") -> str:
+    def generate_checksum_file(
+        self, file_path: str, output_path: str, algorithm: str = "sha256"
+    ) -> str:
         checksum = self.compute_file_checksum(file_path, algorithm)
         filename = Path(file_path).name
         content = f"{checksum}  {filename}\n"
@@ -94,9 +102,7 @@ class PackageVerifier:
 
     def sign_data(self, data: bytes, private_key: str = "") -> dict[str, Any]:
         data_hash = hashlib.sha256(data).hexdigest()
-        signature = hashlib.sha256(
-            f"{data_hash}:{private_key}".encode()
-        ).hexdigest()
+        signature = hashlib.sha256(f"{data_hash}:{private_key}".encode()).hexdigest()
 
         return {
             "algorithm": "sha256",
@@ -174,7 +180,9 @@ class PackageVerifier:
 
         return True
 
-    def detect_tampering(self, file_path: str, expected_checksum: str, algorithm: str = "sha256") -> bool:
+    def detect_tampering(
+        self, file_path: str, expected_checksum: str, algorithm: str = "sha256"
+    ) -> bool:
         actual = self.compute_file_checksum(file_path, algorithm)
         return actual != expected_checksum
 

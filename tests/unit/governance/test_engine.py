@@ -1,8 +1,10 @@
 """Unit tests for Governance Engine."""
 
 import pytest
+
 from platform_core.governance.engine import GovernanceEngine, GovernanceError
-from platform_core.governance.types import FindingSeverity, FindingStatus, QualityGateResult
+from platform_core.governance.types import (FindingSeverity, FindingStatus,
+                                            QualityGateResult)
 
 
 class TestGovernanceEngine:
@@ -20,8 +22,14 @@ class TestGovernanceEngine:
     def test_approve_release(self) -> None:
         ge = GovernanceEngine()
         result = ge.approve_release(
-            "repo", "1.0.0", "alice",
-            evidence={"coverage_percent": 0.90, "security_passed": True, "manifest_valid": True},
+            "repo",
+            "1.0.0",
+            "alice",
+            evidence={
+                "coverage_percent": 0.90,
+                "security_passed": True,
+                "manifest_valid": True,
+            },
         )
         assert result["approved"] is True
 

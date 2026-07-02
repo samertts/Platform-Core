@@ -1,0 +1,67 @@
+id: runtime
+
+name: Runtime Engine
+
+kind: capability
+
+version: "1.0.0"
+
+status: stable
+
+owner: platform_core.runtime
+
+description: >
+  Core runtime engine responsible for lifecycle management,
+  capability discovery, dependency resolution, execution,
+  service orchestration, and runtime coordination.
+
+depends_on:
+  - registry
+  - governance
+
+provides:
+  - lifecycle
+  - discovery
+  - execution
+  - dependency_resolution
+  - service_loading
+
+consumes: []
+
+exports:
+  - RuntimeManager
+  - RuntimeLoader
+  - DependencyResolver
+
+entrypoint: platform_core.runtime
+
+health:
+  startup: required
+  shutdown: graceful
+
+configuration:
+
+  auto_discovery: true
+
+  dependency_validation: true
+
+  lazy_loading: true
+
+  parallel_loading: false
+
+  strict_mode: true
+
+metadata:
+
+  layer: core
+
+  criticality: critical
+
+  maturity: production
+
+tags:
+  - runtime
+  - core
+  - engine
+  - lifecycle
+  - execution

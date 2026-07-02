@@ -5,53 +5,25 @@ Phase 17: Frontend Development
 35 business domains, 57 canonical entities, type-safe interfaces
 """
 
-from .base import BaseEntity, BaseRelationship, BaseEvent
+from .base import BaseEntity, BaseEvent, BaseRelationship
+from .blood_bank import BloodUnit, Donation, Transfusion
 from .citizen import Citizen, DigitalCredential
-from .healthcare_core import (
-    Patient, Visit, Encounter, Appointment, Admission, Discharge
-)
-from .laboratory import (
-    Specimen, LaboratoryOrder, LaboratoryResult, Analyzer
-)
-from .medical_devices import (
-    MedicalDevice, DeviceConnection, Calibration
-)
-from .radiology import (
-    RadiologyStudy, Image, RadiologyReport
-)
-from .pharmacy import (
-    Prescription, Medication, Dispensing
-)
-from .clinical import (
-    Diagnosis, Procedure, Observation, VitalSigns
-)
-from .blood_bank import (
-    Donation, BloodUnit, Transfusion
-)
-from .epidemiology import (
-    Disease, Outbreak
-)
-from .human_resources import (
-    Professional, License, Organization, Facility, Department, Room, Bed, Employee, Attendance, Leave
-)
-from .financial import (
-    Insurance, Consent, Invoice, Payment, Claim
-)
-from .supply_chain import (
-    InventoryItem, Supplier, Purchase
-)
-from .workflow import (
-    Workflow, WorkflowStep, Task
-)
-from .notifications import (
-    Notification, Message
-)
-from .public_health import (
-    Vaccine, Immunization, ResearchStudy
-)
-from .communications import (
-    Correspondence
-)
+from .clinical import Diagnosis, Observation, Procedure, VitalSigns
+from .communications import Correspondence
+from .epidemiology import Disease, Outbreak
+from .financial import Claim, Consent, Insurance, Invoice, Payment
+from .healthcare_core import (Admission, Appointment, Discharge, Encounter,
+                              Patient, Visit)
+from .human_resources import (Attendance, Bed, Department, Employee, Facility,
+                              Leave, License, Organization, Professional, Room)
+from .laboratory import Analyzer, LaboratoryOrder, LaboratoryResult, Specimen
+from .medical_devices import Calibration, DeviceConnection, MedicalDevice
+from .notifications import Message, Notification
+from .pharmacy import Dispensing, Medication, Prescription
+from .public_health import Immunization, ResearchStudy, Vaccine
+from .radiology import Image, RadiologyReport, RadiologyStudy
+from .supply_chain import InventoryItem, Purchase, Supplier
+from .workflow import Task, Workflow, WorkflowStep
 
 __all__ = [
     "BaseEntity",

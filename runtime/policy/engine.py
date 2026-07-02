@@ -123,7 +123,11 @@ class PolicyEngine:
             indent = len(line) - len(line.lstrip())
             stripped = line.strip()
 
-            while section_stack and indent <= section_stack[-1][0] and len(section_stack) > 1:
+            while (
+                section_stack
+                and indent <= section_stack[-1][0]
+                and len(section_stack) > 1
+            ):
                 section_stack.pop()
             current_section = section_stack[-1][1]
 
@@ -190,9 +194,7 @@ class PolicyEngine:
 
         return EvaluationResult(allowed=True, results=results)
 
-    def _evaluate_policy(
-        self, policy: Policy, context: dict[str, Any]
-    ) -> PolicyResult:
+    def _evaluate_policy(self, policy: Policy, context: dict[str, Any]) -> PolicyResult:
         for rule in policy.rules:
             condition = rule.get("condition", "")
             effect = rule.get("effect", "allow")
@@ -202,7 +204,9 @@ class PolicyEngine:
                     return PolicyResult(
                         allowed=False,
                         policy_id=policy.id,
-                        reason=rule.get("reason", f"Policy {policy.name} denied access"),
+                        reason=rule.get(
+                            "reason", f"Policy {policy.name} denied access"
+                        ),
                     )
 
         return PolicyResult(

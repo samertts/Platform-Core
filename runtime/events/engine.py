@@ -96,7 +96,9 @@ class EventBus:
                         self._dead_letters.append(event)
                         self._stats["dead_lettered"] += 1
                         if len(self._dead_letters) > self._max_queue_size:
-                            self._dead_letters = self._dead_letters[-self._max_queue_size:]
+                            self._dead_letters = self._dead_letters[
+                                -self._max_queue_size :
+                            ]
             except Exception as e:
                 logger.error("Event handler error: %s", e)
                 with self._lock:

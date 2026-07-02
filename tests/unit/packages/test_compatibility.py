@@ -1,6 +1,7 @@
 """Unit tests for Compatibility Engine."""
 
 import pytest
+
 from platform_core.packages.compatibility import CompatibilityEngine
 
 

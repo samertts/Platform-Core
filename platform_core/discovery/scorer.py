@@ -2,11 +2,8 @@
 
 from __future__ import annotations
 
-from platform_core.discovery.types import (
-    AnalysisResult,
-    HealthRating,
-    HealthScore,
-)
+from platform_core.discovery.types import (AnalysisResult, HealthRating,
+                                           HealthScore)
 
 
 class HealthScorer:
@@ -90,12 +87,15 @@ class HealthScorer:
                 return rating
         return HealthRating.CRITICAL
 
-    def get_category_breakdown(self, analysis: AnalysisResult) -> dict[str, dict[str, float]]:
+    def get_category_breakdown(
+        self, analysis: AnalysisResult
+    ) -> dict[str, dict[str, float]]:
         return {
             "documentation": {
                 "score": analysis.documentation.score,
                 "weight": self._weights.get("documentation", 0),
-                "weighted": analysis.documentation.score * self._weights.get("documentation", 0),
+                "weighted": analysis.documentation.score
+                * self._weights.get("documentation", 0),
             },
             "testing": {
                 "score": analysis.testing.score,
@@ -110,12 +110,14 @@ class HealthScorer:
             "architecture": {
                 "score": analysis.architecture.confidence,
                 "weight": self._weights.get("architecture", 0),
-                "weighted": analysis.architecture.confidence * self._weights.get("architecture", 0),
+                "weighted": analysis.architecture.confidence
+                * self._weights.get("architecture", 0),
             },
             "dependencies": {
                 "score": analysis.dependencies.score,
                 "weight": self._weights.get("dependencies", 0),
-                "weighted": analysis.dependencies.score * self._weights.get("dependencies", 0),
+                "weighted": analysis.dependencies.score
+                * self._weights.get("dependencies", 0),
             },
             "ci_cd": {
                 "score": analysis.ci_cd.score,
@@ -131,7 +133,9 @@ class HealthScorer:
             "overall_change": round(current.overall - previous.overall, 3),
             "improved": current.overall > previous.overall,
             "category_changes": {
-                "documentation": round(current.documentation - previous.documentation, 3),
+                "documentation": round(
+                    current.documentation - previous.documentation, 3
+                ),
                 "testing": round(current.testing - previous.testing, 3),
                 "security": round(current.security - previous.security, 3),
                 "architecture": round(current.architecture - previous.architecture, 3),

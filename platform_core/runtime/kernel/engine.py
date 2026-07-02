@@ -6,7 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.runtime.types import HealthReport, HealthStatus, RuntimeState
+from platform_core.runtime.types import (HealthReport, HealthStatus,
+                                         RuntimeState)
 
 
 class RuntimeKernel:
@@ -120,9 +121,11 @@ class RuntimeKernel:
                     status = (
                         HealthStatus.HEALTHY
                         if status_str == "healthy"
-                        else HealthStatus.DEGRADED
-                        if status_str == "degraded"
-                        else HealthStatus.UNHEALTHY
+                        else (
+                            HealthStatus.DEGRADED
+                            if status_str == "degraded"
+                            else HealthStatus.UNHEALTHY
+                        )
                     )
                 elif isinstance(result, HealthStatus):
                     status = result
@@ -139,9 +142,7 @@ class RuntimeKernel:
         overall = (
             HealthStatus.HEALTHY
             if all_healthy
-            else HealthStatus.DEGRADED
-            if components
-            else HealthStatus.HEALTHY
+            else HealthStatus.DEGRADED if components else HealthStatus.HEALTHY
         )
 
         return HealthReport(

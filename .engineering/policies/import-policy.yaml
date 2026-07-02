@@ -1,0 +1,41 @@
+allow:
+
+  github:
+
+    patterns: true
+
+    architecture: true
+
+    documentation: true
+
+    tests: true
+
+    workflows: true
+
+deny:
+
+  copy_entire_repository: true
+
+  overwrite_existing_modules: true
+
+review:
+
+  required: true
+
+learning:
+
+  semantic_analysis: true
+
+  ast_analysis: true
+
+  dependency_analysis: true
+
+  architecture_analysis: true
+
+integration:
+
+  preserve_existing_architecture: true
+
+  preserve_tests: true
+
+  preserve_interfaces: true

@@ -11,12 +11,8 @@ import threading
 from typing import Any
 
 from platform_core.knowledge.graph import GraphStore
-from platform_core.knowledge.types import (
-    AIReasoningResult,
-    Node,
-    NodeType,
-    RelationshipType,
-)
+from platform_core.knowledge.types import (AIReasoningResult, Node, NodeType,
+                                           RelationshipType)
 
 
 class AIKnowledgeLayer:
@@ -26,7 +22,9 @@ class AIKnowledgeLayer:
         self._store = store
         self._lock = threading.RLock()
 
-    def reason_architecture(self, question: str, node_id: str = "") -> AIReasoningResult:
+    def reason_architecture(
+        self, question: str, node_id: str = ""
+    ) -> AIReasoningResult:
         result = AIReasoningResult(reasoning_type="architecture", question=question)
         if node_id:
             node = self._store.get_node_optional(node_id)
@@ -43,7 +41,9 @@ class AIKnowledgeLayer:
                 if len(outgoing) > 10:
                     result.recommendations.append("Consider reducing dependencies")
                 if not incoming and node.node_type == NodeType.SERVICE:
-                    result.recommendations.append("Service may be orphaned - verify usage")
+                    result.recommendations.append(
+                        "Service may be orphaned - verify usage"
+                    )
         else:
             node_count = self._store.node_count()
             edge_count = self._store.edge_count()
@@ -54,7 +54,9 @@ class AIKnowledgeLayer:
             result.confidence = 0.6
         return result
 
-    def reason_dependencies(self, question: str, node_id: str = "") -> AIReasoningResult:
+    def reason_dependencies(
+        self, question: str, node_id: str = ""
+    ) -> AIReasoningResult:
         result = AIReasoningResult(reasoning_type="dependencies", question=question)
         if node_id:
             node = self._store.get_node_optional(node_id)
@@ -73,7 +75,9 @@ class AIKnowledgeLayer:
                 )
                 result.confidence = 0.9
                 if len(deps) > 15:
-                    result.recommendations.append("High dependency count - consider refactoring")
+                    result.recommendations.append(
+                        "High dependency count - consider refactoring"
+                    )
         return result
 
     def reason_impact(self, question: str, node_id: str = "") -> AIReasoningResult:
@@ -102,7 +106,9 @@ class AIKnowledgeLayer:
             )
             result.confidence = 0.7
             if len(affected) > 10:
-                result.recommendations.append("High impact change - requires thorough review")
+                result.recommendations.append(
+                    "High impact change - requires thorough review"
+                )
         return result
 
     def reason_migration(self, question: str, node_id: str = "") -> AIReasoningResult:
@@ -119,9 +125,13 @@ class AIKnowledgeLayer:
                 )
                 result.confidence = 0.7
                 if dependents:
-                    result.recommendations.append("Coordinate migration with dependent services")
+                    result.recommendations.append(
+                        "Coordinate migration with dependent services"
+                    )
                 if deps:
-                    result.recommendations.append("Ensure all dependencies support new version")
+                    result.recommendations.append(
+                        "Ensure all dependencies support new version"
+                    )
         return result
 
     def reason_refactoring(self, question: str, node_id: str = "") -> AIReasoningResult:
@@ -138,7 +148,9 @@ class AIKnowledgeLayer:
                 result.confidence = 0.6
                 if len(outgoing) > 10:
                     result.recommendations.append("Consider interface segregation")
-                    result.recommendations.append("Evaluate dependency inversion opportunities")
+                    result.recommendations.append(
+                        "Evaluate dependency inversion opportunities"
+                    )
         return result
 
     def reason_governance(self, question: str, node_id: str = "") -> AIReasoningResult:
@@ -148,11 +160,13 @@ class AIKnowledgeLayer:
             if node:
                 result.supporting_nodes.append(node_id)
                 gov_edges = [
-                    e for e in self._store.get_incoming_edges(node_id)
+                    e
+                    for e in self._store.get_incoming_edges(node_id)
                     if e.relationship_type == RelationshipType.GOVERNED_BY
                 ]
                 cert_edges = [
-                    e for e in self._store.get_incoming_edges(node_id)
+                    e
+                    for e in self._store.get_incoming_edges(node_id)
                     if e.relationship_type == RelationshipType.CERTIFIED_BY
                 ]
                 result.answer = (
@@ -161,7 +175,9 @@ class AIKnowledgeLayer:
                 )
                 result.confidence = 0.8
                 if not cert_edges:
-                    result.recommendations.append("Node lacks certification - initiate review")
+                    result.recommendations.append(
+                        "Node lacks certification - initiate review"
+                    )
                 if not gov_edges:
                     result.recommendations.append("Node not governed by any policy")
         return result
@@ -181,9 +197,13 @@ class AIKnowledgeLayer:
                 )
                 result.confidence = 0.7
                 if risk_score > 0.7:
-                    result.recommendations.append("High risk node - prioritize monitoring")
+                    result.recommendations.append(
+                        "High risk node - prioritize monitoring"
+                    )
                 if len(incoming) > 5:
-                    result.recommendations.append("Many dependents - changes require careful review")
+                    result.recommendations.append(
+                        "Many dependents - changes require careful review"
+                    )
         return result
 
     def reason_healthcare(self, question: str, node_id: str = "") -> AIReasoningResult:
@@ -197,9 +217,15 @@ class AIKnowledgeLayer:
                     f"Type: {node.node_type.value}, Status: {node.status.value}"
                 )
                 result.confidence = 0.6
-                labels = [l for l in node.labels if l.startswith("hl7") or l.startswith("fhir")]
+                labels = [
+                    l
+                    for l in node.labels
+                    if l.startswith("hl7") or l.startswith("fhir")
+                ]
                 if labels:
-                    result.recommendations.append(f"Healthcare standards detected: {', '.join(labels)}")
+                    result.recommendations.append(
+                        f"Healthcare standards detected: {', '.join(labels)}"
+                    )
         return result
 
     def ask(

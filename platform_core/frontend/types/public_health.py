@@ -4,12 +4,14 @@ Public Health domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Vaccine(BaseEntity):
     """Vaccine record."""
+
     name: str = ""
     vaccine_type: str = ""
     manufacturer: str = ""
@@ -23,6 +25,7 @@ class Vaccine(BaseEntity):
 @dataclass
 class Immunization(BaseEntity):
     """Immunization record."""
+
     patient_id: str = ""
     vaccine_id: str = ""
     administration_date: str = ""
@@ -39,6 +42,7 @@ class Immunization(BaseEntity):
 @dataclass
 class ResearchStudy(BaseEntity):
     """Research study record."""
+
     title: str = ""
     description: Optional[str] = None
     study_type: str = ""

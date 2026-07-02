@@ -4,12 +4,14 @@ Financial domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class Insurance(BaseEntity):
     """Insurance record."""
+
     patient_id: str = ""
     insurance_provider: str = ""
     policy_number: str = ""
@@ -23,6 +25,7 @@ class Insurance(BaseEntity):
 @dataclass
 class Consent(BaseEntity):
     """Patient consent record."""
+
     patient_id: str = ""
     consent_type: str = ""
     consent_date: str = ""
@@ -36,6 +39,7 @@ class Consent(BaseEntity):
 @dataclass
 class Invoice(BaseEntity):
     """Financial invoice record."""
+
     patient_id: str = ""
     facility_id: str = ""
     invoice_number: str = ""
@@ -50,6 +54,7 @@ class Invoice(BaseEntity):
 @dataclass
 class Payment(BaseEntity):
     """Payment record."""
+
     invoice_id: str = ""
     patient_id: str = ""
     payment_date: str = ""
@@ -63,6 +68,7 @@ class Payment(BaseEntity):
 @dataclass
 class Claim(BaseEntity):
     """Insurance claim record."""
+
     patient_id: str = ""
     insurance_id: str = ""
     invoice_id: str = ""

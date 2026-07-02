@@ -45,12 +45,14 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
         elif path == "/api/v1/modules":
             manager = self._get_manager()
             packages = manager.registry.list_packages()
-            self._send_json({
-                "modules": [
-                    {"name": p.name, "version": p.version, "status": p.status.value}
-                    for p in packages
-                ]
-            })
+            self._send_json(
+                {
+                    "modules": [
+                        {"name": p.name, "version": p.version, "status": p.status.value}
+                        for p in packages
+                    ]
+                }
+            )
 
         elif path.startswith("/api/v1/modules/"):
             parts = path.split("/")
@@ -59,12 +61,14 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
             manager = self._get_manager()
             entry = manager.registry.get(name, version)
             if entry:
-                self._send_json({
-                    "name": entry.name,
-                    "version": entry.version,
-                    "publisher": entry.publisher,
-                    "status": entry.status.value,
-                })
+                self._send_json(
+                    {
+                        "name": entry.name,
+                        "version": entry.version,
+                        "publisher": entry.publisher,
+                        "status": entry.status.value,
+                    }
+                )
             else:
                 self._send_json({"error": "Not found"}, 404)
 
@@ -76,12 +80,19 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
         elif path == "/api/v1/repositories":
             manager = self._get_manager()
             repos = manager.repository_manager.list_repositories()
-            self._send_json({
-                "repositories": [
-                    {"name": r.name, "type": r.type.value, "url": r.url, "enabled": r.enabled}
-                    for r in repos
-                ]
-            })
+            self._send_json(
+                {
+                    "repositories": [
+                        {
+                            "name": r.name,
+                            "type": r.type.value,
+                            "url": r.url,
+                            "enabled": r.enabled,
+                        }
+                        for r in repos
+                    ]
+                }
+            )
 
         elif path == "/api/v1/doctor":
             manager = self._get_manager()
@@ -140,7 +151,7 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
         elif path == "/api/v1/modules":
             body = self._read_body()
             manager = self._get_manager()
-            from platform_core.packages import RegistryEntry, PackageStatus
+            from platform_core.packages import PackageStatus, RegistryEntry
 
             entry = RegistryEntry(
                 name=body.get("name", ""),

@@ -9,7 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import InstallRecord, InstallStatus, PackageManifest
+from platform_core.packages import (InstallRecord, InstallStatus,
+                                    PackageManifest)
 
 
 class InstallError(Exception):
@@ -46,7 +47,9 @@ class ModuleInstaller:
         }
         self._install_log.append(entry)
 
-    def pre_install_validate(self, package_path: str, manifest: PackageManifest) -> list[str]:
+    def pre_install_validate(
+        self, package_path: str, manifest: PackageManifest
+    ) -> list[str]:
         errors: list[str] = []
         path = Path(package_path)
 
@@ -64,7 +67,9 @@ class ModuleInstaller:
             if "name" not in dep:
                 errors.append("Required dependency must have a name")
             if "version" not in dep:
-                errors.append(f"Required dependency {dep.get('name', '?')} must have a version")
+                errors.append(
+                    f"Required dependency {dep.get('name', '?')} must have a version"
+                )
 
         install_path = self._install_root / manifest.package.name
         if install_path.exists():
@@ -106,14 +111,18 @@ class ModuleInstaller:
         manifest: PackageManifest,
         dry_run: bool = False,
     ) -> InstallRecord:
-        self._log(f"Starting install of {manifest.package.name}@{manifest.package.version}")
+        self._log(
+            f"Starting install of {manifest.package.name}@{manifest.package.version}"
+        )
 
         errors = self.pre_install_validate(package_path, manifest)
         if errors:
             raise ValidationError(f"Pre-install validation failed: {errors}")
 
         if dry_run:
-            self._log(f"Dry run: would install {manifest.package.name}@{manifest.package.version}")
+            self._log(
+                f"Dry run: would install {manifest.package.name}@{manifest.package.version}"
+            )
             return InstallRecord(
                 package_name=manifest.package.name,
                 package_version=manifest.package.version,
@@ -146,7 +155,9 @@ class ModuleInstaller:
         with self._lock:
             self._installed[manifest.package.name] = record
 
-        self._log(f"Installed {manifest.package.name}@{manifest.package.version} to {install_path}")
+        self._log(
+            f"Installed {manifest.package.name}@{manifest.package.version} to {install_path}"
+        )
 
         return record
 

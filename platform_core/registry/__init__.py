@@ -8,19 +8,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from platform_core.packages import (
-    PackageCapabilities,
-    PackageChecksum,
-    PackageCompatibility,
-    PackageDependencies,
-    PackageIdentity,
-    PackageLifecycle,
-    PackageManifest,
-    PackageSignature,
-    PackageStatus,
-    PackageUUID,
-    RegistryEntry,
-)
+from platform_core.packages import (PackageCapabilities, PackageChecksum,
+                                    PackageCompatibility, PackageDependencies,
+                                    PackageIdentity, PackageLifecycle,
+                                    PackageManifest, PackageSignature,
+                                    PackageStatus, PackageUUID, RegistryEntry)
 
 
 class ModuleRegistry:
@@ -106,8 +98,12 @@ class ModuleRegistry:
             publisher=data.get("publisher", ""),
             license=data.get("license", "proprietary"),
             status=PackageStatus(data.get("status", "active")),
-            created_at=datetime.fromisoformat(data.get("created_at", datetime.now(timezone.utc).isoformat())),
-            updated_at=datetime.fromisoformat(data.get("updated_at", datetime.now(timezone.utc).isoformat())),
+            created_at=datetime.fromisoformat(
+                data.get("created_at", datetime.now(timezone.utc).isoformat())
+            ),
+            updated_at=datetime.fromisoformat(
+                data.get("updated_at", datetime.now(timezone.utc).isoformat())
+            ),
             dependencies=PackageDependencies(
                 required=data.get("dependencies", {}).get("required", []),
                 optional=data.get("dependencies", {}).get("optional", []),
@@ -117,7 +113,9 @@ class ModuleRegistry:
                 requires=data.get("capabilities", {}).get("requires", []),
             ),
             compatibility=PackageCompatibility(
-                platform_core=data.get("compatibility", {}).get("platform_core", ">=1.0.0"),
+                platform_core=data.get("compatibility", {}).get(
+                    "platform_core", ">=1.0.0"
+                ),
                 runtime=data.get("compatibility", {}).get("runtime", "python>=3.11"),
                 sdk_version=data.get("compatibility", {}).get("sdk_version", ">=1.0.0"),
             ),
@@ -189,7 +187,9 @@ class ModuleRegistry:
                     if (
                         query_lower in entry.name.lower()
                         or query_lower in entry.publisher.lower()
-                        or any(query_lower in tag for tag in entry.capabilities.provides)
+                        or any(
+                            query_lower in tag for tag in entry.capabilities.provides
+                        )
                     ):
                         result.append(entry)
             return result

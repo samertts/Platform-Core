@@ -1,21 +1,11 @@
-from platform_core.runtime.types import (
-    RuntimeState,
-    ServiceType,
-    HealthStatus,
-    EventPriority,
-    Identity,
-    HealthReport,
-    Event,
-    EventResult,
-)
+"""
+Platform-Core
 
-__all__ = [
-    "RuntimeState",
-    "ServiceType",
-    "HealthStatus",
-    "EventPriority",
-    "Identity",
-    "HealthReport",
-    "Event",
-    "EventResult",
-]
+Knowledge Driven Engineering Platform
+"""
+
+__version__ = "0.1.0"
+
+__stage__ = "Genesis"
+
+__author__ = "Samer Abbas Al-Karawi"

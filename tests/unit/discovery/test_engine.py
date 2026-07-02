@@ -1,8 +1,9 @@
 """Unit tests for Discovery Engine."""
 
 import pytest
+
 from platform_core.discovery.engine import DiscoveryEngine, DiscoveryError
-from platform_core.discovery.types import ScanType, ScanStatus
+from platform_core.discovery.types import ScanStatus, ScanType
 
 
 class TestDiscoveryEngine:
@@ -78,7 +79,14 @@ class TestDiscoveryEngine:
         engine = DiscoveryEngine()
         engine.discover(str(tmp_path), repository_name="r1")
         summary = engine.get_health_summary("r1")
-        assert "r1" not in summary or "EXCELLENT" in summary or "GOOD" in summary or "FAIR" in summary or "POOR" in summary or "CRITICAL" in summary
+        assert (
+            "r1" not in summary
+            or "EXCELLENT" in summary
+            or "GOOD" in summary
+            or "FAIR" in summary
+            or "POOR" in summary
+            or "CRITICAL" in summary
+        )
 
     def test_get_health_summary_not_found(self) -> None:
         engine = DiscoveryEngine()

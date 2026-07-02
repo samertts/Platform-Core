@@ -1,6 +1,7 @@
 """Unit tests for Governance Registry."""
 
 import pytest
+
 from platform_core.governance.registry import GovernanceRegistry
 
 

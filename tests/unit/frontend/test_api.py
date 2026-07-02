@@ -3,10 +3,11 @@ Tests for NHDOS Frontend API Client
 """
 
 import sys
-sys.path.insert(0, '/tmp')
 
-from platform_core.frontend.api.client import APIClient, APIConfig, APIError
+sys.path.insert(0, "/tmp")
+
 from platform_core.frontend.api.base import BaseEntityClient
+from platform_core.frontend.api.client import APIClient, APIConfig, APIError
 
 
 class TestAPIClient:
@@ -54,37 +55,49 @@ class TestAPIClient:
 class TestBaseEntityClient:
     def test_entity_client_creation(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         assert entity_client.entity_name == "patient"
         assert entity_client.endpoint == "patients"
 
     def test_entity_client_list(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         result = entity_client.list()
         assert result["success"] is True
 
     def test_entity_client_get(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         result = entity_client.get("123")
         assert result["success"] is True
 
     def test_entity_client_create(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         result = entity_client.create({"name": "test"})
         assert result["success"] is True
 
     def test_entity_client_update(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         result = entity_client.update("123", {"name": "updated"})
         assert result["success"] is True
 
     def test_entity_client_delete(self):
         client = APIClient()
-        entity_client = BaseEntityClient(client=client, entity_name="patient", endpoint="patients")
+        entity_client = BaseEntityClient(
+            client=client, entity_name="patient", endpoint="patients"
+        )
         result = entity_client.delete("123")
         assert result["success"] is True
 

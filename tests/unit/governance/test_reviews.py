@@ -1,6 +1,7 @@
 """Unit tests for Review Manager."""
 
 import pytest
+
 from platform_core.governance.reviews import ReviewManager
 from platform_core.governance.types import ReviewStatus, ReviewType
 

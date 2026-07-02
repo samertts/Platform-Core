@@ -3,6 +3,7 @@ Communications API client for NHDOS Frontend
 """
 
 from dataclasses import dataclass
+
 from .base import BaseEntityClient
 from .client import APIClient
 
@@ -10,6 +11,7 @@ from .client import APIClient
 @dataclass
 class CorrespondenceClient(BaseEntityClient):
     """Client for Correspondence entity API."""
+
     client: APIClient
     entity_name: str = "correspondence"
     endpoint: str = "correspondence"

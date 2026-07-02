@@ -4,12 +4,14 @@ Medical Devices domain types for NHDOS Frontend
 
 from dataclasses import dataclass, field
 from typing import Optional
+
 from .base import BaseEntity
 
 
 @dataclass
 class MedicalDevice(BaseEntity):
     """Medical device record."""
+
     facility_id: str = ""
     department_id: Optional[str] = None
     device_type: str = ""
@@ -25,6 +27,7 @@ class MedicalDevice(BaseEntity):
 @dataclass
 class DeviceConnection(BaseEntity):
     """Device connection record."""
+
     device_id: str = ""
     connection_type: str = ""
     connection_string: Optional[str] = None
@@ -37,6 +40,7 @@ class DeviceConnection(BaseEntity):
 @dataclass
 class Calibration(BaseEntity):
     """Device calibration record."""
+
     device_id: str = ""
     calibration_type: str = ""
     calibration_date: str = ""

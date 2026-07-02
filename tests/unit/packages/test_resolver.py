@@ -1,11 +1,9 @@
 """Unit tests for Dependency Resolver."""
 
 import pytest
-from platform_core.resolver import (
-    DependencyResolver,
-    CircularDependencyError,
-    VersionConflict,
-)
+
+from platform_core.resolver import (CircularDependencyError,
+                                    DependencyResolver, VersionConflict)
 
 
 class TestDependencyResolver:

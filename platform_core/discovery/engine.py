@@ -11,16 +11,10 @@ from platform_core.discovery.analyzers import run_all_analyzers
 from platform_core.discovery.reporter import Reporter
 from platform_core.discovery.scanner import Scanner
 from platform_core.discovery.scorer import HealthScorer
-from platform_core.discovery.types import (
-    AnalysisResult,
-    DiscoveryResult,
-    EcosystemReport,
-    HealthScore,
-    RepositoryReport,
-    ScanResult,
-    ScanStatus,
-    ScanType,
-)
+from platform_core.discovery.types import (AnalysisResult, DiscoveryResult,
+                                           EcosystemReport, HealthScore,
+                                           RepositoryReport, ScanResult,
+                                           ScanStatus, ScanType)
 
 
 class DiscoveryError(Exception):

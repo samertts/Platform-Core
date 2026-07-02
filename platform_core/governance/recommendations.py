@@ -5,7 +5,8 @@ from __future__ import annotations
 import threading
 from typing import Any
 
-from platform_core.governance.types import Finding, FindingSeverity, Recommendation
+from platform_core.governance.types import (Finding, FindingSeverity,
+                                            Recommendation)
 
 
 class RecommendationEngine:
@@ -83,9 +84,7 @@ class RecommendationEngine:
         }
         return impacts.get(severity, "Unknown impact")
 
-    def prioritize(
-        self, recommendations: list[Recommendation]
-    ) -> list[Recommendation]:
+    def prioritize(self, recommendations: list[Recommendation]) -> list[Recommendation]:
         return sorted(recommendations, key=lambda r: r.priority)
 
     def group_by_category(

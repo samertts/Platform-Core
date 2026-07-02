@@ -6,13 +6,8 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
-from platform_core.governance.types import (
-    Finding,
-    FindingSeverity,
-    Review,
-    ReviewStatus,
-    ReviewType,
-)
+from platform_core.governance.types import (Finding, FindingSeverity, Review,
+                                            ReviewStatus, ReviewType)
 
 
 class ReviewManager:
@@ -116,7 +111,10 @@ class ReviewManager:
         completed = [r for r in reviews if r.status == ReviewStatus.COMPLETED]
         if not completed:
             return None
-        return max(completed, key=lambda r: r.completed_at or datetime.min.replace(tzinfo=timezone.utc))
+        return max(
+            completed,
+            key=lambda r: r.completed_at or datetime.min.replace(tzinfo=timezone.utc),
+        )
 
     def get_review_summary(self, repository: str | None = None) -> dict[str, Any]:
         reviews = self.list_reviews(repository=repository)
@@ -134,7 +132,8 @@ class ReviewManager:
             "by_type": by_type,
             "by_status": by_status,
             "completed_count": by_status.get("completed", 0),
-            "pending_count": by_status.get("pending", 0) + by_status.get("in_progress", 0),
+            "pending_count": by_status.get("pending", 0)
+            + by_status.get("in_progress", 0),
         }
 
     def run_all_reviews(self, repository: str) -> list[Review]:
