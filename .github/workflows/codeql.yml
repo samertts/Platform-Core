@@ -1,2 +1,0 @@
-# CodeQL scanning has been consolidated into .github/workflows/security.yml
-# This file is kept for backwards compatibility and can be removed.
