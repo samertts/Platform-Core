@@ -1,0 +1,15 @@
+# Platform-Core Code Owners
+# These owners will be automatically requested for review
+
+# Default owners
+* @samertts
+
+# Runtime
+/runtime/ @samertts
+/platform_core/runtime/ @samertts
+
+# Governance
+/platform_core/governance/ @samertts
+
+# CI/CD
+/.github/ @samertts

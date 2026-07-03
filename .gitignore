@@ -44,6 +44,7 @@ ruff.json
 ruff_errors.txt
 ruff-report.txt
 ruff-report.txt.gz
+F401.txt
 
 # Virtual environment backups
 .venv*/

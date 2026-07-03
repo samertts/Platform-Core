@@ -6,7 +6,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "platform-core"
-version = "1.0.0"
+version = "1.0.0a1"
 description = "Authoritative governance, runtime, intelligence and integration platform for the Unified Healthcare Platform"
 readme = "README.md"
 license = {text = "Proprietary"}
@@ -46,6 +46,8 @@ dev = [
     "build>=1.2",
     "twine>=6.0",
     "types-PyYAML",
+    "bandit[toml]>=1.7",
+    "pip-audit>=2.7",
 ]
 yaml = [
     "pyyaml>=6.0",
@@ -85,3 +87,11 @@ warn_unused_configs = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs", "examples", "scripts", "benchmarks"]
+skips = [
+    "B101",  # assert used (tests)
+    "B108",  # hardcoded_tmp_directory (intentional temp paths)
+    "B110",  # try_except_pass (graceful error handling)
+]

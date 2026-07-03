@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerability
+    url: https://github.com/samertts/Platform-Core/blob/main/SECURITY.md
+    about: Please report security vulnerabilities through our security policy.
+  - name: Documentation
+    url: https://github.com/samertts/Platform-Core/tree/main/docs
+    about: Check our documentation for guides and API references.
