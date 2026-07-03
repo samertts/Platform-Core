@@ -4,8 +4,11 @@ NHDOS Frontend Utilities
 Helper functions for frontend development
 """
 
+from __future__ import annotations
+
 import hashlib
 from datetime import datetime
+from typing import Any
 from uuid import uuid4
 
 
@@ -34,14 +37,15 @@ def hash_data(data: str) -> str:
 
 def validate_uuid(uuid_string: str) -> bool:
     try:
-        uuid_obj = uuid4()
-        uuid_obj.__init__(uuid_string)
+        from uuid import UUID
+
+        UUID(uuid_string)
         return True
-    except ValueError:
+    except (ValueError, TypeError):
         return False
 
 
-def deep_merge(base: dict, override: dict) -> dict:
+def deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
     result = base.copy()
     for key, value in override.items():
         if key in result and isinstance(result[key], dict) and isinstance(value, dict):
@@ -51,8 +55,8 @@ def deep_merge(base: dict, override: dict) -> dict:
     return result
 
 
-def flatten_dict(d: dict, parent_key: str = "", sep: str = ".") -> dict:
-    items = []
+def flatten_dict(d: dict[str, Any], parent_key: str = "", sep: str = ".") -> dict[str, Any]:
+    items: list[tuple[str, Any]] = []
     for k, v in d.items():
         new_key = f"{parent_key}{sep}{k}" if parent_key else k
         if isinstance(v, dict):
@@ -62,8 +66,8 @@ def flatten_dict(d: dict, parent_key: str = "", sep: str = ".") -> dict:
     return dict(items)
 
 
-def unflatten_dict(d: dict, sep: str = ".") -> dict:
-    result = {}
+def unflatten_dict(d: dict[str, Any], sep: str = ".") -> dict[str, Any]:
+    result: dict[str, Any] = {}
     for key, value in d.items():
         parts = key.split(sep)
         current = result
@@ -103,13 +107,13 @@ def sanitize_filename(filename: str) -> str:
     return re.sub(r'[<>:"/\\|?*]', "_", filename)
 
 
-def chunk_list(lst: list, chunk_size: int) -> list[list]:
+def chunk_list(lst: list[Any], chunk_size: int) -> list[list[Any]]:
     return [lst[i : i + chunk_size] for i in range(0, len(lst), chunk_size)]
 
 
-def unique_by_key(lst: list[dict], key: str) -> list[dict]:
-    seen = set()
-    result = []
+def unique_by_key(lst: list[dict[str, Any]], key: str) -> list[dict[str, Any]]:
+    seen: set[Any] = set()
+    result: list[dict[str, Any]] = []
     for item in lst:
         value = item.get(key)
         if value not in seen:

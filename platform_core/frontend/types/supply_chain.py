@@ -2,7 +2,10 @@
 Supply Chain domain types for NHDOS Frontend
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
+from typing import Any
 
 from .base import BaseEntity
 
@@ -50,4 +53,4 @@ class Purchase(BaseEntity):
     total_amount: float = 0.0
     currency: str = "IQD"
     status: str = "pending"
-    items: list[dict] = field(default_factory=list)
+    items: list[dict[str, Any]] = field(default_factory=list)

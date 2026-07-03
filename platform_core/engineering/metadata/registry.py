@@ -18,6 +18,5 @@ class MetadataRegistry:
     }
 
     @classmethod
-    def resolve(cls, kind: MetadataKind):
-
+    def resolve(cls, kind: MetadataKind) -> Path:
         return cls.MAP[kind]

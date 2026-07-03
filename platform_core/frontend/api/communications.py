@@ -2,34 +2,37 @@
 Communications API client for NHDOS Frontend
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass
+from typing import Any
 
 from .base import BaseEntityClient
 from .client import APIClient
 
 
 @dataclass
-class CorrespondenceClient(BaseEntityClient):
+class CorrespondenceClient(BaseEntityClient[Any]):
     """Client for Correspondence entity API."""
 
     client: APIClient
     entity_name: str = "correspondence"
     endpoint: str = "correspondence"
 
-    def get_by_sender(self, sender_id: str) -> dict:
+    def get_by_sender(self, sender_id: str) -> dict[str, Any]:
         return self.client.get(f"{self.endpoint}/sender/{sender_id}")
 
-    def get_by_recipient(self, recipient_id: str) -> dict:
+    def get_by_recipient(self, recipient_id: str) -> dict[str, Any]:
         return self.client.get(f"{self.endpoint}/recipient/{recipient_id}")
 
-    def send(self, correspondence_data: dict) -> dict:
+    def send(self, correspondence_data: dict[str, Any]) -> dict[str, Any]:
         return self.client.post(f"{self.endpoint}/send", data=correspondence_data)
 
-    def mark_read(self, correspondence_id: str) -> dict:
+    def mark_read(self, correspondence_id: str) -> dict[str, Any]:
         return self.client.put(f"{self.endpoint}/{correspondence_id}/read")
 
-    def get_by_type(self, correspondence_type: str) -> dict:
+    def get_by_type(self, correspondence_type: str) -> dict[str, Any]:
         return self.client.get(f"{self.endpoint}/type/{correspondence_type}")
 
-    def get_by_reference(self, reference_number: str) -> dict:
+    def get_by_reference(self, reference_number: str) -> dict[str, Any]:
         return self.client.get(f"{self.endpoint}/reference/{reference_number}")

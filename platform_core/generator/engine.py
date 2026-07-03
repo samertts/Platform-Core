@@ -8,10 +8,8 @@ from platform_core.generator.result import GeneratorResult
 
 
 class GeneratorEngine:
-    def __init__(self):
-
+    def __init__(self) -> None:
         self._fs = FileSystem()
-
         self._renderer = TemplateRenderer()
 
     def generate_service(

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterator
 
 from platform_core.doctor.check import DoctorCheck
 
@@ -60,6 +60,6 @@ class CheckRegistry:
 
         return len(self._checks)
 
-    def __iter__(self) -> Iterable[DoctorCheck]:
+    def __iter__(self) -> Iterator[DoctorCheck]:
 
         return iter(self._checks.values())

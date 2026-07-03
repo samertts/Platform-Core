@@ -5,28 +5,24 @@ from .subscriber import Subscriber
 
 
 class EventBus:
-    def __init__(self):
-
+    def __init__(self) -> None:
         self._subscribers: dict[str, list[Subscriber]] = defaultdict(list)
 
     def subscribe(
         self,
         event_name: str,
         callback: Subscriber,
-    ):
-
+    ) -> None:
         self._subscribers[event_name].append(callback)
 
     def unsubscribe(
         self,
         event_name: str,
         callback: Subscriber,
-    ):
-
+    ) -> None:
         if callback in self._subscribers[event_name]:
             self._subscribers[event_name].remove(callback)
 
-    def publish(self, event: Event):
-
+    def publish(self, event: Event) -> None:
         for callback in self._subscribers[event.name]:
             callback(event)

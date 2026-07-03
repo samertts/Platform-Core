@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+import argparse
 from pathlib import Path
 
 from platform_core.cli.core.command import Command
@@ -9,8 +12,7 @@ class GenerateCommand(Command):
 
     help = "Generate platform artifacts"
 
-    def configure(self, parser) -> None:
-
+    def configure(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
             "kind",
             choices=[
@@ -24,8 +26,7 @@ class GenerateCommand(Command):
             help="Artifact name.",
         )
 
-    def execute(self, args) -> int:
-
+    def execute(self, args: argparse.Namespace) -> int:
         engine = GeneratorEngine()
 
         if args.kind == "service":
@@ -36,8 +37,8 @@ class GenerateCommand(Command):
 
             print()
             print("Service generated successfully")
-            print(f"Directories : {result.created_directories}")
-            print(f"Files       : {result.created_files}")
+            print(f"Directories : {result.directories_created}")
+            print(f"Files       : {result.files_created}")
             print()
 
         return 0

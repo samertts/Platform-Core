@@ -119,7 +119,7 @@ class PackageVerifier:
             return False
 
         actual_hash = self.compute_checksum(data, algorithm)
-        return actual_hash == expected_hash
+        return bool(actual_hash == expected_hash)
 
     def verify_signature_file(self, file_path: str, signature_path: str) -> bool:
         sig_path = Path(signature_path)

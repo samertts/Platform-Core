@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import Any
 
 
-class VersionConflict(Exception):  # noqa: N818
+class VersionConflictError(Exception):
     def __init__(self, package: str, required: str, installed: str) -> None:
         self.package = package
         self.required = required
@@ -77,9 +77,9 @@ class DependencyResolver:
             return self._compare_versions(version, target) >= 0
         elif constraint.startswith("~"):
             target = constraint[1:].strip()
-            v_parts = self._parse_version(version)[:2]
-            t_parts = self._parse_version(target)[:2]
-            if v_parts != t_parts:
+            v_parts_tilde: tuple[int, int] = self._parse_version(version)[:2]
+            t_parts_tilde: tuple[int, int] = self._parse_version(target)[:2]
+            if v_parts_tilde != t_parts_tilde:
                 return False
             return self._compare_versions(version, target) >= 0
         elif constraint.startswith(">"):
@@ -118,7 +118,7 @@ class DependencyResolver:
 
             if name in visited:
                 if self._resolved.get(name) != resolved_version:
-                    raise VersionConflict(name, resolved_version, self._resolved[name])
+                    raise VersionConflictError(name, resolved_version, self._resolved[name])
                 return
 
             in_stack.add(name)
@@ -157,7 +157,7 @@ class DependencyResolver:
     def detect_cycles(self) -> list[list[str]]:
         cycles: list[list[str]] = []
         visited: set[str] = set()
-        in_stack: set[str] = []
+        in_stack: list[str] = []
         path: set[str] = set()
 
         def dfs(node: str) -> None:
@@ -188,7 +188,7 @@ class DependencyResolver:
         visited: set[str] = set()
 
         def build_tree(pkg_name: str, pkg_version: str, depth: int) -> dict[str, Any]:
-            node = {"name": pkg_name, "version": pkg_version, "dependencies": []}
+            node: dict[str, Any] = {"name": pkg_name, "version": pkg_version, "dependencies": []}
             if pkg_name in visited or depth > 10:
                 return node
             visited.add(pkg_name)

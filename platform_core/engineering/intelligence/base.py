@@ -27,7 +27,7 @@ class EngineeringObject:
             if hasattr(self, key):
                 setattr(self, key, value)
 
-    def copy(self):
+    def copy(self) -> EngineeringObject:
         cls = type(self)
         return cls(**self.to_dict())
 

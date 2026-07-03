@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from typing import Any
 
 from .exceptions import (
     ServiceAlreadyRegisteredError,
@@ -18,7 +19,7 @@ class ServiceContainer(IServiceContainer):
     def register_singleton(
         self,
         interface: type,
-        implementation: type | Callable,
+        implementation: type | Callable[..., Any],
     ) -> None:
 
         if interface in self._services:
@@ -33,7 +34,7 @@ class ServiceContainer(IServiceContainer):
     def register_transient(
         self,
         interface: type,
-        implementation: type | Callable,
+        implementation: type | Callable[..., Any],
     ) -> None:
 
         if interface in self._services:
@@ -45,7 +46,7 @@ class ServiceContainer(IServiceContainer):
             lifetime=Lifetime.TRANSIENT,
         )
 
-    def resolve(self, interface: type):
+    def resolve(self, interface: type) -> Any:
 
         descriptor = self._services.get(interface)
 

@@ -1,9 +1,10 @@
+from __future__ import annotations
+
 import platform
 from pathlib import Path
 
 
-def doctor():
-
+def doctor() -> None:
     print()
 
     print("Platform Doctor")

@@ -8,9 +8,8 @@ import platform_core.cli.commands as commands_pkg
 from platform_core.cli.core.command import Command
 
 
-def discover_commands():
-
-    commands = []
+def discover_commands() -> list[Command]:
+    commands: list[Command] = []
 
     for module in pkgutil.iter_modules(commands_pkg.__path__):
         mod = importlib.import_module(f"{commands_pkg.__name__}.{module.name}")

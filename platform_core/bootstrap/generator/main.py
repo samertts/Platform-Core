@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 from .bootstrap import engine
 
 
-def main():
-
+def main() -> None:
     workspace = Path.cwd()
 
     engine.run(

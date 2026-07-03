@@ -3,12 +3,13 @@ Platform Definition Language Parser
 Genesis Version
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 
 class PDLParser:
-    def parse(self, filename):
-
+    def parse(self, filename: str) -> list[str]:
         path = Path(filename)
 
         with open(path, encoding="utf-8") as file:

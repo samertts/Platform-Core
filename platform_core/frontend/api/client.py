@@ -2,17 +2,19 @@
 Base API client for NHDOS Frontend
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, TypeVar
-
-T = TypeVar("T")
+from typing import Any
 
 
 class APIError(Exception):
     """API error exception."""
 
-    def __init__(self, message: str, status_code: int = 500, details: dict | None = None):
+    def __init__(
+        self, message: str, status_code: int = 500, details: dict[str, Any] | None = None
+    ) -> None:
         super().__init__(message)
         self.status_code = status_code
         self.details = details or {}
@@ -37,7 +39,7 @@ class APIClient:
     config: APIConfig = field(default_factory=APIConfig)
     _session: Any = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.config.auth_token:
             self.config.headers["Authorization"] = f"Bearer {self.config.auth_token}"
         self.config.headers["Content-Type"] = "application/json"
@@ -50,9 +52,9 @@ class APIClient:
         self,
         method: str,
         endpoint: str,
-        data: dict | None = None,
-        params: dict | None = None,
-    ) -> dict:
+        data: dict[str, Any] | None = None,
+        params: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         self._build_url(endpoint)
         try:
             return {
@@ -63,17 +65,17 @@ class APIClient:
         except Exception as e:
             raise APIError(f"Request failed: {str(e)}", 500)
 
-    def get(self, endpoint: str, params: dict | None = None) -> dict:
+    def get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         return self._make_request("GET", endpoint, params=params)
 
-    def post(self, endpoint: str, data: dict | None = None) -> dict:
+    def post(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
         return self._make_request("POST", endpoint, data=data)
 
-    def put(self, endpoint: str, data: dict | None = None) -> dict:
+    def put(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
         return self._make_request("PUT", endpoint, data=data)
 
-    def delete(self, endpoint: str) -> dict:
+    def delete(self, endpoint: str) -> dict[str, Any]:
         return self._make_request("DELETE", endpoint)
 
-    def health_check(self) -> dict:
+    def health_check(self) -> dict[str, Any]:
         return self.get("health")

@@ -2,6 +2,8 @@
 Project Validator
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 
@@ -12,9 +14,8 @@ class ProjectValidator:
         "platform.yaml",
     ]
 
-    def validate(self, root: Path):
-
-        missing = []
+    def validate(self, root: Path) -> list[str]:
+        missing: list[str] = []
 
         for item in self.REQUIRED:
             if not (root / item).exists():

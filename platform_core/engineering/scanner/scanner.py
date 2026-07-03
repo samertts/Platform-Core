@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from collections.abc import Iterable
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -16,12 +19,11 @@ class EngineeringScanner:
         self,
         engineering_root: Path,
         registry: EngineeringRegistry,
-    ):
+    ) -> None:
         self.root = engineering_root
         self.registry = registry
 
     def scan(self) -> None:
-
         for file in self._yaml_files():
             document = self._load(file)
 
@@ -41,11 +43,9 @@ class EngineeringScanner:
             self.registry.register(entry)
 
     def _yaml_files(self) -> Iterable[Path]:
-
         yield from self.root.rglob("*.yaml")
 
-    def _load(self, file: Path):
-
+    def _load(self, file: Path) -> Any:
         with file.open(
             "r",
             encoding="utf8",

@@ -16,7 +16,7 @@ from platform_core.packages import (
 from platform_core.packages.compatibility import CompatibilityEngine
 from platform_core.registry import ModuleRegistry
 from platform_core.repository import RepositoryManager
-from platform_core.resolver import CircularDependencyError, DependencyResolver, VersionConflict
+from platform_core.resolver import CircularDependencyError, DependencyResolver, VersionConflictError
 from platform_core.rollback import RollbackEngine
 from platform_core.updater import UpdateManager
 from platform_core.verifier import PackageVerifier
@@ -115,7 +115,7 @@ class PackageManager:
             resolution = self._resolver.resolve(package_name, entry.version)
         except CircularDependencyError as e:
             raise PackageError(f"Circular dependency: {e}")
-        except VersionConflict as e:
+        except VersionConflictError as e:
             raise PackageError(f"Version conflict: {e}")
 
         manifest = PackageManifest()

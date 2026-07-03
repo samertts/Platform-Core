@@ -1,19 +1,17 @@
+from __future__ import annotations
+
 from .models import Capability
 
 
 class CapabilityRegistry:
-    def __init__(self):
+    def __init__(self) -> None:
+        self.capabilities: dict[str, Capability] = {}
 
-        self.capabilities = {}
-
-    def add(self, capability: Capability):
-
+    def add(self, capability: Capability) -> None:
         self.capabilities[capability.id] = capability
 
-    def get(self, capability_id: str):
-
+    def get(self, capability_id: str) -> Capability | None:
         return self.capabilities.get(capability_id)
 
-    def all(self):
-
+    def all(self) -> list[Capability]:
         return list(self.capabilities.values())

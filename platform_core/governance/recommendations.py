@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import threading
+from typing import Any
 
 from platform_core.governance.types import Finding, FindingSeverity, Recommendation
 
@@ -92,7 +93,7 @@ class RecommendationEngine:
             groups.setdefault(cat, []).append(rec)
         return groups
 
-    def estimate_total_effort(self, recommendations: list[Recommendation]) -> dict[str, int]:
+    def estimate_total_effort(self, recommendations: list[Recommendation]) -> dict[str, Any]:
         hours_map = {
             "1-2 hours": 2,
             "2-4 hours": 3,

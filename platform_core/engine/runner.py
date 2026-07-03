@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+from typing import Any
 
 from platform_core.engine.cancellation_coordinator import (
     CancellationCoordinator,
@@ -39,7 +40,7 @@ class EngineRunner:
 
     def run(
         self,
-        engine,
+        engine: Any,
         context: EngineContext,
     ) -> EngineResult:
 

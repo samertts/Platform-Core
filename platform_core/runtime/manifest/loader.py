@@ -39,13 +39,15 @@ class ManifestLoader:
             return self.parse(content, "json")
         else:
             try:
-                return json.loads(content)
+                result: dict[str, Any] = json.loads(content)
+                return result
             except json.JSONDecodeError:
                 return self.parse(content, "yaml")
 
     def parse(self, content: str, format: str = "yaml") -> dict[str, Any]:
         if format == "json":
-            return json.loads(content)
+            result: dict[str, Any] = json.loads(content)
+            return result
         elif format in ("yaml", "yml"):
             return self._parse_yaml(content)
         else:

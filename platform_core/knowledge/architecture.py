@@ -19,6 +19,7 @@ from platform_core.knowledge.types import (
     NodeType,
     RecommendationPriority,
     RelationshipType,
+    SmellType,
 )
 
 
@@ -49,7 +50,7 @@ class ArchitectureIntelligence:
             if not incoming and not outgoing:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="orphan_service",
+                        smell_type=SmellType.ORPHAN_SERVICE,
                         description=f"Service '{svc.name}' has no connections",
                         affected_nodes=[svc.id],
                         severity=ImpactLevel.MEDIUM,
@@ -66,7 +67,7 @@ class ArchitectureIntelligence:
             if not incoming:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="dead_module",
+                        smell_type=SmellType.DEAD_MODULE,
                         description=f"Module '{mod.name}' is not referenced by anything",
                         affected_nodes=[mod.id],
                         severity=ImpactLevel.LOW,
@@ -87,7 +88,7 @@ class ArchitectureIntelligence:
             if not consumers:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="unused_api",
+                        smell_type=SmellType.UNUSED_API,
                         description=f"API '{api.name}' has no consumers",
                         affected_nodes=[api.id],
                         severity=ImpactLevel.LOW,
@@ -106,7 +107,7 @@ class ArchitectureIntelligence:
             if len(group) > 1:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="duplicate_service",
+                        smell_type=SmellType.DUPLICATE_SERVICE,
                         description=f"Multiple services named '{name}'",
                         affected_nodes=[s.id for s in group],
                         severity=ImpactLevel.MEDIUM,
@@ -139,7 +140,7 @@ class ArchitectureIntelligence:
             cycle = path[cycle_start:] + [node_id]
             smells.append(
                 ArchitectureSmell(
-                    smell_type="circular_dependency",
+                    smell_type=SmellType.CIRCULAR_DEPENDENCY,
                     description=f"Circular dependency: {' -> '.join(cycle)}",
                     affected_nodes=cycle,
                     severity=ImpactLevel.HIGH,
@@ -167,7 +168,7 @@ class ArchitectureIntelligence:
             if total > 15:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="high_coupling",
+                        smell_type=SmellType.HIGH_COUPLING,
                         description=f"Node '{node.name}' has {total} connections (high coupling)",
                         affected_nodes=[node.id],
                         severity=ImpactLevel.MEDIUM,
@@ -186,7 +187,7 @@ class ArchitectureIntelligence:
             if len(outgoing) > 20:
                 smells.append(
                     ArchitectureSmell(
-                        smell_type="god_module",
+                        smell_type=SmellType.GOD_MODULE,
                         description=f"Module '{mod.name}' depends on {len(outgoing)} other modules",
                         affected_nodes=[mod.id],
                         severity=ImpactLevel.HIGH,
@@ -202,7 +203,7 @@ class ArchitectureIntelligence:
         smells = self.detect_smells()
         smell_counts = Counter(s.smell_type for s in smells)
         for smell_type, count in smell_counts.most_common():
-            if smell_type == "orphan_service":
+            if smell_type == SmellType.ORPHAN_SERVICE:
                 recs.append(
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.MEDIUM,
@@ -215,7 +216,7 @@ class ArchitectureIntelligence:
                         rationale="Disconnected services increase maintenance burden",
                     )
                 )
-            elif smell_type == "circular_dependency":
+            elif smell_type == SmellType.CIRCULAR_DEPENDENCY:
                 recs.append(
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.HIGH,
@@ -227,7 +228,7 @@ class ArchitectureIntelligence:
                         rationale="Circular dependencies prevent independent deployment",
                     )
                 )
-            elif smell_type == "high_coupling":
+            elif smell_type == SmellType.HIGH_COUPLING:
                 recs.append(
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.MEDIUM,
@@ -237,7 +238,7 @@ class ArchitectureIntelligence:
                         rationale="Loose coupling improves maintainability",
                     )
                 )
-            elif smell_type == "god_module":
+            elif smell_type == SmellType.GOD_MODULE:
                 recs.append(
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.HIGH,

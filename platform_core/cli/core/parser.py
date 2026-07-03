@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 import argparse
 
 from platform_core.cli.core.discovery import discover_commands
 
 
-def build_parser():
-
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="platform",
         description="Platform-Core",

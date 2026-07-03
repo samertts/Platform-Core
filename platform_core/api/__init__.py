@@ -34,7 +34,8 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
         if content_length == 0:
             return {}
         body = self.rfile.read(content_length)
-        return json.loads(body)
+        result: dict[str, Any] = json.loads(body)
+        return result
 
     def do_GET(self) -> None:
         path = self.path.rstrip("/")
@@ -74,8 +75,8 @@ class PackageAPIHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/v1/packages/installed":
             manager = self._get_manager()
-            packages = manager.list_installed()
-            self._send_json({"packages": packages})
+            installed_packages = manager.list_installed()
+            self._send_json({"packages": installed_packages})
 
         elif path == "/api/v1/repositories":
             manager = self._get_manager()

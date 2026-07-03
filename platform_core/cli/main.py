@@ -4,6 +4,8 @@ Platform-Core Command Line Interface
 Genesis Version 0.1.0
 """
 
+from __future__ import annotations
+
 import argparse
 import platform
 from pathlib import Path
@@ -11,7 +13,7 @@ from pathlib import Path
 VERSION = "0.1.0"
 
 
-def banner():
+def banner() -> None:
     print("=" * 60)
     print("Platform-Core")
     print("Knowledge Driven Engineering Platform")
@@ -19,7 +21,7 @@ def banner():
     print("=" * 60)
 
 
-def doctor():
+def doctor() -> None:
     print("\nRunning Platform Doctor...\n")
 
     print(f"Python Version : {platform.python_version()}")
@@ -43,20 +45,19 @@ def doctor():
     print("\nDoctor Finished.")
 
 
-def init():
+def init() -> None:
     print("\nPlatform-Core Initialization Complete.")
 
 
-def validate():
+def validate() -> None:
     print("\nValidation is not implemented yet.")
 
 
-def build():
+def build() -> None:
     print("\nBuild system is not implemented yet.")
 
 
-def main():
-
+def main() -> None:
     parser = argparse.ArgumentParser(prog="platform", description="Platform-Core CLI")
 
     parser.add_argument("command", nargs="?", default="doctor")

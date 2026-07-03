@@ -135,7 +135,7 @@ class QueryEngine:
                         visited[edge.target_id] = current
                         if edge.target_id == target_id:
                             path = [target_id]
-                            node = current
+                            node: str | None = current
                             while node is not None:
                                 path.append(node)
                                 node = visited[node]

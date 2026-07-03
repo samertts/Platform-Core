@@ -2,15 +2,16 @@
 Repository Generator
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 
 class RepositoryGenerator:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path) -> None:
         self.root = root
 
-    def create(self):
-
+    def create(self) -> None:
         directories = [
             "docs",
             "tests",

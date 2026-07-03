@@ -24,8 +24,8 @@ class CorrelationFilter(logging.Filter):
         self._context.update(kwargs)
 
     def filter(self, record: logging.LogRecord) -> bool:
-        record.correlation_id = str(self._correlation_id) if self._correlation_id else None  # type: ignore[attr-defined]
-        record.extra_context = dict(self._context)  # type: ignore[attr-defined]
+        record.correlation_id = str(self._correlation_id) if self._correlation_id else None
+        record.extra_context = dict(self._context)
         return True
 
 
@@ -180,11 +180,11 @@ class LoggingEngine:
             args=(),
             exc_info=None,
         )
-        record.audit_action = action  # type: ignore[attr-defined]
-        record.audit_subject = subject  # type: ignore[attr-defined]
-        record.audit_actor = actor  # type: ignore[attr-defined]
-        record.audit_result = result  # type: ignore[attr-defined]
-        record.audit_details = kwargs  # type: ignore[attr-defined]
+        record.audit_action = action
+        record.audit_subject = subject
+        record.audit_actor = actor
+        record.audit_result = result
+        record.audit_details = kwargs
         self._audit_handler.emit(record)
 
     def with_correlation(self, correlation_id: UUID) -> LoggingEngine:

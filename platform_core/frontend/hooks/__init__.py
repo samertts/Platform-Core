@@ -4,6 +4,8 @@ NHDOS Frontend Hooks
 Reusable hooks for frontend state management
 """
 
+from __future__ import annotations
+
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
@@ -14,9 +16,9 @@ class UseState:
     """State management hook."""
 
     value: Any = None
-    setter: Callable | None = None
+    setter: Callable[..., Any] | None = None
 
-    def update(self, new_value: Any):
+    def update(self, new_value: Any) -> None:
         self.value = new_value
         if self.setter:
             self.setter(new_value)
@@ -27,15 +29,15 @@ class UseEffect:
     """Side effect hook."""
 
     dependencies: list[Any] = field(default_factory=list)
-    cleanup: Callable | None = None
-    effect: Callable | None = None
+    cleanup: Callable[..., Any] | None = None
+    effect: Callable[..., Any] | None = None
 
 
 @dataclass
 class UseCallback:
     """Memoized callback hook."""
 
-    callback: Callable | None = None
+    callback: Callable[..., Any] | None = None
     dependencies: list[Any] = field(default_factory=list)
 
 
@@ -54,7 +56,7 @@ class UseQuery:
     data: Any = None
     error: str | None = None
     loading: bool = False
-    refetch: Callable | None = None
+    refetch: Callable[..., Any] | None = None
 
 
 @dataclass
@@ -64,28 +66,30 @@ class UseMutation:
     data: Any = None
     error: str | None = None
     loading: bool = False
-    mutate: Callable | None = None
+    mutate: Callable[..., Any] | None = None
 
 
 def use_state(initial_value: Any = None) -> UseState:
     return UseState(value=initial_value)
 
 
-def use_effect(effect: Callable, dependencies: list[Any] = None) -> UseEffect:
+def use_effect(effect: Callable[..., Any], dependencies: list[Any] | None = None) -> UseEffect:
     return UseEffect(dependencies=dependencies or [], effect=effect)
 
 
-def use_callback(callback: Callable, dependencies: list[Any] = None) -> UseCallback:
+def use_callback(
+    callback: Callable[..., Any], dependencies: list[Any] | None = None
+) -> UseCallback:
     return UseCallback(callback=callback, dependencies=dependencies or [])
 
 
-def use_memo(factory: Callable, dependencies: list[Any] = None) -> UseMemo:
+def use_memo(factory: Callable[..., Any], dependencies: list[Any] | None = None) -> UseMemo:
     return UseMemo(value=factory(), dependencies=dependencies or [])
 
 
-def use_query(fetcher: Callable, *args, **kwargs) -> UseQuery:
+def use_query(fetcher: Callable[..., Any], *args: Any, **kwargs: Any) -> UseQuery:
     return UseQuery(loading=True, refetch=lambda: fetcher(*args, **kwargs))
 
 
-def use_mutate(mutation: Callable) -> UseMutation:
+def use_mutate(mutation: Callable[..., Any]) -> UseMutation:
     return UseMutation(mutate=mutation)

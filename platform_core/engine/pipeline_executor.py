@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from platform_core.engine.context import EngineContext
 from platform_core.engine.hook_dispatcher import HookDispatcher
 from platform_core.engine.result import EngineResult
@@ -27,7 +29,7 @@ class PipelineExecutor:
 
     def execute(
         self,
-        engine,
+        engine: Any,
         context: EngineContext,
     ) -> EngineResult:
 
@@ -53,4 +55,10 @@ class PipelineExecutor:
         engine.finalize(context)
         self._hooks.after_finalize(engine, context)
 
-        return result
+        return EngineResult(
+            status=result.status,
+            artifacts=result.artifacts,
+            metrics=result.metrics,
+            warnings=result.warnings,
+            payload=result.payload,
+        )

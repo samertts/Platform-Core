@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 
 from platform_core.workflow.step import WorkflowStep
 
@@ -41,8 +41,7 @@ class WorkflowPipeline:
 
     def __iter__(
         self,
-    ):
-
+    ) -> Iterator[WorkflowStep]:
         return iter(self._steps)
 
     def clear(

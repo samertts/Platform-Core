@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .generator_engine import GeneratorEngine
 from .generators.capability_generator import CapabilityGenerator
 from .generators.engine_generator import EngineGenerator

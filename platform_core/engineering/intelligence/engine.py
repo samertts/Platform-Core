@@ -5,6 +5,7 @@ Platform-Core Engineering Intelligence Engine
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from .analyzer import EngineeringAnalyzer
 from .discovery import DiscoveryEngine
@@ -34,7 +35,7 @@ class EngineeringEngine:
     def run(
         self,
         root: Path,
-    ):
+    ) -> dict[str, Any]:
 
         snapshot = self.index.build(root)
 

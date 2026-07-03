@@ -2,23 +2,20 @@ from __future__ import annotations
 
 
 class ComponentRegistry:
-    def __init__(self):
-
+    def __init__(self) -> None:
         self._components: dict[str, object] = {}
 
     def register(
         self,
         name: str,
         component: object,
-    ):
-
+    ) -> None:
         self._components[name] = component
 
     def unregister(
         self,
         name: str,
-    ):
-
+    ) -> None:
         self._components.pop(
             name,
             None,
@@ -27,8 +24,7 @@ class ComponentRegistry:
     def get(
         self,
         name: str,
-    ):
-
+    ) -> object | None:
         return self._components.get(
             name,
         )
@@ -36,10 +32,8 @@ class ComponentRegistry:
     def exists(
         self,
         name: str,
-    ):
-
+    ) -> bool:
         return name in self._components
 
-    def all(self):
-
+    def all(self) -> dict[str, object]:
         return dict(self._components)

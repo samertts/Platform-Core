@@ -60,7 +60,7 @@ class RepositoryManager:
             return
         path = Path(self._config_path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        data = {"repositories": {}}
+        data: dict[str, dict[str, dict[str, Any]]] = {"repositories": {}}
         for name, repo in self._repositories.items():
             data["repositories"][name] = {
                 "type": repo.type.value,
