@@ -2,11 +2,6 @@ from dataclasses import dataclass, field
 
 
 @dataclass(slots=True)
-class Manifest:
-    capabilities: list = field(default_factory=list)
-
-
-@dataclass(slots=True)
 class ProjectManifest:
     name: str
 

@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class KernelState(str, Enum):
+class KernelState(StrEnum):
     CREATED = "created"
 
     INITIALIZED = "initialized"

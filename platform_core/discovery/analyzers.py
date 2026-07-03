@@ -372,7 +372,7 @@ class DocumentationAnalyzer(BaseAnalyzer):
         has_readme = any(r in file_names for r in self.REQUIRED_FILES)
         has_changelog = "CHANGELOG.md" in file_names
         has_contributing = "CONTRIBUTING.md" in file_names
-        has_license = any(l in file_names for l in ["LICENSE", "LICENSE.md", "LICENSE.txt"])
+        has_license = any(lic in file_names for lic in ["LICENSE", "LICENSE.md", "LICENSE.txt"])
         has_api_docs = any(d in file_names for d in self.API_DOC_FILES)
         has_arch_docs = any(d.rstrip("/") in dir_names for d in self.ARCH_DOC_DIRS)
 

@@ -261,13 +261,15 @@ class PluginEngine:
             if info.min_platform_version:
                 if self._compare_versions(self._platform_version, info.min_platform_version) < 0:
                     errors.append(
-                        f"Platform version {self._platform_version} < required {info.min_platform_version}"
+                        f"Platform version {self._platform_version}"
+                        f" < required {info.min_platform_version}"
                     )
 
             if info.max_platform_version:
                 if self._compare_versions(self._platform_version, info.max_platform_version) > 0:
                     errors.append(
-                        f"Platform version {self._platform_version} > maximum {info.max_platform_version}"
+                        f"Platform version {self._platform_version}"
+                        f" > maximum {info.max_platform_version}"
                     )
 
         return errors

@@ -4,17 +4,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-import shutil
 import tarfile
 import threading
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from io import BytesIO
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
 
 from platform_core.packages import (
-    PackageChecksum,
     PackageManifest,
     PackageSignature,
     SignatureAlgorithm,
@@ -58,7 +55,6 @@ class PackageBuilder:
             PackageCompatibility,
             PackageDependencies,
             PackageIdentity,
-            PackageLifecycle,
             PackageUUID,
         )
 

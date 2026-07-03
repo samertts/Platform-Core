@@ -20,7 +20,9 @@ class PlatformCLI:
     def _create_parser(self) -> argparse.ArgumentParser:
         parser = argparse.ArgumentParser(
             prog="platform",
-            description="Platform Package Manager - Manage modules for the Unified Healthcare Platform",
+            description=(
+                "Platform Package Manager - Manage modules for the Unified Healthcare Platform"
+            ),
         )
         subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
@@ -59,7 +61,11 @@ class PlatformCLI:
         rollback.add_argument("package", help="Package name")
 
         registry = subparsers.add_parser("registry", help="Registry operations")
-        registry.add_argument("action", choices=["list", "count", "stats"], help="Registry action")
+        registry.add_argument(
+            "action",
+            choices=["list", "count", "stats"],
+            help="Registry action",
+        )
 
         return parser
 

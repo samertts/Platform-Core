@@ -52,7 +52,7 @@ class TestNodeManager:
     def test_list_nodes_by_status(self) -> None:
         mgr = self._make_manager()
         n1 = mgr.create_node(NodeType.MODULE, "a")
-        n2 = mgr.create_node(NodeType.MODULE, "b")
+        mgr.create_node(NodeType.MODULE, "b")
         mgr.update_node(n1.id, status=NodeStatus.INACTIVE)
         inactive = mgr.list_nodes(status=NodeStatus.INACTIVE)
         assert len(inactive) == 1

@@ -171,7 +171,9 @@ class ArchitectureIntelligence:
                         description=f"Node '{node.name}' has {total} connections (high coupling)",
                         affected_nodes=[node.id],
                         severity=ImpactLevel.MEDIUM,
-                        recommendation=f"Reduce coupling for '{node.name}' by introducing abstraction layers",
+                        recommendation=(
+                            f"Reduce coupling for '{node.name}' by introducing abstraction layers"
+                        ),
                     )
                 )
         return smells
@@ -188,7 +190,9 @@ class ArchitectureIntelligence:
                         description=f"Module '{mod.name}' depends on {len(outgoing)} other modules",
                         affected_nodes=[mod.id],
                         severity=ImpactLevel.HIGH,
-                        recommendation=f"Decompose module '{mod.name}' into smaller, focused modules",
+                        recommendation=(
+                            f"Decompose module '{mod.name}' into smaller, focused modules"
+                        ),
                     )
                 )
         return smells
@@ -203,7 +207,10 @@ class ArchitectureIntelligence:
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.MEDIUM,
                         title=f"Address {count} orphan service(s)",
-                        description="Orphan services have no connections and should be integrated or removed",
+                        description=(
+                            "Orphan services have no connections "
+                            "and should be integrated or removed"
+                        ),
                         estimated_effort=f"{count * 2} hours",
                         rationale="Disconnected services increase maintenance burden",
                     )
@@ -213,7 +220,9 @@ class ArchitectureIntelligence:
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.HIGH,
                         title=f"Break {count} circular dependency(ies)",
-                        description="Circular dependencies make the system fragile and hard to test",
+                        description=(
+                            "Circular dependencies make the system fragile and hard to test"
+                        ),
                         estimated_effort=f"{count * 4} hours",
                         rationale="Circular dependencies prevent independent deployment",
                     )
@@ -233,7 +242,9 @@ class ArchitectureIntelligence:
                     ArchitectureRecommendation(
                         priority=RecommendationPriority.HIGH,
                         title=f"Decompose {count} god module(s)",
-                        description="God modules violate single responsibility and are hard to maintain",
+                        description=(
+                            "God modules violate single responsibility and are hard to maintain"
+                        ),
                         estimated_effort=f"{count * 8} hours",
                         rationale="Large modules are error-prone and block parallel development",
                     )

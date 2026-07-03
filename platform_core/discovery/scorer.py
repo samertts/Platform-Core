@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from platform_core.discovery.types import AnalysisResult, HealthRating, HealthScore
 
 
@@ -132,6 +134,3 @@ class HealthScorer:
                 "ci_cd": round(current.ci_cd - previous.ci_cd, 3),
             },
         }
-
-
-from typing import Any

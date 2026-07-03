@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-class EngineException(Exception):
+class EngineException(Exception):  # noqa: N818
     """Base Engine exception."""
 
 

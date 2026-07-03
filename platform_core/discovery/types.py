@@ -4,18 +4,18 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 from uuid import uuid4
 
 
-class ScanType(str, Enum):
+class ScanType(StrEnum):
     FULL = "full"
     INCREMENTAL = "incremental"
     ON_DEMAND = "on_demand"
 
 
-class ScanStatus(str, Enum):
+class ScanStatus(StrEnum):
     PENDING = "pending"
     RUNNING = "running"
     SUCCESS = "success"
@@ -23,7 +23,7 @@ class ScanStatus(str, Enum):
     FAILED = "failed"
 
 
-class FindingSeverity(str, Enum):
+class FindingSeverity(StrEnum):
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -31,7 +31,7 @@ class FindingSeverity(str, Enum):
     INFO = "info"
 
 
-class FindingCategory(str, Enum):
+class FindingCategory(StrEnum):
     SECURITY = "security"
     DOCUMENTATION = "documentation"
     TESTING = "testing"
@@ -42,7 +42,7 @@ class FindingCategory(str, Enum):
     DOCKER = "docker"
 
 
-class HealthRating(str, Enum):
+class HealthRating(StrEnum):
     EXCELLENT = "excellent"
     GOOD = "good"
     FAIR = "fair"

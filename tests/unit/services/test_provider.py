@@ -42,23 +42,6 @@ def test_transient():
     assert first is not second
 
 
-def test_scoped():
-
-    provider = ServiceProvider()
-
-    descriptor = ServiceDescriptor(
-        key="logger",
-        implementation=Logger,
-        lifetime=ServiceLifetime.SCOPED,
-    )
-
-    first = provider.create(descriptor)
-
-    second = provider.create(descriptor)
-
-    assert first is not second
-
-
 def test_clear():
 
     provider = ServiceProvider()

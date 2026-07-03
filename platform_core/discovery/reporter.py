@@ -111,7 +111,6 @@ class Reporter:
 
     def _generate_recommendations(self, result: DiscoveryResult) -> list[dict[str, Any]]:
         recommendations: list[dict[str, Any]] = []
-        score = result.health_score
         analysis = result.analysis
 
         if not analysis.documentation.has_readme:
@@ -119,7 +118,10 @@ class Reporter:
                 {
                     "priority": 1,
                     "category": "documentation",
-                    "message": "Add a README.md with project overview, installation, and usage instructions",
+                    "message": (
+                        "Add a README.md with project overview, "
+                        "installation, and usage instructions"
+                    ),
                     "estimated_effort": "1-2 hours",
                 }
             )

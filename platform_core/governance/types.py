@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 from uuid import uuid4
 
 
-class ReviewType(str, Enum):
+class ReviewType(StrEnum):
     ARCHITECTURE = "architecture"
     SECURITY = "security"
     PERFORMANCE = "performance"
@@ -20,7 +20,7 @@ class ReviewType(str, Enum):
     HEALTHCARE_STANDARDS = "healthcare_standards"
 
 
-class ReviewStatus(str, Enum):
+class ReviewStatus(StrEnum):
     PENDING = "pending"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
@@ -28,7 +28,7 @@ class ReviewStatus(str, Enum):
     CANCELLED = "cancelled"
 
 
-class FindingSeverity(str, Enum):
+class FindingSeverity(StrEnum):
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -36,7 +36,7 @@ class FindingSeverity(str, Enum):
     INFO = "info"
 
 
-class FindingStatus(str, Enum):
+class FindingStatus(StrEnum):
     OPEN = "open"
     ACKNOWLEDGED = "acknowledged"
     IN_PROGRESS = "in_progress"
@@ -45,7 +45,7 @@ class FindingStatus(str, Enum):
     DEFERRED = "deferred"
 
 
-class RiskLevel(str, Enum):
+class RiskLevel(StrEnum):
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -53,7 +53,7 @@ class RiskLevel(str, Enum):
     NEGLIGIBLE = "negligible"
 
 
-class RiskCategory(str, Enum):
+class RiskCategory(StrEnum):
     ARCHITECTURE = "architecture"
     OPERATIONAL = "operational"
     SECURITY = "security"
@@ -63,7 +63,7 @@ class RiskCategory(str, Enum):
     GOVERNMENT_READINESS = "government_readiness"
 
 
-class ComplianceStatus(str, Enum):
+class ComplianceStatus(StrEnum):
     COMPLIANT = "compliant"
     NON_COMPLIANT = "non_compliant"
     PARTIAL = "partial"
@@ -71,14 +71,14 @@ class ComplianceStatus(str, Enum):
     UNKNOWN = "unknown"
 
 
-class QualityGateResult(str, Enum):
+class QualityGateResult(StrEnum):
     PASSED = "passed"
     FAILED = "failed"
     BLOCKED = "blocked"
     WAIVED = "waived"
 
 
-class DecisionType(str, Enum):
+class DecisionType(StrEnum):
     APPROVE = "approve"
     REJECT = "reject"
     DEFER = "defer"
@@ -86,14 +86,14 @@ class DecisionType(str, Enum):
     ESCALATE = "escalate"
 
 
-class ApprovalStatus(str, Enum):
+class ApprovalStatus(StrEnum):
     PENDING = "pending"
     APPROVED = "approved"
     REJECTED = "rejected"
     EXPIRED = "expired"
 
 
-class ExceptionType(str, Enum):
+class ExceptionType(StrEnum):
     SECURITY = "security"
     COMPLIANCE = "compliance"
     QUALITY = "quality"
@@ -101,7 +101,7 @@ class ExceptionType(str, Enum):
     DEPENDENCY = "dependency"
 
 
-class PolicyType(str, Enum):
+class PolicyType(StrEnum):
     MANDATORY = "mandatory"
     RECOMMENDED = "recommended"
     OPTIONAL = "optional"

@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import Any
 
 
-class VersionConflict(Exception):
+class VersionConflict(Exception):  # noqa: N818
     def __init__(self, package: str, required: str, installed: str) -> None:
         self.package = package
         self.required = required
@@ -185,7 +185,6 @@ class DependencyResolver:
         return cycles
 
     def get_dependency_tree(self, name: str, version: str) -> dict[str, Any]:
-        tree: dict[str, Any] = {"name": name, "version": version, "dependencies": []}
         visited: set[str] = set()
 
         def build_tree(pkg_name: str, pkg_version: str, depth: int) -> dict[str, Any]:

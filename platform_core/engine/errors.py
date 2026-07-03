@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 
-class EngineErrorCategory(str, Enum):
+class EngineErrorCategory(StrEnum):
     VALIDATION = "validation"
     CONFIGURATION = "configuration"
     DEPENDENCY = "dependency"

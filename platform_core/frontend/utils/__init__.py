@@ -5,9 +5,7 @@ Helper functions for frontend development
 """
 
 import hashlib
-import json
 from datetime import datetime
-from typing import Any, Optional
 from uuid import uuid4
 
 

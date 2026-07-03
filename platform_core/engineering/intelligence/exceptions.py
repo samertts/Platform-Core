@@ -89,9 +89,9 @@ class GitHubIntegrationError(EngineeringError):
     """GitHub integration failed."""
 
 
-class SecurityViolation(EngineeringError):
+class SecurityViolation(EngineeringError):  # noqa: N818
     """Security policy violation."""
 
 
-class GovernanceViolation(EngineeringError):
+class GovernanceViolation(EngineeringError):  # noqa: N818
     """Governance rule violation."""

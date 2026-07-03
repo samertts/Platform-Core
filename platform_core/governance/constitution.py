@@ -1,4 +1,4 @@
-"""Constitution Enforcement - Auto-validates against the Unified Healthcare Platform Constitution."""
+"""Constitution Enforcement.Auto-validates against the Unified Healthcare Platform Constitution."""
 
 from __future__ import annotations
 
@@ -153,7 +153,11 @@ class ConstitutionEnforcer:
             articles_passed=articles_passed,
             violations=violations,
             recommendations=recommendations,
-            summary=f"Constitution compliance: {articles_passed}/{articles_checked} articles passed ({score:.1%})",
+            summary=(
+                "Constitution compliance: "
+                f"{articles_passed}/{articles_checked} "
+                f"articles passed ({score:.1%})"
+            ),
         )
 
         with self._lock:

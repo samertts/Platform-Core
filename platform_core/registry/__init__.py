@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import threading
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -13,9 +13,7 @@ from platform_core.packages import (
     PackageChecksum,
     PackageCompatibility,
     PackageDependencies,
-    PackageIdentity,
     PackageLifecycle,
-    PackageManifest,
     PackageSignature,
     PackageStatus,
     PackageUUID,
@@ -24,7 +22,10 @@ from platform_core.packages import (
 
 
 class ModuleRegistry:
-    """Centralized registry for modules, plugins, SDKs, templates, policies, workflows, knowledge packs."""
+    """
+    Centralized registry for modules, plugins, SDKs,
+    templates, policies, workflows, and knowledge packs.
+    """
 
     def __init__(self, storage_path: str | None = None) -> None:
         self._entries: dict[str, dict[str, RegistryEntry]] = {}

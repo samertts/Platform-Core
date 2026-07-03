@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from platform_core.engine.artifact import Artifact
@@ -10,7 +10,7 @@ from platform_core.engine.errors import EngineError
 from platform_core.engine.warnings import EngineWarning
 
 
-class EngineStatus(str, Enum):
+class EngineStatus(StrEnum):
     COMPLETED = "completed"
     FAILED = "failed"
     CANCELLED = "cancelled"

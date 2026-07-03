@@ -91,7 +91,10 @@ class DecisionEngine:
         if decision_type == DecisionType.APPROVE:
             return f"Approved: {open_count} open findings, none critical or high"
         elif decision_type == DecisionType.REJECT:
-            return f"Rejected: {critical_count} critical, {high_count} high findings require resolution"
+            return (
+                f"Rejected: {critical_count} critical, "
+                f"{high_count} high findings require resolution"
+            )
         elif decision_type == DecisionType.DEFER:
             return f"Deferred: {open_count} open findings require review"
         return f"Decision: {decision_type.value}"

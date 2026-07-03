@@ -196,7 +196,7 @@ class ManifestLoader:
         compat = manifest.get("compatibility", {})
 
         min_version = compat.get("min_platform_core", "")
-        max_version = compat.get("platform_core", "")
+        compat.get("platform_core", "")
 
         if min_version and not self.SEMVER_PATTERN.match(min_version.lstrip(">=")):
             errors.append(f"Invalid min_platform_core version: {min_version}")

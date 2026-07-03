@@ -53,7 +53,7 @@ class APIClient:
         data: dict | None = None,
         params: dict | None = None,
     ) -> dict:
-        url = self._build_url(endpoint)
+        self._build_url(endpoint)
         try:
             return {
                 "success": True,

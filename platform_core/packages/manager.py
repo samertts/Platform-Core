@@ -175,8 +175,8 @@ class PackageManager:
         if entry is None:
             raise PackageNotFoundError(f"Package not found: {package_name}")
 
-        staged = self._updater.stage_update(package_name, entry.version)
-        result = self._updater.apply_update(package_name, entry.version)
+        self._updater.stage_update(package_name, entry.version)
+        self._updater.apply_update(package_name, entry.version)
 
         with self._lock:
             self._installed[package_name].package_version = entry.version

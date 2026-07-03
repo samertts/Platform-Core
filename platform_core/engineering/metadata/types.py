@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class MetadataKind(str, Enum):
+class MetadataKind(StrEnum):
     MANIFEST = "manifest"
 
     CAPABILITY = "capability"

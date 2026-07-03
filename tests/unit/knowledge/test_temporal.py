@@ -77,7 +77,7 @@ class TestTemporalManager:
     def test_get_latest_snapshot(self) -> None:
         _, _, temporal = self._make_managers()
         temporal.create_snapshot("first")
-        second = temporal.create_snapshot("second")
+        temporal.create_snapshot("second")
         latest = temporal.get_latest_snapshot()
         assert latest is not None
         assert latest.description == "second"

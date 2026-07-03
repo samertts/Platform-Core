@@ -8,7 +8,7 @@ from __future__ import annotations
 import uuid
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -16,7 +16,7 @@ from typing import Any
 # ---------------------------------------------------------------------------
 
 
-class NodeType(str, Enum):
+class NodeType(StrEnum):
     REPOSITORY = "repository"
     MODULE = "module"
     SERVICE = "service"
@@ -41,7 +41,7 @@ class NodeType(str, Enum):
     ENVIRONMENT = "environment"
 
 
-class NodeStatus(str, Enum):
+class NodeStatus(StrEnum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     DEPRECATED = "deprecated"
@@ -51,7 +51,7 @@ class NodeStatus(str, Enum):
     RETIRED = "retired"
 
 
-class LifecycleStage(str, Enum):
+class LifecycleStage(StrEnum):
     IDEA = "idea"
     PLANNING = "planning"
     DEVELOPMENT = "development"
@@ -67,7 +67,7 @@ class LifecycleStage(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class RelationshipType(str, Enum):
+class RelationshipType(StrEnum):
     DEPENDS_ON = "depends_on"
     USES = "uses"
     IMPLEMENTS = "implements"
@@ -91,7 +91,7 @@ class RelationshipType(str, Enum):
     INCOMPATIBLE_WITH = "incompatible_with"
 
 
-class RelationshipStatus(str, Enum):
+class RelationshipStatus(StrEnum):
     ACTIVE = "active"
     PROPOSED = "proposed"
     DEPRECATED = "deprecated"
@@ -104,7 +104,7 @@ class RelationshipStatus(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class QueryType(str, Enum):
+class QueryType(StrEnum):
     DEPENDENCY_ANALYSIS = "dependency_analysis"
     IMPACT_ANALYSIS = "impact_analysis"
     CIRCULAR_DEPENDENCY = "circular_dependency"
@@ -124,7 +124,7 @@ class QueryType(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class ImpactLevel(str, Enum):
+class ImpactLevel(StrEnum):
     NONE = "none"
     LOW = "low"
     MEDIUM = "medium"
@@ -132,7 +132,7 @@ class ImpactLevel(str, Enum):
     CRITICAL = "critical"
 
 
-class ChangeType(str, Enum):
+class ChangeType(StrEnum):
     ADD = "add"
     MODIFY = "modify"
     DELETE = "delete"
@@ -146,7 +146,7 @@ class ChangeType(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class SmellType(str, Enum):
+class SmellType(StrEnum):
     ORPHAN_SERVICE = "orphan_service"
     DEAD_MODULE = "dead_module"
     UNUSED_API = "unused_api"
@@ -161,7 +161,7 @@ class SmellType(str, Enum):
     SHOTGUN_SURGERY = "shotgun_surgery"
 
 
-class RecommendationPriority(str, Enum):
+class RecommendationPriority(StrEnum):
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -174,7 +174,7 @@ class RecommendationPriority(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class HealthcareStandard(str, Enum):
+class HealthcareStandard(StrEnum):
     HL7 = "hl7"
     FHIR = "fhir"
     LOINC = "loinc"
@@ -189,7 +189,7 @@ class HealthcareStandard(str, Enum):
     X12 = "x12"
 
 
-class HealthcareEntity(str, Enum):
+class HealthcareEntity(StrEnum):
     LABORATORY_EQUIPMENT = "laboratory_equipment"
     ANALYZER = "analyzer"
     MEDICAL_DEVICE = "medical_device"
@@ -205,7 +205,7 @@ class HealthcareEntity(str, Enum):
 # ---------------------------------------------------------------------------
 
 
-class EventType(str, Enum):
+class EventType(StrEnum):
     NODE_CREATED = "node_created"
     NODE_UPDATED = "node_updated"
     NODE_DELETED = "node_deleted"

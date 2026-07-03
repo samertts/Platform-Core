@@ -131,7 +131,7 @@ class MetricsCollector:
     def _compute_histogram_stats(self, values: list[float]) -> dict[str, float]:
         if not values:
             return {}
-        values_sorted = sorted(values)
+        sorted(values)
         return {
             "count": len(values),
             "sum": sum(values),

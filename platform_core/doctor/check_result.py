@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 
-class CheckStatus(str, Enum):
+class CheckStatus(StrEnum):
     PASSED = "passed"
     FAILED = "failed"
     WARNING = "warning"

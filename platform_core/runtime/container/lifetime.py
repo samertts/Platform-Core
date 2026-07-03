@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class Lifetime(str, Enum):
+class Lifetime(StrEnum):
     SINGLETON = "singleton"
     TRANSIENT = "transient"
     SCOPED = "scoped"

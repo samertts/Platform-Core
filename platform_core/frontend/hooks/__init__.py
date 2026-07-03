@@ -6,10 +6,7 @@ Reusable hooks for frontend state management
 
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Any, Optional
-
-from ..types.base import ApiResponse, PaginatedResponse
+from typing import Any
 
 
 @dataclass

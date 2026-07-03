@@ -30,3 +30,29 @@ htmlcov/
 env/
 venv/
 .cache/
+# OpenCode
+.opencode/node_modules/
+
+# Generated files
+dist/
+
+# Python cache
+**/__pycache__/
+
+# Ruff reports
+ruff.json
+ruff_errors.txt
+ruff-report.txt
+ruff-report.txt.gz
+
+# Virtual environment backups
+.venv*/
+.venv_py310_backup/
+
+# IDE
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db

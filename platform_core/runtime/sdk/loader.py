@@ -49,7 +49,8 @@ class SDKLoader:
                 return info.version
 
             raise ValueError(
-                f"SDK {sdk_id} version {info.version} is not compatible with required {required_version}"
+                f"SDK {sdk_id} version {info.version}"
+                f" is not compatible with required {required_version}"
             )
 
     def _is_compatible(self, actual: str, required: str) -> bool:

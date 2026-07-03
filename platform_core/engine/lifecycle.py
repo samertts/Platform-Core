@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class LifecycleState(str, Enum):
+class LifecycleState(StrEnum):
     """
     Standard lifecycle states for every Engine.
 

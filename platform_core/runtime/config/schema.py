@@ -38,7 +38,7 @@ class ConfigSchema:
 
     def validate(self, config: dict[str, Any]) -> list[str]:
         errors: list[str] = []
-        for name, field in self.fields.items():
-            value = config.get(name, field.default)
-            errors.extend(field.validate(value))
+        for name, config_field in self.fields.items():
+            value = config.get(name, config_field.default)
+            errors.extend(config_field.validate(value))
         return errors

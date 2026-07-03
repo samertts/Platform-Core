@@ -118,7 +118,7 @@ class NodeManager:
             if query_lower in n.name.lower()
             or query_lower in n.id.lower()
             or any(query_lower in t.lower() for t in n.tags)
-            or any(query_lower in l.lower() for l in n.labels)
+            or any(query_lower in label.lower() for label in n.labels)
             or any(query_lower in str(v).lower() for v in n.metadata.values())
         ]
 

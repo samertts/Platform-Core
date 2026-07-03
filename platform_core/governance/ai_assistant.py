@@ -113,7 +113,12 @@ class AIGovernanceAssistant:
             "score": round(max(score, 0.0), 2),
             "findings": findings,
             "recommendations": recommendations,
-            "summary": f"Dependency review: {total_deps} total, {vulnerable} vulnerable, {outdated} outdated",
+            "summary": (
+                f"Dependency review: "
+                f"{total_deps} total, "
+                f"{vulnerable} vulnerable, "
+                f"{outdated} outdated"
+            ),
         }
 
     def review_manifest(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:
@@ -199,7 +204,9 @@ class AIGovernanceAssistant:
             "score": round(score, 2),
             "findings": findings,
             "recommendations": recommendations,
-            "summary": f"API review: health={has_health}, docs={has_docs}, versioned={is_versioned}",
+            "summary": (
+                f"API review: health={has_health}, docs={has_docs}, versioned={is_versioned}"
+            ),
         }
 
     def estimate_risk(self, repository: str, evidence: dict[str, Any]) -> dict[str, Any]:

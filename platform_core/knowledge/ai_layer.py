@@ -193,7 +193,11 @@ class AIKnowledgeLayer:
                     f"Type: {node.node_type.value}, Status: {node.status.value}"
                 )
                 result.confidence = 0.6
-                labels = [l for l in node.labels if l.startswith("hl7") or l.startswith("fhir")]
+                labels = [
+                    label
+                    for label in node.labels
+                    if label.startswith("hl7") or label.startswith("fhir")
+                ]
                 if labels:
                     result.recommendations.append(
                         f"Healthcare standards detected: {', '.join(labels)}"

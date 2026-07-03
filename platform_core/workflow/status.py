@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class WorkflowStatus(str, Enum):
+class WorkflowStatus(StrEnum):
     PENDING = "pending"
 
     RUNNING = "running"
