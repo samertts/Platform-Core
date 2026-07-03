@@ -2,7 +2,7 @@ from platform_core.engineering.registry.models import RegistryEntry
 from platform_core.engineering.registry.registry import EngineeringRegistry
 
 
-def test_registry_register():
+def test_registry_register() -> None:
 
     registry = EngineeringRegistry()
 
@@ -20,7 +20,7 @@ def test_registry_register():
     assert registry.count() == 1
 
 
-def test_registry_remove():
+def test_registry_remove() -> None:
 
     registry = EngineeringRegistry()
 

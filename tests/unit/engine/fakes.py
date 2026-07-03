@@ -6,11 +6,11 @@ from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class FakeEngine(BaseEngine):
-    def __init__(self):
+    def __init__(self) -> None:
 
         super().__init__()
 
-        self.calls = []
+        self.calls: list[str] = []
 
     def validate(
         self,

@@ -1,7 +1,7 @@
 from platform_core.runtime.services import ServiceRegistry
 
 
-def test_service_registry():
+def test_service_registry() -> None:
 
     registry = ServiceRegistry()
 

@@ -1,3 +1,4 @@
+from typing import Any
 from uuid import uuid4
 
 from platform_core.engine.cancellation import CancellationToken
@@ -8,32 +9,32 @@ from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class FakeEngine:
-    def __init__(self):
+    def __init__(self) -> None:
 
-        self.calls = []
+        self.calls: list[str] = []
 
-    def before_validate(self, ctx):
+    def before_validate(self, ctx: Any) -> None:
         self.calls.append("before_validate")
 
-    def validate(self, ctx):
+    def validate(self, ctx: Any) -> None:
         self.calls.append("validate")
 
-    def after_validate(self, ctx):
+    def after_validate(self, ctx: Any) -> None:
         self.calls.append("after_validate")
 
-    def before_prepare(self, ctx):
+    def before_prepare(self, ctx: Any) -> None:
         self.calls.append("before_prepare")
 
-    def prepare(self, ctx):
+    def prepare(self, ctx: Any) -> None:
         self.calls.append("prepare")
 
-    def after_prepare(self, ctx):
+    def after_prepare(self, ctx: Any) -> None:
         self.calls.append("after_prepare")
 
-    def before_execute(self, ctx):
+    def before_execute(self, ctx: Any) -> None:
         self.calls.append("before_execute")
 
-    def execute(self, ctx):
+    def execute(self, ctx: Any) -> EngineResult:
 
         self.calls.append("execute")
 
@@ -41,20 +42,20 @@ class FakeEngine:
             status=EngineStatus.COMPLETED,
         )
 
-    def after_execute(self, ctx, result):
+    def after_execute(self, ctx: Any, result: Any) -> None:
         self.calls.append("after_execute")
 
-    def before_finalize(self, ctx):
+    def before_finalize(self, ctx: Any) -> None:
         self.calls.append("before_finalize")
 
-    def finalize(self, ctx):
+    def finalize(self, ctx: Any) -> None:
         self.calls.append("finalize")
 
-    def after_finalize(self, ctx):
+    def after_finalize(self, ctx: Any) -> None:
         self.calls.append("after_finalize")
 
 
-def make_context():
+def make_context() -> EngineContext:
 
     return EngineContext(
         execution_id=uuid4(),
@@ -63,7 +64,7 @@ def make_context():
     )
 
 
-def test_pipeline_executor_order():
+def test_pipeline_executor_order() -> None:
 
     executor = PipelineExecutor(
         HookDispatcher(),

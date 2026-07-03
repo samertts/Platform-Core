@@ -7,7 +7,7 @@ class Logger:
     pass
 
 
-def test_locator():
+def test_locator() -> None:
 
     container = ServiceContainer()
 

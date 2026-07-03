@@ -19,7 +19,7 @@ class FakeCheck(DoctorCheck):
         )
 
 
-def test_register():
+def test_register() -> None:
 
     registry = CheckRegistry()
 
@@ -28,7 +28,7 @@ def test_register():
     assert len(registry) == 1
 
 
-def test_get():
+def test_get() -> None:
 
     registry = CheckRegistry()
 
@@ -37,7 +37,7 @@ def test_get():
     assert registry.get("python").id == "python"
 
 
-def test_exists():
+def test_exists() -> None:
 
     registry = CheckRegistry()
 
@@ -46,7 +46,7 @@ def test_exists():
     assert registry.exists("python")
 
 
-def test_duplicate():
+def test_duplicate() -> None:
 
     registry = CheckRegistry()
 
@@ -56,7 +56,7 @@ def test_duplicate():
         registry.register(FakeCheck())
 
 
-def test_unregister():
+def test_unregister() -> None:
 
     registry = CheckRegistry()
 
@@ -67,7 +67,7 @@ def test_unregister():
     assert len(registry) == 0
 
 
-def test_clear():
+def test_clear() -> None:
 
     registry = CheckRegistry()
 

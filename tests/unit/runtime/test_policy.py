@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+from typing import Any
 
 from platform_core.runtime.policy.engine import Policy, PolicyEngine, PolicyResult
 
@@ -103,7 +104,7 @@ class TestPolicyEngine:
     def test_authorization_hook(self) -> None:
         engine = PolicyEngine()
 
-        def hook(ctx: dict) -> PolicyResult:
+        def hook(ctx: dict[str, Any]) -> PolicyResult:
             if ctx.get("blocked"):
                 return PolicyResult(allowed=False, reason="blocked by hook")
             return PolicyResult(allowed=True)

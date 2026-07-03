@@ -17,7 +17,7 @@ class Repository:
         self.logger = logger
 
 
-def test_create():
+def test_create() -> None:
 
     descriptor = ServiceDescriptor(
         key="logger",
@@ -34,7 +34,7 @@ def test_create():
     )
 
 
-def test_constructor_not_supported():
+def test_constructor_not_supported() -> None:
 
     descriptor = ServiceDescriptor(
         key="repository",

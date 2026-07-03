@@ -1,19 +1,21 @@
+from typing import Any
+
 from platform_core.engine.event_bus import EventBus
 from platform_core.engine.events import EngineEvent, EngineEventType
 from platform_core.engine.observer import EngineObserver
 
 
 class FakeObserver(EngineObserver):
-    def __init__(self):
+    def __init__(self) -> None:
 
-        self.events = []
+        self.events: list[EngineEvent] = []
 
-    def notify(self, event):
+    def notify(self, event: Any) -> None:
 
         self.events.append(event)
 
 
-def test_observer_receives_event():
+def test_observer_receives_event() -> None:
 
     bus = EventBus()
 

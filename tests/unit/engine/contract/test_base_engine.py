@@ -17,7 +17,7 @@ def make_context() -> EngineContext:
     )
 
 
-def test_run_pipeline():
+def test_run_pipeline() -> None:
 
     engine = FakeEngine()
 
@@ -33,7 +33,7 @@ def test_run_pipeline():
     ]
 
 
-def test_engine_disposed_after_run():
+def test_engine_disposed_after_run() -> None:
 
     engine = FakeEngine()
 
@@ -42,7 +42,7 @@ def test_engine_disposed_after_run():
     assert engine.state is LifecycleState.DISPOSED
 
 
-def test_duration_recorded():
+def test_duration_recorded() -> None:
 
     engine = FakeEngine()
 
@@ -51,7 +51,7 @@ def test_duration_recorded():
     assert result.duration >= 0
 
 
-def test_history_is_recorded():
+def test_history_is_recorded() -> None:
 
     engine = FakeEngine()
 

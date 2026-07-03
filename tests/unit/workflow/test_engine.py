@@ -15,7 +15,7 @@ class Step(WorkflowStep):
         return WorkflowResult.ok()
 
 
-def test_engine():
+def test_engine() -> None:
 
     engine = WorkflowEngine()
 

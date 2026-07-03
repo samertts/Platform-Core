@@ -2,7 +2,7 @@ from platform_core.scheduler.queue import TaskQueue
 from platform_core.scheduler.task import ScheduledTask
 
 
-def test_queue():
+def test_queue() -> None:
 
     queue = TaskQueue()
 

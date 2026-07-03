@@ -7,7 +7,7 @@ from platform_core.engine.runner import EngineRunner
 from tests.unit.engine.fakes import FakeEngine
 
 
-def make_context():
+def make_context() -> EngineContext:
 
     return EngineContext(
         execution_id=uuid4(),
@@ -16,7 +16,7 @@ def make_context():
     )
 
 
-def test_runner_executes_engine():
+def test_runner_executes_engine() -> None:
 
     runner = EngineRunner()
 
@@ -32,7 +32,7 @@ def test_runner_executes_engine():
     assert engine.state.name == "DISPOSED"
 
 
-def test_runner_records_history():
+def test_runner_records_history() -> None:
 
     runner = EngineRunner()
 

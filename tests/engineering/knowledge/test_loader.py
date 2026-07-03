@@ -3,7 +3,7 @@ from pathlib import Path
 from platform_core.engineering.knowledge.loader import KnowledgeLoader
 
 
-def test_load(tmp_path: Path):
+def test_load(tmp_path: Path) -> None:
 
     root = tmp_path / "knowledge"
 

@@ -13,7 +13,7 @@ class Step(WorkflowStep):
         return WorkflowResult.ok()
 
 
-def test_pipeline():
+def test_pipeline() -> None:
 
     pipeline = WorkflowPipeline()
 

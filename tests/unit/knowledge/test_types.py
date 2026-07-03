@@ -160,8 +160,8 @@ class TestDataclasses:
         assert r.impact_level == ImpactLevel.HIGH
 
     def test_architecture_smell(self) -> None:
-        s = ArchitectureSmell(smell_type="orphan_service", severity=ImpactLevel.MEDIUM)
-        assert s.smell_type == "orphan_service"
+        s = ArchitectureSmell(smell_type=SmellType.ORPHAN_SERVICE, severity=ImpactLevel.MEDIUM)
+        assert s.smell_type == SmellType.ORPHAN_SERVICE
         assert s.severity == ImpactLevel.MEDIUM
 
     def test_architecture_recommendation(self) -> None:

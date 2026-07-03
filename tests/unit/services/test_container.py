@@ -8,7 +8,7 @@ class Logger:
     pass
 
 
-def test_register():
+def test_register() -> None:
 
     container = ServiceContainer()
 
@@ -22,7 +22,7 @@ def test_register():
     assert container.exists("logger")
 
 
-def test_resolve_singleton():
+def test_resolve_singleton() -> None:
 
     container = ServiceContainer()
 
@@ -40,7 +40,7 @@ def test_resolve_singleton():
     assert first is second
 
 
-def test_resolve_transient():
+def test_resolve_transient() -> None:
 
     container = ServiceContainer()
 
@@ -58,7 +58,7 @@ def test_resolve_transient():
     assert first is not second
 
 
-def test_clear():
+def test_clear() -> None:
 
     container = ServiceContainer()
 
@@ -74,7 +74,7 @@ def test_clear():
     assert len(container) == 0
 
 
-def test_create_scope():
+def test_create_scope() -> None:
 
     container = ServiceContainer()
 
@@ -83,7 +83,7 @@ def test_create_scope():
     assert isinstance(scope, ServiceScope)
 
 
-def test_resolve_scoped():
+def test_resolve_scoped() -> None:
 
     container = ServiceContainer()
 

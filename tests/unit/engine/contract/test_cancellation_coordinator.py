@@ -9,7 +9,7 @@ from platform_core.engine.cancellation_coordinator import (
 from platform_core.engine.context import EngineContext
 
 
-def make_context():
+def make_context() -> EngineContext:
 
     return EngineContext(
         execution_id=uuid4(),
@@ -18,7 +18,7 @@ def make_context():
     )
 
 
-def test_not_cancelled():
+def test_not_cancelled() -> None:
 
     coordinator = CancellationCoordinator()
 
@@ -27,7 +27,7 @@ def test_not_cancelled():
     assert coordinator.is_cancelled(ctx) is False
 
 
-def test_cancelled():
+def test_cancelled() -> None:
 
     coordinator = CancellationCoordinator()
 
@@ -38,7 +38,7 @@ def test_cancelled():
     assert coordinator.is_cancelled(ctx) is True
 
 
-def test_raise_if_cancelled():
+def test_raise_if_cancelled() -> None:
 
     coordinator = CancellationCoordinator()
 

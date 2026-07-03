@@ -1,3 +1,5 @@
+from typing import Any, cast
+
 import pytest
 
 from platform_core.doctor.check import DoctorCheck
@@ -18,14 +20,14 @@ class FakeCheck(DoctorCheck):
         )
 
 
-def test_fake_check():
+def test_fake_check() -> None:
 
     result = FakeCheck().run()
 
     assert result.status is CheckStatus.PASSED
 
 
-def test_base_is_abstract():
+def test_base_is_abstract() -> None:
 
     with pytest.raises(TypeError):
-        DoctorCheck()
+        cast(Any, DoctorCheck)()

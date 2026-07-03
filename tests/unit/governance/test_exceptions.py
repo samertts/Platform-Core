@@ -30,7 +30,9 @@ class TestExceptionManager:
         em = ExceptionManager()
         exc = em.create_exception("repo", ExceptionType.SECURITY, "r", "a")
         assert em.revoke_exception(exc.id) is True
-        assert em.get_exception(exc.id).active is False
+        result = em.get_exception(exc.id)
+        assert result is not None
+        assert result.active is False
 
     def test_list_exceptions(self) -> None:
         em = ExceptionManager()

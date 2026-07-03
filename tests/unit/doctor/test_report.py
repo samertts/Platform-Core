@@ -2,7 +2,7 @@ from platform_core.doctor.check_result import CheckResult, CheckStatus
 from platform_core.doctor.report import DoctorReport
 
 
-def test_empty_report():
+def test_empty_report() -> None:
 
     report = DoctorReport()
 
@@ -13,7 +13,7 @@ def test_empty_report():
     assert report.skipped == 0
 
 
-def test_report_statistics():
+def test_report_statistics() -> None:
 
     report = DoctorReport(
         checks=(

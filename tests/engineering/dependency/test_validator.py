@@ -5,7 +5,7 @@ from platform_core.engineering.dependency.models import DependencyNode
 from platform_core.engineering.dependency.validator import DependencyValidator
 
 
-def test_validation():
+def test_validation() -> None:
 
     graph = DependencyGraph()
 
@@ -23,7 +23,7 @@ def test_validation():
     assert validator.validate()
 
 
-def test_missing_dependency():
+def test_missing_dependency() -> None:
 
     graph = DependencyGraph()
 

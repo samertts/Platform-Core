@@ -1,7 +1,7 @@
 from platform_core.kernel.registry import ComponentRegistry
 
 
-def test_registry():
+def test_registry() -> None:
 
     registry = ComponentRegistry()
 

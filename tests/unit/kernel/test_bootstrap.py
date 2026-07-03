@@ -1,7 +1,7 @@
 from platform_core.kernel import Bootstrap
 
 
-def test_boot():
+def test_boot() -> None:
 
     bootstrap = Bootstrap()
 

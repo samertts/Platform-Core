@@ -1,7 +1,9 @@
+from pathlib import Path
+
 from platform_core.filesystem.filesystem import FileSystem
 
 
-def test_write_read(tmp_path):
+def test_write_read(tmp_path: Path) -> None:
 
     file = tmp_path / "demo.txt"
 

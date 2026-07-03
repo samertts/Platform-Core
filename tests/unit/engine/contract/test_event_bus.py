@@ -2,11 +2,11 @@ from platform_core.engine.event_bus import EventBus
 from platform_core.engine.events import EngineEvent, EngineEventType
 
 
-def test_subscribe_specific():
+def test_subscribe_specific() -> None:
 
     bus = EventBus()
 
-    received = []
+    received: list[EngineEvent] = []
 
     bus.subscribe(
         EngineEventType.CREATED,
@@ -22,11 +22,11 @@ def test_subscribe_specific():
     assert len(received) == 1
 
 
-def test_subscribe_all():
+def test_subscribe_all() -> None:
 
     bus = EventBus()
 
-    received = []
+    received: list[EngineEvent] = []
 
     bus.subscribe_all(received.append)
 
@@ -51,11 +51,11 @@ def test_subscribe_all():
     assert len(received) == 3
 
 
-def test_specific_not_called():
+def test_specific_not_called() -> None:
 
     bus = EventBus()
 
-    received = []
+    received: list[EngineEvent] = []
 
     bus.subscribe(
         EngineEventType.FAILED,

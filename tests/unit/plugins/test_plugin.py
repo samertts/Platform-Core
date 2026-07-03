@@ -6,7 +6,7 @@ class TestPlugin(Plugin):
         pass
 
 
-def test_plugin():
+def test_plugin() -> None:
 
     plugin = TestPlugin()
 

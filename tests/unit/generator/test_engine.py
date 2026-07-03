@@ -3,7 +3,7 @@ from pathlib import Path
 from platform_core.generator.engine import GeneratorEngine
 
 
-def test_generate_service(tmp_path: Path):
+def test_generate_service(tmp_path: Path) -> None:
 
     engine = GeneratorEngine()
 

@@ -1,13 +1,13 @@
 from platform_core.events import Event, EventBus
 
 
-def test_publish():
+def test_publish() -> None:
 
     bus = EventBus()
 
-    result = []
+    result: list[int] = []
 
-    def callback(event):
+    def callback(event: Event) -> None:
 
         result.append(event.payload["value"])
 

@@ -14,7 +14,7 @@ class Cache:
     pass
 
 
-def test_add_singleton():
+def test_add_singleton() -> None:
 
     services = ServiceCollection()
 
@@ -30,7 +30,7 @@ def test_add_singleton():
     assert descriptor.lifetime is ServiceLifetime.SINGLETON
 
 
-def test_add_scoped():
+def test_add_scoped() -> None:
 
     services = ServiceCollection()
 
@@ -44,7 +44,7 @@ def test_add_scoped():
     assert descriptor.lifetime is ServiceLifetime.SCOPED
 
 
-def test_add_transient():
+def test_add_transient() -> None:
 
     services = ServiceCollection()
 
@@ -58,7 +58,7 @@ def test_add_transient():
     assert descriptor.lifetime is ServiceLifetime.TRANSIENT
 
 
-def test_multiple():
+def test_multiple() -> None:
 
     services = ServiceCollection()
 

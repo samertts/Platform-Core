@@ -12,7 +12,7 @@ class Database:
     pass
 
 
-def test_register():
+def test_register() -> None:
 
     registry = ServiceRegistry()
 
@@ -26,7 +26,7 @@ def test_register():
     assert registry.exists("logger")
 
 
-def test_get():
+def test_get() -> None:
 
     registry = ServiceRegistry()
 
@@ -40,7 +40,7 @@ def test_get():
     assert registry.get("logger") == descriptor
 
 
-def test_duplicate():
+def test_duplicate() -> None:
 
     registry = ServiceRegistry()
 
@@ -55,7 +55,7 @@ def test_duplicate():
         registry.register(descriptor)
 
 
-def test_unregister():
+def test_unregister() -> None:
 
     registry = ServiceRegistry()
 
@@ -71,7 +71,7 @@ def test_unregister():
     assert not registry.exists("logger")
 
 
-def test_clear():
+def test_clear() -> None:
 
     registry = ServiceRegistry()
 
@@ -94,7 +94,7 @@ def test_clear():
     assert len(registry) == 0
 
 
-def test_unknown():
+def test_unknown() -> None:
 
     registry = ServiceRegistry()
 

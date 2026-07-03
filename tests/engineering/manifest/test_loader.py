@@ -3,7 +3,7 @@ from pathlib import Path
 from platform_core.engineering.manifest.loader import ManifestLoader
 
 
-def test_load_manifest():
+def test_load_manifest() -> None:
 
     loader = ManifestLoader()
 

@@ -2,7 +2,7 @@ from platform_core.scheduler.engine import SchedulerEngine
 from platform_core.scheduler.task import ScheduledTask
 
 
-def test_scheduler():
+def test_scheduler() -> None:
 
     called = []
 

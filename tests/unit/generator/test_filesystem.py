@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from platform_core.generator.filesystem import (
@@ -6,7 +8,7 @@ from platform_core.generator.filesystem import (
 )
 
 
-def test_prevent_overwrite(tmp_path):
+def test_prevent_overwrite(tmp_path: Path) -> None:
 
     fs = FileSystem()
 

@@ -10,7 +10,7 @@ class Service:
     pass
 
 
-def test_descriptor():
+def test_descriptor() -> None:
 
     descriptor = ServiceDescriptor(
         key="service",
@@ -24,7 +24,7 @@ def test_descriptor():
     assert descriptor.lifetime is ServiceLifetime.SINGLETON
 
 
-def test_descriptor_immutable():
+def test_descriptor_immutable() -> None:
 
     descriptor = ServiceDescriptor(
         key="service",
@@ -32,4 +32,4 @@ def test_descriptor_immutable():
     )
 
     with pytest.raises(FrozenInstanceError):
-        descriptor.key = "other"
+        setattr(descriptor, "key", "other")

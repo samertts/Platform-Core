@@ -6,7 +6,7 @@ import pytest
 from platform_core.doctor.context import DoctorContext
 
 
-def test_context_defaults():
+def test_context_defaults() -> None:
 
     context = DoctorContext(
         project_root=Path("."),
@@ -18,11 +18,11 @@ def test_context_defaults():
     assert context.exclude == ()
 
 
-def test_context_immutable():
+def test_context_immutable() -> None:
 
     context = DoctorContext(
         project_root=Path("."),
     )
 
     with pytest.raises(FrozenInstanceError):
-        context.strict = True
+        setattr(context, "strict", True)

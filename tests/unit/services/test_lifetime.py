@@ -1,7 +1,7 @@
 from platform_core.services.lifetime import ServiceLifetime
 
 
-def test_values():
+def test_values() -> None:
 
     assert ServiceLifetime.SINGLETON.value == "singleton"
 

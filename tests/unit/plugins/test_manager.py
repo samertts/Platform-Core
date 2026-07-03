@@ -3,7 +3,7 @@ from platform_core.plugins.plugin import Plugin
 
 
 class TestPlugin(Plugin):
-    def __init__(self):
+    def __init__(self) -> None:
 
         self.initialized = False
 
@@ -12,7 +12,7 @@ class TestPlugin(Plugin):
         self.initialized = True
 
 
-def test_manager():
+def test_manager() -> None:
 
     manager = PluginManager()
 

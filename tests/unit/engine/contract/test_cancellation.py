@@ -9,7 +9,7 @@ from platform_core.engine.result import EngineStatus
 from tests.unit.engine.fakes import FakeEngine
 
 
-def test_cancel_before_pipeline():
+def test_cancel_before_pipeline() -> None:
 
     token = CancellationToken()
 

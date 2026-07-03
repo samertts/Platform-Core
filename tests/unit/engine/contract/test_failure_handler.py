@@ -7,7 +7,7 @@ from platform_core.engine.failure_handler import FailureHandler
 from platform_core.engine.result import EngineStatus
 
 
-def make_context():
+def make_context() -> EngineContext:
 
     return EngineContext(
         execution_id=uuid4(),
@@ -16,7 +16,7 @@ def make_context():
     )
 
 
-def test_failure_handler_returns_failed_result():
+def test_failure_handler_returns_failed_result() -> None:
 
     handler = FailureHandler()
 

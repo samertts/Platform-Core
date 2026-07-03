@@ -14,7 +14,7 @@ class Step(WorkflowStep):
         return WorkflowResult.ok()
 
 
-def test_step():
+def test_step() -> None:
 
     context = WorkflowContext()
 

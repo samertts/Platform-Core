@@ -2,7 +2,7 @@ from platform_core.engineering.dependency.graph import DependencyGraph
 from platform_core.engineering.dependency.models import DependencyNode
 
 
-def test_graph():
+def test_graph() -> None:
 
     graph = DependencyGraph()
 

@@ -4,20 +4,20 @@ from uuid import uuid4
 
 from platform_core.engine.cancellation import CancellationToken
 from platform_core.engine.context import EngineContext
-from platform_core.engine.result import EngineStatus
+from platform_core.engine.result import EngineResult, EngineStatus
 from tests.unit.engine.fakes import FakeEngine
 
 
 class BrokenEngine(FakeEngine):
     def execute(
         self,
-        context,
-    ):
+        context: EngineContext,
+    ) -> EngineResult:
 
         raise RuntimeError("boom")
 
 
-def make_context():
+def make_context() -> EngineContext:
 
     return EngineContext(
         execution_id=uuid4(),
@@ -26,7 +26,7 @@ def make_context():
     )
 
 
-def test_failure_returns_result():
+def test_failure_returns_result() -> None:
 
     engine = BrokenEngine()
 

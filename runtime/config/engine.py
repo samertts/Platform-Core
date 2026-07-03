@@ -196,7 +196,7 @@ class ConfigurationEngine:
     def get(self, key: str, default: Any = None) -> Any:
         with self._lock:
             keys = key.split(".")
-            current = self._config
+            current: Any = self._config
             for k in keys:
                 if isinstance(current, dict):
                     current = current.get(k)

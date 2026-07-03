@@ -9,7 +9,7 @@ class CheckA(DoctorCheck):
 
     name = "A"
 
-    def run(self):
+    def run(self) -> CheckResult:
 
         return CheckResult(
             id=self.id,
@@ -24,7 +24,7 @@ class CheckB(DoctorCheck):
 
     name = "B"
 
-    def run(self):
+    def run(self) -> CheckResult:
 
         return CheckResult(
             id=self.id,
@@ -34,7 +34,7 @@ class CheckB(DoctorCheck):
         )
 
 
-def test_runner_executes_every_check():
+def test_runner_executes_every_check() -> None:
 
     registry = CheckRegistry()
 
@@ -53,7 +53,7 @@ def test_runner_executes_every_check():
     assert report.warnings == 1
 
 
-def test_runner_empty_registry():
+def test_runner_empty_registry() -> None:
 
     registry = CheckRegistry()
 

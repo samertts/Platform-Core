@@ -5,7 +5,7 @@ class CreateUser(Command):
     pass
 
 
-def test_command():
+def test_command() -> None:
 
     cmd = CreateUser()
 

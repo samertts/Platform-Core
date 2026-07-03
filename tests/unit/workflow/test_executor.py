@@ -16,7 +16,7 @@ class Step(WorkflowStep):
         return WorkflowResult.ok()
 
 
-def test_executor():
+def test_executor() -> None:
 
     pipeline = WorkflowPipeline()
 

@@ -1,7 +1,7 @@
 from platform_core.host.application_host import ApplicationHost
 
 
-def test_boot():
+def test_boot() -> None:
 
     host = ApplicationHost()
 

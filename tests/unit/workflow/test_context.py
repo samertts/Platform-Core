@@ -1,7 +1,7 @@
 from platform_core.workflow.context import WorkflowContext
 
 
-def test_context():
+def test_context() -> None:
 
     context = WorkflowContext()
 
@@ -12,7 +12,7 @@ def test_context():
     assert context.get("x") == 10
 
 
-def test_clear():
+def test_clear() -> None:
 
     context = WorkflowContext()
 

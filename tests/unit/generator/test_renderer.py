@@ -1,7 +1,7 @@
 from platform_core.generator.renderer import TemplateRenderer
 
 
-def test_render():
+def test_render() -> None:
 
     renderer = TemplateRenderer()
 

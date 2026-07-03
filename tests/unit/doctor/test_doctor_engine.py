@@ -14,7 +14,7 @@ class FakeCheck(DoctorCheck):
 
     name = "Python"
 
-    def run(self):
+    def run(self) -> CheckResult:
 
         return CheckResult(
             id=self.id,
@@ -24,7 +24,7 @@ class FakeCheck(DoctorCheck):
         )
 
 
-def test_doctor_engine():
+def test_doctor_engine() -> None:
 
     registry = CheckRegistry()
 
@@ -46,4 +46,5 @@ def test_doctor_engine():
 
     assert result.metrics["score"] == 100
 
+    assert result.payload is not None
     assert result.payload.total == 1

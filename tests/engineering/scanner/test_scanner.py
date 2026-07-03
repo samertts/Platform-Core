@@ -4,7 +4,7 @@ from platform_core.engineering.registry.registry import EngineeringRegistry
 from platform_core.engineering.scanner.scanner import EngineeringScanner
 
 
-def test_scanner(tmp_path: Path):
+def test_scanner(tmp_path: Path) -> None:
 
     engineering = tmp_path / ".engineering"
 

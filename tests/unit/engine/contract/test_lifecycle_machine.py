@@ -4,14 +4,14 @@ from platform_core.engine.lifecycle import LifecycleState
 from platform_core.engine.lifecycle_machine import LifecycleMachine
 
 
-def test_initial_state():
+def test_initial_state() -> None:
 
     machine = LifecycleMachine()
 
     assert machine.state is LifecycleState.CREATED
 
 
-def test_happy_path():
+def test_happy_path() -> None:
 
     machine = LifecycleMachine()
 
@@ -25,7 +25,7 @@ def test_happy_path():
     assert machine.state is LifecycleState.DISPOSED
 
 
-def test_failure_path():
+def test_failure_path() -> None:
 
     machine = LifecycleMachine()
 
@@ -39,7 +39,7 @@ def test_failure_path():
     assert machine.state is LifecycleState.DISPOSED
 
 
-def test_cancel_path():
+def test_cancel_path() -> None:
 
     machine = LifecycleMachine()
 
@@ -53,7 +53,7 @@ def test_cancel_path():
     assert machine.state is LifecycleState.DISPOSED
 
 
-def test_invalid_transition():
+def test_invalid_transition() -> None:
 
     machine = LifecycleMachine()
 
@@ -61,7 +61,7 @@ def test_invalid_transition():
         machine.completed()
 
 
-def test_history():
+def test_history() -> None:
 
     machine = LifecycleMachine()
 

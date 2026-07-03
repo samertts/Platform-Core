@@ -1,7 +1,7 @@
 from platform_core.workflow.status import WorkflowStatus
 
 
-def test_values():
+def test_values() -> None:
 
     assert WorkflowStatus.PENDING.value == "pending"
 

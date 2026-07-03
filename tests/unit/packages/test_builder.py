@@ -1,6 +1,7 @@
 """Unit tests for Package Builder."""
 
 import os
+from pathlib import Path
 
 import pytest
 
@@ -66,7 +67,7 @@ class TestPackageBuilder:
         sig = builder.sign_package(b"test data")
         assert sig.signer == "platform-core"
 
-    def test_build_package(self, tmp_path) -> None:
+    def test_build_package(self, tmp_path: Path) -> None:
         source_dir = tmp_path / "source"
         source_dir.mkdir()
         (source_dir / "main.py").write_text("print('hello')")
@@ -78,7 +79,7 @@ class TestPackageBuilder:
         result = builder.build_package(str(source_dir), manifest, sign=False)
         assert os.path.exists(result)
 
-    def test_build_package_signed(self, tmp_path) -> None:
+    def test_build_package_signed(self, tmp_path: Path) -> None:
         source_dir = tmp_path / "source"
         source_dir.mkdir()
         (source_dir / "main.py").write_text("print('hello')")
@@ -90,13 +91,13 @@ class TestPackageBuilder:
         assert os.path.exists(result)
         assert os.path.exists(result + ".sig")
 
-    def test_build_package_source_not_found(self, tmp_path) -> None:
+    def test_build_package_source_not_found(self, tmp_path: Path) -> None:
         builder = PackageBuilder(output_dir=str(tmp_path / "output"))
         manifest = builder.generate_manifest(name="test", version="1.0.0")
         with pytest.raises(BuildError, match="Source directory not found"):
             builder.build_package("/nonexistent", manifest)
 
-    def test_build_package_creates_checksum(self, tmp_path) -> None:
+    def test_build_package_creates_checksum(self, tmp_path: Path) -> None:
         source_dir = tmp_path / "source"
         source_dir.mkdir()
         (source_dir / "main.py").write_text("x = 1")

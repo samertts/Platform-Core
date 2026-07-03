@@ -4,7 +4,7 @@ from platform_core.runtime.context import RuntimeContext
 from platform_core.services.container import ServiceContainer
 
 
-def test_runtime_context():
+def test_runtime_context() -> None:
 
     container = ServiceContainer()
 

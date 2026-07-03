@@ -5,7 +5,7 @@ import pytest
 from platform_core.doctor.check_result import CheckResult, CheckStatus
 
 
-def test_result_is_immutable():
+def test_result_is_immutable() -> None:
 
     result = CheckResult(
         id="python",
@@ -14,10 +14,10 @@ def test_result_is_immutable():
     )
 
     with pytest.raises(FrozenInstanceError):
-        result.score = 10
+        setattr(result, "score", 10)
 
 
-def test_result_defaults():
+def test_result_defaults() -> None:
 
     result = CheckResult(
         id="git",
@@ -30,7 +30,7 @@ def test_result_defaults():
     assert result.metadata == {}
 
 
-def test_status_values():
+def test_status_values() -> None:
 
     assert CheckStatus.PASSED.value == "passed"
     assert CheckStatus.FAILED.value == "failed"

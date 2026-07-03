@@ -7,40 +7,40 @@ from platform_core.engine.result import EngineResult, EngineStatus
 
 
 class HookEngine(BaseEngine):
-    def __init__(self):
+    def __init__(self) -> None:
 
         super().__init__()
 
-        self.calls = []
+        self.calls: list[str] = []
 
-    def before_validate(self, context):
+    def before_validate(self, context: EngineContext) -> None:
 
         self.calls.append("before_validate")
 
-    def validate(self, context):
+    def validate(self, context: EngineContext) -> None:
 
         self.calls.append("validate")
 
-    def after_validate(self, context):
+    def after_validate(self, context: EngineContext) -> None:
 
         self.calls.append("after_validate")
 
-    def prepare(self, context):
+    def prepare(self, context: EngineContext) -> None:
 
         pass
 
-    def execute(self, context):
+    def execute(self, context: EngineContext) -> EngineResult:
 
         return EngineResult(
             status=EngineStatus.COMPLETED,
         )
 
-    def finalize(self, context):
+    def finalize(self, context: EngineContext) -> None:
 
         pass
 
 
-def test_validate_hooks():
+def test_validate_hooks() -> None:
 
     engine = HookEngine()
 

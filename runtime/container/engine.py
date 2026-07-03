@@ -83,7 +83,7 @@ class ServiceScope:
 
         import inspect
 
-        sig = inspect.signature(cls.__init__)
+        sig = inspect.signature(cls)
         for name, param in sig.parameters.items():
             if name == "self":
                 continue
@@ -207,7 +207,7 @@ class ServiceContainer:
         import inspect
 
         try:
-            sig = inspect.signature(cls.__init__)
+            sig = inspect.signature(cls)
         except (ValueError, TypeError):
             return deps
 
@@ -248,7 +248,7 @@ class ServiceContainer:
                 import inspect
 
                 try:
-                    sig = inspect.signature(registration.implementation.__init__)
+                    sig = inspect.signature(registration.implementation)
                     for name, param in sig.parameters.items():
                         if name == "self":
                             continue

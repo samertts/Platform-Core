@@ -3,7 +3,7 @@ from platform_core.registrars.core import CoreRegistrar
 from platform_core.services.collection import ServiceCollection
 
 
-def test_register_all():
+def test_register_all() -> None:
 
     services = ServiceCollection()
 
@@ -23,7 +23,7 @@ def test_register_all():
     )
 
 
-def test_multiple_registrars():
+def test_multiple_registrars() -> None:
 
     services = ServiceCollection()
 

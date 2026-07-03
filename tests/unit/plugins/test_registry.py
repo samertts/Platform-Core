@@ -7,7 +7,7 @@ class TestPlugin(Plugin):
         pass
 
 
-def test_registry():
+def test_registry() -> None:
 
     registry = PluginRegistry()
 

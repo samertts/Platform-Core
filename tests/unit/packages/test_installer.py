@@ -1,5 +1,7 @@
 """Unit tests for Module Installer."""
 
+from pathlib import Path
+
 import pytest
 
 from platform_core.installer import ModuleInstaller, ValidationError
@@ -29,7 +31,7 @@ class TestModuleInstaller:
         results = installer.install_dependencies(manifest)
         assert isinstance(results, list)
 
-    def test_install(self, tmp_path) -> None:
+    def test_install(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -39,7 +41,7 @@ class TestModuleInstaller:
         assert record.package_name == "test"
         assert record.status.value == "completed"
 
-    def test_install_dry_run(self, tmp_path) -> None:
+    def test_install_dry_run(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -53,7 +55,7 @@ class TestModuleInstaller:
         with pytest.raises(ValidationError):
             installer.install("/nonexistent", manifest)
 
-    def test_uninstall(self, tmp_path) -> None:
+    def test_uninstall(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -62,7 +64,7 @@ class TestModuleInstaller:
         assert installer.uninstall("test")
         assert not installer.uninstall("nonexistent")
 
-    def test_verify_installation(self, tmp_path) -> None:
+    def test_verify_installation(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -77,7 +79,7 @@ class TestModuleInstaller:
         result = installer.verify_installation("nonexistent")
         assert result["installed"] is False
 
-    def test_get_installed_packages(self, tmp_path) -> None:
+    def test_get_installed_packages(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -86,7 +88,7 @@ class TestModuleInstaller:
         installed = installer.get_installed_packages()
         assert len(installed) == 1
 
-    def test_get_install_log(self, tmp_path) -> None:
+    def test_get_install_log(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -95,7 +97,7 @@ class TestModuleInstaller:
         log = installer.get_install_log()
         assert len(log) > 0
 
-    def test_repair(self, tmp_path) -> None:
+    def test_repair(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()
@@ -109,7 +111,7 @@ class TestModuleInstaller:
         result = installer.repair("nonexistent")
         assert result["repaired"] is False
 
-    def test_install_with_deps(self, tmp_path) -> None:
+    def test_install_with_deps(self, tmp_path: Path) -> None:
         installer = ModuleInstaller(install_root=str(tmp_path))
         pkg_dir = tmp_path / "source"
         pkg_dir.mkdir()

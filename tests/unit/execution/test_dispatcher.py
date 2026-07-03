@@ -8,7 +8,7 @@ class Create(Command):
 
 
 class Handler(CommandHandler):
-    def __init__(self):
+    def __init__(self) -> None:
 
         self.called = False
 
@@ -20,7 +20,7 @@ class Handler(CommandHandler):
         self.called = True
 
 
-def test_dispatch():
+def test_dispatch() -> None:
 
     handler = Handler()
 

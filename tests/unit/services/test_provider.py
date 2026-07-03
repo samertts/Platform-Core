@@ -8,7 +8,7 @@ class Logger:
     pass
 
 
-def test_singleton():
+def test_singleton() -> None:
 
     provider = ServiceProvider()
 
@@ -25,7 +25,7 @@ def test_singleton():
     assert first is second
 
 
-def test_transient():
+def test_transient() -> None:
 
     provider = ServiceProvider()
 
@@ -42,7 +42,7 @@ def test_transient():
     assert first is not second
 
 
-def test_clear():
+def test_clear() -> None:
 
     provider = ServiceProvider()
 
@@ -61,7 +61,7 @@ def test_clear():
     assert first is not second
 
 
-def test_scoped():
+def test_scoped() -> None:
 
     provider = ServiceProvider()
 
@@ -86,7 +86,7 @@ def test_scoped():
     assert first is second
 
 
-def test_two_scopes():
+def test_two_scopes() -> None:
 
     provider = ServiceProvider()
 

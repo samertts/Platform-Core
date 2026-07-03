@@ -182,11 +182,10 @@ class BootstrapManager:
                         await self._plugins.load(plugin_info["id"])
                         await self._plugins.activate(plugin_info["id"])
                     except Exception as e:
-                        self._logging.warning(
-                            "Failed to load plugin %s: %s",
-                            plugin_info["id"],
-                            e,
-                        )
+                        if self._logging is not None:
+                            self._logging.warning(
+                                f"Failed to load plugin {plugin_info['id']}: {e}",
+                            )
 
     def _register_core_services(self) -> None:
         self._container.register_instance(ConfigurationEngine, self._config)

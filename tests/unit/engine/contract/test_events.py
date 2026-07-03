@@ -2,11 +2,11 @@ from platform_core.engine.event_publisher import EventPublisher
 from platform_core.engine.events import EngineEvent, EngineEventType
 
 
-def test_publish():
+def test_publish() -> None:
 
     publisher = EventPublisher()
 
-    received = []
+    received: list[EngineEvent] = []
 
     publisher.subscribe(received.append)
 
@@ -21,12 +21,12 @@ def test_publish():
     assert received[0].type is EngineEventType.CREATED
 
 
-def test_multiple_subscribers():
+def test_multiple_subscribers() -> None:
 
     publisher = EventPublisher()
 
-    first = []
-    second = []
+    first: list[EngineEvent] = []
+    second: list[EngineEvent] = []
 
     publisher.subscribe(first.append)
     publisher.subscribe(second.append)
@@ -42,14 +42,14 @@ def test_multiple_subscribers():
     assert second[0] is event
 
 
-def test_event_is_immutable():
+def test_event_is_immutable() -> None:
 
     event = EngineEvent(
         type=EngineEventType.COMPLETED,
     )
 
     try:
-        event.payload = {}
+        setattr(event, "payload", {})
 
         assert False
 

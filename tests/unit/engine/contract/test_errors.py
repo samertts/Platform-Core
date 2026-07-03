@@ -1,7 +1,7 @@
 from platform_core.engine.errors import EngineError, EngineErrorCategory
 
 
-def test_error_category():
+def test_error_category() -> None:
 
     error = EngineError(
         category=EngineErrorCategory.VALIDATION,
@@ -11,7 +11,7 @@ def test_error_category():
     assert error.category is EngineErrorCategory.VALIDATION
 
 
-def test_error_is_immutable():
+def test_error_is_immutable() -> None:
 
     error = EngineError(
         category=EngineErrorCategory.INTERNAL,
@@ -21,7 +21,7 @@ def test_error_is_immutable():
     assert error.message == "boom"
 
 
-def test_all_categories_exist():
+def test_all_categories_exist() -> None:
 
     expected = {
         "validation",

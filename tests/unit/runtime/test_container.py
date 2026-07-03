@@ -15,7 +15,7 @@ class Service(IService):
     pass
 
 
-def test_register():
+def test_register() -> None:
 
     container = ServiceContainer()
 
@@ -27,7 +27,7 @@ def test_register():
     assert container.contains(IService)
 
 
-def test_singleton():
+def test_singleton() -> None:
 
     container = ServiceContainer()
 
@@ -43,7 +43,7 @@ def test_singleton():
     assert first is second
 
 
-def test_transient():
+def test_transient() -> None:
 
     container = ServiceContainer()
 
@@ -59,7 +59,7 @@ def test_transient():
     assert first is not second
 
 
-def test_duplicate_registration():
+def test_duplicate_registration() -> None:
 
     container = ServiceContainer()
 
@@ -75,7 +75,7 @@ def test_duplicate_registration():
         )
 
 
-def test_unknown_service():
+def test_unknown_service() -> None:
 
     container = ServiceContainer()
 

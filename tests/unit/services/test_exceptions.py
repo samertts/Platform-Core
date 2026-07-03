@@ -7,7 +7,7 @@ from platform_core.services.exceptions import (
 )
 
 
-def test_inheritance():
+def test_inheritance() -> None:
 
     assert issubclass(ServiceAlreadyRegisteredError, ServiceError)
     assert issubclass(ServiceNotFoundError, ServiceError)
@@ -15,7 +15,7 @@ def test_inheritance():
     assert issubclass(ScopeRequiredError, ServiceError)
 
 
-def test_raise():
+def test_raise() -> None:
 
     try:
         raise ServiceNotFoundError("missing")

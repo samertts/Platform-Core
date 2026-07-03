@@ -5,14 +5,14 @@ class Logger:
     pass
 
 
-def test_empty():
+def test_empty() -> None:
 
     scope = ServiceScope()
 
     assert len(scope) == 0
 
 
-def test_set():
+def test_set() -> None:
 
     scope = ServiceScope()
 
@@ -28,7 +28,7 @@ def test_set():
     assert scope.get("logger") is logger
 
 
-def test_clear():
+def test_clear() -> None:
 
     scope = ServiceScope()
 

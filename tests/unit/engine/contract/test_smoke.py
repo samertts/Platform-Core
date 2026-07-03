@@ -11,7 +11,7 @@ from platform_core.engine.lifecycle import LifecycleState
 from platform_core.engine.result import EngineResult, EngineStatus
 
 
-def test_lifecycle_contains_all_states():
+def test_lifecycle_contains_all_states() -> None:
 
     expected = {
         "created",
@@ -30,7 +30,7 @@ def test_lifecycle_contains_all_states():
     assert actual == expected
 
 
-def test_context_is_immutable():
+def test_context_is_immutable() -> None:
 
     context = EngineContext(
         execution_id=uuid4(),
@@ -39,10 +39,10 @@ def test_context_is_immutable():
     )
 
     with pytest.raises(FrozenInstanceError):
-        context.execution_mode = "strict"
+        setattr(context, "execution_mode", "strict")
 
 
-def test_result_success():
+def test_result_success() -> None:
 
     result = EngineResult(
         status=EngineStatus.COMPLETED,
@@ -51,7 +51,7 @@ def test_result_success():
     assert result.success is True
 
 
-def test_result_failure():
+def test_result_failure() -> None:
 
     result = EngineResult(
         status=EngineStatus.FAILED,
@@ -60,7 +60,7 @@ def test_result_failure():
     assert result.success is False
 
 
-def test_cancellation_token():
+def test_cancellation_token() -> None:
 
     token = CancellationToken()
 

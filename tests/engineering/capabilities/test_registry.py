@@ -2,7 +2,7 @@ from platform_core.engineering.capabilities.models import Capability
 from platform_core.engineering.capabilities.registry import CapabilityRegistry
 
 
-def test_add_capability():
+def test_add_capability() -> None:
 
     registry = CapabilityRegistry()
 

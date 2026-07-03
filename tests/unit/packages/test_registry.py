@@ -28,6 +28,7 @@ class TestModuleRegistry:
         registry.register(RegistryEntry(name="test", version="1.0.0"))
         registry.register(RegistryEntry(name="test", version="2.0.0"))
         result = registry.get("test")
+        assert result is not None
         assert result.version == "2.0.0"
 
     def test_unregister(self) -> None:

@@ -1,5 +1,7 @@
 """Unit tests for Analyzers."""
 
+from pathlib import Path
+
 from platform_core.discovery.analyzers import (
     ArchitectureAnalyzer,
     CIAnalyzer,
@@ -52,7 +54,7 @@ class TestLanguageAnalyzer:
 
 
 class TestFrameworkAnalyzer:
-    def test_detect_fastapi(self, tmp_path) -> None:
+    def test_detect_fastapi(self, tmp_path: Path) -> None:
         (tmp_path / "requirements.txt").write_text("fastapi==0.100.0\nuvicorn==0.23.0")
         analyzer = FrameworkAnalyzer()
         files = [
@@ -129,14 +131,14 @@ class TestTestingAnalyzer:
 
 
 class TestSecurityAnalyzer:
-    def test_detect_hardcoded_secret(self, tmp_path) -> None:
+    def test_detect_hardcoded_secret(self, tmp_path: Path) -> None:
         (tmp_path / "config.py").write_text('password = "secret123"')
         analyzer = SecurityAnalyzer()
         files = [{"name": "config.py", "path": "config.py", "size": 30}]
         result = analyzer.analyze(str(tmp_path), files)
         assert result["secret_patterns_found"] > 0
 
-    def test_clean_code(self, tmp_path) -> None:
+    def test_clean_code(self, tmp_path: Path) -> None:
         (tmp_path / "main.py").write_text("x = 1")
         analyzer = SecurityAnalyzer()
         files = [{"name": "main.py", "path": "main.py", "size": 10}]
@@ -150,14 +152,14 @@ class TestSecurityAnalyzer:
 
 
 class TestDependencyAnalyzer:
-    def test_count_requirements(self, tmp_path) -> None:
+    def test_count_requirements(self, tmp_path: Path) -> None:
         (tmp_path / "requirements.txt").write_text("fastapi==0.100.0\nuvicorn==0.23.0\n")
         analyzer = DependencyAnalyzer()
         files = [{"name": "requirements.txt", "path": "requirements.txt"}]
         result = analyzer.analyze(str(tmp_path), files)
         assert result["total"] == 2
 
-    def test_count_package_json(self, tmp_path) -> None:
+    def test_count_package_json(self, tmp_path: Path) -> None:
         content = '{"dependencies": {"react": "^18.0.0"}, "devDependencies": {"jest": "^29.0.0"}}'
         (tmp_path / "package.json").write_text(content)
         analyzer = DependencyAnalyzer()
@@ -181,7 +183,7 @@ class TestCIAnalyzer:
 
 
 class TestDockerAnalyzer:
-    def test_detect_dockerfile(self, tmp_path) -> None:
+    def test_detect_dockerfile(self, tmp_path: Path) -> None:
         (tmp_path / "Dockerfile").write_text("FROM python:3.11\nCOPY . .\nEXPOSE 8000\n")
         analyzer = DockerAnalyzer()
         files = [{"name": "Dockerfile", "path": "Dockerfile"}]
@@ -190,7 +192,7 @@ class TestDockerAnalyzer:
         assert result["base_image"] == "python:3.11"
         assert 8000 in result["ports"]
 
-    def test_multi_stage(self, tmp_path) -> None:
+    def test_multi_stage(self, tmp_path: Path) -> None:
         (tmp_path / "Dockerfile").write_text("FROM python:3.11 AS builder\nFROM python:3.11\n")
         analyzer = DockerAnalyzer()
         files = [{"name": "Dockerfile", "path": "Dockerfile"}]
@@ -199,7 +201,7 @@ class TestDockerAnalyzer:
 
 
 class TestRunAllAnalyzers:
-    def test_run_all(self, tmp_path) -> None:
+    def test_run_all(self, tmp_path: Path) -> None:
         (tmp_path / "main.py").write_text("x = 1")
         (tmp_path / "README.md").write_text("# Test")
         (tmp_path / "test_main.py").write_text("def test_x(): pass")

@@ -6,7 +6,7 @@ class Logger:
     pass
 
 
-def test_build():
+def test_build() -> None:
 
     services = ServiceCollection()
 
