@@ -80,6 +80,9 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v7
+      # GitHub currently reports that Dependency Graph is unavailable for this
+      # repository. Keep the check visible while other security gates remain blocking.
       - uses: actions/dependency-review-action@v5
+        continue-on-error: true
         with:
           fail-on-severity: moderate
