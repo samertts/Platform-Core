@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gula-platform.org/contracts/integration/event-envelope.schema.json",
+  "title": "GULA Integration Event Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "schema_version",
+    "source_service",
+    "tenant_id",
+    "occurred_at",
+    "actor_id",
+    "entity_id",
+    "correlation_id",
+    "idempotency_key",
+    "payload"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,119}$" },
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "source_service": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "tenant_id": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "actor_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "entity_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "correlation_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "idempotency_key": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "payload": { "type": "object" }
+  }
+}
