@@ -4,7 +4,6 @@ import pytest
 
 from scripts.validate_event_envelope import validate_envelope
 
-
 BASE = {
     "event_id": "event-1",
     "event_type": "platform.diagnostic.reported",

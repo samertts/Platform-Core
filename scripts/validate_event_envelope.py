@@ -19,13 +19,28 @@ def validate_envelope(envelope: dict[str, Any]) -> None:
     extra = set(envelope) - set(schema["properties"])
     if extra:
         raise ValueError(f"unexpected fields: {sorted(extra)}")
-    for field in ("event_id", "source_service", "tenant_id", "actor_id", "entity_id", "correlation_id", "idempotency_key"):
+    string_fields = (
+        "event_id",
+        "source_service",
+        "tenant_id",
+        "actor_id",
+        "entity_id",
+        "correlation_id",
+        "idempotency_key",
+    )
+    for field in string_fields:
         value = envelope[field]
         if not isinstance(value, str) or not value.strip():
             raise ValueError(f"{field} must be a non-empty string")
-    if not isinstance(envelope["event_type"], str) or not EVENT_PATTERN.fullmatch(envelope["event_type"]):
+    event_type = envelope["event_type"]
+    if not isinstance(event_type, str) or not EVENT_PATTERN.fullmatch(event_type):
         raise ValueError("event_type has an invalid format")
-    if not isinstance(envelope["schema_version"], int) or isinstance(envelope["schema_version"], bool) or envelope["schema_version"] < 1:
+    schema_version = envelope["schema_version"]
+    if (
+        not isinstance(schema_version, int)
+        or isinstance(schema_version, bool)
+        or schema_version < 1
+    ):
         raise ValueError("schema_version must be a positive integer")
     if not isinstance(envelope["occurred_at"], str):
         raise ValueError("occurred_at must be a date-time string")
