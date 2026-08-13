@@ -1,4 +1,5 @@
 from copy import deepcopy
+from typing import Any
 
 import pytest
 
@@ -31,20 +32,24 @@ BASE = {
         ("platform.diagnostic.reported", "govlab-platform", {"healthy": True}),
     ],
 )
-def test_all_registered_services_emit_valid_envelopes(event_type, source_service, payload):
+def test_all_registered_services_emit_valid_envelopes(
+    event_type: str,
+    source_service: str,
+    payload: dict[str, Any],
+) -> None:
     envelope = deepcopy(BASE)
     envelope.update(event_type=event_type, source_service=source_service, payload=payload)
     validate_envelope(envelope)
 
 
-def test_unknown_fields_are_rejected():
+def test_unknown_fields_are_rejected() -> None:
     envelope = deepcopy(BASE)
     envelope["clinical_approval"] = "approved"
     with pytest.raises(ValueError, match="unexpected fields"):
         validate_envelope(envelope)
 
 
-def test_invalid_timestamp_is_rejected():
+def test_invalid_timestamp_is_rejected() -> None:
     envelope = deepcopy(BASE)
     envelope["occurred_at"] = "not-a-date"
     with pytest.raises(ValueError, match="ISO date-time"):
