@@ -1,0 +1,82 @@
+[
+  {
+    "service": "gula-platform",
+    "repository": "gula-platform",
+    "domain": "clinical hub, national observatory, policy enforcement",
+    "system_of_record": true,
+    "can_approve_clinical_results": true,
+    "transport": "authenticated HTTP event ingress plus durable inbox",
+    "event_types": ["sample.custody.transitioned", "device.observation.pending", "identity.subject.mapped", "workforce.assignment.changed"],
+    "notes": "The only service authorized to approve or finalize clinical results."
+  },
+  {
+    "service": "lablink-core",
+    "repository": "LabLink-Core",
+    "domain": "laboratory and medical device integration",
+    "system_of_record": false,
+    "can_approve_clinical_results": false,
+    "transport": "authenticated event publish with offline retry queue",
+    "event_types": ["device.observation.pending"],
+    "notes": "Normalizes device readings and publishes observations that remain pending_review."
+  },
+  {
+    "service": "receipt-and-delivery",
+    "repository": "Receipt-and-delivery",
+    "domain": "sample logistics and chain of custody",
+    "system_of_record": true,
+    "can_approve_clinical_results": false,
+    "transport": "authenticated event publish with local custody ledger",
+    "event_types": ["sample.custody.transitioned"],
+    "notes": "Owns sample movement state but cannot approve laboratory results."
+  },
+  {
+    "service": "inwp",
+    "repository": "Iraq-National-Workforce-Platform-INWP",
+    "domain": "workforce identity, assignments, attendance, offline synchronization",
+    "system_of_record": true,
+    "can_approve_clinical_results": false,
+    "transport": "signed synchronization bundle or authenticated event gateway",
+    "event_types": ["workforce.assignment.changed", "workforce.attendance.recorded"],
+    "notes": "Publishes minimum identity and assignment claims; never exports unrestricted personnel data."
+  },
+  {
+    "service": "identity-credential",
+    "repository": "identity-credential",
+    "domain": "offline identity and credential lifecycle",
+    "system_of_record": true,
+    "can_approve_clinical_results": false,
+    "transport": "signed offline export/import bundle; no direct online endpoint",
+    "event_types": ["identity.subject.mapped", "identity.credential.status.changed"],
+    "notes": "Offline-only boundary is preserved; GULA receives signed minimum claims through a controlled adapter."
+  },
+  {
+    "service": "front-end",
+    "repository": "Front-end",
+    "domain": "national user interface",
+    "system_of_record": false,
+    "can_approve_clinical_results": false,
+    "transport": "GULA APIs and read models only",
+    "event_types": [],
+    "notes": "No direct access to service databases or device and custody writes."
+  },
+  {
+    "service": "oglg",
+    "repository": "OGLG",
+    "domain": "offline government correspondence",
+    "system_of_record": true,
+    "can_approve_clinical_results": false,
+    "transport": "signed archive linkage and outbound correspondence events",
+    "event_types": ["correspondence.issued", "correspondence.acknowledged"],
+    "notes": "May carry policy or administrative documents, never clinical approval decisions."
+  },
+  {
+    "service": "govlab-platform",
+    "repository": "govlab-platform",
+    "domain": "government desktop and resilience layer",
+    "system_of_record": false,
+    "can_approve_clinical_results": false,
+    "transport": "controlled gateway and diagnostic export",
+    "event_types": ["platform.diagnostic.reported"],
+    "notes": "Provides operational resilience and diagnostics; clinical authority remains in GULA."
+  }
+]

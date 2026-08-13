@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gula-platform.org/contracts/integration/service-registry.schema.json",
+  "title": "GULA Ecosystem Service Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["service", "repository", "domain", "system_of_record", "can_approve_clinical_results", "event_types"],
+    "properties": {
+      "service": { "type": "string", "minLength": 1 },
+      "repository": { "type": "string", "minLength": 1 },
+      "domain": { "type": "string", "minLength": 1 },
+      "system_of_record": { "type": "boolean" },
+      "can_approve_clinical_results": { "type": "boolean" },
+      "transport": { "type": "string" },
+      "event_types": { "type": "array", "items": { "type": "string" } },
+      "notes": { "type": "string" }
+    }
+  }
+}
