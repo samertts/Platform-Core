@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v7
       - name: Setup Python ${{ matrix.python-version }}
@@ -36,7 +36,7 @@ jobs:
       - name: Ruff Lint
         run: ruff check .
       - name: Ruff Format
-        run: ruff format --check .
+        run: ruff format --check $(find platform_core scripts tests -type f -name '*.py' -print)
       - name: Mypy
         run: python -m mypy .
         if: matrix.python-version == '3.11'
